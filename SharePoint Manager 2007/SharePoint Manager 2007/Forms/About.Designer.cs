@@ -37,9 +37,9 @@ namespace Keutmann.SharePointManager.Forms
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(209, 253);
+            this.btnOK.Location = new System.Drawing.Point(209, 274);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@ namespace Keutmann.SharePointManager.Forms
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(396, 235);
+            this.textBox1.Size = new System.Drawing.Size(396, 256);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -69,7 +69,7 @@ namespace Keutmann.SharePointManager.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 288);
+            this.ClientSize = new System.Drawing.Size(490, 311);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnOK);

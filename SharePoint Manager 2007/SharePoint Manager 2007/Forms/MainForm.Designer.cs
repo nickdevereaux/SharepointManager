@@ -223,13 +223,13 @@ namespace Keutmann.SharePointManager.Forms
             this.mediumToolStripMenuItem,
             this.fullToolStripMenuItem});
             this.objectModelToolStripMenuItem.Name = "objectModelToolStripMenuItem";
-            this.objectModelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.objectModelToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.objectModelToolStripMenuItem.Text = "Object Model";
             // 
             // minimalToolStripMenuItem
             // 
             this.minimalToolStripMenuItem.Name = "minimalToolStripMenuItem";
-            this.minimalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.minimalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.minimalToolStripMenuItem.Tag = "1";
             this.minimalToolStripMenuItem.Text = "&Minimal";
             this.minimalToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
@@ -237,7 +237,7 @@ namespace Keutmann.SharePointManager.Forms
             // mediumToolStripMenuItem
             // 
             this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.mediumToolStripMenuItem.Tag = "3";
             this.mediumToolStripMenuItem.Text = "Me&dium";
             this.mediumToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
@@ -247,7 +247,7 @@ namespace Keutmann.SharePointManager.Forms
             this.fullToolStripMenuItem.Checked = true;
             this.fullToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fullToolStripMenuItem.Name = "fullToolStripMenuItem";
-            this.fullToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fullToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.fullToolStripMenuItem.Tag = "7";
             this.fullToolStripMenuItem.Text = "&Full";
             this.fullToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
@@ -255,7 +255,7 @@ namespace Keutmann.SharePointManager.Forms
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(145, 6);
             // 
             // MenuItemStandardBarVisible
             // 
@@ -263,7 +263,7 @@ namespace Keutmann.SharePointManager.Forms
             this.MenuItemStandardBarVisible.CheckOnClick = true;
             this.MenuItemStandardBarVisible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MenuItemStandardBarVisible.Name = "MenuItemStandardBarVisible";
-            this.MenuItemStandardBarVisible.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemStandardBarVisible.Size = new System.Drawing.Size(148, 22);
             this.MenuItemStandardBarVisible.Text = "Tool Bar";
             this.MenuItemStandardBarVisible.Click += new System.EventHandler(this.toolBarToolStripMenuItem_Click);
             // 
@@ -273,7 +273,7 @@ namespace Keutmann.SharePointManager.Forms
             this.MenuItemStatusBarVisible.CheckOnClick = true;
             this.MenuItemStatusBarVisible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MenuItemStatusBarVisible.Name = "MenuItemStatusBarVisible";
-            this.MenuItemStatusBarVisible.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemStatusBarVisible.Size = new System.Drawing.Size(148, 22);
             this.MenuItemStatusBarVisible.Text = "Status Bar";
             this.MenuItemStatusBarVisible.Click += new System.EventHandler(this.MenuItemStatusBarVisible_Click);
             // 
@@ -449,7 +449,7 @@ namespace Keutmann.SharePointManager.Forms
             this.Explorer.ShowNodeToolTips = true;
             this.Explorer.Size = new System.Drawing.Size(408, 440);
             this.Explorer.TabIndex = 0;
-            this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Explorer_NodeMouseClick);
+            this.Explorer.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.Explorer_BeforeSelect);
             this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
             // 
             // tabControl

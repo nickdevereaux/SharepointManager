@@ -137,12 +137,6 @@ namespace Keutmann.SharePointManager.Forms
         {
         }
 
-
-        private void Explorer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            ExplorerClick(e.Node as ExplorerNodeBase);
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm();
@@ -402,6 +396,11 @@ namespace Keutmann.SharePointManager.Forms
         {
             SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_NL);
             this.MainWindow_Load(null, null);
+        }
+
+        private void Explorer_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            ExplorerClick(e.Node as ExplorerNodeBase);
         }
     }
 }

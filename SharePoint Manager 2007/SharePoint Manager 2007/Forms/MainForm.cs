@@ -97,8 +97,6 @@ namespace Keutmann.SharePointManager.Forms
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            // Select the node!
-            Explorer.SelectedNode = node;
             this.toolStripStatusLabel.Text = node.ToolTipText;
             UpdateMenu(node);
 

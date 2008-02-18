@@ -16,7 +16,7 @@ using Microsoft.SharePoint.Administration;
 using Keutmann.SharePointManager.Components;
 using Keutmann.SharePointManager.Library;
 
-/* test*/
+
 namespace Keutmann.SharePointManager.Forms
 {
     public partial class MainWindow : Form
@@ -396,7 +396,14 @@ namespace Keutmann.SharePointManager.Forms
             this.MainWindow_Load(null, null);
         }
 
-        private void Explorer_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        void Explorer_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Return)
+            {
+                ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
+            }
+        }
+        void Explorer_NodeMouseClick(object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
         {
             ExplorerClick(e.Node as ExplorerNodeBase);
         }

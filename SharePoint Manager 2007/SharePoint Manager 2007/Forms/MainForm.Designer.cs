@@ -449,8 +449,9 @@ namespace Keutmann.SharePointManager.Forms
             this.Explorer.ShowNodeToolTips = true;
             this.Explorer.Size = new System.Drawing.Size(408, 440);
             this.Explorer.TabIndex = 0;
-            this.Explorer.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.Explorer_BeforeSelect);
+            this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(Explorer_KeyUp);
             this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
+            this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(Explorer_NodeMouseClick);
             // 
             // tabControl
             // 
@@ -488,6 +489,7 @@ namespace Keutmann.SharePointManager.Forms
             this.PerformLayout();
 
         }
+
 
         #endregion
 

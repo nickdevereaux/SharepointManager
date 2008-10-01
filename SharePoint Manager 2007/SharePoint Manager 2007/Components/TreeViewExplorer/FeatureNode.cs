@@ -44,14 +44,14 @@ namespace Keutmann.SharePointManager.Components
                         _featureCollection = ((SPWebApplication)this.SPParent).Features;
                     }
                     else
-                    if (this.SPParent is SPSite)
-                    {
-                        _featureCollection = ((SPSite)this.SPParent).Features;
-                    }
-                    else
-                    {
-                        _featureCollection = ((SPWeb)this.SPParent).Features;
-                    }
+                        if (this.SPParent is SPSite)
+                        {
+                            _featureCollection = ((SPSite)this.SPParent).Features;
+                        }
+                        else
+                        {
+                            _featureCollection = ((SPWeb)this.SPParent).Features;
+                        }
                 }
                 return _featureCollection;
             }
@@ -88,26 +88,48 @@ namespace Keutmann.SharePointManager.Components
             this.SelectedImageIndex = imageIndex;
             this.IsInstalled = installed;
 
-            if (definition.Hidden)
+            try
             {
-                _Text = definition.GetTitle(SPMConfig.Instance.CultureInfo) + " (Hidden)";
-                this.ForeColor = Color.DarkGray;
+                if (definition.Hidden)
+                {
+                    _Text = definition.GetTitle(SPMConfig.Instance.CultureInfo) + " (Hidden)";
+                    this.ForeColor = Color.DarkGray;
+                }
+                else
+                {
+                    _Text = definition.GetTitle(SPMConfig.Instance.CultureInfo);
+                }
+
+                _ToolTip = definition.GetDescription(SPMConfig.Instance.CultureInfo);
+                _Name = definition.Id.ToString();
+
+                this.Setup();
+
+                this.Nodes.Add(new ExplorerNodeBase("Dummy"));
             }
-            else
+            catch(Exception ex) 
             {
-                _Text = definition.GetTitle(SPMConfig.Instance.CultureInfo);
+                this.ForeColor = Color.DarkRed;
+                if (definition != null)
+                {
+                    _Text = definition.RootDirectory.ToLower() + " (error)";
+                    _ToolTip = ex.Message;
+                    _Name = definition.Id.ToString();
+                }
+                else
+                {
+                    _Text = "(Error: Can not find feature definition)";
+                    _ToolTip = ex.Message;
+                    _Name = Guid.Empty.ToString();
+                }
+
             }
 
-            _ToolTip = definition.GetDescription(SPMConfig.Instance.CultureInfo);
-            _Name = definition.Id.ToString();
-
-            this.Setup();
-
-            this.Nodes.Add(new ExplorerNodeBase("Dummy"));
         }
-
-        public FeatureNode(object spParent, SPFeature feature, int imageIndex, bool installed)
+        //: this(spParent, feature.Definition, imageIndex, installed)
+        public FeatureNode(object spParent, SPFeature feature, int imageIndex, bool installed) 
         {
+
             this.SPParent = spParent;
             this.ImageIndex = imageIndex;
             this.SelectedImageIndex = imageIndex;
@@ -116,31 +138,43 @@ namespace Keutmann.SharePointManager.Components
             Color nodeColor = this.ForeColor;
             string addText = string.Empty;
 
-            if (feature.Definition.Hidden)
+            try
             {
-                nodeColor = Color.DarkGray;
-                addText = " (Hidden)";
+
+                if (feature.Definition != null)
+                {
+                    this.Tag = feature.Definition;
+
+                    if (feature.Definition.Hidden)
+                    {
+                        nodeColor = Color.DarkGray;
+                        addText = " (Hidden)";
+                    }
+
+                    _Text = feature.Definition.GetTitle(SPMConfig.Instance.CultureInfo) + addText;
+                    _ToolTip = feature.Definition.GetDescription(SPMConfig.Instance.CultureInfo);
+                    _Name = feature.Definition.Id.ToString();
+
+                    this.ForeColor = nodeColor;
+                }
+                else
+                {
+                    this.Tag = null;
+
+                    _Text = SPMLocalization.GetString("Feature_Message01");
+                    _ToolTip = SPMLocalization.GetString("Feature_Message02");
+                    _Name = feature.DefinitionId.ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                
+                this.ForeColor = Color.DarkRed;
+                _Text = "(Error: Feature missing)";
+                _ToolTip = ex.Message;
+                _Name = feature.DefinitionId + string.Empty;
             }
 
-            if (feature.Definition != null)
-            {
-                this.Tag = feature.Definition;
-
-                _Text = feature.Definition.GetTitle(SPMConfig.Instance.CultureInfo) + addText;
-                _ToolTip = feature.Definition.GetDescription(SPMConfig.Instance.CultureInfo);
-                _Name = feature.Definition.Id.ToString();
-
-                this.ForeColor = nodeColor;
-            }
-            else
-            {
-                this.Tag = null;
-
-                _Text = SPMLocalization.GetString("Feature_Message01");
-                _ToolTip = SPMLocalization.GetString("Feature_Message02");
-                _Name = feature.DefinitionId.ToString();
-            }
-            
             this.Setup();
 
             this.Nodes.Add(new ExplorerNodeBase("Dummy"));

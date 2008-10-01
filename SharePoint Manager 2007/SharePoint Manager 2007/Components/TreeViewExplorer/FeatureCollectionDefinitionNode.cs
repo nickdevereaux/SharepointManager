@@ -46,7 +46,16 @@ namespace Keutmann.SharePointManager.Components
 
             foreach (SPFeatureDefinition definition in FeatureDefinitions)
             {
-                this.Nodes.Add(new FeatureDefinitionNode(this.Tag, definition, InstalledIndex, UnInstalledIndex));
+                try
+                {
+                    this.Nodes.Add(new FeatureDefinitionNode(this.Tag, definition, InstalledIndex, UnInstalledIndex));
+                }
+                catch 
+                {
+
+                    
+                    
+                }
             }
 
             string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);

@@ -36,8 +36,8 @@ namespace Keutmann.SharePointManager.Components
 
         public override void Setup()
         {
-            this.Text = Definition.DisplayName;
-            this.ToolTipText = Definition.Name;
+            this.Text = Definition.Title;
+            this.ToolTipText = Definition.DisplayName;
             this.Name = Definition.Id.ToString();
 
             int index = Program.Window.Explorer.AddImage(this.ImageUrl());

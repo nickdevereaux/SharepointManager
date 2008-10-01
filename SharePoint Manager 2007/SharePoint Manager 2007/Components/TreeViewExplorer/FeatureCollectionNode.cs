@@ -114,10 +114,18 @@ namespace Keutmann.SharePointManager.Components
             Dictionary<string, SPFeatureDefinition> featureList = new Dictionary<string,SPFeatureDefinition>();
             foreach (SPFeatureDefinition def in Program.Window.Explorer.CurrentFarm.FeatureDefinitions)
             {
-                // Only add features that match the scope 
-                if (def.Scope == FeatureScope)
+                try
                 {
-                    featureList.Add(def.RootDirectory.ToLower(), def);
+                    // Only add features that match the scope 
+                    if (def.Scope == FeatureScope)
+                    {
+                        featureList.Add(def.RootDirectory.ToLower(), def);
+                    }
+                }
+                catch 
+                {
+                    // def.Scope throws an exception.
+                    //featureList.Add(def.RootDirectory.ToLower(), def);
                 }
             }
 

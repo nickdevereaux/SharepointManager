@@ -201,6 +201,14 @@
     <value>Error</value>
     <comment>Program</comment>
   </data>
+  <data name="EventReceiverDefinitionCollection_Text" xml:space="preserve">
+    <value>Event Receivers</value>
+    <comment>EventReceiverDefinitionCollectionNode</comment>
+  </data>
+  <data name="EventReceiverDefinitionCollection_ToolTip" xml:space="preserve">
+    <value>Event Receiver Definition Collection</value>
+    <comment>EventReceiverDefinitionCollectionNode</comment>
+  </data>
   <data name="ExplorerBase_Error" xml:space="preserve">
     <value>Sorry, not able to update data.</value>
     <comment>ExplorerNodeBase</comment>

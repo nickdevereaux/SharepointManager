@@ -147,6 +147,8 @@ namespace Keutmann.SharePointManager.Components
                     this.AddNode(NodeDisplayLevelType.Medium, new FileVersionCollectionNode(this.File));
                 }
             }
+
+            this.AddNode(NodeDisplayLevelType.Advanced, new EventReceiverDefinitionCollectionNode(this.File, this.File.EventReceivers));
         }
 
         public override string ImageUrl()

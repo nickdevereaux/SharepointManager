@@ -82,7 +82,6 @@ namespace Keutmann.SharePointManager.Components
             }
 
             this.AddNode(NodeDisplayLevelType.Medium, new WorkflowCollectionNode(this.Item, this.Item.Workflows));
-
             //this.Nodes.Add(new FieldCollectionNode(this.Item, this.Item.Fields));
 
         }

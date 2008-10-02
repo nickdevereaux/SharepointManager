@@ -76,9 +76,10 @@ namespace Keutmann.SharePointManager.Components
             this.AddNode(NodeDisplayLevelType.Medium, new AlertCollectionNode(this.Web, this.Web.Alerts));
             this.AddNode(NodeDisplayLevelType.Medium, new UserCollectionNode(this.Tag, this.Web.Users));
 
-
             this.AddNode(NodeDisplayLevelType.Advanced, new FolderNode(web.RootFolder));
             this.AddNode(NodeDisplayLevelType.Advanced, new PropertyBagCollection(web, web.Properties));
+
+            this.AddNode(NodeDisplayLevelType.Advanced, new EventReceiverDefinitionCollectionNode(web, web.EventReceivers));
         }
 
 

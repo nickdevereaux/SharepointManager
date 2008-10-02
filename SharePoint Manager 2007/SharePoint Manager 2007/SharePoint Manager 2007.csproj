@@ -116,6 +116,8 @@
     <Compile Include="Components\TreeViewExplorer\ContentTypeNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\WebPartNode.cs" />
     <Compile Include="Components\TreeViewExplorer\WebPartCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\QuotaTemplateNode.cs" />

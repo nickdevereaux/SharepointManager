@@ -71,6 +71,8 @@ namespace Keutmann.SharePointManager.Components
             this.AddNode(NodeDisplayLevelType.Medium, new FieldCollectionNode(this.List, this.List.Fields));
             this.AddNode(NodeDisplayLevelType.Medium, new WorkflowAssociationCollectionNode(this.List, this.List.WorkflowAssociations));
             this.AddNode(NodeDisplayLevelType.Advanced, new FormCollectionNode(this.List));
+
+            this.AddNode(NodeDisplayLevelType.Advanced, new EventReceiverDefinitionCollectionNode(this.List, this.List.EventReceivers));
         }
 
 

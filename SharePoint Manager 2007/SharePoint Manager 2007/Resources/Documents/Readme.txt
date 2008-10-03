@@ -36,6 +36,12 @@ License:
 ------------------
 Please read the License.txt file.
 
+Ver: 0.9.8.1002
+------------------
+- Feature collection now uses try catch on invalid features.
+- Title used to show names of JobDefinitions.
+- SPEventReceiverDefinition implemented. EventReceivers are now browsable.
+
 Ver: 0.32.7.1212
 ------------------
 - Folder node for every site added.

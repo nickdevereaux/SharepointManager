@@ -48,7 +48,7 @@ namespace Keutmann.SharePointManager.Components
 
         public override string ImageUrl()
         {
-            return SPMPaths.ImageDirectory + "USERS.GIF";
+            return SPMPaths.ImageDirectory + "MNGATT.GIF";
         }
 
 

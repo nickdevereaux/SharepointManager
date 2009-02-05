@@ -78,6 +78,7 @@ namespace Keutmann.SharePointManager.Components
             PasteItem.Enabled   = Clipboard.ContainsText() && IsMethodImplementet(nodeType, "PasteFromClipboard");
             
             //DeleteItem.Enabled  = IsMethodImplementet(nodeType, "Delete");
+            
             DeleteItem.Enabled = SPMReflection.DoMethodExists(this.CurrentNode.Tag.GetType(), "Delete", new Type[] { });
         }
 

@@ -71,6 +71,7 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.swedishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Explorer = new Keutmann.SharePointManager.Components.TreeViewExplorer();
             this.tabControl = new Keutmann.SharePointManager.Components.SPMTabControl();
             this.statusStrip.SuspendLayout();
@@ -282,7 +283,8 @@ namespace Keutmann.SharePointManager.Forms
             this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.englishToolStripMenuItem,
             this.spanishToolStripMenuItem,
-            this.dutchToolStripMenuItem});
+            this.dutchToolStripMenuItem,
+            this.swedishToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
             this.languageToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.languageToolStripMenuItem.Text = "Language";
@@ -292,24 +294,30 @@ namespace Keutmann.SharePointManager.Forms
             this.englishToolStripMenuItem.Checked = true;
             this.englishToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // spanishToolStripMenuItem
             // 
             this.spanishToolStripMenuItem.Name = "spanishToolStripMenuItem";
-            this.spanishToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.spanishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.spanishToolStripMenuItem.Text = "Spanish";
             this.spanishToolStripMenuItem.Click += new System.EventHandler(this.spanishToolStripMenuItem_Click);
             // 
             // dutchToolStripMenuItem
             // 
             this.dutchToolStripMenuItem.Name = "dutchToolStripMenuItem";
-            this.dutchToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.dutchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dutchToolStripMenuItem.Text = "Dutch";
-            this.dutchToolStripMenuItem.Visible = false;
             this.dutchToolStripMenuItem.Click += new System.EventHandler(this.dutchToolStripMenuItem_Click);
+            // 
+            // swedishToolStripMenuItem
+            // 
+            this.swedishToolStripMenuItem.Name = "swedishToolStripMenuItem";
+            this.swedishToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.swedishToolStripMenuItem.Text = "Swedish";
+            this.swedishToolStripMenuItem.Click += new System.EventHandler(swedishToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -449,9 +457,9 @@ namespace Keutmann.SharePointManager.Forms
             this.Explorer.ShowNodeToolTips = true;
             this.Explorer.Size = new System.Drawing.Size(408, 440);
             this.Explorer.TabIndex = 0;
-            this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(Explorer_KeyUp);
+            this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Explorer_KeyUp);
+            this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Explorer_NodeMouseClick);
             this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
-            this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(Explorer_NodeMouseClick);
             // 
             // tabControl
             // 
@@ -489,7 +497,6 @@ namespace Keutmann.SharePointManager.Forms
             this.PerformLayout();
 
         }
-
 
         #endregion
 
@@ -534,6 +541,7 @@ namespace Keutmann.SharePointManager.Forms
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spanishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dutchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem swedishToolStripMenuItem;
     }
 }
 

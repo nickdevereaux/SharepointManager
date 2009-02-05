@@ -62,6 +62,12 @@ namespace Keutmann.SharePointManager.Components
                 {
                     base.ContextMenuStrip = MenuStripBase;
                 }
+                if (base.ContextMenuStrip is ContextMenuStripBase)
+                {
+                    ContextMenuStripBase menu = base.ContextMenuStrip as ContextMenuStripBase;
+                    Program.Window.Explorer.SelectedNode = this;
+                }
+                
                 return base.ContextMenuStrip;
             }
             set

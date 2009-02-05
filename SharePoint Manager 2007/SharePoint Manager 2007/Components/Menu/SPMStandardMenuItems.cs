@@ -75,7 +75,7 @@ namespace Keutmann.SharePointManager.Components
             delete.Text = SPMLocalization.GetString("Delete_Text");
             delete.Name = "Delete";
             delete.Size = new System.Drawing.Size(125, 22);
-            //delete.Image = global::Keutmann.SharePointManager.Properties.Resources.refresh3;
+            delete.Image = global::Keutmann.SharePointManager.Properties.Resources.delete;
             delete.Click += new EventHandler(Delete_Click);
             return delete;
         }
@@ -145,9 +145,12 @@ namespace Keutmann.SharePointManager.Components
 
         public void Delete_Click(object sender, EventArgs e)
         {
-            CurrentNode.Delete(); // Delete the SP object
-            CurrentNode.Remove(); // Remove the TreeNode object
-
+            DialogResult result = MessageBox.Show(String.Format(SPMLocalization.GetString("Message_DeleteWarning"), CurrentNode.Text), SPMLocalization.GetString("Delete_Text"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                CurrentNode.Delete(); // Delete the SP object
+                CurrentNode.Remove(); // Remove the TreeNode object
+            }
         }
 
         public void Refresh_Click(object sender, EventArgs e)

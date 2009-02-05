@@ -43,6 +43,7 @@ namespace Keutmann.SharePointManager.Library
         public const string C_CULTURE_EN = "EN";
         public const string C_CULTURE_ES = "ES";
         public const string C_CULTURE_NL = "NL";
+        public const string C_CULTURE_SV = "SV";
 
         
         private static CultureInfo _selectedCulture = null;

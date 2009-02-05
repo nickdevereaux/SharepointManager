@@ -65,7 +65,9 @@ namespace Keutmann.SharePointManager.Forms
 
                 //Uncheck everything in the Language Menu
                 foreach (ToolStripMenuItem myItem in languageToolStripMenuItem.DropDownItems)
+                {
                     myItem.Checked = false;
+                }
 
                 //Select the correct one
                 switch ((string)SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID))
@@ -78,6 +80,9 @@ namespace Keutmann.SharePointManager.Forms
                         break;
                     case SPMLocalization.C_CULTURE_NL:
                         dutchToolStripMenuItem.Checked = true;
+                        break;
+                    case SPMLocalization.C_CULTURE_SV:
+                        swedishToolStripMenuItem.Checked = true;
                         break;
                 }
             }
@@ -371,6 +376,7 @@ namespace Keutmann.SharePointManager.Forms
             englishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_EnglishLanguage");
             spanishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SpanishLanguage");
             dutchToolStripMenuItem.Text                 = SPMLocalization.GetString("Interface_DutchLanguage");
+            swedishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SwedishLanguage");
             saveToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Save_ToolTip");
             saveallToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
             cancelToolStripMenuItem.Text                = SPMLocalization.GetString("Interface_Cancel_ToolTip");
@@ -392,7 +398,14 @@ namespace Keutmann.SharePointManager.Forms
 
         private void dutchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_NL);
+            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_NL;
+            //SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_NL);
+            this.MainWindow_Load(null, null);
+        }
+
+        void swedishToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_SV;
             this.MainWindow_Load(null, null);
         }
 

@@ -33,6 +33,7 @@ namespace Keutmann.SharePointManager.Components
         public void Init(object spParent, SPLimitedWebPartManager manager)
         {
             this.Tag = manager;
+            
             this.SPParent = spParent;
 
             int index = Program.Window.Explorer.AddImage(this.ImageUrl());

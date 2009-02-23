@@ -4,17 +4,23 @@ using System.Web.UI.WebControls.WebParts;
 using Microsoft.SharePoint;
 
 using Keutmann.SharePointManager.Library;
+using System.Collections;
+using Keutmann.Framework.Xml.Serialization;
+using System.Windows.Forms;
+using Microsoft.SharePoint.WebPartPages;
+using System.IO;
+using System.Xml;
 
 namespace Keutmann.SharePointManager.Components
 {
     class WebPartNode : ExplorerNodeBase
     {
 
-        public WebPart ASPWebPart
+        public System.Web.UI.WebControls.WebParts.WebPart ASPWebPart
         {
             get
             {
-                return this.Tag as WebPart;
+                return this.Tag as System.Web.UI.WebControls.WebParts.WebPart;
             }
         }
 
@@ -27,7 +33,7 @@ namespace Keutmann.SharePointManager.Components
         }
 
 
-        public WebPartNode(object spParent, WebPart webpart)
+        public WebPartNode(object spParent, System.Web.UI.WebControls.WebParts.WebPart webpart)
         {
             this.Tag = webpart;
             this.SPParent = spParent;
@@ -57,6 +63,7 @@ namespace Keutmann.SharePointManager.Components
 
         public override void LoadNodes()
         {
+            
             base.LoadNodes();
         }
 
@@ -65,6 +72,32 @@ namespace Keutmann.SharePointManager.Components
             return SPMPaths.TemplateDirectory + ASPWebPart.CatalogIconImageUrl;
         }
 
+
+        public override TabPage[] GetTabPages()
+        {
+            ArrayList alPages = new ArrayList();
+
+            alPages.AddRange(base.GetTabPages());
+
+            
+            if(this.Parent.Tag != null)
+            {
+                string xml = string.Empty;
+
+                SPLimitedWebPartManager manager = (SPLimitedWebPartManager)this.Parent.Tag;
+                using (StringWriter writer = new StringWriter())
+                {
+                    XmlTextWriter xtw = new XmlTextWriter(writer);
+                    //this.ASPWebPart.ExportMode == WebPartExportMode.All;
+                    manager.ExportWebPart(this.ASPWebPart, xtw);
+                    xml = writer.ToString();
+                }
+                TabXmlPage xmlPage = TabPages.GetXmlPage("Xml", xml);
+                alPages.Add(xmlPage);
+            }
+
+            return (TabPage[])alPages.ToArray(typeof(TabPage));
+        }
 
         // TODO Fix that normal Update function do not work with webparts. Create a override function for this.
         // However on the ListViewWebPart, not all properties can be saved.

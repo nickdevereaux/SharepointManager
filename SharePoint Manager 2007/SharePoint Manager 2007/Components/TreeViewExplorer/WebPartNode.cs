@@ -5,7 +5,6 @@ using Microsoft.SharePoint;
 
 using Keutmann.SharePointManager.Library;
 using System.Collections;
-using Keutmann.Framework.Xml.Serialization;
 using System.Windows.Forms;
 using Microsoft.SharePoint.WebPartPages;
 using System.IO;

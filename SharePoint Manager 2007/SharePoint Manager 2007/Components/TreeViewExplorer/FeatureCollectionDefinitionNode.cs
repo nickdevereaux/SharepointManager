@@ -52,9 +52,7 @@ namespace Keutmann.SharePointManager.Components
                 }
                 catch 
                 {
-
-                    
-                    
+                    this.Nodes.Add(definition.Id.ToString() + " (Error)");
                 }
             }
 

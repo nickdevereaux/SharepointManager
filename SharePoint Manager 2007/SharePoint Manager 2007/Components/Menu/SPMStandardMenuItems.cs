@@ -155,18 +155,18 @@ namespace Keutmann.SharePointManager.Components
 
         public void Refresh_Click(object sender, EventArgs e)
         {
-
             //RefreshFunction();
-            CurrentNode.Refresh();
             if (CurrentNode != null)
             {
+                CurrentNode.Refresh();
                 Program.Window.ChangedNodes.Remove(CurrentNode);
                 Program.Window.UpdateMenu(CurrentNode);
             }
+            else
+            {
+                MessageBox.Show(
+                    "Could not load any nodes in this context. Make sure Sharepoint Manager is running on a Sharepoint server and in administrative mode.");
+            }
         }
-
-
-
-
     }
 }

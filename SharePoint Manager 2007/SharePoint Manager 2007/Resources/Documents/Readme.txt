@@ -36,6 +36,19 @@ License:
 ------------------
 Please read the License.txt file.
 
+Ver: 0.9.9.0405
+------------------
+- PropertiesXmlForUncustomizedViews tab added for Views
+- Minor bugfixes. Provided by Mads Nissen
+
+
+Ver: 0.9.9.0316
+------------------
+- "BaseView Xml" Tab added on Views node.
+- "WebPart Xml" Tab added on WebPart node.
+
+
+
 Ver: 0.9.8.1002
 ------------------
 - Feature collection now uses try catch on invalid features.

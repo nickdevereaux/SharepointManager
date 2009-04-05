@@ -17,9 +17,16 @@ namespace Keutmann.SharePointManager.Library
 
         public static object GetValue(string subgroup, string name)
         {
-            RegistryKey key = Registry.LocalMachine.CreateSubKey(Group + subgroup);
-            
-            return key.GetValue(name);
+            try
+            {
+                RegistryKey key = Registry.LocalMachine.CreateSubKey(Group + subgroup);
+                return key.GetValue(name);
+            }
+            catch (UnauthorizedAccessException exception)
+            {
+                throw new UnauthorizedAccessException(
+                    "In order to access the registry you must run SPM as Administrator.", exception);
+            }
         }
 
         public static RegistryKey GetKey(string subgroup)

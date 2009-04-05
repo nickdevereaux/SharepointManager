@@ -118,6 +118,10 @@
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageNode.cs" />
     <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\GroupCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\GroupNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\RoleDefinitionCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\RoleDefinitionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\WebPartNode.cs" />
     <Compile Include="Components\TreeViewExplorer\WebPartCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\QuotaTemplateNode.cs" />
@@ -269,7 +273,13 @@
     <EmbeddedResource Include="SPManagerLanguage.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SPManagerLanguage.nl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SPManagerLanguage.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SPManagerLanguage.sv.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">

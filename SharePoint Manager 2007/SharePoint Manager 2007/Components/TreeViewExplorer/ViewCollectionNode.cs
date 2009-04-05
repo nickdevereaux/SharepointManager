@@ -6,6 +6,8 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 
 using Keutmann.SharePointManager.Library;
+using System.Windows.Forms;
+using System.Collections;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -66,6 +68,20 @@ namespace Keutmann.SharePointManager.Components
         {
             return SPMPaths.ImageDirectory + "itgen.gif";
         }
+
+        public override TabPage[] GetTabPages()
+        {
+            ArrayList alPages = new ArrayList(base.GetTabPages());
+
+            string xml = this.List.GetPropertiesXmlForUncustomizedViews();
+            if (!String.IsNullOrEmpty(xml))
+            {
+                alPages.Add(TabPages.GetXmlPage("BaseView Xml", xml));
+            }
+
+            return (TabPage[])alPages.ToArray(typeof(TabPage));
+        }
+
         
     }
 }

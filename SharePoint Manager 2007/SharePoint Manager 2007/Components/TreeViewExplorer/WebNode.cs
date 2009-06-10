@@ -13,7 +13,7 @@ using Keutmann.SharePointManager.Library;
 
 namespace Keutmann.SharePointManager.Components
 {
-    class WebNode : ExplorerNodeBase
+    public class WebNode : ExplorerNodeBase
     {
         private string _publishingName = null;
 
@@ -68,6 +68,7 @@ namespace Keutmann.SharePointManager.Components
 
             this.AddNode(NodeDisplayLevelType.Simple, new WebCollectionNode(web));
             this.AddNode(NodeDisplayLevelType.Simple, new ListCollectionNode(this, web));
+            this.AddNode(NodeDisplayLevelType.Advanced, new ListTemplateCollectionNode(this, web));
             this.AddNode(NodeDisplayLevelType.Medium, new FeatureCollectionNode(web));
             this.AddNode(NodeDisplayLevelType.Advanced, new PropertyCollectionNode(web, web.AllProperties));
             this.AddNode(NodeDisplayLevelType.Medium, new RecycleBinItemCollectionNode(web, web.RecycleBin));

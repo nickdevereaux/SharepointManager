@@ -485,6 +485,9 @@
     <value />
     <comment>MainForm</comment>
   </data>
+  <data name="Interface_SwedishLanguage" xml:space="preserve">
+    <value>Swedish</value>
+  </data>
   <data name="Interface_TestConn" xml:space="preserve">
     <value>&amp;Test Connection</value>
     <comment>OpenDBConnectionForm</comment>
@@ -548,6 +551,9 @@
   <data name="Lists_ToolTip" xml:space="preserve">
     <value />
     <comment>ListCollectionNode</comment>
+  </data>
+  <data name="ListTemplates_Text" xml:space="preserve">
+    <value>List Templates</value>
   </data>
   <data name="LoadingFieldColumns" xml:space="preserve">
     <value>Loading field columns</value>

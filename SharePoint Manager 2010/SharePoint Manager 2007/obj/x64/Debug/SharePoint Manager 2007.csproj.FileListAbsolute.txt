@@ -1,0 +1,32 @@
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\Resources\Documents\License.txt
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\Resources\Documents\Readme.txt
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\SharePoint Manager 2007.exe.manifest
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\SharePoint Manager 2007.application
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\SharePoint Manager 2007.exe
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\SharePoint Manager 2007.pdb
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\en\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\es\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\nl\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Debug\sv\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\ResolveAssemblyReference.cache
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Components.FileListView.FileListView.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Components.FileListView.SPMListView.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Forms.AboutForm.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Forms.OpenDBConnection.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Forms.MainWindow.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Forms.RestoreForm.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.Properties.Resources.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.SPManagerLanguage.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.SPManagerLanguage.en.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.SPManagerLanguage.es.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.SPManagerLanguage.nl.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\Keutmann.SharePointManager.SPManagerLanguage.sv.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\SharePoint Manager 2007.csproj.GenerateResource.Cache
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\en\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\es\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\nl\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\sv\SharePoint Manager 2007.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\SharePoint Manager 2007.exe.manifest
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\SharePoint Manager 2007.application
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\SharePoint Manager 2007.exe
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Debug\SharePoint Manager 2007.pdb

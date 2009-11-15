@@ -1,0 +1,34 @@
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\Resources\Documents\License.txt
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\Resources\Documents\Readme.txt
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\SharePoint Manager 2010.exe.manifest
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\SharePoint Manager 2010.application
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\SharePoint Manager 2010.exe
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\SharePoint Manager 2010.pdb
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\en\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\es\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\nl\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\bin\x64\Release\sv\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\ResolveAssemblyReference.cache
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Components.FileListView.FileListView.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Components.FileListView.SPMListView.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Forms.AboutForm.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Forms.OpenDBConnection.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Forms.MainWindow.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Forms.RestoreForm.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.Properties.Resources.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.SPManagerLanguage.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.SPManagerLanguage.en.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.SPManagerLanguage.es.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.SPManagerLanguage.nl.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\Keutmann.SharePointManager.SPManagerLanguage.sv.resources
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.csproj.GenerateResource.Cache
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\en\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\es\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\nl\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\sv\SharePoint Manager 2010.resources.dll
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.exe.manifest
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.application
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.exe
+C:\Projects\SharePoint Manager 2007\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.pdb
+C:\Projects\SharePoint Manager 2010\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.exe
+C:\Projects\SharePoint Manager 2010\SharePoint Manager 2007\obj\x64\Release\SharePoint Manager 2010.pdb

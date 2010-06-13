@@ -1,19 +1,24 @@
 using System;
 using System.Windows.Forms;
+using Keutmann.SharePointManager.Components;
 
 namespace Keutmann.SharePointManager.Components
 {
     public class TabPropertyPage : TabPage
     {
-        private PropertyGrid _grid = null;
+        private ReadOnlyPropertyGrid _grid = null;
 
-        public PropertyGrid Grid
+        public ReadOnlyPropertyGrid Grid
         {
             get 
             {
                 if (_grid == null)
                 {
-                    _grid = new PropertyGrid();
+                    _grid = new ReadOnlyPropertyGrid();
+                    if (Properties.Settings.Default.ReadOnly)
+                    {
+                        _grid.ReadOnly = true; 
+                    }
                     _grid.Dock = DockStyle.Fill;
                 }
                 return _grid; 

@@ -88,6 +88,12 @@ namespace Keutmann.SharePointManager.Forms
             }
             InitializeInterfaceStrings();
 
+            if (Properties.Settings.Default.ReadOnly)
+            {
+                toolStripSave.Visible = false;
+                toolStripSaveAll.Visible = false;
+            }
+
             Explorer.Build();
 
             // Call default expand after Explorer.Build();
@@ -196,38 +202,44 @@ namespace Keutmann.SharePointManager.Forms
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            ExplorerNodeBase node = Explorer.SelectedNode as ExplorerNodeBase;
-            this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_Changes");
-
-            if (ChangedNodes.ContainsKey(node))
+            if (!Properties.Settings.Default.ReadOnly)
             {
-                node.Update();
-                node.Setup();
-                ChangedNodes.Remove(node);
+                Cursor.Current = Cursors.WaitCursor;
+                ExplorerNodeBase node = Explorer.SelectedNode as ExplorerNodeBase;
+                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_Changes");
+
+                if (ChangedNodes.ContainsKey(node))
+                {
+                    node.Update();
+                    node.Setup();
+                    ChangedNodes.Remove(node);
+                }
+                UpdateMenu(node);
+                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
+                Cursor.Current = Cursors.Default;
             }
-            UpdateMenu(node);
-            this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
-            Cursor.Current = Cursors.Default;
         }
 
         private void saveallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            ExplorerNodeBase selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
-
-            this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_All_Changes");
-            foreach (ExplorerNodeBase node in ChangedNodes.Keys)
+            if (!Properties.Settings.Default.ReadOnly)
             {
-                node.Update();
-                node.Setup();
+                Cursor.Current = Cursors.WaitCursor;
+                ExplorerNodeBase selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
+
+                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_All_Changes");
+                foreach (ExplorerNodeBase node in ChangedNodes.Keys)
+                {
+                    node.Update();
+                    node.Setup();
+                }
+                ChangedNodes.Clear();
+
+                UpdateMenu(selectedNode);
+
+                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
+                Cursor.Current = Cursors.Default;
             }
-            ChangedNodes.Clear();
-
-            UpdateMenu(selectedNode);
-
-            this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
-            Cursor.Current = Cursors.Default;
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdministrationService" xml:space="preserve">
     <value>Administration Service</value>
@@ -836,5 +836,17 @@
   </data>
   <data name="IisSettings_ToolTip" xml:space="preserve">
     <value>IIS Settings Collection</value>
+  </data>
+  <data name="ServiceProxies_Text" xml:space="preserve">
+    <value>Service Proxies</value>
+  </data>
+  <data name="ServiceProxies_ToolTip" xml:space="preserve">
+    <value>Service Proxies</value>
+  </data>
+  <data name="ApplicationProxes_Text" xml:space="preserve">
+    <value>Application Proxies</value>
+  </data>
+  <data name="ApplicationProxes_ToolTip" xml:space="preserve">
+    <value>Application Proxies</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -18,14 +19,10 @@
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -125,6 +122,9 @@
     <Compile Include="Components\Menu\MenuStripRefresh.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\TabControl\ReadOnlyPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\TabControl\SPMTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -148,9 +148,13 @@
     <Compile Include="Components\TreeViewExplorer\ContentTypeNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\ApplicationProxiyNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\ApplicationProxyCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ExplorerNodeNew2010Feature.cs" />
     <Compile Include="Components\TreeViewExplorer\IisSettingNode.cs" />
     <Compile Include="Components\TreeViewExplorer\IisSettingsCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\ServiceProxyCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\ServiceProxyNode.cs" />
     <Compile Include="Components\TreeViewExplorer\SolutionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\UserSolutionCollectionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ListTemplateNode.cs" />
@@ -326,6 +330,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

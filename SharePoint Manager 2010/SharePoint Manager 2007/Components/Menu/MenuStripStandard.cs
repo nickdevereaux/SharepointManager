@@ -23,6 +23,10 @@ namespace Keutmann.SharePointManager.Components
         public ToolStripItem DeleteItem;
         public ToolStripItem RefreshItem;
 
+        public bool InReadOnlyMode
+        {
+            get { return Properties.Settings.Default.ReadOnly; }
+        }
 
         public MenuStripStandard()
         {
@@ -53,9 +57,15 @@ namespace Keutmann.SharePointManager.Components
             //    RefreshItem
             //   });
 
-            this.Items.AddRange(new ToolStripItem[] {
+            if (!InReadOnlyMode)
+            {
+                this.Items.AddRange(new ToolStripItem[] {
                 DeleteItem,
-                SPMMenu.Items.CreateSeparator(),
+                SPMMenu.Items.CreateSeparator()
+               });
+                
+            }
+            this.Items.AddRange(new ToolStripItem[] {
                 RefreshItem
                });
                 

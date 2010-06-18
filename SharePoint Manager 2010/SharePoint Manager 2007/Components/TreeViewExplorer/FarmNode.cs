@@ -51,6 +51,7 @@ namespace Keutmann.SharePointManager.Components
             this.AddNode(NodeDisplayLevelType.Advanced, new SolutionCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new ServerCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new ServiceCollectionNode(Farm));
+            this.AddNode(NodeDisplayLevelType.Advanced, new ServiceProxyCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new PropertyCollectionNode(Farm, Farm.Properties));
 
             SPMFarmHelper farmHelper = new SPMFarmHelper(Farm);

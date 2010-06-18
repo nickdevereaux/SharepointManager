@@ -61,7 +61,7 @@ namespace Keutmann.SharePointManager.Components
         {
             get
             {
-                if (base.ContextMenuStrip == MenuStripBase)
+                if (base.ContextMenuStrip == MenuStripBase && !InReadOnlyMode)
                 {
                     MenuStripRefresh menu = new MenuStripRefresh();
                     menu.Opening += new System.ComponentModel.CancelEventHandler(menu_Opening);

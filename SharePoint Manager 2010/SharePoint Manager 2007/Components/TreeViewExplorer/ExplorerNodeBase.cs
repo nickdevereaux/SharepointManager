@@ -31,6 +31,11 @@ namespace Keutmann.SharePointManager.Components
         #endregion
 
         #region Properties
+
+        public bool InReadOnlyMode
+        {
+            get { return Properties.Settings.Default.ReadOnly; }
+        }
          
         public bool DefaultExpand
         {
@@ -347,7 +352,8 @@ namespace Keutmann.SharePointManager.Components
 
         public virtual void Delete()
         {
-            SPMReflection.CallMethod(this.Tag, "Delete", new object[] { });
+            if(!InReadOnlyMode)
+                SPMReflection.CallMethod(this.Tag, "Delete", new object[] { });
         }
 
         public virtual void Refresh()

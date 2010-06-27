@@ -42,25 +42,31 @@ namespace Keutmann.SharePointManager.Components
 
         public override void Setup()
         {
-
-            if (ContentType.Hidden)
+            if (ContentType != null)
             {
-                this.Text = ContentType.Name + " (Hidden)";
-                this.ForeColor = Color.DarkGray;
+                if (ContentType.Hidden)
+                {
+                    this.Text = ContentType.Name + " (Hidden)";
+                    this.ForeColor = Color.DarkGray;
+                }
+                else
+                {
+                    this.Text = ContentType.Name;
+                }
+
+                this.ToolTipText = ContentType.Description;
+                this.Name = ContentType.Id.ToString();
+
+                int index = Program.Window.Explorer.AddImage(this.ImageUrl());
+                this.ImageIndex = index;
+                this.SelectedImageIndex = index;
+
+                this.Nodes.Add(new ExplorerNodeBase("Dummy"));
             }
             else
             {
-                this.Text = ContentType.Name;
+                Remove();
             }
-
-            this.ToolTipText = ContentType.Description;
-            this.Name = ContentType.Id.ToString();
-
-            int index = Program.Window.Explorer.AddImage(this.ImageUrl());
-            this.ImageIndex = index;
-            this.SelectedImageIndex = index;
-
-            this.Nodes.Add(new ExplorerNodeBase("Dummy"));
         }
 
         public override void LoadNodes()

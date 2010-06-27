@@ -14,6 +14,8 @@ namespace Keutmann.SharePointManager.Library
     {
         public static string FormatXml(string xml)
         {
+            if(!string.IsNullOrEmpty(xml))
+            {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xml);
 
@@ -24,6 +26,11 @@ namespace Keutmann.SharePointManager.Library
             xmlDoc.Save(writer);
 
             return sw.ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         public static SPMObjectType GetSPMObjectType(Type objType)

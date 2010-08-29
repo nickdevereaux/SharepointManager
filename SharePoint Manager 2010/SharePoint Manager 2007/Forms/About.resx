@@ -112,33 +112,34 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        R0lGODlhHgAZAPYAAP////39//z8/fX2/fb3++bq9uzv+M7X7cfR6N7l9Nzj8t/l8uzx/IWOoLfD232F
+        R0lGODlhHgAZAIYAAP////39//z8/fX2/fb3++bq9uzv+M7X7cfR6N7l9Nzj8t/l8uzx/IWOoLfD232F
         lcvW7MrV6sTO4s/Z7b/I2sfQ4tDZ69nh8dbe7uDn9fDz+fT2+vf4+vb3+WeBr2mDsHyTu3eNtIWZvIuf
         womauZOhuqi30qy71rHA27LB27nI4rXD3LK/1r/L4LC7zsnV6sjU6bzH2tHb7tPc7MrS4cPL2eft+MzR
         2tfc5WuFsXuOroKWt4yhxH+RsIWSqK+/2p6sxJqovqSyyb/N5ZOesKWwwpCZqMrW6szW58DI1bzDz8rR
         3N/l79rf5/L1+nKEn4KTrG17kIKSqnSCl4aVq4ybsnJ9joiSoX+IlsrQ2TxOZ0VXcEVWbGN1jVpoe3qL
         o4uar4OQor3G0vX4/M3V3+ru8/n7/fT2+Pv8/ZuhpoKCfMTCn8O8jeXXltDAgdHBgtfKk8exY8q2atbE
-        gaefg6CTaZ6GQJOBUbmkaaV/G5F0LbGcZayYZpqFVlZDKv///yH5BAEAAAAALAAAAAAeABkAAAf/gACC
-        giKFg4JQQVVQYIeOjwA6CgVkO4hQDTcdZ01BUpCgIRZ/CiGHVlZLHAIdPj6gjyExBRKWh1FKTBtmGq+P
-        PDyOIRgIHo8PZRgFAwxUvzTBgyIaQzmORldmChcGfxlfjjx/0IIkARgrII4PSWYTMgkEaCcPhzxJfxU8
-        PQELKiwjHGHpoADBgQsJcLiI4ohLDRsFCMz4F8OENUF91CjBcAQBAhdEiuCod4gLFwosWKxwcIFJig8A
-        +vCBk0ZICyFfuvgoQ2YKqoYmuQiBkYHAjw904LSRo+aJFi0AvCgJg0ODmC6gtgAhOubEhzVy8viBOshL
-        FicLkJCFpJWr1zt+ex5pIZKgxdqsQF5kGHMUlJYgdyH1qdN270u/sDDiecNGq94xhxML3vNmqR6tR/ai
-        gCn5UB/KS8UC0BrBMOfOn92EjiuItGnUoMOyHqQVwmtYnyvLZgsk84AVFx+lXg2rbQwhgQfdmUM88ZYg
-        JZIfshNHdOennfXM7gwrEAA7
+        gaefg6CTaZ6GQJOBUbmkaaV/G5F0LbGcZayYZpqFVlZDKv///yH/C05FVFNDQVBFMi4wAwEBAAAh+QQB
+        AAAAACwAAAAAHgAZAAAI/wABCBQoouBAgVCCVIEC5qDDhwB0KChAZgdCKA1udDjTJIgUiCBDWPijIMRB
+        K1aWcBDQwYcPkA9DxCggweLBKEqYbDCj4eVDHjwchsCAwMPDB2UwFBjAgMpPGkEHitAwJIdDI1fMKLhg
+        4E+GLw55/IEqkEQADCtAOHyQxMwEGQkIoDnx4CCPJH8q8OgRYIEKFiMcYumgAMGBCwlwuIjikEsNGwUI
+        zPgbw4RVgX3UKMFwBAECF0SK4Kh7kAsXCixYrHBwgUmKDwD68IGTRkgLIV+6+ChDZgrKxqa5CIGRgcCP
+        D3TgtJGj5okWLQC8KAmDQ4OYLiC3ACE+5sSHNXLy+JeBPtBLFicLkJCHqJ279zt+HmohkqDF+uxAXmQY
+        cxykliD3QdRHHe3t95p/MGGGxxtsaKffGAcmKOAebyynh3ZH7IcCbBIe1AeFy4kHgHYRGMhhhx+6EWJ8
+        ApFoIooghsfiQNpB8CJMH1YoI3tAZDjACpc9lOKKMLUXgxABDnTHHEQmuEUQJSR5kB1xiNjhcx3qMWOH
+        MAUEADs=
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
     <value>SharePoint Manager 2010 Copyright (c) 2010 All rights reserved. 
-Ver: 0.9.11.0206
+Ver: 0.9.10.0829
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the author be held liable for any damages arising from the use of this software.
 Please email to the author if you are unclear about where to get a copy of GPL.

@@ -150,6 +150,8 @@
     <Compile Include="Components\TreeViewExplorer\ContentTypeUsageNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ApplicationProxiyNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ApplicationProxyCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\SiteSubscriptionCollectionNode.cs" />
+    <Compile Include="Components\TreeViewExplorer\SiteSubscriptionNode.cs" />
     <Compile Include="Components\TreeViewExplorer\ExplorerNodeNew2010Feature.cs" />
     <Compile Include="Components\TreeViewExplorer\IisSettingNode.cs" />
     <Compile Include="Components\TreeViewExplorer\IisSettingsCollectionNode.cs" />

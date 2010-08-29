@@ -53,7 +53,7 @@ namespace Keutmann.SharePointManager.Components
             this.AddNode(NodeDisplayLevelType.Advanced, new ServiceCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new ServiceProxyCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new PropertyCollectionNode(Farm, Farm.Properties));
-
+            this.AddNode(NodeDisplayLevelType.Advanced, new SiteSubscriptionCollectionNode(Farm));
             SPMFarmHelper farmHelper = new SPMFarmHelper(Farm);
 
             this.AddNode(NodeDisplayLevelType.Simple, new WebServiceNode(SPMLocalization.GetString("ContentService"), farmHelper.ContentWebService, true));

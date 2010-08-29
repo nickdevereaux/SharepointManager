@@ -849,4 +849,16 @@
   <data name="ApplicationProxes_ToolTip" xml:space="preserve">
     <value>Application Proxies</value>
   </data>
+  <data name="SiteSubscriptionCollection_Text" xml:space="preserve">
+    <value>Site Subscriptions</value>
+    <comment>SiteSubscriptionCollectionNode</comment>
+  </data>
+  <data name="SiteSubscriptionCollection_ToolTip" xml:space="preserve">
+    <value>Site Subscriptions</value>
+    <comment>SiteSubscriptionCollectionNode</comment>
+  </data>
+  <data name="Message_DeleteWarning" xml:space="preserve">
+    <value>Sure you want to delete this item?</value>
+    <comment>SPMStandardMenuItems</comment>
+  </data>
 </root>

@@ -30,7 +30,7 @@
             <ad:ResizingPanel Orientation="Vertical">
                 <ad:ResizingPanel Orientation="Horizontal">
                     
-                    <ad:DockablePane x:Name="LeftDockPane" ad:ResizingPanel.ResizeWidth="250">
+                    <ad:DockablePane x:Name="LeftDockPane" ad:ResizingPanel.ResizeWidth="350">
                     </ad:DockablePane>
                     
                     <ad:DocumentPane x:Name="ContentPane">

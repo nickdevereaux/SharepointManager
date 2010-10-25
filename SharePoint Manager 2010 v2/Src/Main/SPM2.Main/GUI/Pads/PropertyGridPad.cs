@@ -21,7 +21,7 @@ namespace SPM2.Main.GUI.Pads
 {
 
     [Title("PropertyGrid")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane")]
+    [AttachTo("SPM2.Main.MainWindow.ContentPane", Index= 100)]
     public class PropertyGridPad : AbstractPadWindow
     {
         private const string PROPERTY_GRID_NAME = "PropertyGrid";

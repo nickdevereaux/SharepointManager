@@ -27,7 +27,7 @@ namespace SPM2.Main.GUI.Pads
 {
 
     [Title("Text editor")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane")]
+    [AttachTo("SPM2.Main.MainWindow.ContentPane", After = "SPM2.Main.GUI.Pads.BrowserPad")]
     public class EditorPad : AbstractPadWindow
     {
         private const string NAME = "Editor";

@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\Build\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -59,9 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileTest.cs" />
-    <Compile Include="MyTestCommand.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

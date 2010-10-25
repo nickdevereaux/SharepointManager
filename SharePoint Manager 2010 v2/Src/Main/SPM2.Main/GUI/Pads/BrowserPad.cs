@@ -19,7 +19,7 @@ namespace SPM2.Main.GUI.Pads
 {
 
     [Title("PropertyGrid")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane")]
+    [AttachTo("SPM2.Main.MainWindow.ContentPane", After = "SPM2.Main.GUI.Pads.PropertyGridPad")]
     public class BrowserPad : AbstractPadWindow
     {
         private const string NAME = "Browser";

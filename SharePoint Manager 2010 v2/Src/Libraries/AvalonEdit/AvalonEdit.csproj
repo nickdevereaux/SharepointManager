@@ -79,6 +79,7 @@
     <CodeAnalysisRules />
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>bin\Release\ICSharpCode.AvalonEdit.xml</DocumentationFile>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>

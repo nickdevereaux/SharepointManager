@@ -7,6 +7,8 @@ namespace SPM2.SharePoint.Model
         string AddInID { get; set; }
         string Url { get; set; }
         object SPObject { get; set; }
+        object SPParent { get; set; }
+
         Type SPObjectType { get;  }
     }
 }

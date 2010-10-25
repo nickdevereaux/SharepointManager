@@ -20,20 +20,21 @@ namespace SPM2.SharePoint.Model
             List<INode> children = new List<INode>();
 
             ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.AddInID);
-
             Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
 
             IEnumerable collection = (IEnumerable)this.SPObject;
             foreach (object instance in collection)
             {
                 Type instanceType = instance.GetType();
+
                 if (types.ContainsKey(instanceType))
                 {
                     // Use defined SPNode
                     ClassDescriptor descriptor = types[instanceType];
 
-                    INode node = (INode)Activator.CreateInstance(descriptor.ClassType);
-                    node.Setup(instance, descriptor);
+                    ISPNode node = (ISPNode)Activator.CreateInstance(descriptor.ClassType);
+                    node.SPObject = instance;
+                    node.Setup(this.SPObject, descriptor);
                     children.Add(node);
                 }
                 else
@@ -44,7 +45,8 @@ namespace SPM2.SharePoint.Model
 
                     SPNode node = new SPNode();
                     //INode node = (INode)Activator.CreateInstance(descriptor.ClassType);
-                    node.Setup(instance, descriptor);
+                    node.SPObject = instance;
+                    node.Setup(this.SPObject, descriptor);
                     children.Add(node);
                 }
             }

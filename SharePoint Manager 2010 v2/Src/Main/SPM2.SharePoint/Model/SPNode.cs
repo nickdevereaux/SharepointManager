@@ -33,7 +33,24 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public object SPObject { get; set; }
+        public object _spObject = null;
+        public object SPObject 
+        { 
+            get
+            {
+                if(this._spObject == null)
+                {
+                    this._spObject = GetSPObject();
+                }
+                return this._spObject;
+            }
+            set
+            {
+                this._spObject = value;
+            }
+        }
+
+
         public object SPParent { get; set; }
         public ClassDescriptor Descriptor { get; set; }
 
@@ -44,9 +61,9 @@ namespace SPM2.SharePoint.Model
             {
                 if (_spObjectType == null)
                 {
-                    if (this.SPObject != null)
+                    if (this._spObject != null)
                     {
-                        _spObjectType = this.SPObject.GetType();
+                        _spObjectType = this._spObject.GetType();
                     }
 
                     if (_spObjectType == null)
@@ -57,6 +74,8 @@ namespace SPM2.SharePoint.Model
                             _spObjectType = Type.GetType(attrib.Name, true, false);
                         }
                     }
+
+                    PropertyGridTypeConverter.AddTo(this.SPObjectType);
                 }
                 return _spObjectType;
             }
@@ -100,15 +119,35 @@ namespace SPM2.SharePoint.Model
 
         public virtual void Setup(object spObject, ClassDescriptor descriptor)
         {
-            this.SPObject = spObject;
+            this.SPParent = spObject;
             this.Descriptor = descriptor;
             this.AddInID = descriptor.AddInID;
-            PropertyGridTypeConverter.AddTo(this.SPObjectType);
         }
 
         public virtual object GetSPObject()
         {
-            return this.SPObject;
+            object result = null;
+            if (this.SPParent != null)
+            {
+                
+                //PropertyInfo[] properties = this.SPParent.GetType().GetProperties();
+                PropertyDescriptorCollection des = TypeDescriptor.GetProperties(this.SPParent.GetType());
+                foreach(PropertyDescriptor info in des)
+                {
+                    
+                    if (this.SPObjectType == info.PropertyType)
+                    {
+                        // Use the name from the Property in the object model.
+                        this.Descriptor.Title = info.Name;
+                        
+                        result = info.GetValue(this.SPParent);
+
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
 
         public virtual Type GetSPObjectType()
@@ -124,29 +163,32 @@ namespace SPM2.SharePoint.Model
 
         protected override void LoadChildren()
         {
-            PropertyInfo[] properties = SPObjectType.GetProperties();
-            
-            // Replace the Generic node where the customize matches
-            ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.AddInID);
-            Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
-            
-            foreach (PropertyInfo info in properties)
+            if (this.SPObject != null)
             {
-                if (types.ContainsKey(info.PropertyType))
+                ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.AddInID);
+                Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
+
+                PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
+                foreach (PropertyDescriptor info in propertyDescriptors)
                 {
-                    ClassDescriptor descriptor = types[info.PropertyType];
-                    
-                    // Use the name from the Property in the object model.
-                    descriptor.Title = info.Name;
 
-                    object spChildObject = info.GetValue(this.SPObject, null);
+                    object obj = info.GetValue(this.SPObject);
 
-                    INode node = (INode)Activator.CreateInstance(descriptor.ClassType);
-                    node.Setup(spChildObject, descriptor);
+                    if (obj != null)
+                    {
+                        if (types.ContainsKey(info.PropertyType))
+                        {
+                            ClassDescriptor descriptor = types[info.PropertyType];
 
-                    this.Children.Add(node);
+                            ISPNode node = (ISPNode)Activator.CreateInstance(descriptor.ClassType);
+                            node.Text = info.Name;
+                            node.SPObject = obj;
+                            node.Setup(this.SPObject, descriptor);
+
+                            this.Children.Add(node);
+                        }
+                    }
                 }
-                
             }
         }
 
@@ -205,6 +247,9 @@ namespace SPM2.SharePoint.Model
         {
             return "/SPM2.SharePoint;component/Resources/Images/"+filename;
         }
+
+
+
 
     }
 }

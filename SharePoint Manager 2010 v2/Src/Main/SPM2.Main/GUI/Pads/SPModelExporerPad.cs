@@ -36,11 +36,12 @@ namespace SPM2.Main.GUI.Pads
             if (item != null)
             {
                 ISPNode node = item as ISPNode;
-                if (node.SPObject != null)
-                {
+                SPM2Commands.ObjectSelected.Execute(node, null);
+                //if (node.SPObject != null)
+                //{
                     
-                    SPM2Commands.ObjectSelected.Execute(node, null);
-                }
+                    
+                //}
             }
         }
 

@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="SPM2.Framework.WPF.Components.WPFTreeView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:SPM2.Framework.WPF.Components"
+  xmlns:framework="clr-namespace:SPM2.Framework;assembly=SPM2.Framework"
+  >
+    <TreeView ItemsSource="{Binding Children}" x:Name="TV">
+        <TreeView.ItemContainerStyle>
+            <!-- This Style binds a TreeViewItem to a TreeViewItemViewModel. -->
+            <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Tag" Value="Normal" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </TreeView.ItemContainerStyle>
+
+        <TreeView.Resources>
+            <HierarchicalDataTemplate DataType="{x:Type framework:TreeViewItemModel}" ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="16" Height="16" Source="{Binding IconUri}" />
+                    <TextBlock Text="{Binding Text}" />
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <!--
+            <HierarchicalDataTemplate 
+                DataType="{x:Type local:StateViewModel}" 
+                ItemsSource="{Binding Children}"
+                >
+                <StackPanel Orientation="Horizontal">
+                <Image Width="16" Height="16" Margin="3,0" Source="Images\State.png" />
+                <TextBlock Text="{Binding StateName}" />
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+            <DataTemplate DataType="{x:Type local:CityViewModUserControl1.xamlel}">
+                <StackPanel Orientation="Horizontal">
+                <Image Width="16" Height="16" Margin="3,0" Source="Images\City.png" />
+                <TextBlock Text="{Binding CityName}" />
+                </StackPanel>
+            </DataTemplate>-->
+        </TreeView.Resources>
+    </TreeView>
+</UserControl>

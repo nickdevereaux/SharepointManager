@@ -1,0 +1,29 @@
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\SPM2.Framework.WPF.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\SPM2.Framework.WPF.pdb
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\AvalonDock.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\AvalonDock.pdb
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\de\AvalonDock.resources.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Generate (Debug)\it-IT\AvalonDock.resources.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\ResolveAssemblyReference.cache
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\BrowserControl.baml
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\PropertyGridControl.baml
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\UserControl1.baml
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\BrowserControl.g.cs
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\PropertyGridControl.g.cs
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\TreeView\WPFTreeView.g.cs
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\UserControl1.g.cs
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF_MarkupCompile.cache
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF_MarkupCompile.lref
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\Components\TreeView\WPFTreeView.baml
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF.g.resources
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF.Properties.Resources.resources
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\ResGen.read.1.tlog
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\ResGen.write.1.tlog
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\obj\Generate (Debug)\SPM2.Framework.WPF.pdb
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\SPM2.Framework.WPF.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\SPM2.Framework.WPF.pdb
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\AvalonDock.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\AvalonDock.pdb
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\de\AvalonDock.resources.dll
+C:\Users\keutmann\Documents\My Dropbox\Projects\SPM2\Src\Main\SPM2.Framework.WPF\bin\Debug\it-IT\AvalonDock.resources.dll

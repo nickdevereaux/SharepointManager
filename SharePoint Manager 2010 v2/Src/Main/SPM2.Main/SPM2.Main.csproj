@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Build\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -134,12 +134,12 @@
     <ProjectReference Include="..\SPM2.Framework.WPF\SPM2.Framework.WPF.csproj">
       <Project>{C97ECB36-3AF4-4788-8251-E57FAB93CB87}</Project>
       <Name>SPM2.Framework.WPF</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\SPM2.Framework\SPM2.Framework.csproj">
       <Project>{5DE0D29F-DE15-4E15-9E89-3A873D849C40}</Project>
       <Name>SPM2.Framework</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\SPM2.SharePoint\SPM2.SharePoint2010.csproj">
       <Project>{CE144460-64CE-4FB5-A25E-25B7BB028D16}</Project>

@@ -71,10 +71,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Migrated rules for ICSharpCode.AvalonEdit.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>bin\Debug\ICSharpCode.AvalonEdit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CodeAnalysisRuleSet>Migrated rules for ICSharpCode.AvalonEdit.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\ICSharpCode.AvalonEdit.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>

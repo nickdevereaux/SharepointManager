@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SharePoint Manager 2010 v2")]
-[assembly: AssemblyDescription("Next generation of the SharePoint Manager 2010. With more nodes and features.")]
+[assembly: AssemblyDescription("Next generation of the SharePoint Manager 2010.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Keutmann ApS")]
 [assembly: AssemblyProduct("SharePoint Manager 2010 v2")]

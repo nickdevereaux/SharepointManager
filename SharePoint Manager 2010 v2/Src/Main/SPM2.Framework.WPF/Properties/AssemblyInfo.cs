@@ -7,13 +7,13 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SPM2.Framework.WPF")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SharePoint Manager 2010 v2")]
+[assembly: AssemblyDescription("Next generation of the SharePoint Manager 2010.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SPM2.Framework.WPF")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Keutmann ApS")]
+[assembly: AssemblyProduct("SharePoint Manager 2010 v2")]
+[assembly: AssemblyCopyright("Copyright © 2010 - Carsten Keutmann")]
+[assembly: AssemblyTrademark("Keutmann ApS")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

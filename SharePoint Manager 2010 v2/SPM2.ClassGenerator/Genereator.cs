@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Reflection;
-using Microsoft.SharePoint.Administration;
-using SPM2.Framework.Reflection;
-using SPM2.SharePoint.Model;
-using SPM2.Framework;
 using System.Collections;
+
+using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Client;
-using SPM2.Framework.Attributes;
+
+using SPM2.Framework;
+using SPM2.Framework.Reflection;
+using SPM2.SharePoint.Model;
 
 namespace SPM2.ClassGenerator
 {

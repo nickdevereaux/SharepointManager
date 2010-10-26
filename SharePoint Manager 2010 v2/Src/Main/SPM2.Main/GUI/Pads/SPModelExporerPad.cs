@@ -13,6 +13,7 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
+using System.Windows.Input;
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -26,22 +27,23 @@ namespace SPM2.Main.GUI.Pads
         public SPModelExporerPad()
         {
             wpfView.DataContext = new SPModelProvider();
+
             wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
             this.Content = wpfView;
         }
 
         void Explorer_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
         {
+            SelectItem();
+        }
+
+        private void SelectItem()
+        {
             object item = wpfView.Explorer.SelectedItem;
             if (item != null)
             {
                 ISPNode node = item as ISPNode;
                 SPM2Commands.ObjectSelected.Execute(node, null);
-                //if (node.SPObject != null)
-                //{
-                    
-                    
-                //}
             }
         }
 

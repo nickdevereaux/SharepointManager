@@ -68,6 +68,7 @@
     <Compile Include="Attributes\AdapterItemTypeAttribute.cs" />
     <Compile Include="Attributes\LoadAddInTypes.cs" />
     <Compile Include="Attributes\TitleAttribute.cs" />
+    <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />

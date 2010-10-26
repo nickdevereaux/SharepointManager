@@ -12,6 +12,7 @@ namespace SPM2.Framework
     public interface IAddInProvider
     {
         TypeAttachmentDictionary TypeAttachments { get; set; }
+        ClassDescriptorLookupDictionary ClassDescriptorLookup { get; set; }
 
         IList<T> CreateAttachments<T>(string id, InitializerDelegate<T> initializer);
     }

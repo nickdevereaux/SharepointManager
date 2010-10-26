@@ -13,9 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebServiceInstanceNode")]
+    //[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
+    //[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+    //[AttachTo("SPM2.SharePoint.Model.SPWebServiceInstanceNode")]
 	[AttachTo("SPM2.SharePoint.Model.SPServiceCollectionNode")]
 	public partial class SPWebServiceNode
 	{

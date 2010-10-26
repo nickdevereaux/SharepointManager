@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
+using Microsoft.SharePoint.Client;
+
 using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
@@ -15,40 +17,86 @@ namespace SPM2.SharePoint.Model
 {
     public class SPNodeCollection : SPNode
     {
+        private ClassDescriptor _collectionItem = null;
+        public ClassDescriptor CollectionItem
+        {
+            get 
+            {
+                if (this._collectionItem == null)
+                {
+                    this._collectionItem = FindCollectionItem();
+                }
+                return _collectionItem; 
+            }
+            set { _collectionItem = value; }
+        }
+
+
+        private ClassDescriptor FindCollectionItem()
+        {
+            ClassDescriptor result = null;
+            if (this.SPObjectType != null)
+            {
+                Type spType = null;
+
+                ClientCallableTypeAttribute attr = this.SPObjectType.GetAttribute<ClientCallableTypeAttribute>(true);
+                if (attr != null)
+                {
+                    spType = attr.CollectionChildItemType;
+                }
+
+                if (spType == null)
+                {
+                    Type[] argTypes = this.SPObjectType.GetBaseGenericArguments();
+                    if (argTypes != null && argTypes.Length == 1)
+                    {
+                        spType = argTypes[0];
+                    }
+                }
+
+                if (spType != null && AddInProvider.Current.ClassDescriptorLookup.ContainsKey(spType))
+                {
+                    result = AddInProvider.Current.ClassDescriptorLookup[spType];
+                }                
+            }
+
+            return result;
+        }
+
         protected override void LoadChildren()
         {
             List<INode> children = new List<INode>();
 
-            ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.AddInID);
-            Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
+            ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
 
             IEnumerable collection = (IEnumerable)this.SPObject;
             foreach (object instance in collection)
             {
                 Type instanceType = instance.GetType();
+                ClassDescriptor descriptor = null;
+                ISPNode node = node = null;
 
-                if (types.ContainsKey(instanceType))
+                if (AddInProvider.Current.ClassDescriptorLookup.ContainsKey(instanceType))
                 {
-                    // Use defined SPNode
-                    ClassDescriptor descriptor = types[instanceType];
-
-                    ISPNode node = (ISPNode)Activator.CreateInstance(descriptor.ClassType);
-                    node.SPObject = instance;
-                    node.Setup(this.SPObject, descriptor);
-                    children.Add(node);
+                    descriptor = AddInProvider.Current.ClassDescriptorLookup[instanceType];
                 }
                 else
                 {
-                    //// Auto create the SPNode 
-                    //Type nodeType = CreateNodeType(instanceType);
-                    ClassDescriptor descriptor = new ClassDescriptor(instance.GetType());
+                    if (this.CollectionItem != null)
+                    {
+                        descriptor = this.CollectionItem;
+                    }
+                }
 
-                    SPNode node = new SPNode();
-                    //INode node = (INode)Activator.CreateInstance(descriptor.ClassType);
+                if (descriptor != null)
+                {
+                    node = descriptor.CreateInstance<ISPNode>();
                     node.SPObject = instance;
                     node.Setup(this.SPObject, descriptor);
+
                     children.Add(node);
                 }
+
             }
 
             var orderedList = from p in children.Cast<ITreeViewItemModel>()

@@ -17,7 +17,7 @@ namespace SPM2.Framework
     public class AddInProvider : AbstractProvider<IAddInProvider>, IAddInProvider
     {
         public TypeAttachmentDictionary TypeAttachments { get; set; }
-
+        public ClassDescriptorLookupDictionary ClassDescriptorLookup { get; set; }
 
         AddInProvider()
         {
@@ -69,7 +69,8 @@ namespace SPM2.Framework
         private void Clear()
         {
             // Clear all
-            TypeAttachments = new TypeAttachmentDictionary();
+            this.TypeAttachments = new TypeAttachmentDictionary();
+            this.ClassDescriptorLookup = new ClassDescriptorLookupDictionary();
         }
 
         private void LoadTypes()
@@ -103,6 +104,10 @@ namespace SPM2.Framework
             foreach (Type type in types)
             {
                 ClassDescriptor descriptor = new ClassDescriptor(type);
+                if (descriptor.AdapterItemType != null)
+                {
+                    this.ClassDescriptorLookup.AddOrReplace(descriptor.AdapterItemType, descriptor);
+                }
 
                 if (descriptor.IsAddIn)
                 {

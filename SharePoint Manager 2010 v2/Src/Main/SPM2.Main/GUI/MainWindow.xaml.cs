@@ -87,7 +87,11 @@ namespace SPM2.Main
             if (e.Parameter != null && e.Parameter is ISPNode)
             {
                 ISPNode node = (ISPNode)e.Parameter;
-                FirstTextBlock.Text = node.SPObjectType.Name;
+                string name = node.SPObjectType.Name;
+                if (FirstTextBlock.Text != name)
+                {
+                    FirstTextBlock.Text = node.SPObjectType.Name;
+                }
             }
         }
 

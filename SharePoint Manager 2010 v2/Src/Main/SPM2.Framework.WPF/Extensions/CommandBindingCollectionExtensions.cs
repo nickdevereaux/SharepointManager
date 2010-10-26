@@ -12,18 +12,24 @@ namespace SPM2.Framework.WPF
         public static void AddCommandPreviewCanExecuteHandler(this CommandBindingCollection collection, RoutedCommand command, CanExecuteRoutedEventHandler handler)
         {
             CommandBinding binding = GetOrCreateBinding(collection, command);
+            // Remove the handler if it already exist
+            binding.PreviewCanExecute -= handler;
             binding.PreviewCanExecute += handler;
         }
 
         public static void AddCommandCanExecuteHandler(this CommandBindingCollection collection, RoutedCommand command, CanExecuteRoutedEventHandler handler)
         {
             CommandBinding binding = GetOrCreateBinding(collection, command);
+            // Remove the handler if it already exist
+            binding.CanExecute -= handler;
             binding.CanExecute += handler;
         }
 
         public static void AddCommandPreviewExecuteHandler(this CommandBindingCollection collection, RoutedCommand command, ExecutedRoutedEventHandler handler)
         {
             CommandBinding binding = GetOrCreateBinding(collection, command);
+            // Remove the handler if it already exist
+            binding.PreviewExecuted -= handler;
             binding.PreviewExecuted += handler;
         }
 
@@ -31,6 +37,8 @@ namespace SPM2.Framework.WPF
         public static void AddCommandExecutedHandler(this CommandBindingCollection collection, RoutedCommand command, ExecutedRoutedEventHandler handler)
         {
             CommandBinding binding = GetOrCreateBinding(collection, command);
+            // Remove the handler if it already exist
+            binding.Executed -= handler;
             binding.Executed += handler;
         }
 

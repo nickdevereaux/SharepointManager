@@ -34,7 +34,6 @@ namespace SPM2.Main.GUI.Pads
         private object SelectedObject { get; set; }
 
 
-
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -42,11 +41,15 @@ namespace SPM2.Main.GUI.Pads
             this.Title = PROPERTY_GRID_NAME;
 
             this.Loaded += new System.Windows.RoutedEventHandler(PropertyGridPad_Loaded);
+            this.Unloaded += new System.Windows.RoutedEventHandler(PropertyGridPad_Unloaded);
 
-            PGrid.propertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
+            this.IsActiveDocumentChanged += new EventHandler(PropertyGridPad_IsActiveDocumentChanged);
+            this.PGrid.propertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
             
             this.Content = PGrid;
+
         }
+
 
         void PropertyGridPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -55,7 +58,12 @@ namespace SPM2.Main.GUI.Pads
             Workbench.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
         }
 
-
+        void PropertyGridPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
+            Workbench.MainWindow.CommandBindings.RemoveCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
+        }
 
         void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -80,8 +88,7 @@ namespace SPM2.Main.GUI.Pads
 
         void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            //if (!CancelActive)
-            //{
+
             Hashtable propertyItems = null;
             if (!ChangedPropertyItems.ContainsKey(this.SelectedObject))
             {
@@ -95,36 +102,23 @@ namespace SPM2.Main.GUI.Pads
             propertyItems[e.ChangedItem] = e;
 
             ValueChanged = true;
-                //ChangedNodes[node] = true;
-
-                //UpdateMenu(node);
-            //}
         }
 
-
-        protected override void OnClosed()
+        void PropertyGridPad_IsActiveDocumentChanged(object sender, EventArgs e)
         {
-            base.OnClosed();
-
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            SetObject();
         }
 
         private void SetObject()
         {
-            ISPNode node = (ISPNode)this.SelectedObject;
-            if (node != null)
+            if (this.IsWindowVisible)
             {
-                PGrid.propertyGrid.SelectedObject = node.SPObject; 
+                ISPNode node = (ISPNode)this.SelectedObject;
+                if (node != null && PGrid.propertyGrid.SelectedObject != node.SPObject)
+                {
+                    PGrid.propertyGrid.SelectedObject = node.SPObject;
+                }
             }
-            
-            //if (this.SelectedObject != null)
-            //{
-            //    this.Title = PROPERTY_GRID_NAME+ ": " +this.SelectedObject.GetType().Name;
-            //}
-            //else
-            //{
-            //    this.Title = PROPERTY_GRID_NAME;
-            //}
         }
 
 

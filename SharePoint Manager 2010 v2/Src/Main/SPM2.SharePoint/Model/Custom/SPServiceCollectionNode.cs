@@ -13,7 +13,6 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Services")]
-	[Icon(Small="BULLET.GIF")]
 	[AttachTo("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceCollectionNode
 	{

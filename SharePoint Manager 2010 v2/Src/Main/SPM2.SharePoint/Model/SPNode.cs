@@ -129,8 +129,6 @@ namespace SPM2.SharePoint.Model
             object result = null;
             if (this.SPParent != null)
             {
-                
-                //PropertyInfo[] properties = this.SPParent.GetType().GetProperties();
                 PropertyDescriptorCollection des = TypeDescriptor.GetProperties(this.SPParent.GetType());
                 foreach(PropertyDescriptor info in des)
                 {
@@ -138,7 +136,7 @@ namespace SPM2.SharePoint.Model
                     if (this.SPObjectType == info.PropertyType)
                     {
                         // Use the name from the Property in the object model.
-                        this.Descriptor.Title = info.Name;
+                        this.Descriptor.Title = info.DisplayName;
                         
                         result = info.GetValue(this.SPParent);
 
@@ -165,7 +163,7 @@ namespace SPM2.SharePoint.Model
         {
             if (this.SPObject != null)
             {
-                ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.AddInID);
+                ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
                 Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
 
                 PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
@@ -181,7 +179,7 @@ namespace SPM2.SharePoint.Model
                             ClassDescriptor descriptor = types[info.PropertyType];
 
                             ISPNode node = (ISPNode)Activator.CreateInstance(descriptor.ClassType);
-                            node.Text = info.Name;
+                            node.Text = info.DisplayName;
                             node.SPObject = obj;
                             node.Setup(this.SPObject, descriptor);
 
@@ -208,40 +206,40 @@ namespace SPM2.SharePoint.Model
             return types;
         }
 
-        protected Type GetArgumentType(ClassDescriptor descriptor)
-        {
-            Type result = descriptor.ClassType;
-            Type[] argumentTypes = descriptor.ClassType.GetGenericArguments();
-            if (argumentTypes.Length > 0)
-            {
-                result = argumentTypes[0];
-            }
-            return result;
-        }
+        //protected Type GetArgumentType(ClassDescriptor descriptor)
+        //{
+        //    Type result = descriptor.ClassType;
+        //    Type[] argumentTypes = descriptor.ClassType.GetGenericArguments();
+        //    if (argumentTypes.Length > 0)
+        //    {
+        //        result = argumentTypes[0];
+        //    }
+        //    return result;
+        //}
 
-        protected Type CreateNodeType(Type spObjectType)
-        {
-            Type nodeType = null;
-            bool isAssignable = TypeExtensions.IEnumerableType.IsAssignableFrom(spObjectType);
-            if (isAssignable && spObjectType != TypeExtensions.StringType && !spObjectType.IsArray)
-            {
-                Type collectionType = spObjectType;
+        //protected Type CreateNodeType(Type spObjectType)
+        //{
+        //    Type nodeType = null;
+        //    bool isAssignable = TypeExtensions.IEnumerableType.IsAssignableFrom(spObjectType);
+        //    if (isAssignable && spObjectType != TypeExtensions.StringType && !spObjectType.IsArray)
+        //    {
+        //        Type collectionType = spObjectType;
 
-                Type itemType = null;
-                Type[] argTypes = spObjectType.GetBaseGenericArguments();
-                if (argTypes != null && argTypes.Length > 0)
-                {
-                    itemType = argTypes[0];
-                    nodeType = SharedTypes.SPNodeCollectionType.MakeGenericType(collectionType, itemType);
-                }
+        //        Type itemType = null;
+        //        Type[] argTypes = spObjectType.GetBaseGenericArguments();
+        //        if (argTypes != null && argTypes.Length > 0)
+        //        {
+        //            itemType = argTypes[0];
+        //            nodeType = SharedTypes.SPNodeCollectionType.MakeGenericType(collectionType, itemType);
+        //        }
 
-            }
-            else
-            {
-                nodeType = SharedTypes.SPNodeType.MakeGenericType(spObjectType);
-            }
-            return nodeType;
-        }
+        //    }
+        //    else
+        //    {
+        //        nodeType = SharedTypes.SPNodeType.MakeGenericType(spObjectType);
+        //    }
+        //    return nodeType;
+        //}
 
         public string GetResourceImagePath(string filename)
         {

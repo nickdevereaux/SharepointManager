@@ -13,6 +13,16 @@ namespace SPM2.Framework.WPF
             
         }
 
-
+        /// <summary>
+        /// Returns true if the content of the window is visible.
+        /// </summary>
+        public bool IsWindowVisible
+        {
+            get
+            {
+                bool result = (this.IsActiveDocument || (this.State != DockableContentState.Document && this.State != DockableContentState.Hidden));
+                return result;
+            }
+        }
     }
 }

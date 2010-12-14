@@ -10,10 +10,12 @@ using System.ComponentModel;
 
 using SPM2.Framework;
 using SPM2.Framework.WPF;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.Commands
 {
-    [AttachTo(File.AddInID)]
+    //[Export(File.AddInID, typeof(MenuItem))]
+    [Export(typeof(File))]
     public class Exit : MenuItem
     {
         public Exit()

@@ -13,13 +13,13 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Folders")]
-	[AttachTo("SPM2.SharePoint.Model.SPFolderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPFolderCollectionNode
 	{
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
         }
 	}
 }

@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSolutionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSolutionLanguagePackNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSolutionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSolutionLanguagePackNode")]
 	public partial class SPPersistedFileNode
 	{
 	}

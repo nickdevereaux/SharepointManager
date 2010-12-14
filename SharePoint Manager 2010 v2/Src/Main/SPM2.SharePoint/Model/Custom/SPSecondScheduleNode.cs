@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Schedule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
 	public partial class SPSecondScheduleNode
 	{
 	}

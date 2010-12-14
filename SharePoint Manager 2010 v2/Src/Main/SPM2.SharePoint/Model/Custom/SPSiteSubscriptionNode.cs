@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SiteSubscription")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteSubscriptionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionCollectionNode")]
 	public partial class SPSiteSubscriptionNode
 	{
 	}

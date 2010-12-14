@@ -25,13 +25,15 @@ using SPM2.Framework;
 using SPM2.Framework.Reflection;
 using SPM2.Framework.WPF.Commands;
 using SPM2.SharePoint.Model;
+using System.ComponentModel.Composition;
+using SPM2.Main.ViewModel;
 
 namespace SPM2.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    [AttachTo(Workbench.AddInID)]
+    [Export(Workbench.MainWindowName, typeof(Window))]
     public partial class MainWindow : Window
     {
         public const string ToolBarTreyContainer_AddInID = "SPM2.Main.MainWindow.ToolBarTreyContainer";
@@ -47,25 +49,64 @@ namespace SPM2.Main
             InitializeComponent();
             Build();
             CommandBinding();
+
         }
+
+        protected override void OnInitialized(System.EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            MainWindowModel model = (MainWindowModel)this.Resources["Model"];
+
+            if (model.Menus != null)
+            {
+                foreach (var item in model.Menus)
+                {
+                    this.MenuContainer.Children.Add(item.Value as Menu);
+                }
+
+                foreach (var item in model.ToolBars)
+                {
+                    this.ToolBarTrayControl.ToolBars.Add(item.Value);
+                }
+
+
+                foreach (var item in model.LeftDockableContents)
+                {
+                    this.LeftDockPane.Items.Add(item.Value);
+                }
+
+                foreach (var item in model.CenterDockableContents)
+                {
+                    this.ContentPane.Items.Add(item.Value);
+                }
+
+                foreach (var item in model.BottomDockableContents)
+                {
+                    this.BottomDockPane.Items.Add(item.Value);
+                }
+            }
+        }
+
+
 
 
         private void Build()
         {
-            IList<Menu> menus = AddInProvider.Current.CreateAttachments<Menu>(MenuContainer_AddInID, null);
-            this.MenuContainer.Children.AddRange(menus);
+            //IList<Menu> menus = AddInProvider.Current.CreateAttachments<Menu>(MenuContainer_AddInID, null);
+            //this.MenuContainer.Children.AddRange(menus);
 
 
-            IList<ToolBar> toolbars = AddInProvider.Current.CreateAttachments<ToolBar>(ToolBarTreyContainer_AddInID, null);
-            foreach(ToolBar bar in toolbars)
-            {
-                this.ToolBarTrayControl.ToolBars.Add(bar);
-            }
+            //IList<ToolBar> toolbars = AddInProvider.Current.CreateAttachments<ToolBar>(ToolBarTreyContainer_AddInID, null);
+            //foreach(ToolBar bar in toolbars)
+            //{
+            //    this.ToolBarTrayControl.ToolBars.Add(bar);
+            //}
 
 
-            this.LeftDockPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(LeftDockPane_AddInID));
-            this.ContentPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(ContentPane_AddInID));
-            this.BottomDockPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(BottomDockPane_AddInID));
+            //this.LeftDockPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(LeftDockPane_AddInID));
+            //this.ContentPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(ContentPane_AddInID));
+            //this.BottomDockPane.Items.AddList(WindowProvider.Current.BuildWindows<IPadWindow>(BottomDockPane_AddInID));
 
             
         }

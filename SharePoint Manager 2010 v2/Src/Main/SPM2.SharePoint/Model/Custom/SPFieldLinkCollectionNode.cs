@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FieldLinks")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentTypeNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
 	public partial class SPFieldLinkCollectionNode
 	{
 	}

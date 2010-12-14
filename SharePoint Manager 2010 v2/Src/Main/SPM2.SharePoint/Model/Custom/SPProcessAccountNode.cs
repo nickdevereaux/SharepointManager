@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ProcessAccount")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPProcessIdentityNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPApplicationPoolNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFarmNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPProcessIdentityNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPApplicationPoolNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPProcessAccountNode
 	{
 	}

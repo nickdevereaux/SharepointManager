@@ -14,11 +14,11 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FirstUniqueAncestorSecurableObject")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPSecurableObjectNode
 	{
 	}

@@ -8,11 +8,13 @@ using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
 using Microsoft.SharePoint.Administration;
 using SPM2.SharePoint.Model;
+using System.ComponentModel.Composition;
 
 namespace SPM2.SharePoint
 {
-    [Title("SharePoint ExplorerNode")]
-    [AddInID(SPModelProvider.AddInID)]
+    //[Title("SharePoint ExplorerNode")]
+    [Export()]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class SPModelProvider : TreeViewModel
     {
         public const string AddInID = "SPM2.SharePoint.SPModelProvider";
@@ -37,13 +39,23 @@ namespace SPM2.SharePoint
 
         protected override void LoadChildren()
         {
-            AddInProvider.Current.CreateAttachments<SPNode>(AddInID,
-                delegate(ClassDescriptor descriptor, SPNode node)
-                {
-                    node.Setup(this.Farm, descriptor);
-                    this.Children.Add(node);
-                    return true;
-                });
+            OrderingCollection<SPNode> orderedItems = CompositionProvider.GetOrderedExports<SPNode>(this.GetType());
+
+            // now add the items to the menu child items collection in a ordered list
+            foreach (var item in orderedItems)
+            {
+                SPNode node = item.Value;
+                node.Setup(this.Farm);
+                this.Children.Add(item.Value);
+            }
+
+            //AddInProvider.Current.CreateAttachments<SPNode>(AddInID,
+            //    delegate(ClassDescriptor descriptor, SPNode node)
+            //    {
+            //        node.Setup(this.Farm, descriptor);
+            //        this.Children.Add(node);
+            //        return true;
+            //    });
         }
     }
 }

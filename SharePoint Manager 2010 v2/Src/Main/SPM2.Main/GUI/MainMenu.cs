@@ -5,19 +5,27 @@ using System.Text;
 using System.Windows.Controls;
 using SPM2.Framework;
 using SPM2.Framework.WPF;
+using System.ComponentModel.Composition;
+using SPM2.Framework.Collections;
 
 namespace SPM2.Main.GUI
 {
-    [AttachTo(MainWindow.MenuContainer_AddInID)]
+    [Export(MainWindow.MenuContainer_AddInID, typeof(Menu))]
     public class MainMenu : Menu
     {
         public const string AddInID = "SPM2.Main.GUI.MainMenu";
 
-        public MainMenu()
+        [ImportMany(AddInID, typeof(MenuItem))]
+        public OrderingCollection<MenuItem> LacyItems { get; set; }
+
+        protected override void OnInitialized(EventArgs e)
         {
-            this.Items.LoadChildren(AddInID);
+            base.OnInitialized(e);
+
+            foreach (var item in LacyItems)
+            {
+                this.Items.Add(item.Value);
+            }
         }
-
-
     }
 }

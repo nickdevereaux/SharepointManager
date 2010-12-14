@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPDatabaseSnapshot")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPDatabaseSnapshotCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseSnapshotCollectionNode")]
 	public partial class SPDatabaseSnapshotNode
 	{
 	}

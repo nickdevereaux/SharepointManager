@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("DocTemplates")]
 	[AdapterItemType("Microsoft.SharePoint.SPDocTemplate, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocTemplateCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocTemplateCollectionNode")]
 	public partial class SPDocTemplateNode : SPNode
 	{
 	}

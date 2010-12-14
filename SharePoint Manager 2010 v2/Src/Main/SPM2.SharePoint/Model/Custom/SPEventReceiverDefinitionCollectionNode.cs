@@ -14,14 +14,14 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("EventReceivers")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentTypeNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFileNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPEventReceiverDefinitionCollectionNode
 	{
 	}

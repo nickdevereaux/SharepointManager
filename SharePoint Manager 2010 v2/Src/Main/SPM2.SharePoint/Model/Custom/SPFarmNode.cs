@@ -15,7 +15,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-    [AttachTo(SPModelProvider.AddInID)]
+    [ExportToNode(SPModelProvider.AddInID)]
 	public partial class SPFarmNode
 	{
         public SPFarmNode()

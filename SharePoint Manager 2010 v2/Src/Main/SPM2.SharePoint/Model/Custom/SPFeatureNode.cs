@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPFeature")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFeatureCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFeatureCollectionNode")]
 	public partial class SPFeatureNode
 	{
         private string _customText = null;

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("WorkflowAssociations")]
 	[AdapterItemType("Microsoft.SharePoint.Workflow.SPWebWorkflowAssociationCollection, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPWebWorkflowAssociationCollectionNode : SPNodeCollection
 	{
 	}

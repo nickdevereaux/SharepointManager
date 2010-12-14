@@ -14,11 +14,11 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceApplicationProxyGroupCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceApplicationProxyGroupCollectionNode")]
 	public partial class SPServiceApplicationProxyGroupNode
 	{
 	}

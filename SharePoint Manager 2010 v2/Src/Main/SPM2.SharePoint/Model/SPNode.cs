@@ -52,7 +52,23 @@ namespace SPM2.SharePoint.Model
 
 
         public object SPParent { get; set; }
-        public ClassDescriptor Descriptor { get; set; }
+
+        private ClassDescriptor _descriptor = null;
+        public ClassDescriptor Descriptor 
+        {
+            get
+            {
+                if (_descriptor == null)
+                {
+                    _descriptor = new ClassDescriptor(this.GetType());
+                }
+                return _descriptor;
+            }
+            set
+            {
+                this._descriptor = value;
+            }
+        }
 
         private Type _spObjectType = null;
         public Type SPObjectType
@@ -78,6 +94,10 @@ namespace SPM2.SharePoint.Model
                     PropertyGridTypeConverter.AddTo(this.SPObjectType);
                 }
                 return _spObjectType;
+            }
+            set
+            {
+                this._spObjectType = value;
             }
         }
 
@@ -114,14 +134,45 @@ namespace SPM2.SharePoint.Model
             }
         }
 
-
-
-
-        public virtual void Setup(object spObject, ClassDescriptor descriptor)
+        private IEnumerable<Lazy<SPNode>> _importedNodes = null;
+        public IEnumerable<Lazy<SPNode>> ImportedNodes
         {
-            this.SPParent = spObject;
-            this.Descriptor = descriptor;
-            this.AddInID = descriptor.AddInID;
+            get
+            {
+                if (_importedNodes == null)
+                {
+                    _importedNodes = CompositionProvider.GetExports<SPNode>(this.Descriptor.ClassType);
+                }
+                return _importedNodes;
+            }
+            set
+            {
+                _importedNodes = value;
+            }
+        }
+
+        private Dictionary<Type, SPNode> _nodeDictionary = null;
+        protected Dictionary<Type, SPNode> NodeDictionary
+        {
+            get
+            {
+                if (_nodeDictionary == null)
+                {
+                    _nodeDictionary = GetNodeDictionary();
+                }
+                return _nodeDictionary;
+            }
+            set
+            {
+                _nodeDictionary = value;
+            }
+        }
+
+
+
+        public virtual void Setup(object spParent)
+        {
+            this.SPParent = spParent;
         }
 
         public virtual object GetSPObject()
@@ -159,12 +210,30 @@ namespace SPM2.SharePoint.Model
             this.SPObject.InvokeMethod("Update", true);
         }
 
+        public virtual SPNode Clone()
+        {
+            SPNode result = (SPNode)Activator.CreateInstance(this.GetType());
+            //result.AddInID = this.AddInID;
+            //result.IconUri = this.IconUri;
+            //result.SPParent = this.SPParent;
+            //result.SPObject = this.SPObject;
+            //result.SPObjectType = this.SPObjectType;
+            //result.Descriptor = this.Descriptor;
+            //result.Text = this.Text;
+            //result.ToolTipText = this.ToolTipText;
+            //result.SPTypeName = this.SPTypeName;
+            //result.Url = this.Url;
+
+            return result;
+        }
+
         protected override void LoadChildren()
         {
             if (this.SPObject != null)
             {
-                ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
-                Dictionary<Type, ClassDescriptor> types = GetTypes(descriptors);
+                var nodes = CompositionProvider.GetExports<SPNode>(this.Descriptor.ClassType);
+
+                //ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
 
                 PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
                 foreach (PropertyDescriptor info in propertyDescriptors)
@@ -174,14 +243,14 @@ namespace SPM2.SharePoint.Model
 
                     if (obj != null)
                     {
-                        if (types.ContainsKey(info.PropertyType))
+                        if (this.NodeDictionary.ContainsKey(info.PropertyType))
                         {
-                            ClassDescriptor descriptor = types[info.PropertyType];
-
-                            ISPNode node = (ISPNode)Activator.CreateInstance(descriptor.ClassType);
+                            SPNode node = this.NodeDictionary[info.PropertyType];
+                            node = node.Clone();
                             node.Text = info.DisplayName;
                             node.SPObject = obj;
-                            node.Setup(this.SPObject, descriptor);
+
+                            node.Setup(this.SPObject);
 
                             this.Children.Add(node);
                         }
@@ -190,21 +259,22 @@ namespace SPM2.SharePoint.Model
             }
         }
 
-        protected Dictionary<Type, ClassDescriptor> GetTypes(ClassDescriptorCollection descriptors)
+        protected Dictionary<Type, SPNode> GetNodeDictionary()
         {
-            Dictionary<Type, ClassDescriptor> types = new Dictionary<Type, ClassDescriptor>();
-            if (descriptors != null)
+            Dictionary<Type, SPNode> types = new Dictionary<Type, SPNode>();
+            foreach (var lazyItem in this.ImportedNodes)
             {
-                foreach (ClassDescriptor descriptor in descriptors)
+                SPNode node = lazyItem.Value;
+
+                if (node.Descriptor.AdapterItemType != null)
                 {
-                    if (descriptor.AdapterItemType != null)
-                    {
-                        types.AddOrReplace(descriptor.AdapterItemType, descriptor);
-                    }
+                    types.AddOrReplace(node.Descriptor.AdapterItemType, node);
                 }
             }
             return types;
         }
+
+
 
         //protected Type GetArgumentType(ClassDescriptor descriptor)
         //{

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("TemplateContainer")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.BaseFieldControlNode")]
+	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
 	public partial class TemplateContainerNode
 	{
 	}

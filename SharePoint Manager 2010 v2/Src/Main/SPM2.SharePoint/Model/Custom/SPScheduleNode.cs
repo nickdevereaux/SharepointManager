@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ChangeSchedule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPManagedAccountNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPJobDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPManagedAccountNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPJobDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPScheduleNode
 	{
 	}

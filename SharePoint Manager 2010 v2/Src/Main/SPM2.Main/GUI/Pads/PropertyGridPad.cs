@@ -5,6 +5,9 @@ using System.Text;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Windows.Forms;
+using System.Collections;
+using System.ComponentModel.Composition;
 
 using AvalonDock;
 
@@ -14,14 +17,12 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
-using System.Windows.Forms;
-using System.Collections;
 
 namespace SPM2.Main.GUI.Pads
 {
 
     [Title("PropertyGrid")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane", Index= 100)]
+    [Export(MainWindow.ContentPane_AddInID, typeof(DockableContent))]
     public class PropertyGridPad : AbstractPadWindow
     {
         private const string PROPERTY_GRID_NAME = "PropertyGrid";
@@ -40,29 +41,30 @@ namespace SPM2.Main.GUI.Pads
 
             this.Title = PROPERTY_GRID_NAME;
 
-            this.Loaded += new System.Windows.RoutedEventHandler(PropertyGridPad_Loaded);
-            this.Unloaded += new System.Windows.RoutedEventHandler(PropertyGridPad_Unloaded);
-
             this.IsActiveDocumentChanged += new EventHandler(PropertyGridPad_IsActiveDocumentChanged);
             this.PGrid.propertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
-            
+
             this.Content = PGrid;
 
-        }
-
-
-        void PropertyGridPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
             Workbench.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
         }
 
+        //void PropertyGridPad_Closed(object sender, EventArgs e)
+        //{
+        //    Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+        //    Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
+        //    Workbench.MainWindow.CommandBindings.RemoveCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
+        //}
+        
+
+        void PropertyGridPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+        }
+
         void PropertyGridPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
-            Workbench.MainWindow.CommandBindings.RemoveCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
         }
 
         void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)

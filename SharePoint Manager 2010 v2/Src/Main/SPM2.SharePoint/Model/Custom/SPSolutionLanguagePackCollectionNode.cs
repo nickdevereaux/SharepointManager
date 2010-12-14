@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("LanguagePacks")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSolutionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSolutionNode")]
 	public partial class SPSolutionLanguagePackCollectionNode
 	{
 	}

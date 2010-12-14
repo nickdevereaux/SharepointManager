@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Quota")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPQuotaNode
 	{
 	}

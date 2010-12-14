@@ -8,20 +8,30 @@ using System.Windows.Controls;
 using SPM2.Framework;
 using SPM2.Framework.WPF;
 using SPM2.Main.GUI;
+using System.ComponentModel.Composition;
+using SPM2.Framework.Collections;
 
 namespace SPM2.Main.Commands
 {
-    [AttachTo(Id=MainMenu.AddInID, Index=100)]
+    [Export(MainMenu.AddInID, typeof(MenuItem))]
+    [ExportMetadata("Order", 100)]
     public class File : MenuItem
     {
         public const string AddInID = "SPM2.Main.Commands.File";
+
+        [ImportMany(typeof(File))]
+        public OrderingCollection<MenuItem> LacyItems { get; set; }
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
 
             this.Header = "_File";
-            
+
+            foreach (var item in LacyItems)
+            {
+                this.Items.Add(item.Value);
+            }
         }
     }
 }

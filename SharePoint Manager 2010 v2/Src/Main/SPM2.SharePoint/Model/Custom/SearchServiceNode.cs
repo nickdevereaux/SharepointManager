@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SearchDataAccessServiceInstanceNode")]
-	[AttachTo("SPM2.SharePoint.Model.SearchServiceInstanceNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SearchDataAccessServiceInstanceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SearchServiceInstanceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
 	public partial class SearchServiceNode
 	{
 	}

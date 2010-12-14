@@ -14,11 +14,11 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemVersionNode")]
-	[AttachTo("SPM2.SharePoint.Model.BaseFieldControlNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemVersionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
 	public partial class SPListItemNode
 	{
 	}

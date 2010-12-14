@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("WebApplications")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPWebApplicationCollectionNode
 	{
         public SPWebApplicationCollectionNode()

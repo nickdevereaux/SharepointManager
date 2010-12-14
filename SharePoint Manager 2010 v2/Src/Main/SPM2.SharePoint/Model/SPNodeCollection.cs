@@ -17,24 +17,24 @@ namespace SPM2.SharePoint.Model
 {
     public class SPNodeCollection : SPNode
     {
-        private ClassDescriptor _collectionItem = null;
-        public ClassDescriptor CollectionItem
+        private SPNode _defaultNode = null;
+        public SPNode DefaultNode
         {
             get 
             {
-                if (this._collectionItem == null)
+                if (this._defaultNode == null)
                 {
-                    this._collectionItem = FindCollectionItem();
+                    this._defaultNode = FindDefaultNode();
                 }
-                return _collectionItem; 
+                return _defaultNode; 
             }
-            set { _collectionItem = value; }
+            set { _defaultNode = value; }
         }
 
 
-        private ClassDescriptor FindCollectionItem()
+        private SPNode FindDefaultNode()
         {
-            ClassDescriptor result = null;
+            SPNode result = null;
             if (this.SPObjectType != null)
             {
                 Type spType = null;
@@ -54,9 +54,9 @@ namespace SPM2.SharePoint.Model
                     }
                 }
 
-                if (spType != null && AddInProvider.Current.ClassDescriptorLookup.ContainsKey(spType))
+                if (spType != null && this.NodeDictionary.ContainsKey(spType))
                 {
-                    result = AddInProvider.Current.ClassDescriptorLookup[spType];
+                    result = this.NodeDictionary[spType];
                 }                
             }
 
@@ -67,33 +67,32 @@ namespace SPM2.SharePoint.Model
         {
             List<INode> children = new List<INode>();
 
-            ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
+            Dictionary<Type, SPNode> nodeDictionary = GetNodeDictionary();
 
             IEnumerable collection = (IEnumerable)this.SPObject;
             foreach (object instance in collection)
             {
                 Type instanceType = instance.GetType();
-                ClassDescriptor descriptor = null;
-                ISPNode node = node = null;
+                SPNode node = null;
 
-                if (AddInProvider.Current.ClassDescriptorLookup.ContainsKey(instanceType))
+                if (nodeDictionary.ContainsKey(instanceType))
                 {
-                    descriptor = AddInProvider.Current.ClassDescriptorLookup[instanceType];
+                    node = nodeDictionary[instanceType];
                 }
                 else
                 {
-                    if (this.CollectionItem != null)
+                    if (this.DefaultNode != null)
                     {
-                        descriptor = this.CollectionItem;
+                        node = this.DefaultNode;
                     }
                 }
 
-                if (descriptor != null)
+                if (node != null)
                 {
-                    node = descriptor.CreateInstance<ISPNode>();
+                    // Always create a new node, because the object has to be unique for each item in the treeview.
+                    node = node.Clone();
                     node.SPObject = instance;
-                    node.Setup(this.SPObject, descriptor);
-
+                    node.Setup(this.SPObject);
                     children.Add(node);
                 }
 
@@ -107,7 +106,8 @@ namespace SPM2.SharePoint.Model
             {
                 this.Children.Add(item);
             }
-
         }
+
+
     }
 }

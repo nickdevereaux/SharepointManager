@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPExternalBinaryId")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPExternalBinaryIdCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPExternalBinaryIdCollectionNode")]
 	public partial class SPExternalBinaryIdNode
 	{
 	}

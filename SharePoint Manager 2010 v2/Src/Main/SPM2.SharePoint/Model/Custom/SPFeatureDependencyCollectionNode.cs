@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ActivationDependencies")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFeatureDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFeatureDefinitionNode")]
 	public partial class SPFeatureDependencyCollectionNode
 	{
 	}

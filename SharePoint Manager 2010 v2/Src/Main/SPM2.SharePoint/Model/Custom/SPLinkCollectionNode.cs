@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ForwardLinks")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFileNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
 	public partial class SPLinkCollectionNode
 	{
 	}

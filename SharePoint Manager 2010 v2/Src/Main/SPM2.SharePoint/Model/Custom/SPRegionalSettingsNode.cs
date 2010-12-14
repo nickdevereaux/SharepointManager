@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RegionalSettings")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	public partial class SPRegionalSettingsNode
 	{
 	}

@@ -13,9 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ParentContentType")]
-	[AttachTo("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentTypeCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	public partial class SPContentTypeNode
 	{
         public SPContentTypeNode()

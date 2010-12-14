@@ -13,19 +13,19 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Icon(Small="BULLET.GIF")]
-	//[AttachTo("SPM2.SharePoint.Model.SPFileNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFolderCollectionNode")]
-	//[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	//[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFolderCollectionNode")]
+	//[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPFolderNode
 	{
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             this.Text = this.Folder.Name;
         }

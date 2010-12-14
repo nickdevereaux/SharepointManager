@@ -14,15 +14,15 @@ using Microsoft.SharePoint.Utilities;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
-    //[AttachTo("SPM2.SharePoint.Model.SPFolderNode")]
-    //[AttachTo("SPM2.SharePoint.Model.SPFileNode")]
-    [AttachTo("SPM2.SharePoint.Model.SPListCollectionNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPListCollectionNode")]
 	public partial class SPDocumentLibraryNode
 	{
 
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             string title = (String.IsNullOrEmpty(this.DocumentLibrary.Title)) ? this.DocumentLibrary.ID.ToString() : this.DocumentLibrary.Title;
             this.Text = String.Format("{0} ({1})", title, this.DocumentLibrary.ItemCount);

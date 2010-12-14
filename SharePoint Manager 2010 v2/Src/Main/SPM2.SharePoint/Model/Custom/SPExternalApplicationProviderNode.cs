@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Provider")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPExternalApplicationSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPExternalApplicationSettingsNode")]
 	public partial class SPExternalApplicationProviderNode
 	{
 	}

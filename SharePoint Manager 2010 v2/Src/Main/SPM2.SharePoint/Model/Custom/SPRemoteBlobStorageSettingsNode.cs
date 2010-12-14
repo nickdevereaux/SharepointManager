@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RemoteBlobStorageSettings")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentDatabaseNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentDatabaseNode")]
 	public partial class SPRemoteBlobStorageSettingsNode
 	{
 	}

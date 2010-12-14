@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Databases")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPDatabaseServiceInstanceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseServiceInstanceNode")]
 	public partial class SPDatabaseCollectionNode
 	{
 	}

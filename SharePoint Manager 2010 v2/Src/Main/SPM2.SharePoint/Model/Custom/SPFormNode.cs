@@ -14,12 +14,12 @@ using Microsoft.SharePoint.Utilities;
 
 namespace SPM2.SharePoint.Model
 {
-	[AttachTo("SPM2.SharePoint.Model.SPFormCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFormCollectionNode")]
 	public partial class SPFormNode
 	{
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             this.Text = this.Form.Url.Substring(this.Form.Url.LastIndexOf("/") + 1);
             this.ToolTipText = this.Form.Url;
@@ -37,9 +37,8 @@ namespace SPM2.SharePoint.Model
             SPWeb web = this.Form.ParentList.ParentWeb;
 
             SPLimitedWebPartManager manager = web.GetLimitedWebPartManager(this.Form.Url, System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared);
-            ClassDescriptor descriptor = new ClassDescriptor(typeof(SPLimitedWebPartCollectionNode));
 
-            webparts.Setup(manager.WebParts, descriptor);
+            webparts.Setup(manager.WebParts);
 
             this.Children.Add(webparts);
         }

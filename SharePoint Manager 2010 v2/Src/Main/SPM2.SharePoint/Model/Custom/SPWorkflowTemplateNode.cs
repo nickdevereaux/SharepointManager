@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("BaseTemplate")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWorkflowTemplateCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowTemplateCollectionNode")]
 	public partial class SPWorkflowTemplateNode
 	{
 	}

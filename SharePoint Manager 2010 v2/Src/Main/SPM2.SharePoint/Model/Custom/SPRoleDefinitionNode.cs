@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPRoleDefinition")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRoleDefinitionBindingCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPRoleDefinitionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRoleDefinitionBindingCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRoleDefinitionCollectionNode")]
 	public partial class SPRoleDefinitionNode
 	{
 	}

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SweepSchedule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPTimerServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceNode")]
 	public partial class SPHourlyScheduleNode
 	{
 	}

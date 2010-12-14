@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("AlternateUrlCollections")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAlternateUrlCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionNode")]
 	public partial class SPAlternateUrlNode
 	{
 	}

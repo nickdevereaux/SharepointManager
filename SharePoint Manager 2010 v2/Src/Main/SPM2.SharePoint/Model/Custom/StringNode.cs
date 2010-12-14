@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("String")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPViewFieldCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPMimeTypeSetNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFileExtensionsCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPViewFieldCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMimeTypeSetNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFileExtensionsCollectionNode")]
 	public partial class StringNode
 	{
 	}

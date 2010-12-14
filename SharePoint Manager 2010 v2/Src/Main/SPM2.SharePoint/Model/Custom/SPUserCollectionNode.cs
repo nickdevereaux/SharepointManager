@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Users")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPGroupNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPUserCollectionNode
 	{
 	}

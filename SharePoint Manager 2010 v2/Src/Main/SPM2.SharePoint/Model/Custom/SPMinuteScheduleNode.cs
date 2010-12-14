@@ -14,12 +14,12 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("InitialSweepSchedule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPTimerServiceNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
 	public partial class SPMinuteScheduleNode
 	{
 	}

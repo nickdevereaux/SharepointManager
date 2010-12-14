@@ -14,10 +14,10 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPAlternateUrlNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPAlternateUrlCollectionNode
 	{
 	}

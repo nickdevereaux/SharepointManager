@@ -9,38 +9,43 @@ using System.ComponentModel;
 using SPM2.Framework.ComponentModel;
 using SPM2.SharePoint.Model;
 using SPM2.Main.ComponentModel;
+using System.ComponentModel.Composition.Hosting;
 
 namespace SPM2.Main
 {
     public class Workbench
     {
-        public const string AddInID = "SPM2.Main.Workbench";
+        public const string MainWindowName = "MainWindow";
 
-        public static Window MainWindow;
+        public static App Application;
+        public static Window MainWindow
+        {
+            get
+            {
+                return Workbench.Application.MainWindow;
+            }
+        }
+
+        //private static CompositionProvider AddinProvider = new CompositionProvider();
+        //public static CompositionContainer AddIns { get; set; }
 
         //public static IWindowsProvider Windows;
         //public static DockingManager DockManager;
 
         public static void Initialize()
         {
-            IList<Window> windows = AddInProvider.Current.CreateAttachments<Window>(AddInID, null);
-            if (windows.Count > 0)
-            {
-                MainWindow = windows[0];
-            }
-            else
-            {
-                throw new ApplicationException("No Main Window found for the Application!");
-            }
-
-            //DockManager = MainWindow.DockManager;
-            //Windows = WindowProvider.Current;
-            PropertyGridTypeConverter.AddEditor(typeof(string), typeof(StringEditor)); 
-
+            //AddinProvider.Load("addins");
+            //AddIns = AddinProvider.Container;
             
+            PropertyGridTypeConverter.AddEditor(typeof(string), typeof(StringEditor));
 
+            Application = CompositionProvider.Current.GetExportedValue<App>();
+            Application.InitializeComponent();
+        }
 
-
+        public static void Run()
+        {
+            Application.Run();
         }
      }
 }

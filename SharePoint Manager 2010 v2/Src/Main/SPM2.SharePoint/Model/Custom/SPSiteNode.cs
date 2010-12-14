@@ -13,8 +13,8 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPSite")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteSubscriptionSiteCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionSiteCollectionNode")]
 	public partial class SPSiteNode
 	{
         public SPSiteNode()

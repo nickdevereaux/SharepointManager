@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("CopyDestinations")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	public partial class SPCopyDestinationCollectionNode
 	{
 	}

@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPNavigationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPNavigationNodeCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPNavigationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPNavigationNodeCollectionNode")]
 	public partial class SPNavigationNodeNode
 	{
 	}

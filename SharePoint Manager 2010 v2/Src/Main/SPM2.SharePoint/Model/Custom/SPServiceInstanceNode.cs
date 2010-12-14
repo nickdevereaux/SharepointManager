@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceInstanceDependencyCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceInstanceCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceInstanceDependencyCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceInstanceCollectionNode")]
 	public partial class SPServiceInstanceNode
 	{
 	}

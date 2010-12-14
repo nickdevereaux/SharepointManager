@@ -14,16 +14,16 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Receivers")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPImportUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPClickthroughUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPExportUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPRequestUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFeatureUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPQueryUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteInventoryUsageProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPTimerJobUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPRatingUsageDefinitionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPImportUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPClickthroughUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPExportUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRequestUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFeatureUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPQueryUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteInventoryUsageProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPTimerJobUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRatingUsageDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUsageDefinitionNode")]
 	public partial class SPUsageReceiverDefinitionCollectionNode
 	{
 	}

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPJobHistory")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPJobHistoryEntriesNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPJobHistoryEntriesNode")]
 	public partial class SPJobHistoryNode
 	{
 	}

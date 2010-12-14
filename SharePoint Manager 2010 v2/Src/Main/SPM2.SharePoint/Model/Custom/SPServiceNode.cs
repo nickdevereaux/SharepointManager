@@ -13,10 +13,10 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[AttachTo("SPM2.SharePoint.Model.SPTimerServiceInstanceNode")]
-	[AttachTo("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceInstanceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPServiceNode
 	{
         public SPServiceNode()

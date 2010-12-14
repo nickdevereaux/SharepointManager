@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ServiceInstances")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPServerNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServerNode")]
 	public partial class SPServiceInstanceCollectionNode
 	{
 	}

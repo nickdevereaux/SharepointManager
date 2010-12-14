@@ -14,15 +14,15 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("TitleResource")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserCustomActionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentTypeNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFieldNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPNavigationNodeNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserCustomActionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFieldNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPNavigationNodeNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPUserResourceNode
 	{
 	}

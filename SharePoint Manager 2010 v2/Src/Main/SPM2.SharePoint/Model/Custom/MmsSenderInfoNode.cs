@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("MmsSender")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileMessageServiceProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileMessageServiceProviderNode")]
 	public partial class MmsSenderInfoNode
 	{
 	}

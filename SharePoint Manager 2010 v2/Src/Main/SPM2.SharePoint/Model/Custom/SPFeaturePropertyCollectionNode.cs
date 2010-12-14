@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Properties")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFeatureNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFeatureDefinitionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFeatureNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFeatureDefinitionNode")]
 	public partial class SPFeaturePropertyCollectionNode
 	{
 	}

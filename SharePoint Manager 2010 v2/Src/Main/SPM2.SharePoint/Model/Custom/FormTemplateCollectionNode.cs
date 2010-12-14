@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FormTemplates")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.FormsServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.FormsServiceNode")]
 	public partial class FormTemplateCollectionNode
 	{
 	}

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPGroup")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPGroupCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPGroupCollectionNode")]
 	public partial class SPGroupNode
 	{
 	}

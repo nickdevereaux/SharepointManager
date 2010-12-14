@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPWorkflowAssociation")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWorkflowAssociationCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListWorkflowAssociationCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowAssociationCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListWorkflowAssociationCollectionNode")]
 	public partial class SPWorkflowAssociationNode
 	{
 	}

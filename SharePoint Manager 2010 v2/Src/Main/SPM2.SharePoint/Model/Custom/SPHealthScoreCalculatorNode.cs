@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("AssociatedHealthScoreCalculator")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPPerformanceMonitorCreationDataNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPPerformanceMonitorCreationDataNode")]
 	public partial class SPHealthScoreCalculatorNode
 	{
 	}

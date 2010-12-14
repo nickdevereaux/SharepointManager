@@ -14,10 +14,10 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Roles")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPPrincipalNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPGroupNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPPrincipalNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	public partial class SPRoleCollectionNode
 	{
 	}

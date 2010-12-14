@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("PerformanceMonitors")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPHttpThrottleSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHttpThrottleSettingsNode")]
 	public partial class SPHttpThrottlingMonitorsNode
 	{
 	}

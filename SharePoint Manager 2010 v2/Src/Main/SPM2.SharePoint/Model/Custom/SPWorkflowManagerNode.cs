@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("WorkflowManager")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPWorkflowManagerNode
 	{
 	}

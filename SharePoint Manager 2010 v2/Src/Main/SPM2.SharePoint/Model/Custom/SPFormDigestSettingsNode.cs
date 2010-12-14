@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FormDigestSettings")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPFormDigestSettingsNode
 	{
 	}

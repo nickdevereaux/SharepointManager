@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Products")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.<get_Products>d__0Node")]
+	[ExportToNode("SPM2.SharePoint.Model.<get_Products>d__0Node")]
 	public partial class GuidNode
 	{
 	}

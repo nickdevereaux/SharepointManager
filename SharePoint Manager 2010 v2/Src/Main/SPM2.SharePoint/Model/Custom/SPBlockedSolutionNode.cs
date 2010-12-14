@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPBlockedSolution")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPBlockedSolutionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPBlockedSolutionCollectionNode")]
 	public partial class SPBlockedSolutionNode
 	{
 	}

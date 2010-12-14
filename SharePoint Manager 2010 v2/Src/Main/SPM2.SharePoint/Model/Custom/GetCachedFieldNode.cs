@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FieldControlCacheGetCallback")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	public partial class GetCachedFieldNode
 	{
 	}

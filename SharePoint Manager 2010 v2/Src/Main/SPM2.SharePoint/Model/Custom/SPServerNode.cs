@@ -14,16 +14,16 @@ using System.IO;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[AttachTo("SPM2.SharePoint.Model.SPServerCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SessionStateDatabaseNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServerCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SessionStateDatabaseNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPServerNode
 	{
         public SPServerNode()

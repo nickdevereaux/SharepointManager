@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPFileVersion")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFileVersionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFileVersionCollectionNode")]
 	public partial class SPFileVersionNode
 	{
 	}

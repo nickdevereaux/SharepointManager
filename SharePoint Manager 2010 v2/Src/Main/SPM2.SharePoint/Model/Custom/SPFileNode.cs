@@ -15,15 +15,15 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFileCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFileCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	public partial class SPFileNode
 	{
 
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             this.Url = SPUrlUtility.CombineUrl(this.File.ParentFolder.ParentWeb.Url, this.File.Url);
         }

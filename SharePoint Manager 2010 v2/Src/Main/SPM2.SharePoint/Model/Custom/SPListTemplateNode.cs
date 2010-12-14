@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPListTemplate")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPListTemplateCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListTemplateCollectionNode")]
 	public partial class SPListTemplateNode
 	{
 	}

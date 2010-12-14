@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("DistributionGroupPendingJobData")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPGroupNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
 	public partial class SPDistributionGroupJobDataNode
 	{
 	}

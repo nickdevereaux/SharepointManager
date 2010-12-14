@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPObjectModelType")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPObjectModelTypeCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPObjectModelTypeCollectionNode")]
 	public partial class SPObjectModelTypeNode
 	{
 	}

@@ -14,15 +14,15 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFarmNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseServerDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebFrontEndDiagnosticsPerformanceCounterProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsEventLogProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlMemoryProviderNode")]
 	public partial class SPTimerServiceNode
 	{
 	}

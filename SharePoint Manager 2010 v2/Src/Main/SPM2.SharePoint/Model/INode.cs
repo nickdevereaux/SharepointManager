@@ -11,6 +11,6 @@ namespace SPM2.SharePoint.Model
         object GetSPObject();
         Type GetSPObjectType();
 
-        void Setup(object spObject, ClassDescriptor descriptor);
+        void Setup(object spObject);
     }
 }

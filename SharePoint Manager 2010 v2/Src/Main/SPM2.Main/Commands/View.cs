@@ -8,10 +8,12 @@ using System.ComponentModel;
 using SPM2.Framework;
 using SPM2.Framework.WPF;
 using SPM2.Main.GUI;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.Commands
 {
-    [AttachTo(MainMenu.AddInID, After=File.AddInID)]
+    [Export(MainMenu.AddInID, typeof(MenuItem))]
+    [ExportMetadata("After",  File.AddInID)]
     public class View : MenuItem
     {
         public const string AddInID = "SPM2.Main.Commands.View";

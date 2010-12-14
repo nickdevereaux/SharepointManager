@@ -15,19 +15,19 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPViewCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPViewContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileContextNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPViewCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPViewContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileContextNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPViewNode
 	{
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             this.Url = SPUrlUtility.CombineUrl(View.ParentList.ParentWeb.Url, View.Url);
         }

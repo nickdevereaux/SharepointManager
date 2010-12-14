@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPMimeMapping")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPMimeMappingCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMimeMappingCollectionNode")]
 	public partial class SPMimeMappingNode
 	{
 	}

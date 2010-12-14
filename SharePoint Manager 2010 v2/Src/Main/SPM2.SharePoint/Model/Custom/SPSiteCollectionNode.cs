@@ -13,9 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Sites")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentDatabaseNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentDatabaseNode")]
 	public partial class SPSiteCollectionNode
 	{
         public SPSiteCollectionNode()

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
 	public partial class SessionStateDatabaseNode
 	{
 	}

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Properties")]
 	[AdapterItemType("Microsoft.SharePoint.SPModule+SPModulePropertyBag, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-	[AttachTo("SPM2.SharePoint.Model.SPModuleNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPModuleNode")]
 	public partial class SPModulePropertyBagNode : SPNode
 	{
 	}

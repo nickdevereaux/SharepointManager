@@ -14,10 +14,10 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SiteSubscriptions")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPContentDatabaseNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPFarmNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPContentDatabaseNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPSiteSubscriptionCollectionNode
 	{
 	}

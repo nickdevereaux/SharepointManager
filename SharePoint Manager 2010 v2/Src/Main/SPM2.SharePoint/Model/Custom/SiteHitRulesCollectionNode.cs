@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SiteHitRules")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SearchServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SearchServiceNode")]
 	public partial class SiteHitRulesCollectionNode
 	{
 	}

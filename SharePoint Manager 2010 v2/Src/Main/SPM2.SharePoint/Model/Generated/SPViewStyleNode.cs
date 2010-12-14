@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ViewStyles")]
 	[AdapterItemType("Microsoft.SharePoint.SPViewStyle, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-	[AttachTo("SPM2.SharePoint.Model.SPViewStyleCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPViewStyleCollectionNode")]
 	public partial class SPViewStyleNode : SPNode
 	{
 	}

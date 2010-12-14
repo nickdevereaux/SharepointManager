@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RegisteredUsageDefinitions")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUsageManagerNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUsageManagerNode")]
 	public partial class SPUsageDefinitionCollectionNode
 	{
 	}

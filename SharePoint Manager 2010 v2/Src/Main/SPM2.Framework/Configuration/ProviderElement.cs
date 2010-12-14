@@ -103,10 +103,10 @@ namespace SPM2.Framework.Configuration
 
         public static void ValidateProviderType(object type)
         {
-            if (!typeof(IAddInProvider).IsAssignableFrom((Type)type))
-            {
-                throw new ConfigurationErrorsException("The provider must implement the IAddInProvider interface.");
-            }
+            //if (!typeof(IAddInProvider).IsAssignableFrom((Type)type))
+            //{
+            //    throw new ConfigurationErrorsException("The provider must implement the IAddInProvider interface.");
+            //}
         }
 
 

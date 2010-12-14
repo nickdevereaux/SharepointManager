@@ -6,10 +6,12 @@ using System.Windows.Controls;
 using SPM2.Framework.WPF;
 using System.Windows.Input;
 using SPM2.Framework;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.Commands
 {
-    [AttachTo(Id=File.AddInID, Index= 0)]
+    [Export(typeof(File))]
+    [ExportMetadata("Order", 20)]
     public class Save : MenuItem
     {
         public Save()

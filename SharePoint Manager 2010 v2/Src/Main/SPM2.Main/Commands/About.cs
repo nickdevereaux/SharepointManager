@@ -11,10 +11,11 @@ using System.Windows.Media.Imaging;
 using SPM2.Framework;
 using SPM2.Framework.WPF;
 using SPM2.Main.GUI;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.Commands
 {
-    [AttachTo(Help.AddInID)]
+    [Export(Help.AddInID, typeof(MenuItem))]
     public class About : MenuItem
     {
         

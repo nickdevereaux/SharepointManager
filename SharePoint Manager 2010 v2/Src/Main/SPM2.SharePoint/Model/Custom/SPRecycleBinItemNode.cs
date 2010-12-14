@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRecycleBinItemCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRecycleBinItemCollectionNode")]
 	public partial class SPRecycleBinItemNode
 	{
 	}

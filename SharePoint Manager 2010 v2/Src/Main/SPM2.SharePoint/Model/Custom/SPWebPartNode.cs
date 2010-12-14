@@ -9,7 +9,7 @@ namespace SPM2.SharePoint.Model
 {
 
     [AdapterItemType("Microsoft.SharePoint.WebPartPages.WebPart, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-    [AttachTo("SPM2.SharePoint.Model.SPLimitedWebPartCollectionNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPLimitedWebPartCollectionNode")]
     public class SPWebPartNode : SPNode
     {
         public WebPart ASPWebPart
@@ -29,9 +29,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             string title = this.ASPWebPart.Title;
             if (title.Length == 0)

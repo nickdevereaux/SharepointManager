@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUsageReceiverDefinitionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUsageReceiverDefinitionCollectionNode")]
 	public partial class SPUsageReceiverDefinitionNode
 	{
 	}

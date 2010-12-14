@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Model\Custom\SPLimitedWebPartCollectionNode.cs" />
     <Compile Include="Model\Custom\SPWebPartNode.cs" />
+    <Compile Include="Model\ExportToNodeAttribute.cs" />
     <Compile Include="SharePointContext.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceInstanceNode.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceNode.cs" />
@@ -874,6 +875,10 @@
     <None Include="SPM2.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
+      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
+      <Name>MEF35</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPM2.Framework\SPM2.Framework.csproj">
       <Project>{5DE0D29F-DE15-4E15-9E89-3A873D849C40}</Project>
       <Name>SPM2.Framework</Name>

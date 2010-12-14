@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RestrictedTypes")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRestrictedObjectModelNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPClientCallableSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRestrictedObjectModelNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPClientCallableSettingsNode")]
 	public partial class SPObjectModelTypeCollectionNode
 	{
 	}

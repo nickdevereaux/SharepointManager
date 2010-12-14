@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Servers")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFarmNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServerCollectionNode
 	{
         public SPServerCollectionNode()

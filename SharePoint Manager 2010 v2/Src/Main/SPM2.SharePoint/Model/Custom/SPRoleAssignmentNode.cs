@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPRoleAssignment")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRoleAssignmentCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRoleAssignmentCollectionNode")]
 	public partial class SPRoleAssignmentNode
 	{
 	}

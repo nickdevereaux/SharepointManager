@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPPrefix")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPPrefixCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPPrefixCollectionNode")]
 	public partial class SPPrefixNode
 	{
 	}

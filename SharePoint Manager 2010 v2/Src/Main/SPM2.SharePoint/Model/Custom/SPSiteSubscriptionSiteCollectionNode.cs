@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Sites")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteSubscriptionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionNode")]
 	public partial class SPSiteSubscriptionSiteCollectionNode
 	{
 	}

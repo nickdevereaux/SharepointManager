@@ -22,12 +22,14 @@ using SPM2.Framework.ComponentModel;
 
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.GUI.Pads
 {
 
     [Title("Text editor")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane", After = "SPM2.Main.GUI.Pads.BrowserPad")]
+    [Export(MainWindow.ContentPane_AddInID, typeof(DockableContent))]
+    [ExportMetadata("After", "SPM2.Main.GUI.Pads.BrowserPad")]
     public class EditorPad : AbstractPadWindow
     {
         private const string NAME = "Editor";
@@ -46,8 +48,7 @@ namespace SPM2.Main.GUI.Pads
 
             this.Title = NAME;
 
-            this.Loaded += new System.Windows.RoutedEventHandler(EditorPad_Loaded);
-
+            //this.Loaded += new System.Windows.RoutedEventHandler(EditorPad_Loaded);
 
             DispatcherTimer foldingUpdateTimer = new DispatcherTimer();
             foldingUpdateTimer.Interval = TimeSpan.FromSeconds(2);
@@ -55,17 +56,16 @@ namespace SPM2.Main.GUI.Pads
             foldingUpdateTimer.Start();
 
             this.Content = this.Editor;
-        }
 
-        void EditorPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
             //Workbench.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
+
         }
 
-        
-
+        //void EditorPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //}
 
         private void EditString_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -94,6 +94,7 @@ namespace SPM2.Main.GUI.Pads
             base.OnClosed();
 
             Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, EditString_Executed);
+            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
         }
 
         void foldingUpdateTimer_Tick(object sender, EventArgs e)

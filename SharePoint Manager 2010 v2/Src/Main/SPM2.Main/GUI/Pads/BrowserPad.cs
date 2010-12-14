@@ -14,12 +14,14 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.GUI.Pads
 {
 
     [Title("PropertyGrid")]
-    [AttachTo("SPM2.Main.MainWindow.ContentPane", After = "SPM2.Main.GUI.Pads.PropertyGridPad")]
+    [Export("SPM2.Main.MainWindow.ContentPane", typeof(DockableContent))]
+    [ExportMetadata("After", "SPM2.Main.GUI.Pads.PropertyGridPad")]
     public class BrowserPad : AbstractPadWindow
     {
         private const string NAME = "Browser";
@@ -34,24 +36,25 @@ namespace SPM2.Main.GUI.Pads
             base.OnInitialized(e);
 
             this.Title = NAME;
-            this.Loaded += new System.Windows.RoutedEventHandler(BrowserPad_Loaded);
-            this.Unloaded += new System.Windows.RoutedEventHandler(BrowserPad_Unloaded);
+            //this.Loaded += new System.Windows.RoutedEventHandler(BrowserPad_Loaded);
+            //this.Unloaded += new System.Windows.RoutedEventHandler(BrowserPad_Unloaded);
 
             this.IsActiveDocumentChanged += new EventHandler(BrowserPad_IsActiveDocumentChanged);
             
             this.Content = this.BrowserContainer;
-        }
 
-
-        private void BrowserPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
         }
 
-        void BrowserPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
-        }
+
+        //private void BrowserPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //}
+
+        //void BrowserPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+        //}
 
 
 

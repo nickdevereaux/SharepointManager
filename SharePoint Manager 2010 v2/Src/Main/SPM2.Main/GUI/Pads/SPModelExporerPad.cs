@@ -14,20 +14,35 @@ using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.Windows.Input;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.GUI.Pads
 {
 
     [Title("SharePoint Explorer")]
-    [AttachTo("SPM2.Main.MainWindow.LeftDockPane")]
-    public class SPModelExporerPad : AbstractPadWindow
+    [Export("SPM2.Main.MainWindow.LeftDockPane", typeof(DockableContent))]
+    public class SPModelExporerPad : AbstractPadWindow, IPartImportsSatisfiedNotification
     {
         WPFTreeView wpfView = new WPFTreeView();
 
+        [Import()]
+        public SPModelProvider ModelProvider { get; set; }
+
         public SPModelExporerPad()
         {
-            wpfView.DataContext = new SPModelProvider();
+            this.Title = "SharePoint Explorer";
 
+            //SPModelProvider ModelProvider = CompositionProvider.Current.GetExportedValue<SPModelProvider>(); 
+
+            //wpfView.DataContext = ModelProvider;
+            //wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
+            //this.Content = wpfView;
+        }
+
+
+        public void OnImportsSatisfied()
+        {
+            wpfView.DataContext = this.ModelProvider;
             wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
             this.Content = wpfView;
         }
@@ -46,6 +61,7 @@ namespace SPM2.Main.GUI.Pads
                 SPM2Commands.ObjectSelected.Execute(node, null);
             }
         }
+
 
 
 

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ViewFields")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPViewNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPViewNode")]
 	public partial class SPViewFieldCollectionNode
 	{
 	}

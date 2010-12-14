@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Tiers")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserCodeServiceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserCodeServiceNode")]
 	public partial class SPUserCodeExecutionTierCollectionNode
 	{
 	}

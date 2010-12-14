@@ -14,10 +14,10 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SystemAccount")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserCollectionNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPUserNode
 	{
 	}

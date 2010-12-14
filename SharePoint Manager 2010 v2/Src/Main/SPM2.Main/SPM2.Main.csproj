@@ -62,10 +62,19 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\Libraries\GalaSoft\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -93,6 +102,7 @@
     <Compile Include="GUI\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MainWindowModel.cs" />
     <Compile Include="WindowsManager.cs" />
     <Compile Include="Workbench.cs" />
     <Compile Include="Properties\WPFAssemblyInfo.cs" />
@@ -130,6 +140,10 @@
     <ProjectReference Include="..\..\Libraries\AvalonEdit\AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
+      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
+      <Name>MEF35</Name>
     </ProjectReference>
     <ProjectReference Include="..\SPM2.Framework.WPF\SPM2.Framework.WPF.csproj">
       <Project>{C97ECB36-3AF4-4788-8251-E57FAB93CB87}</Project>

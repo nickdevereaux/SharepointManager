@@ -15,7 +15,7 @@ namespace SPM2.Framework
         public static Type TitleAttributeType = typeof(TitleAttribute);
         public static Type DescriptionAttributeType = typeof(DescriptionAttribute);
         public static Type IconAttributeType = typeof(IconAttribute);
-        public static Type AttachToAttributeType = typeof(AttachToAttribute);
+        //public static Type AttachToAttributeType = typeof(AttachToAttribute);
 
         //public static Type IAddInCommandType = typeof(IAddInCommand);
         public static Type IAddInDocumentWindow = typeof(IDocumentWindow);
@@ -113,7 +113,7 @@ namespace SPM2.Framework
             }
         }
         public AttributeCollection Attributes { get; set; }
-        public List<AttachToAttribute> AttachTo { get; set; }
+        //public List<AttachToAttribute> AttachTo { get; set; }
         public Type[] Interfaces { get; set; }
         public Type ClassType { get; set; }
 
@@ -200,7 +200,7 @@ namespace SPM2.Framework
             if (this.IsAddIn)
             {
                 this.Attributes = new AttributeCollection(this.ClassType.GetCustomAttributes(true).OfType<Attribute>().ToArray());
-                this.AttachTo = new List<AttachToAttribute>(this.Attributes.OfType<AttachToAttribute>());
+                //this.AttachTo = new List<AttachToAttribute>(this.Attributes.OfType<AttachToAttribute>());
             }
         }
 

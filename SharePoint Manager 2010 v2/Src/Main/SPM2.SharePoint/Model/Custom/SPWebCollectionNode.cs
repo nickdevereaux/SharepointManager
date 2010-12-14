@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Webs")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPWebCollectionNode
 	{
 	}

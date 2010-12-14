@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("UserInfo")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPMobileMessagingAccountNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPMobileMessagingAccountNode")]
 	public partial class SPMobileMessageUserInfoNode
 	{
 	}

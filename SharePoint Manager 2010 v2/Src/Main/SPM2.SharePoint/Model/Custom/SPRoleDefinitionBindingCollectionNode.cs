@@ -14,15 +14,15 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RoleDefinitionBindings")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRoleAssignmentNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSecurableObjectNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListItemNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRoleAssignmentNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSecurableObjectNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPRoleDefinitionBindingCollectionNode
 	{
 	}

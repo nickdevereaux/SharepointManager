@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace SPM2.StartApp
 {
@@ -13,21 +14,18 @@ namespace SPM2.StartApp
         [STAThread()]
         static void Main(string[] args)
         {
-            try
-            {
 #if DEBUG
-                Control.CheckForIllegalCrossThreadCalls = true;
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = true;
 #endif
-                // Start the application
-                ApplicationStarter app = new ApplicationStarter();
-                app.Execute(args);
-            }
-            catch (Exception ex)
+            // Start the application
+            using (ApplicationStarter appStarter = new ApplicationStarter())
             {
-                MessageBox.Show(ex.Message+"\r\n"+ex.StackTrace);
+                appStarter.ShowSplashScreen();
+                appStarter.Initialize();
+                appStarter.ParseCommandline(args);
+                appStarter.Execute(args);
             }
-                   
-        
+       
         }
 
     }

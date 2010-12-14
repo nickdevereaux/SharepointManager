@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FieldRenderingControl")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFieldNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFieldNode")]
 	public partial class BaseFieldControlNode
 	{
 	}

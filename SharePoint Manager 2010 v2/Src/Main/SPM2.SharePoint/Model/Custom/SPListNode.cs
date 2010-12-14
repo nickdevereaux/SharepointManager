@@ -13,15 +13,15 @@ using Microsoft.SharePoint.Utilities;
 
 namespace SPM2.SharePoint.Model
 {
-	[AttachTo("SPM2.SharePoint.Model.SPListCollectionNode")]
-    //[AttachTo("SPM2.SharePoint.Model.SPWebNode")]
-    //[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPListCollectionNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPListNode
 	{
 
-        public override void Setup(object spObject, ClassDescriptor descriptor)
+        public override void Setup(object spObject)
         {
-            base.Setup(spObject, descriptor);
+            base.Setup(spObject);
 
             string title = (String.IsNullOrEmpty(this.List.Title)) ? this.List.ID.ToString() : this.List.Title;
             this.Text = String.Format("{0} ({1})", title, this.List.ItemCount);

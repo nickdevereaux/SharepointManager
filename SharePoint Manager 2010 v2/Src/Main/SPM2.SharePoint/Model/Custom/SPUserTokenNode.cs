@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("UserToken")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPUserTokenNode
 	{
 	}

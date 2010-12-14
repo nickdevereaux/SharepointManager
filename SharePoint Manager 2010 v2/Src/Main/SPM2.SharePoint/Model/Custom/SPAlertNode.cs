@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
     [AdapterItemType("Microsoft.SharePoint.SPAlert, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
-    [AttachTo("SPM2.SharePoint.Model.SPAlertCollectionNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPAlertCollectionNode")]
     public partial class SPAlertNode : SPNode
 	{
         public SPAlertNode()

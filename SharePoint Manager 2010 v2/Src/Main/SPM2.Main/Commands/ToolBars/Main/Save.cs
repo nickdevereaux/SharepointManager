@@ -8,10 +8,11 @@ using SPM2.Framework.WPF.Components;
 using System.Windows.Input;
 using SPM2.Framework.WPF;
 using System.Windows.Media.Imaging;
+using System.ComponentModel.Composition;
 
 namespace SPM2.Main.Commands.ToolBars.Main
 {
-    [AttachTo(MainToolBar.AddInID)]
+    [Export(typeof(MainToolBar))]
     public class Save : ImageButton
     {
         public Save()

@@ -14,6 +14,7 @@ using Microsoft.SharePoint.Utilities;
 
 namespace SPM2.SharePoint.Model
 {
+    [Icon(Small ="ASPX16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFormCollectionNode")]
 	public partial class SPFormNode
 	{
@@ -24,21 +25,16 @@ namespace SPM2.SharePoint.Model
             this.Text = this.Form.Url.Substring(this.Form.Url.LastIndexOf("/") + 1);
             this.ToolTipText = this.Form.Url;
             this.Url = this.Form.ParentList.ParentWeb.Url + "/" + this.Form.Url;
-            this.IconUri = SharePointContext.GetImagePath("ASPX16.GIF");
-
         }
 
 
-        protected override void LoadChildren()
+        public override void LoadChildren()
         {
             base.LoadChildren();
 
-            SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode();
-            SPWeb web = this.Form.ParentList.ParentWeb;
+            SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.Form.ParentList.ParentWeb, this.Form.Url);
 
-            SPLimitedWebPartManager manager = web.GetLimitedWebPartManager(this.Form.Url, System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared);
-
-            webparts.Setup(manager.WebParts);
+            webparts.Setup(this.SPObject);
 
             this.Children.Add(webparts);
         }

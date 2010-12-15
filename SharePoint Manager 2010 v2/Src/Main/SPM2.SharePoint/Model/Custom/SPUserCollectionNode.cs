@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Users")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "MNGATT.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPUserCollectionNode

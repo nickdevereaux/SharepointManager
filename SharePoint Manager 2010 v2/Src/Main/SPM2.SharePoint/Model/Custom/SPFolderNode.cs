@@ -23,11 +23,13 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPFolderNode
 	{
+
         public override void Setup(object spObject)
         {
             base.Setup(spObject);
 
             this.Text = this.Folder.Name;
+            this.IconUri = SharePointContext.GetImagePath("Folder.gif");
         }
 	}
 

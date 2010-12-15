@@ -13,10 +13,11 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("RecycleBin")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "RECYCBIN.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPRecycleBinItemCollectionNode
 	{
+
 	}
 }

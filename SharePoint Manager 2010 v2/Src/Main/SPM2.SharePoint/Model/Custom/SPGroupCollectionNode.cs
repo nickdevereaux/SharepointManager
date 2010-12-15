@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Groups")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "MYSHRPTS.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	public partial class SPGroupCollectionNode
 	{

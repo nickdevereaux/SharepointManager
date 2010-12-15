@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Tasks")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "TASKPANE.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	public partial class SPWorkflowTaskCollectionNode
 	{

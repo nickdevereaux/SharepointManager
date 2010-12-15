@@ -21,6 +21,7 @@ namespace SPM2.Main.GUI.Pads
 
     [Title("SharePoint Explorer")]
     [Export("SPM2.Main.MainWindow.LeftDockPane", typeof(DockableContent))]
+    [ExportMetadata("ID", "SPM2.Main.GUI.Pads.SPModelExporerPad")]
     public class SPModelExporerPad : AbstractPadWindow, IPartImportsSatisfiedNotification
     {
         WPFTreeView wpfView = new WPFTreeView();

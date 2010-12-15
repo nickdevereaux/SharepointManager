@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPFileVersion")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "ICGEN.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileVersionCollectionNode")]
 	public partial class SPFileVersionNode
 	{

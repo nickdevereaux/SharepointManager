@@ -1,20 +1,21 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.ComponentModel;
 using System.Collections;
+using System.Diagnostics;
 
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint;
-using System.IO;
 
 using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
-using SPM2.SharePoint;
 using SPM2.Framework.ComponentModel;
+using SPM2.SharePoint;
 
 
 namespace SPM2.SharePoint.Model
@@ -25,15 +26,7 @@ namespace SPM2.SharePoint.Model
         public virtual string AddInID { get; set; }
         public virtual string Url { get; set; }
 
-        private string _iconUri = Path.Combine(SharePointContext.ImagePath, "mbllistbullet.gif");
-        public virtual string IconUri
-        {
-            get { return _iconUri; }
-            set { _iconUri = value; }
-        }
-
-
-        public object _spObject = null;
+        private object _spObject = null;
         public object SPObject 
         { 
             get
@@ -134,6 +127,36 @@ namespace SPM2.SharePoint.Model
             }
         }
 
+        private string _iconUri = null;
+        public virtual string IconUri
+        {
+            get 
+            {
+                if (String.IsNullOrEmpty(_iconUri))
+                {
+                    if (this.Descriptor.Icon != null)
+                    {
+                        string name = this.Descriptor.Icon.Small;
+                        if (!String.IsNullOrEmpty(name) && !"BULLET.GIF".Equals(name, StringComparison.Ordinal))
+                        {
+                            _iconUri = SharePointContext.GetImagePath(this.Descriptor.Icon.Small);
+                        }
+                    }
+
+                    if (String.IsNullOrEmpty(_iconUri))
+                    {
+                        _iconUri = Path.Combine(SharePointContext.ImagePath, "mbllistbullet.gif");
+                    }
+                }
+                return _iconUri; 
+            }
+            set 
+            { 
+                _iconUri = value; 
+            }
+        }
+
+
         private IEnumerable<Lazy<SPNode>> _importedNodes = null;
         public IEnumerable<Lazy<SPNode>> ImportedNodes
         {
@@ -175,35 +198,6 @@ namespace SPM2.SharePoint.Model
             this.SPParent = spParent;
         }
 
-        public virtual object GetSPObject()
-        {
-            object result = null;
-            if (this.SPParent != null)
-            {
-                PropertyDescriptorCollection des = TypeDescriptor.GetProperties(this.SPParent.GetType());
-                foreach(PropertyDescriptor info in des)
-                {
-                    
-                    if (this.SPObjectType == info.PropertyType)
-                    {
-                        // Use the name from the Property in the object model.
-                        this.Descriptor.Title = info.DisplayName;
-                        
-                        result = info.GetValue(this.SPParent);
-
-                        break;
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public virtual Type GetSPObjectType()
-        {
-            return this.SPObjectType;
-        }
-
 
         public virtual void Update()
         {
@@ -227,36 +221,88 @@ namespace SPM2.SharePoint.Model
             return result;
         }
 
-        protected override void LoadChildren()
+        public virtual object GetSPObject()
         {
-            if (this.SPObject != null)
+            object result = null;
+            if (this.SPParent != null)
             {
-                var nodes = CompositionProvider.GetExports<SPNode>(this.Descriptor.ClassType);
-
-                //ClassDescriptorCollection descriptors = AddInProvider.Current.TypeAttachments.GetValue(this.Descriptor.AddInID);
-
-                PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
-                foreach (PropertyDescriptor info in propertyDescriptors)
+                PropertyDescriptorCollection des = TypeDescriptor.GetProperties(this.SPParent.GetType());
+                foreach (PropertyDescriptor info in des)
                 {
 
-                    object obj = info.GetValue(this.SPObject);
-
-                    if (obj != null)
+                    if (this.SPObjectType == info.PropertyType)
                     {
-                        if (this.NodeDictionary.ContainsKey(info.PropertyType))
-                        {
-                            SPNode node = this.NodeDictionary[info.PropertyType];
-                            node = node.Clone();
-                            node.Text = info.DisplayName;
-                            node.SPObject = obj;
+                        // Use the name from the Property in the object model.
+                        this.Descriptor.Title = info.DisplayName;
 
-                            node.Setup(this.SPObject);
+                        result = info.GetValue(this.SPParent);
 
-                            this.Children.Add(node);
-                        }
+                        break;
                     }
                 }
             }
+
+            return result;
+        }
+
+        public virtual Type GetSPObjectType()
+        {
+            return this.SPObjectType;
+        }
+
+        public string GetResourceImagePath(string filename)
+        {
+            return "/SPM2.SharePoint;component/Resources/Images/" + filename;
+        }
+
+
+        public override void LoadChildren()
+        {
+            if (this.SPObject != null)
+            {
+                this.Children.Clear();
+
+#if DEBUG
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+#endif
+                
+                this.Children.AddRange(LoadUnorderedChildren().OrderBy(p => p.Text));
+
+#if DEBUG
+                watch.Stop();
+                Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.", this.SPObjectType.Name, watch.ElapsedMilliseconds));
+#endif
+            }
+        }
+
+
+        private IEnumerable<ITreeViewItemModel> LoadUnorderedChildren()
+        {
+            var nodes = CompositionProvider.GetExports<SPNode>(this.Descriptor.ClassType);
+
+            PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
+            foreach (PropertyDescriptor info in propertyDescriptors)
+            {
+
+                if (this.NodeDictionary.ContainsKey(info.PropertyType))
+                {
+                    SPNode node = this.NodeDictionary[info.PropertyType];
+
+                    //Ensure that the child node instance is unique in the TreeView
+                    node = node.Clone();
+                    node.Text = info.DisplayName;
+                    node.Setup(this.SPObject);
+
+                    yield return node;
+                }
+            }
+        }
+
+
+        public virtual IEnumerable<SPNode> NodesToExpand()
+        {
+            return null;
         }
 
         protected Dictionary<Type, SPNode> GetNodeDictionary()
@@ -273,49 +319,6 @@ namespace SPM2.SharePoint.Model
             }
             return types;
         }
-
-
-
-        //protected Type GetArgumentType(ClassDescriptor descriptor)
-        //{
-        //    Type result = descriptor.ClassType;
-        //    Type[] argumentTypes = descriptor.ClassType.GetGenericArguments();
-        //    if (argumentTypes.Length > 0)
-        //    {
-        //        result = argumentTypes[0];
-        //    }
-        //    return result;
-        //}
-
-        //protected Type CreateNodeType(Type spObjectType)
-        //{
-        //    Type nodeType = null;
-        //    bool isAssignable = TypeExtensions.IEnumerableType.IsAssignableFrom(spObjectType);
-        //    if (isAssignable && spObjectType != TypeExtensions.StringType && !spObjectType.IsArray)
-        //    {
-        //        Type collectionType = spObjectType;
-
-        //        Type itemType = null;
-        //        Type[] argTypes = spObjectType.GetBaseGenericArguments();
-        //        if (argTypes != null && argTypes.Length > 0)
-        //        {
-        //            itemType = argTypes[0];
-        //            nodeType = SharedTypes.SPNodeCollectionType.MakeGenericType(collectionType, itemType);
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        nodeType = SharedTypes.SPNodeType.MakeGenericType(spObjectType);
-        //    }
-        //    return nodeType;
-        //}
-
-        public string GetResourceImagePath(string filename)
-        {
-            return "/SPM2.SharePoint;component/Resources/Images/"+filename;
-        }
-
 
 
 

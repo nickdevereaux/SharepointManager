@@ -12,7 +12,6 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("ParentContentType")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
@@ -21,6 +20,29 @@ namespace SPM2.SharePoint.Model
         public SPContentTypeNode()
         {
             this.IconUri = SharePointContext.GetImagePath("MARR.GIF");
+        }
+
+        public override void Setup(object spParent)
+        {
+            base.Setup(spParent);
+
+            this.Text = this.ContentType.Name;
+            if (this.ContentType.Hidden)
+            {
+                this.Text = this.Text + " (Hidden)";
+            }
+        }
+        
+
+
+
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+
+            SPContentTypeUsageCollectionNode node = new SPContentTypeUsageCollectionNode();
+            node.Setup(this.SPObject);
+            this.Children.Add(node);
         }
     }
 }

@@ -40,7 +40,6 @@ namespace SPM2.Framework
         }
 
 
-
         static readonly ITreeViewItemModel DummyChild = new TreeViewItemModel(null, false);
         /// <summary>
         /// Returns true if this object's Children have not yet been populated.
@@ -115,6 +114,23 @@ namespace SPM2.Framework
             }
         }
 
+        private bool _isHidden;
+        /// <summary>
+        /// Gets/sets whether the TreeViewItem is 
+        /// </summary>
+        public bool IsHidden
+        {
+            get { return _isHidden; }
+            set 
+            { 
+                if (value != _isHidden)
+                {
+                    _isHidden = value;
+                    this.OnPropertyChanged("IsHidden");
+                }
+            }
+        }
+
 
         readonly TreeViewItemModel _parent;
         public TreeViewItemModel Parent
@@ -150,7 +166,7 @@ namespace SPM2.Framework
         /// Invoked when the child items need to be loaded on demand.
         /// Subclasses can override this to populate the Children collection.
         /// </summary>
-        protected virtual void LoadChildren()
+        public virtual void LoadChildren()
         {
         }
 

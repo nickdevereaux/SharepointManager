@@ -20,6 +20,7 @@ namespace SPM2.SharePoint
         public const string AddInID = "SPM2.SharePoint.SPModelProvider";
 
         private SPFarm _farm = null;
+        private SPFarmNode farmNode;
 
         public SPFarm Farm
         {
@@ -29,16 +30,20 @@ namespace SPM2.SharePoint
 
         public SPModelProvider() : this(SPFarm.Local)
         {
+            
         }
 
         public SPModelProvider(SPFarm farm)
         {
             this.Farm = farm;
             LoadChildren();
+            ExpandToDefault80();
         }
 
-        protected override void LoadChildren()
+        public override void LoadChildren()
         {
+            this.Children.Clear();
+
             OrderingCollection<SPNode> orderedItems = CompositionProvider.GetOrderedExports<SPNode>(this.GetType());
 
             // now add the items to the menu child items collection in a ordered list
@@ -46,16 +51,31 @@ namespace SPM2.SharePoint
             {
                 SPNode node = item.Value;
                 node.Setup(this.Farm);
-                this.Children.Add(item.Value);
+                this.Children.Add(node);
+            }
+        }
+
+        public void ExpandToDefault80()
+        {
+            SPNode node = (SPNode)this.Children[0];
+            node.IsExpanded = true;
+            ExpandNode(node.NodesToExpand());
+                        
+        }
+
+        private void ExpandNode(IEnumerable<SPNode> collection)
+        {
+            if (collection == null)
+            {
+                return;
             }
 
-            //AddInProvider.Current.CreateAttachments<SPNode>(AddInID,
-            //    delegate(ClassDescriptor descriptor, SPNode node)
-            //    {
-            //        node.Setup(this.Farm, descriptor);
-            //        this.Children.Add(node);
-            //        return true;
-            //    });
+            foreach (var node in collection)
+            {
+                node.LoadChildren();
+                node.IsExpanded = true;
+                ExpandNode(node.NodesToExpand());
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "SETTINGS.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceProxyCollectionNode")]
 	public partial class SPServiceProxyNode
 	{

@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SystemAccount")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "ULS16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPUserCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]

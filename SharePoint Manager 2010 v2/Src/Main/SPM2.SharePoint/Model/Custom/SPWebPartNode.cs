@@ -20,6 +20,12 @@ namespace SPM2.SharePoint.Model
             }
         }
 
+        public SPLimitedWebPartManager WebPartManager
+        {
+            get { return (SPLimitedWebPartManager)this.SPParent; }
+        }
+        
+
         public bool IsSharePointWebPart
         {
             get
@@ -43,7 +49,6 @@ namespace SPM2.SharePoint.Model
             this.ToolTipText = this.ASPWebPart.Description;
 
             this.IconUri = SharePointContext.TemplatePath + ASPWebPart.CatalogIconImageUrl;
-
         }
 
 

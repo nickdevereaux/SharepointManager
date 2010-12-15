@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPRoleDefinition")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "MARR.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPRoleDefinitionBindingCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPRoleDefinitionCollectionNode")]
 	public partial class SPRoleDefinitionNode

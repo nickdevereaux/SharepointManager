@@ -231,15 +231,18 @@ namespace SPM2.Framework
             if (instance != null)
             {
                 Type instanceType = instance.GetType();
-                TitleAttribute titleAttribute = (TitleAttribute)this.Attributes[TitleAttributeType];
-                if (titleAttribute != null)
+                if (String.IsNullOrEmpty(result))
                 {
-                    if (!String.IsNullOrEmpty(titleAttribute.PropertyName))
+                    TitleAttribute titleAttribute = (TitleAttribute)this.Attributes[TitleAttributeType];
+                    if (titleAttribute != null)
                     {
-                        PropertyInfo info = instanceType.GetProperty(titleAttribute.PropertyName);
-                        if (info != null)
+                        if (!String.IsNullOrEmpty(titleAttribute.PropertyName))
                         {
-                            result = info.GetValue(instance, null) as string;
+                            PropertyInfo info = instanceType.GetProperty(titleAttribute.PropertyName);
+                            if (info != null)
+                            {
+                                result = info.GetValue(instance, null) as string;
+                            }
                         }
                     }
                 }
@@ -252,6 +255,16 @@ namespace SPM2.Framework
                         result = info.GetValue(instance, null) as string;
                     }
                 }
+
+                if (String.IsNullOrEmpty(result))
+                {
+                    PropertyInfo info = instanceType.GetProperty("Name");
+                    if (info != null)
+                    {
+                        result = info.GetValue(instance, null) as string;
+                    }
+                }
+
             }
             if (String.IsNullOrEmpty(result))
             {

@@ -13,8 +13,8 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Features")]
-	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
+    [Icon(Small = "GenericFeature.gif")]
+    [ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]

@@ -13,9 +13,13 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPJobDefinitionCollectionNode")]
 	public partial class SPJobDefinitionNode
 	{
+
+        public SPJobDefinitionNode()
+        {
+            this.IconUri = SharePointContext.GetImagePath("MARR.GIF");
+        }
 	}
 }

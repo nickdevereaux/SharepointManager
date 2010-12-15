@@ -11,6 +11,7 @@ using Microsoft.SharePoint.Client;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
+using Microsoft.SharePoint.Administration;
 
 
 namespace SPM2.SharePoint.Model
@@ -63,8 +64,15 @@ namespace SPM2.SharePoint.Model
             return result;
         }
 
-        protected override void LoadChildren()
+        public override void LoadChildren()
         {
+            if (this.SPObject == null)
+            {
+                return;
+            }
+
+            this.Children.Clear();
+
             List<INode> children = new List<INode>();
 
             Dictionary<Type, SPNode> nodeDictionary = GetNodeDictionary();

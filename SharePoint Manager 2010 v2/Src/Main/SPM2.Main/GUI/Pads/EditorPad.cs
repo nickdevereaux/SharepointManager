@@ -29,6 +29,7 @@ namespace SPM2.Main.GUI.Pads
 
     [Title("Text editor")]
     [Export(MainWindow.ContentPane_AddInID, typeof(DockableContent))]
+    [ExportMetadata("ID", "SPM2.Main.GUI.Pads.EditorPad")]
     [ExportMetadata("After", "SPM2.Main.GUI.Pads.BrowserPad")]
     public class EditorPad : AbstractPadWindow
     {

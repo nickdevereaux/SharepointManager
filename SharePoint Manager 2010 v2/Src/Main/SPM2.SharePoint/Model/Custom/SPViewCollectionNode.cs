@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Views")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "itgen.gif")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]

@@ -14,12 +14,11 @@ namespace SPM2.StartApp
         [STAThread()]
         static void Main(string[] args)
         {
-#if DEBUG
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = true;
-#endif
+
             // Start the application
             using (ApplicationStarter appStarter = new ApplicationStarter())
             {
+                appStarter.Startup();
                 appStarter.ShowSplashScreen();
                 appStarter.Initialize();
                 appStarter.ParseCommandline(args);

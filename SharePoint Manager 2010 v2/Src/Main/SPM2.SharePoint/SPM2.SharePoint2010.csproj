@@ -74,9 +74,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Custom\SPContentTypeUsageCollectionNode.cs" />
+    <Compile Include="Model\Custom\SPContentTypeUsageNode.cs" />
     <Compile Include="Model\Custom\SPLimitedWebPartCollectionNode.cs" />
     <Compile Include="Model\Custom\SPWebPartNode.cs" />
     <Compile Include="Model\ExportToNodeAttribute.cs" />
+    <Compile Include="Model\Generated\SPContentTypeUsageCollectionNode.cs" />
+    <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
     <Compile Include="SharePointContext.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceInstanceNode.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceNode.cs" />

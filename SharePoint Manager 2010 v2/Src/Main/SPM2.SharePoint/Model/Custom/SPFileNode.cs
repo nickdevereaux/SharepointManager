@@ -10,10 +10,11 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using Microsoft.SharePoint.Utilities;
+using Microsoft.SharePoint.WebPartPages;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title(PropertyName="Title")]
+	[Title(PropertyName="Name")]
 	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileCollectionNode")]
@@ -24,8 +25,39 @@ namespace SPM2.SharePoint.Model
         public override void Setup(object spObject)
         {
             base.Setup(spObject);
+            
+            if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
+            {
+                this.Url = SPUrlUtility.CombineUrl(this.File.ParentFolder.ParentWeb.Url, this.File.Url);
+            }
 
-            this.Url = SPUrlUtility.CombineUrl(this.File.ParentFolder.ParentWeb.Url, this.File.Url);
+            this.IconUri = SharePointContext.GetImagePath(this.File.IconUrl);
+        }
+
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+
+            if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    //SPLimitedWebPartCollectionNode node = new SPLimitedWebPartCollectionNode();
+                    //node.SPObject = 
+                    //node.Setup(this.SPObject);
+                    //this.Children.Add(node);
+
+                    SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.File);
+
+                    webparts.Setup(this.SPObject);
+
+                    this.Children.Add(webparts);
+                }
+                catch
+                {
+                    // Do nothing
+                }
+            }
         }
 	}
 }

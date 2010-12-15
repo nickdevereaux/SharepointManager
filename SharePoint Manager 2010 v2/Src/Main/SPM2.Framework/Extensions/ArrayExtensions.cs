@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace SPM2.Framework
 {
@@ -9,6 +11,20 @@ namespace SPM2.Framework
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> obj)
         {
             return !(obj != null && obj.Count() > 0);
+        }
+
+
+        public static void AddRange<T>(this Collection<T> range, IEnumerable<T> collection)
+        {
+            if(collection == null)
+            {
+                return;
+            }
+
+            foreach (var item in collection)
+            {
+                range.Add(item);
+            }
         }
 
         /// <summary>
@@ -24,27 +40,6 @@ namespace SPM2.Framework
         }
 
 
-        public static bool IsAllTrue<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> selector)
-        {
-            return source.AsSafeEnumable().Where(selector).AsSafeEnumable().Count() == source.AsSafeEnumable().Count();
-        }
-
-        public static T FindTypeOf<T>(this object[] objArray)
-        {
-            T result = default(T);
-
-            foreach (object item in objArray)
-            {
-                if (item is T)
-                {
-                    result = (T)item;
-                    break;
-                }
-            }
-
-            return result;
-        }
-
-
+ 
     }
 }

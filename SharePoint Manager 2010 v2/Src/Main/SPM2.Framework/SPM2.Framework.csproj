@@ -89,6 +89,7 @@
     <Compile Include="IO\Win32.cs" />
     <Compile Include="Properties\SPM2AssemblyInfo.cs" />
     <Compile Include="Providers\CompositionProvider.cs" />
+    <Compile Include="Window\ConsoleManager.cs" />
     <Compile Include="Window\IWindowsProvider.cs" />
     <Compile Include="Providers\AbstractProvider.cs" />
     <Compile Include="Providers\AssemblyProvider.cs" />

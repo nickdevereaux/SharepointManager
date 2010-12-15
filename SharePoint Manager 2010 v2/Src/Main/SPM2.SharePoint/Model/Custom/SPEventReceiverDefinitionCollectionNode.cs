@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("EventReceivers")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "TBSPRDSH.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]

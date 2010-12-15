@@ -13,12 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
-	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
+    [Icon(Small = "CAT.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebCollectionNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPWebNode
 	{
 
@@ -27,7 +24,6 @@ namespace SPM2.SharePoint.Model
             base.Setup(spObject);
 
             this.Url = this.Web.Url;
-            this.IconUri = SharePointContext.GetImagePath("CAT.GIF");
         }
 	}
 }

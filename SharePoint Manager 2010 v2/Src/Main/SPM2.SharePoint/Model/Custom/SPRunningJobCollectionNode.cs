@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("RunningJobs")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "SCT16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceNode")]

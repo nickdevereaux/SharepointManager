@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("RoleDefinitions")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "TASKPANE.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPRoleDefinitionCollectionNode
 	{

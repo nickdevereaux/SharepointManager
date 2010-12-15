@@ -6,6 +6,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Threading;
+using SPM2.Framework.Window;
 
 
 namespace SPM2.StartApp
@@ -15,6 +16,19 @@ namespace SPM2.StartApp
        
         public ApplicationStarter()
         {
+        }
+
+        public void Startup()
+        {
+#if DEBUG
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = true;
+            ConsoleManager.Show();
+            Console.WindowWidth = 120;
+            Console.WindowHeight = 50;
+            Trace.Listeners.Add(new ConsoleTraceListener(true));
+            Debug.WriteLine("SharePoint Manager 2010 Debugger window");
+#endif
+
         }
 
         public void ShowSplashScreen()
@@ -36,6 +50,7 @@ namespace SPM2.StartApp
 
             //WorkbenchSingleton.InitializeWorkbench(new WpfWorkbench(), new AvalonDockLayout());
         }
+
 
         public void ParseCommandline(string[] args)
         {

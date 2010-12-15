@@ -4,30 +4,38 @@
   xmlns:local="clr-namespace:SPM2.Framework.WPF.Components"
   xmlns:framework="clr-namespace:SPM2.Framework;assembly=SPM2.Framework"
   >
-    <TreeView ItemsSource="{Binding Children}" x:Name="TV">
-        <TreeView.ItemContainerStyle>
-            <!-- This Style binds a TreeViewItem to a TreeViewItemViewModel. -->
-            <Style TargetType="{x:Type TreeViewItem}">
-                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                <Setter Property="FontWeight" Value="Normal" />
-                <Setter Property="Tag" Value="Normal" />
-                <Style.Triggers>
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="FontWeight" Value="Bold" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </TreeView.ItemContainerStyle>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <TreeView ItemsSource="{Binding Children}" x:Name="TV" Grid.Row="0">
+            <TreeView.ItemContainerStyle>
+                <!-- This Style binds a TreeViewItem to a TreeViewItemViewModel. -->
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="Tag" Value="Normal" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
 
-        <TreeView.Resources>
-            <HierarchicalDataTemplate DataType="{x:Type framework:TreeViewItemModel}" ItemsSource="{Binding Children}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="16" Height="16" Source="{Binding IconUri}" />
-                    <TextBlock Text="{Binding Text}" />
-                </StackPanel>
-            </HierarchicalDataTemplate>
-            <!--
+                    </Style.Triggers>
+                </Style>
+
+            </TreeView.ItemContainerStyle>
+            
+
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type framework:TreeViewItemModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="16" Height="16" Source="{Binding IconUri}" />
+                        <TextBlock Text="{Binding Text}">
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <!--
             <HierarchicalDataTemplate 
                 DataType="{x:Type local:StateViewModel}" 
                 ItemsSource="{Binding Children}"
@@ -44,6 +52,7 @@
                 <TextBlock Text="{Binding CityName}" />
                 </StackPanel>
             </DataTemplate>-->
-        </TreeView.Resources>
-    </TreeView>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
 </UserControl>

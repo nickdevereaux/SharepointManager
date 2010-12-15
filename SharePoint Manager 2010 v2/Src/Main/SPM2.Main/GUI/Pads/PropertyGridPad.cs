@@ -17,12 +17,15 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace SPM2.Main.GUI.Pads
 {
 
     [Title("PropertyGrid")]
     [Export(MainWindow.ContentPane_AddInID, typeof(DockableContent))]
+    [ExportMetadata("ID", "SPM2.Main.GUI.Pads.PropertyGridPad")]
     public class PropertyGridPad : AbstractPadWindow
     {
         private const string PROPERTY_GRID_NAME = "PropertyGrid";
@@ -33,6 +36,18 @@ namespace SPM2.Main.GUI.Pads
         public bool ValueChanged { get; set; }
 
         private object SelectedObject { get; set; }
+        private bool GridUpdated { get; set; }
+
+
+        private object PreviousSelectedObject { get; set; }
+        
+        /// <summary>
+        /// Save the time of the Object Selected event.
+        /// Used to deside if to update the window.
+        /// </summary>
+        //private DateTime SelectedObjectTimeStamp { get; set; }
+
+        private DispatcherTimer UpdateTimer { get;set;}
 
 
         protected override void OnInitialized(EventArgs e)
@@ -45,6 +60,11 @@ namespace SPM2.Main.GUI.Pads
             this.PGrid.propertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
 
             this.Content = PGrid;
+
+            this.UpdateTimer = new DispatcherTimer();
+            this.UpdateTimer.Interval = TimeSpan.FromMilliseconds(100);
+            this.UpdateTimer.Tick += new EventHandler(updateTimer_Tick);
+            //this.UpdateTimer.Start();
 
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
             Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
@@ -69,8 +89,14 @@ namespace SPM2.Main.GUI.Pads
 
         void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            this.PreviousSelectedObject = this.SelectedObject;
             this.SelectedObject = e.Parameter;
-            SetObject();
+
+            if (!this.UpdateTimer.IsEnabled)
+            {
+                SetObject();
+                this.UpdateTimer.Start();
+            }
         }
 
 
@@ -111,6 +137,22 @@ namespace SPM2.Main.GUI.Pads
             SetObject();
         }
 
+        void updateTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.IsWindowVisible)
+            {
+                if (this.SelectedObject != null && this.SelectedObject == this.PreviousSelectedObject)
+                {
+                    SetObject();
+                    this.UpdateTimer.Stop();
+                }
+                else
+                {
+                    this.PreviousSelectedObject = this.SelectedObject;
+                }
+            }
+        }
+
         private void SetObject()
         {
             if (this.IsWindowVisible)
@@ -118,11 +160,20 @@ namespace SPM2.Main.GUI.Pads
                 ISPNode node = (ISPNode)this.SelectedObject;
                 if (node != null && PGrid.propertyGrid.SelectedObject != node.SPObject)
                 {
+#if DEBUG
+                    Stopwatch watch = new Stopwatch();
+                    watch.Start();
+#endif
+
                     PGrid.propertyGrid.SelectedObject = node.SPObject;
+
+#if DEBUG
+                    watch.Stop();
+                    Trace.WriteLine(String.Format("PropertyGrid load: Type:{0} - Time {1} milliseconds.", node.SPObjectType.Name, watch.ElapsedMilliseconds));
+#endif
+
                 }
             }
         }
-
-
     }
 }

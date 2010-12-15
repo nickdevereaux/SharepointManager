@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("FeatureDefinitions")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "GenericFeature.gif")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPFeatureDefinitionCollectionNode

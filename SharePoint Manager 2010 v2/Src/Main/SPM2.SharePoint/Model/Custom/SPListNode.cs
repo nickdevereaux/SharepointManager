@@ -14,8 +14,6 @@ using Microsoft.SharePoint.Utilities;
 namespace SPM2.SharePoint.Model
 {
 	[ExportToNode("SPM2.SharePoint.Model.SPListCollectionNode")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPListNode
 	{
 

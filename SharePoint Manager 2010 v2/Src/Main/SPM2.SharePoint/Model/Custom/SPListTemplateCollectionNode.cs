@@ -13,7 +13,6 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ListTemplates")]
-	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPListTemplateCollectionNode
 	{

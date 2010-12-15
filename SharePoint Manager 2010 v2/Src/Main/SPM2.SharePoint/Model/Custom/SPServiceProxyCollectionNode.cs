@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ServiceProxies")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "SERVICES.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceProxyCollectionNode
 	{

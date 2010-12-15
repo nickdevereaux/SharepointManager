@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "MARR.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFieldCollectionNode")]
 	public partial class SPFieldNode
 	{

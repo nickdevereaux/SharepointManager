@@ -12,12 +12,18 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("Lists")]
-	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
-	public partial class SPListCollectionNode
-	{
-	}
+    [Title("Lists")]
+    [Icon(Small = "BULLET.GIF")]
+    [ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+    public partial class SPListCollectionNode
+    {
+
+        public SPListCollectionNode()
+        {
+            this.IconUri = SharePointContext.GetImagePath("itgen.GIF");
+        }
+
+    }
 }

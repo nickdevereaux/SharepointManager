@@ -10,6 +10,7 @@ using SPM2.Framework.ComponentModel;
 using SPM2.SharePoint.Model;
 using SPM2.Main.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 
 namespace SPM2.Main
 {
@@ -37,6 +38,8 @@ namespace SPM2.Main
             //AddinProvider.Load("addins");
             //AddIns = AddinProvider.Container;
             
+            
+
             PropertyGridTypeConverter.AddEditor(typeof(string), typeof(StringEditor));
 
             Application = CompositionProvider.Current.GetExportedValue<App>();

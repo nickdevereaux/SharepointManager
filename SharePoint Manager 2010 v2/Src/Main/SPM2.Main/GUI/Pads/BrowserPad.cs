@@ -21,6 +21,7 @@ namespace SPM2.Main.GUI.Pads
 
     [Title("PropertyGrid")]
     [Export("SPM2.Main.MainWindow.ContentPane", typeof(DockableContent))]
+    [ExportMetadata("ID", "SPM2.Main.GUI.Pads.BrowserPad")]
     [ExportMetadata("After", "SPM2.Main.GUI.Pads.PropertyGridPad")]
     public class BrowserPad : AbstractPadWindow
     {

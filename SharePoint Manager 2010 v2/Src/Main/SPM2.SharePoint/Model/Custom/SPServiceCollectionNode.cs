@@ -5,20 +5,22 @@
  */
 
 using System;
-
+using System.Linq;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using System.Collections.Generic;
 
 namespace SPM2.SharePoint.Model
 {
 	[Title("Services")]
+    [Icon(Small = "SERVICES.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceCollectionNode
 	{
-        public SPServiceCollectionNode()
+        public override IEnumerable<SPNode> NodesToExpand()
         {
-            this.IconUri = SharePointContext.GetImagePath("SERVICES.GIF");
+            return this.Children.OfType<SPWebServiceNode>().Where(p => !p.IsAdministrationService).Cast<SPNode>();
         }
 	}
 }

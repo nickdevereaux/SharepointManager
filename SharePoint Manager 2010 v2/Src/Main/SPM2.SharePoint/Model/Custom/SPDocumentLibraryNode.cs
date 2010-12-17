@@ -27,6 +27,11 @@ namespace SPM2.SharePoint.Model
             string title = (String.IsNullOrEmpty(this.DocumentLibrary.Title)) ? this.DocumentLibrary.ID.ToString() : this.DocumentLibrary.Title;
             this.Text = String.Format("{0} ({1})", title, this.DocumentLibrary.ItemCount);
 
+            if (this.DocumentLibrary.Hidden)
+            {
+                this.TextColor = "Gray";
+            }
+
             this.Url = SPUtility.GetFullUrl(this.DocumentLibrary.ParentWeb.Site, this.DocumentLibrary.DefaultViewUrl);
 
             string filename = this.DocumentLibrary.ImageUrl;

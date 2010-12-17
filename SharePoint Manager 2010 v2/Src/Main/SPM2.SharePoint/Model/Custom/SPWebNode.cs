@@ -25,5 +25,10 @@ namespace SPM2.SharePoint.Model
 
             this.Url = this.Web.Url;
         }
+
+        public override bool IsDefaultSelected()
+        {
+            return true;
+        }
 	}
 }

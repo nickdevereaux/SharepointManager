@@ -4,26 +4,37 @@
   xmlns:local="clr-namespace:SPM2.Framework.WPF.Components"
   xmlns:framework="clr-namespace:SPM2.Framework;assembly=SPM2.Framework"
   >
+    <UserControl.Resources>
+        <Style x:Key="ContextMenuItemStyle">
+            <Setter Property="MenuItem.Header" Value="{Binding Header}"/>
+            <Setter Property="MenuItem.ItemsSource" Value="{Binding Items}"/>
+            <Setter Property="MenuItem.Command" Value="{Binding Command}" />
+        </Style>
+    </UserControl.Resources> 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <TreeView ItemsSource="{Binding Children}" x:Name="TV" Grid.Row="0">
+
             <TreeView.ItemContainerStyle>
                 <!-- This Style binds a TreeViewItem to a TreeViewItemViewModel. -->
                 <Style TargetType="{x:Type TreeViewItem}">
+                    <!-- Set focus on right click -->
+                    <EventSetter Event="MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                    <Setter Property="local:TreeViewItemBehavior.IsBroughtIntoViewWhenSelected"  Value="True" />
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="Foreground" Value="{Binding TextColor, Mode=TwoWay}" />
                     <Setter Property="FontWeight" Value="Normal" />
                     <Setter Property="Tag" Value="Normal" />
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="FontWeight" Value="Bold" />
                         </Trigger>
-
+                        
                     </Style.Triggers>
                 </Style>
-
             </TreeView.ItemContainerStyle>
             
 
@@ -31,8 +42,10 @@
                 <HierarchicalDataTemplate DataType="{x:Type framework:TreeViewItemModel}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
                         <Image Width="16" Height="16" Source="{Binding IconUri}" />
-                        <TextBlock Text="{Binding Text}">
-                        </TextBlock>
+                        <TextBlock Text="{Binding Text}"></TextBlock>
+                        <StackPanel.ContextMenu>
+                            <ContextMenu Visibility="{Binding ContextMenuVisible}"  ItemsSource="{Binding ContextMenuItems}" />
+                        </StackPanel.ContextMenu>
                     </StackPanel>
                 </HierarchicalDataTemplate>
                 <!--

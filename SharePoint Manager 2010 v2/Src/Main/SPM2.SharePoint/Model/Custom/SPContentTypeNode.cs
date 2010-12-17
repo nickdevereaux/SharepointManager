@@ -30,11 +30,10 @@ namespace SPM2.SharePoint.Model
             if (this.ContentType.Hidden)
             {
                 this.Text = this.Text + " (Hidden)";
+                this.TextColor = "Gray";
             }
         }
         
-
-
 
         public override void LoadChildren()
         {

@@ -71,6 +71,7 @@
     <Compile Include="Collections\IOrderMetadata.cs" />
     <Compile Include="Collections\OrderingCollection.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
+    <Compile Include="ComponentModel\IContextMenuItem.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Components\TreeView\ITreeViewModel.cs" />
     <Compile Include="Components\TreeView\TreeViewModel.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />

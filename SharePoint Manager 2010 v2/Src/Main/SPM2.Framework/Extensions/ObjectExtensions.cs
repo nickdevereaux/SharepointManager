@@ -15,6 +15,11 @@ namespace SPM2.Framework
 
         public static void InvokeMethod(this object sourceObj, string methodName, params object[] args)
         {
+            if (sourceObj == null)
+            {
+                throw new ApplicationException("Missing sourceObj in Extension method 'InvokeMethod'");
+            }
+
             Type[] types = TypeExtensions.GetParameterTypes(args);
             Type spType = sourceObj.GetType();
             MethodInfo method = spType.GetMethod(methodName, types);

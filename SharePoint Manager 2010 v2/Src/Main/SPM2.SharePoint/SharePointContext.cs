@@ -133,7 +133,7 @@ namespace SPM2.SharePoint
 
         #region Singleton
 
-        SharePointContext()
+        SharePointContext() : this(SPFarm.Local)
         {
         }
 

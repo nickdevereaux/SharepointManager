@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ItemContext")]
 	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
-	[ExportToNode("SPM2.SharePoint.Model.TemplateContainerNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.TemplateContainerNode")]
 	public partial class SPContextNode
 	{
 	}

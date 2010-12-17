@@ -21,7 +21,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPFarmNode()
         {
-            this.IconUri = this.GetResourceImagePath("actionssettings.gif");
+            this.IconUri = GetResourceImagePath("actionssettings.gif");
         }
 
 

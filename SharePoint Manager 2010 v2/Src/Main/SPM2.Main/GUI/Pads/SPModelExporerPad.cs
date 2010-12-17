@@ -38,15 +38,24 @@ namespace SPM2.Main.GUI.Pads
             //wpfView.DataContext = ModelProvider;
             //wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
             //this.Content = wpfView;
+            Workbench.MainWindow.ContentRendered += new EventHandler(MainWindow_ContentRendered);
+
+            wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
+            this.Content = wpfView;
+        }
+
+        void MainWindow_ContentRendered(object sender, EventArgs e)
+        {
+            SelectItem();
         }
 
 
         public void OnImportsSatisfied()
         {
             wpfView.DataContext = this.ModelProvider;
-            wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
-            this.Content = wpfView;
+            this.ModelProvider.ExpandToDefault();
         }
+
 
         void Explorer_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
         {

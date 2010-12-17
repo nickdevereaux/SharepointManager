@@ -20,7 +20,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPApplicationPoolNode()
         {
-            this.IconUri = this.GetResourceImagePath("WebAppPool.gif");
+            this.IconUri = GetResourceImagePath("WebAppPool.gif");
         }
 	}
 }

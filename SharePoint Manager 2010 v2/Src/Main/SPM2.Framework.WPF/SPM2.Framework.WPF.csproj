@@ -120,6 +120,7 @@
     <Compile Include="Components\ToolBarView.xaml.cs">
       <DependentUpon>ToolBarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\TreeView\TreeViewItemBehavior.cs" />
     <Compile Include="Components\TreeView\WPFTreeView.xaml.cs">
       <DependentUpon>WPFTreeView.xaml</DependentUpon>
     </Compile>

@@ -10,6 +10,7 @@ namespace SPM2.Framework
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
         bool IsHidden { get; set; }
+        string TextColor { get; set; }
 
         SPM2.Framework.TreeViewItemModel Parent { get; }
         System.Collections.ObjectModel.ObservableCollection<SPM2.Framework.ITreeViewItemModel> Children { get; }

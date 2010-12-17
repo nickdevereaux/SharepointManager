@@ -18,7 +18,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPApplicationPoolCollectionNode()
         {
-            this.IconUri = this.GetResourceImagePath("AppPool.gif");
+            this.IconUri = GetResourceImagePath("AppPool.gif");
         }
 	}
 }

@@ -29,6 +29,7 @@ namespace SPM2.Framework.WPF.Controls
             {
                 this.Items.Add(item.Value);
             }
+
         }
     }
 }

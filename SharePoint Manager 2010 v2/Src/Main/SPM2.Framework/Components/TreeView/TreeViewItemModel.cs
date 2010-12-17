@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using SPM2.Framework.ComponentModel;
 
 namespace SPM2.Framework
 {
@@ -116,7 +117,7 @@ namespace SPM2.Framework
 
         private bool _isHidden;
         /// <summary>
-        /// Gets/sets whether the TreeViewItem is 
+        /// Gets/sets whether the TreeViewItem is hidden
         /// </summary>
         public bool IsHidden
         {
@@ -128,6 +129,45 @@ namespace SPM2.Framework
                     _isHidden = value;
                     this.OnPropertyChanged("IsHidden");
                 }
+                 
+            }
+        }
+
+        //private bool _isFocused = false;
+        ///// <summary>
+        ///// Gets/Sets whether the TreeViewItem is in focus.
+        ///// </summary>
+        //public bool IsFocused
+        //{
+        //    get { return _isFocused; }
+        //    set 
+        //    {
+        //        if (value != _isFocused)
+        //        {
+        //            _isFocused = value;
+        //            this.OnPropertyChanged("IsFocused");
+        //        }
+        //    }
+        //}
+
+
+        private string _textColor = "Black";
+        /// <summary>
+        /// Sets the color of the text.
+        /// </summary>
+        public string TextColor
+        {
+            get 
+            {
+                return _textColor; 
+            }
+            set 
+            {
+                if (_textColor != value)
+                {
+                    _textColor = value;
+                    this.OnPropertyChanged("TextColor");
+                }
             }
         }
 
@@ -137,6 +177,36 @@ namespace SPM2.Framework
         {
             get { return _parent; }
         }
+
+
+        private ObservableCollection<IContextMenuItem> _contextMenuItems = null;
+        public virtual ObservableCollection<IContextMenuItem> ContextMenuItems
+        {
+            get
+            {
+                //if (_contextMenuItems.Count == 0)
+                //{
+                //    MenuItem item = new MenuItem(DateTime.Now.ToString());
+                //    _contextMenuItems.Add(item);
+                //}
+                return _contextMenuItems;
+            }
+            set
+            {
+                _contextMenuItems = value;
+            }
+
+        }
+
+
+        public string ContextMenuVisible
+        {
+            get 
+            { 
+                return (this.ContextMenuItems != null && this.ContextMenuItems.Count > 0) ? "Visible" : "Hidden"; 
+            }
+        }
+        
 
 
         #endregion // Data

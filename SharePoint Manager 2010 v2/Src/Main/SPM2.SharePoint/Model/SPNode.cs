@@ -16,6 +16,7 @@ using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
 using SPM2.Framework.ComponentModel;
 using SPM2.SharePoint;
+using System.Collections.ObjectModel;
 
 
 namespace SPM2.SharePoint.Model
@@ -139,7 +140,14 @@ namespace SPM2.SharePoint.Model
                         string name = this.Descriptor.Icon.Small;
                         if (!String.IsNullOrEmpty(name) && !"BULLET.GIF".Equals(name, StringComparison.Ordinal))
                         {
-                            _iconUri = SharePointContext.GetImagePath(this.Descriptor.Icon.Small);
+                            if (this.Descriptor.Icon.Source == IconSource.File)
+                            {
+                                _iconUri = SharePointContext.GetImagePath(this.Descriptor.Icon.Small);
+                            }
+                            else
+                            {
+                                _iconUri = GetResourceImagePath(this.Descriptor.Icon.Small);
+                            }
                         }
                     }
 
@@ -151,8 +159,12 @@ namespace SPM2.SharePoint.Model
                 return _iconUri; 
             }
             set 
-            { 
-                _iconUri = value; 
+            {
+                if (_iconUri != value)
+                {
+                    _iconUri = value;
+                    this.OnPropertyChanged("IconUri");
+                }
             }
         }
 
@@ -196,12 +208,49 @@ namespace SPM2.SharePoint.Model
         public virtual void Setup(object spParent)
         {
             this.SPParent = spParent;
+
+            try
+            {
+                SetupContextMenu();
+
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Trace.Fail(ex.Message, ex.StackTrace);
+#else
+                Trace.Fail(ex.Massage);
+#endif
+
+                throw ex; 
+            }
+        }
+
+        private void SetupContextMenu()
+        {
+            this.ContextMenuItems = new ObservableCollection<IContextMenuItem>();
+            LoadContextMenuNodes(typeof(SPNode));
+            LoadContextMenuNodes(this.GetType());
+        }
+
+        private void LoadContextMenuNodes(Type fromType)
+        {
+            OrderingCollection<IContextMenuItem> orderedItems = CompositionProvider.GetOrderedExports<IContextMenuItem>(fromType);
+            foreach (var item in orderedItems)
+            {
+                IContextMenuItem menuItem = item.Value;
+                menuItem.SetupItem(this);
+                this.ContextMenuItems.Add(item.Value);
+            }
         }
 
 
         public virtual void Update()
         {
-            this.SPObject.InvokeMethod("Update", true);
+            if (this.SPObject != null)
+            {
+                this.SPObject.InvokeMethod("Update", true);
+            }
         }
 
         public virtual SPNode Clone()
@@ -250,9 +299,10 @@ namespace SPM2.SharePoint.Model
             return this.SPObjectType;
         }
 
-        public string GetResourceImagePath(string filename)
+        public const string ResourceImagePath = "/SPM2.SharePoint;component/Resources/Images/";
+        public static string GetResourceImagePath(string filename)
         {
-            return "/SPM2.SharePoint;component/Resources/Images/" + filename;
+            return  ResourceImagePath + filename;
         }
 
 
@@ -303,6 +353,11 @@ namespace SPM2.SharePoint.Model
         public virtual IEnumerable<SPNode> NodesToExpand()
         {
             return null;
+        }
+
+        public virtual bool IsDefaultSelected()
+        {
+            return false;
         }
 
         protected Dictionary<Type, SPNode> GetNodeDictionary()

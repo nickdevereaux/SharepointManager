@@ -20,7 +20,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPWebApplicationCollectionNode()
         {
-            this.IconUri = this.GetResourceImagePath("GlobalServer.gif");
+            this.IconUri = GetResourceImagePath("GlobalServer.gif");
         }
 
         public override IEnumerable<SPNode> NodesToExpand()

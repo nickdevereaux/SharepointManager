@@ -28,7 +28,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPServerNode()
         {
-            this.IconUri = this.GetResourceImagePath("server.gif");
+            this.IconUri = GetResourceImagePath("server.gif");
         }
 	}
 }

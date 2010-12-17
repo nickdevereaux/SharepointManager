@@ -28,7 +28,8 @@ namespace SPM2.SharePoint
             set { _farm = value; }
         }
 
-        public SPModelProvider() : this(SPFarm.Local)
+        public SPModelProvider()
+            : this(SharePointContext.Instance.Farm)
         {
             
         }
@@ -37,7 +38,7 @@ namespace SPM2.SharePoint
         {
             this.Farm = farm;
             LoadChildren();
-            ExpandToDefault80();
+            //ExpandToDefault();
         }
 
         public override void LoadChildren()
@@ -55,7 +56,7 @@ namespace SPM2.SharePoint
             }
         }
 
-        public void ExpandToDefault80()
+        public void ExpandToDefault()
         {
             SPNode node = (SPNode)this.Children[0];
             node.IsExpanded = true;
@@ -74,7 +75,11 @@ namespace SPM2.SharePoint
             {
                 node.LoadChildren();
                 node.IsExpanded = true;
+                node.IsSelected = node.IsDefaultSelected();
+
                 ExpandNode(node.NodesToExpand());
+
+                
             }
         }
     }

@@ -19,7 +19,7 @@ namespace SPM2.SharePoint.Model
 	{
         public SPServerCollectionNode()
         {
-            this.IconUri = this.GetResourceImagePath("server.gif");
+            this.IconUri = GetResourceImagePath("server.gif");
         }
 	}
 }

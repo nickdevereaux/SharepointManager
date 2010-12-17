@@ -24,12 +24,25 @@ namespace SPM2.Framework.WPF.Components
 
         public TreeView Explorer = null;
 
-         public WPFTreeView()
+        public WPFTreeView()
         {
             InitializeComponent();
 
             this.Explorer = this.TV;
-            //System.Windows.Controls.TreeViewItem.i
+            ContextMenu me = new ContextMenu();
+
+
         }
+
+        private void TreeViewItem_MouseRightButtonDown(object sender, MouseEventArgs e) 
+        { 
+            TreeViewItem item = sender as TreeViewItem; 
+            if (item != null) 
+            { 
+                item.Focus();
+                e.Handled = true;
+            } 
+        }
+
     }
 }

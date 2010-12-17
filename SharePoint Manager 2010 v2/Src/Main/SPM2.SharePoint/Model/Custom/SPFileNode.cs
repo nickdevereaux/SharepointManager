@@ -18,7 +18,7 @@ namespace SPM2.SharePoint.Model
 	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileCollectionNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
+	//[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	public partial class SPFileNode
 	{
 
@@ -32,6 +32,7 @@ namespace SPM2.SharePoint.Model
             }
 
             this.IconUri = SharePointContext.GetImagePath(this.File.IconUrl);
+            this.Text = this.File.Name;
         }
 
         public override void LoadChildren()
@@ -42,11 +43,6 @@ namespace SPM2.SharePoint.Model
             {
                 try
                 {
-                    //SPLimitedWebPartCollectionNode node = new SPLimitedWebPartCollectionNode();
-                    //node.SPObject = 
-                    //node.Setup(this.SPObject);
-                    //this.Children.Add(node);
-
                     SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.File);
 
                     webparts.Setup(this.SPObject);

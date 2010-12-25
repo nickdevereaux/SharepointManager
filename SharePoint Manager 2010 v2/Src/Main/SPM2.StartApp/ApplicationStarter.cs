@@ -7,18 +7,22 @@ using System.Windows;
 using System.Diagnostics;
 using System.Windows.Threading;
 using SPM2.Framework.Window;
+using SPM2.Framework.ComponentModel;
+using SPM2.Main.ComponentModel;
 
 
 namespace SPM2.StartApp
 {
     public class ApplicationStarter : IDisposable
     {
-       
+        App app = null;
+
+
         public ApplicationStarter()
         {
         }
 
-        public void Startup()
+        public void OpenDebugWindow()
         {
 #if DEBUG
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = true;
@@ -31,51 +35,28 @@ namespace SPM2.StartApp
 
         }
 
-        public void ShowSplashScreen()
-        {
-            SplashScreen splashScreen = new SplashScreen("SplashScreen.png");
-            splashScreen.Show(true);
-        }
-
         public void Initialize()
         {
-            Workbench.Initialize();
-
-            Workbench.Application.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(Current_DispatcherUnhandledException);
-
+            PropertyGridTypeConverter.AddEditor(typeof(string), typeof(StringEditor));
 
             System.Windows.Forms.Integration.WindowsFormsHost.EnableWindowsFormsInterop();
             ComponentDispatcher.ThreadIdle -= ComponentDispatcher_ThreadIdle; // ensure we don't register twice
             ComponentDispatcher.ThreadIdle += ComponentDispatcher_ThreadIdle;
-
-            //WorkbenchSingleton.InitializeWorkbench(new WpfWorkbench(), new AvalonDockLayout());
         }
-
 
         public void ParseCommandline(string[] args)
         {
-
         }
 
 
         public void Execute(string[] args)
         {
-            Workbench.Run();
+            app = new App();
+            app.InitializeComponent();
+            app.Run();
         }
 
         #region Eventhandlers
-
-        void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            Trace.Fail(e.Exception.Message, e.Exception.StackTrace);
-
-#if DEBUG
-            MessageBox.Show(e.Exception.Message+ "\r\n -> "+ e.Exception.StackTrace, "Error! (Debug mode)", MessageBoxButton.OK, MessageBoxImage.Error);
-#else
-            MessageBox.Show(e.Exception.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-#endif
-            e.Handled = true;
-        }
 
         void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
         {
@@ -87,7 +68,6 @@ namespace SPM2.StartApp
 
         public void Dispose()
         {
-            Workbench.Application.DispatcherUnhandledException -= Current_DispatcherUnhandledException;
             ComponentDispatcher.ThreadIdle -= ComponentDispatcher_ThreadIdle;
         }
     }

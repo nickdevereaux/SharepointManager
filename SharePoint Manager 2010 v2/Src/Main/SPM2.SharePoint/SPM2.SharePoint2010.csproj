@@ -68,8 +68,10 @@
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.Search.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -85,6 +87,8 @@
     <Compile Include="Model\ExportToNodeAttribute.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageCollectionNode.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
+    <Compile Include="Model\MoreNode.cs" />
+    <Compile Include="Model\SPExplorerSettings.cs" />
     <Compile Include="SharePointContext.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceInstanceNode.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceNode.cs" />
@@ -878,6 +882,11 @@
     <Compile Include="Model\SharedTypes.cs" />
     <Compile Include="SPModelProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\AdministrativeServiceValidator.cs" />
+    <Compile Include="Validation\AdminRightsValidator.cs" />
+    <Compile Include="Validation\SPFInstalledValidator.cs" />
+    <Compile Include="Validation\SPSInstalledValidator.cs" />
+    <Compile Include="Validation\TimerServiceValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SPM2.snk" />

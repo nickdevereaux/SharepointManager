@@ -81,6 +81,10 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Windows\SettingsDialog.xaml.cs">
+      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewModel\SettingsDialogModel.cs" />
     <Page Include="Components\BrowserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,10 @@
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\CommandBindingCollectionExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Page Include="Windows\SettingsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Menu\Extensions\MenuItemExtensions.cs" />

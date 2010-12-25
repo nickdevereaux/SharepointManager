@@ -6,6 +6,7 @@ using System.Drawing.Design;
 using System.ComponentModel;
 using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.ComponentModel;
+using System.Windows;
 
 namespace SPM2.Main.ComponentModel
 {
@@ -19,7 +20,7 @@ namespace SPM2.Main.ComponentModel
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             PropertyGridEditValue gridValue = new PropertyGridEditValue(context, provider, value);
-            SPM2Commands.EditString.Execute(gridValue, Workbench.MainWindow);
+            SPM2Commands.EditString.Execute(gridValue, Application.Current.MainWindow);
             return base.EditValue(context, provider, value);
         }
 

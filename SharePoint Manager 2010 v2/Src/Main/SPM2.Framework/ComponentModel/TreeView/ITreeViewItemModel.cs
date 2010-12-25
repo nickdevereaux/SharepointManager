@@ -1,4 +1,5 @@
 ﻿using System;
+using SPM2.Framework.Collections;
 namespace SPM2.Framework
 {
     public interface ITreeViewItemModel
@@ -11,8 +12,7 @@ namespace SPM2.Framework
         bool IsSelected { get; set; }
         bool IsHidden { get; set; }
         string TextColor { get; set; }
-
-        SPM2.Framework.TreeViewItemModel Parent { get; }
-        System.Collections.ObjectModel.ObservableCollection<SPM2.Framework.ITreeViewItemModel> Children { get; }
+        ITreeViewItemModel Parent { get; }
+        ObservableCollectionXML<ITreeViewItemModel> Children { get; }
    }
 }

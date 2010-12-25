@@ -15,6 +15,7 @@ using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.ComponentModel.Composition;
+using System.Windows;
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -44,7 +45,7 @@ namespace SPM2.Main.GUI.Pads
             
             this.Content = this.BrowserContainer;
 
-            Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
         }
 
 
@@ -75,7 +76,7 @@ namespace SPM2.Main.GUI.Pads
         {
             base.OnClosed();
 
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Application.Current.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
         }
 
         private void SetObject()

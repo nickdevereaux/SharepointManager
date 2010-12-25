@@ -15,6 +15,7 @@ using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.Windows.Input;
 using System.ComponentModel.Composition;
+using System.Windows;
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -33,12 +34,7 @@ namespace SPM2.Main.GUI.Pads
         {
             this.Title = "SharePoint Explorer";
 
-            //SPModelProvider ModelProvider = CompositionProvider.Current.GetExportedValue<SPModelProvider>(); 
-
-            //wpfView.DataContext = ModelProvider;
-            //wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
-            //this.Content = wpfView;
-            Workbench.MainWindow.ContentRendered += new EventHandler(MainWindow_ContentRendered);
+            Application.Current.MainWindow.ContentRendered += new EventHandler(MainWindow_ContentRendered);
 
             wpfView.Explorer.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
             this.Content = wpfView;
@@ -46,7 +42,7 @@ namespace SPM2.Main.GUI.Pads
 
         void MainWindow_ContentRendered(object sender, EventArgs e)
         {
-            SelectItem();
+            //SelectItem();
         }
 
 
@@ -67,8 +63,18 @@ namespace SPM2.Main.GUI.Pads
             object item = wpfView.Explorer.SelectedItem;
             if (item != null)
             {
-                ISPNode node = item as ISPNode;
-                SPM2Commands.ObjectSelected.Execute(node, null);
+                if (item is MoreNode)
+                {
+                    // Excute the more 
+                    MoreNode node = (MoreNode)item;
+                    node.ParentNode.LoadNextBatch();
+                }
+                else
+                {
+                    // Select the node in the Window
+                    ISPNode node = item as ISPNode;
+                    SPM2Commands.ObjectSelected.Execute(node, null);
+                }
             }
         }
 

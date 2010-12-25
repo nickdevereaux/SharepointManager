@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("SPSite")]
+	[Title(PropertyName="Url")]
     [Icon(Small = "ITS16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionSiteCollectionNode")]
@@ -24,6 +24,18 @@ namespace SPM2.SharePoint.Model
             return this.Children.OfType<SPWebNode>().Take(1).Cast<SPNode>();
         }
 
+
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+
+            SPWebNode webNode = this.Children.OfType<SPWebNode>().FirstOrDefault();
+            if (webNode != null)
+            {
+                // Move the WebNode to first position
+                this.Children.Move(this.Children.IndexOf(webNode), 0);
+            }
+        }
 	}
 
 }

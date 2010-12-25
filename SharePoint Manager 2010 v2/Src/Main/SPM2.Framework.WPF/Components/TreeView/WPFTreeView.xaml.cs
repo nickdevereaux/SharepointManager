@@ -29,7 +29,7 @@ namespace SPM2.Framework.WPF.Components
             InitializeComponent();
 
             this.Explorer = this.TV;
-            ContextMenu me = new ContextMenu();
+
 
 
         }

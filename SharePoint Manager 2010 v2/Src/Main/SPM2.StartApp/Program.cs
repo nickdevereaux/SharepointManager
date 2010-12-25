@@ -14,12 +14,10 @@ namespace SPM2.StartApp
         [STAThread()]
         static void Main(string[] args)
         {
-
             // Start the application
             using (ApplicationStarter appStarter = new ApplicationStarter())
             {
-                appStarter.Startup();
-                appStarter.ShowSplashScreen();
+                appStarter.OpenDebugWindow();
                 appStarter.Initialize();
                 appStarter.ParseCommandline(args);
                 appStarter.Execute(args);

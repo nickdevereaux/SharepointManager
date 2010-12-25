@@ -70,6 +70,12 @@ namespace SPM2.Framework
             return result;
         }
 
+        public static void LoadAssemblies()
+        {
+            // Force a load of assemblies
+            CompositionContainer dummy = Current;
+        }
+
 
         private static CompositionContainer Load(string addinPath)
         {

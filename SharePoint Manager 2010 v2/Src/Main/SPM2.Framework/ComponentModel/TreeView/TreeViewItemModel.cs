@@ -5,6 +5,8 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using SPM2.Framework.ComponentModel;
+using System.Xml.Serialization;
+using SPM2.Framework.Collections;
 
 namespace SPM2.Framework
 {
@@ -13,6 +15,7 @@ namespace SPM2.Framework
     /// Base class for all ViewModel classes displayed by TreeViewItems.  
     /// This acts as an adapter between a raw data object and a TreeViewItem.
     /// </summary>
+    [Serializable]
     public class TreeViewItemModel : INotifyPropertyChanged, ITreeViewItemModel
     {
 
@@ -20,6 +23,7 @@ namespace SPM2.Framework
 
 
         private string _text = null;
+        [Browsable(false)]
         public virtual string Text
         {
             get { return _text; }
@@ -34,6 +38,7 @@ namespace SPM2.Framework
         //}
 
         private string _toolTipText = null;
+        [Browsable(false)]
         public virtual string ToolTipText
         {
             get { return _toolTipText; }
@@ -41,29 +46,17 @@ namespace SPM2.Framework
         }
 
 
-        static readonly ITreeViewItemModel DummyChild = new TreeViewItemModel(null, false);
+        static readonly ITreeViewItemModel DummyChild = new DummyChild();
+
         /// <summary>
         /// Returns true if this object's Children have not yet been populated.
         /// </summary>
+        [Browsable(false)]
+        [XmlIgnore]
         public bool HasDummyChild
         {
-            get { return this.Children.Count == 1 && this.Children[0] == DummyChild; }
+            get { return this.Children.Count == 1 && this.Children[0] is DummyChild; }
         }
-
-
-
-
-
-        ObservableCollection<ITreeViewItemModel> _children = null;
-        /// <summary>
-        /// Returns the logical child items of this object.
-        /// </summary>
-        public ObservableCollection<ITreeViewItemModel> Children
-        {
-            get { return _children; }
-            set { _children = value; }
-        }
-
 
 
         bool _isExpanded;
@@ -71,6 +64,8 @@ namespace SPM2.Framework
         /// Gets/sets whether the TreeViewItem 
         /// associated with this object is expanded.
         /// </summary>
+        [Browsable(false)]
+        [XmlAttribute]
         public bool IsExpanded
         {
             get { return _isExpanded; }
@@ -82,17 +77,12 @@ namespace SPM2.Framework
                     this.OnPropertyChanged("IsExpanded");
                 }
 
-                // Expand all the way up to the root.
-                if (_isExpanded && _parent != null)
-                {
-                    _parent.IsExpanded = true;
-                }
-
                 // Lazy load the child items, if necessary.
                 if (this.HasDummyChild)
                 {
                     this.Children.Remove(DummyChild);
                     this.LoadChildren();
+                    this.LazyLoadChildren = false;
                 }
             }
         }
@@ -102,6 +92,8 @@ namespace SPM2.Framework
         /// Gets/sets whether the TreeViewItem 
         /// associated with this object is selected.
         /// </summary>
+        [Browsable(false)]
+        [XmlAttribute]
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -119,6 +111,8 @@ namespace SPM2.Framework
         /// <summary>
         /// Gets/sets whether the TreeViewItem is hidden
         /// </summary>
+        [Browsable(false)]
+        [XmlAttribute]
         public bool IsHidden
         {
             get { return _isHidden; }
@@ -150,11 +144,20 @@ namespace SPM2.Framework
         //    }
         //}
 
+        private ITreeViewItemModel _parent = null;
+        [Browsable(false)]
+        [XmlIgnore]
+        public ITreeViewItemModel Parent
+        {
+            get { return _parent; }
+        }
 
         private string _textColor = "Black";
         /// <summary>
         /// Sets the color of the text.
         /// </summary>
+        [Browsable(false)]
+        [XmlAttribute]
         public string TextColor
         {
             get 
@@ -172,14 +175,9 @@ namespace SPM2.Framework
         }
 
 
-        readonly TreeViewItemModel _parent;
-        public TreeViewItemModel Parent
-        {
-            get { return _parent; }
-        }
-
-
         private ObservableCollection<IContextMenuItem> _contextMenuItems = null;
+        [Browsable(false)]
+        [XmlIgnore]
         public virtual ObservableCollection<IContextMenuItem> ContextMenuItems
         {
             get
@@ -198,7 +196,8 @@ namespace SPM2.Framework
 
         }
 
-
+        [Browsable(false)]
+        [XmlAttribute]
         public string ContextMenuVisible
         {
             get 
@@ -206,7 +205,39 @@ namespace SPM2.Framework
                 return (this.ContextMenuItems != null && this.ContextMenuItems.Count > 0) ? "Visible" : "Hidden"; 
             }
         }
-        
+
+        private bool _lazyLoadChildren = true;
+        [Browsable(false)]
+        [XmlAttribute]
+        public bool LazyLoadChildren
+        {
+            get { return _lazyLoadChildren; }
+            set { _lazyLoadChildren = value; }
+        }
+
+
+        private ObservableCollectionXML<ITreeViewItemModel> _children = null;
+        /// <summary>
+        /// Returns the logical child items of this object.
+        /// </summary>
+        [Browsable(false)]
+        public ObservableCollectionXML<ITreeViewItemModel> Children
+        {
+            get
+            {
+                if (_children == null)
+                {
+                    _children = new ObservableCollectionXML<ITreeViewItemModel>();
+                    if (this.LazyLoadChildren)
+                    {
+                        _children.Add(DummyChild);
+                    }
+                }
+                return _children; 
+            }
+            set { _children = value; }
+        }
+
 
 
         #endregion // Data
@@ -221,13 +252,7 @@ namespace SPM2.Framework
         protected TreeViewItemModel(TreeViewItemModel parent, bool lazyLoadChildren)
         {
             _parent = parent;
-
-            _children = new ObservableCollection<ITreeViewItemModel>();
-
-            if (lazyLoadChildren)
-            {
-                _children.Add(DummyChild);
-            }
+            _lazyLoadChildren = lazyLoadChildren;
         }
 
         #endregion // Constructors
@@ -238,6 +263,7 @@ namespace SPM2.Framework
         /// </summary>
         public virtual void LoadChildren()
         {
+            
         }
 
 
@@ -252,5 +278,6 @@ namespace SPM2.Framework
         }
 
         #endregion // INotifyPropertyChanged Members
+
     }
 }

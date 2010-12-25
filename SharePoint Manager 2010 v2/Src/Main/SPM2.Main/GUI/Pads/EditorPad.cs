@@ -23,6 +23,7 @@ using SPM2.Framework.ComponentModel;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.ComponentModel.Composition;
+using System.Windows;
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -58,8 +59,8 @@ namespace SPM2.Main.GUI.Pads
 
             this.Content = this.Editor;
 
-            Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
-            Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
+            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
             //Workbench.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
 
         }
@@ -94,8 +95,8 @@ namespace SPM2.Main.GUI.Pads
         {
             base.OnClosed();
 
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, EditString_Executed);
-            Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
+            Application.Current.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.ObjectSelected, EditString_Executed);
+            Application.Current.MainWindow.CommandBindings.RemoveCommandExecutedHandler(SPM2Commands.EditString, EditString_Executed);
         }
 
         void foldingUpdateTimer_Tick(object sender, EventArgs e)

@@ -5,7 +5,7 @@
     Icon="/SPM2.Main;component/resources/images/about.gif"
     x:Uid="idAboutBox"
     Style="{DynamicResource AboutDialogStyle}" 
-   WindowStartupLocation="CenterOwner" 
+       WindowStartupLocation="CenterOwner" 
         mc:Ignorable="d" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

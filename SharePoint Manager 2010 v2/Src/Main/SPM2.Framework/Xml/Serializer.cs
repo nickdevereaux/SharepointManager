@@ -6,6 +6,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Reflection;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 
 namespace SPM2.Framework
@@ -17,7 +20,7 @@ namespace SPM2.Framework
         private static Object thisLock = new Object();
         private static Object lockDBAttributeOverride = new Object();
 
-        private static Hashtable _serializerStore = new Hashtable();
+        private static Dictionary<string, object> _serializerStore = new Dictionary<string,object>();
 
         private static Hashtable _attributeOverrideStore = new Hashtable();
 
@@ -28,59 +31,53 @@ namespace SPM2.Framework
         #region Methods
 
 
-        public static XmlSerializer GetXmlSerializer(Type objType)
-        {
-            string key = "XML" + objType.FullName;
+        //public static XmlSerializer GetXmlSerializer(Type objType)
+        //{
+        //    string key = "XML" + objType.FullName;
 
-            XmlSerializer serializer = (XmlSerializer)GetSerializerObject(key);
-            if (serializer == null)
-            {
-                serializer = factory.CreateSerializer(objType);
+        //    XmlSerializer serializer = (XmlSerializer)GetSerializerObject(key);
+        //    if (serializer == null)
+        //    {
+        //        serializer = factory.CreateSerializer(objType);
 
-                SetSerializerObject(key, serializer);
-            }
-            return serializer;
-        }
+        //        SetSerializerObject(key, serializer);
+        //    }
+        //    return serializer;
+        //}
 
-        public static XmlSerializer GetXmlSerializer(Type objType, XmlAttributeOverrides xmlOverrides)
-        {
-            string hashkey = string.Empty;
-            if (xmlOverrides != null)
-            {
-                hashkey = xmlOverrides.GetHashCode().ToString();
-            }
-            string key = "XML" + objType.FullName + hashkey;
+        //public static XmlSerializer GetXmlSerializer(Type objType, XmlAttributeOverrides xmlOverrides)
+        //{
+        //    string hashkey = string.Empty;
+        //    if (xmlOverrides != null)
+        //    {
+        //        hashkey = xmlOverrides.GetHashCode().ToString();
+        //    }
+        //    string key = "XML" + objType.FullName + hashkey;
 
-            XmlSerializer serializer = (XmlSerializer)GetSerializerObject(key);
-            if (serializer == null)
-            {
-                serializer = factory.CreateSerializer(objType, xmlOverrides);
-                SetSerializerObject(key, serializer);
-            }
-            return serializer;
-        }
+        //    XmlSerializer serializer = (XmlSerializer)GetSerializerObject(key);
+        //    if (serializer == null)
+        //    {
+        //        serializer = factory.CreateSerializer(objType, xmlOverrides);
+        //        SetSerializerObject(key, serializer);
+        //    }
+        //    return serializer;
+        //}
 
 
-        private static object GetSerializerObject(string key)
-        {
-            object result = null;
-            lock (thisLock)
-            {
-                if (_serializerStore.ContainsKey(key))
-                {
-                    result = _serializerStore[key];
-                }
-            }
-            return result;
-        }
+        //private static object GetSerializerObject(string key)
+        //{
+        //    object result = null;
+        //    if (_serializerStore.ContainsKey(key))
+        //    {
+        //        result = _serializerStore[key];
+        //    }
+        //    return result;
+        //}
 
-        private static void SetSerializerObject(string key, object serializer)
-        {
-            lock (thisLock)
-            {
-                _serializerStore[key] = serializer;
-            }
-        }
+        //private static void SetSerializerObject(string key, object serializer)
+        //{
+        //    _serializerStore[key] = serializer;
+        //}
 
 
 
@@ -91,7 +88,8 @@ namespace SPM2.Framework
 
         public static string ObjectToXML(object input)
         {
-            XmlAttributeOverrides xmlOverrides = new XmlAttributeOverrides();
+            //XmlAttributeOverrides xmlOverrides = new XmlAttributeOverrides();
+
 
             return ObjectToXML(input, null);
         }
@@ -115,12 +113,21 @@ namespace SPM2.Framework
 
         public static void ObjectToXML(object input, XmlWriter writer, XmlAttributeOverrides xmlOverrides)
         {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+
             if (input == null)
             {
                 throw new NullReferenceException("Input object cannot be null");
             }
 
-            XmlSerializer serializer = GetXmlSerializer(input.GetType(), xmlOverrides);
+            XmlSerializer serializer = factory.CreateSerializer(input.GetType(), xmlOverrides);
+
+            watch.Stop();
+            watch.Reset();
+            Trace.WriteLine(String.Format("Call to factory.CreateSerializer({0}) took {1} Milliseconds", input.GetType().Name, watch.ElapsedMilliseconds));
+            watch.Start();
+
 
             //Create our own namespaces for the output
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
@@ -130,11 +137,45 @@ namespace SPM2.Framework
 
             // Do the serialization here!
             serializer.Serialize(writer, input, ns);
+
+            watch.Stop();
+            Trace.WriteLine(String.Format("Call to serializer.Serialize({0}) took {1} Milliseconds", input.GetType().Name, watch.ElapsedMilliseconds));
         }
 
-        public static object XmlToObject(string xml, Type typeOfObject)
+        /// <summary>
+        /// Serializes list
+        /// </summary>
+        /// <param name="outputStream">Ouput stream to write the serialized data</param>
+        public static void CollectionToXml<T>(System.Xml.XmlWriter outputStream, ICollection<T> list)
         {
-            return null;
+            foreach (var item in list)
+            {
+                Type itemType = item.GetType();
+
+                XmlAttributeOverrides xOver = CreateTypeNameOverride(itemType, itemType.FullName);
+
+                Serializer.ObjectToXML(item, outputStream, xOver);
+            }
+        }
+
+        private static XmlAttributeOverrides CreateTypeNameOverride(Type objectType, string name)
+        {
+            // Create the XmlAttributes and XmlAttributeOverrides objects.
+            XmlAttributes attrs = new XmlAttributes();
+            XmlAttributeOverrides xOver = new XmlAttributeOverrides();
+
+            /* Create an XmlTypeAttribute and change the name of the XML type. */
+            XmlTypeAttribute xType = new XmlTypeAttribute();
+            xType.TypeName = objectType.FullName;
+
+            // Set the XmlTypeAttribute to the XmlType property.
+            attrs.XmlType = xType;
+
+            /* Add the XmlAttributes to the XmlAttributeOverrides,
+               specifying the member to override. */
+            xOver.Add(objectType, attrs);
+
+            return xOver;
         }
 
 
@@ -144,7 +185,7 @@ namespace SPM2.Framework
             if (!String.IsNullOrEmpty(xml))
             {
                 Type objType = typeof(T);
-                XmlSerializer serializer = GetXmlSerializer(objType);
+                XmlSerializer serializer = factory.CreateSerializer(objType);
                 StringReader sr = new StringReader(xml);
                 try
                 {
@@ -174,12 +215,71 @@ namespace SPM2.Framework
             object result = null;
             using (XmlNodeReader reader = new XmlNodeReader(element))
             {
-                XmlSerializer xs = Serializer.GetXmlSerializer(objectType);
+                XmlSerializer xs = factory.CreateSerializer(objectType);
 
                 result = xs.Deserialize(reader);
             }
             return result;
         }
+
+
+        private static Dictionary<string, Type> typeStore = new Dictionary<string, Type>();
+
+        /// <summary>
+        /// Deserializes list
+        /// </summary>
+        /// <param name="outputStream">Ouput stream to write the serialized data</param>
+        public static void XmlToCollection<T>(System.Xml.XmlReader inputStream, ICollection<T> interfaceList)
+        {
+            if (inputStream.IsEmptyElement)
+            {
+                //Move to next element
+                inputStream.Read();
+                return;
+            }
+
+            //Get the base node name of generic list of items of type IProjectMember
+            string parentNodeName = inputStream.Name;
+            
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            
+            //Move to first child
+            inputStream.Read();
+            while (inputStream.NodeType != XmlNodeType.EndElement)
+            {
+
+                Type objectType = typeStore.GetValue(inputStream.Name);
+                
+                if (objectType == null)
+                {
+                    foreach (Assembly asm in assemblies)
+                    {
+                        objectType = asm.GetType(inputStream.Name);
+                        if (objectType != null)
+                        {
+                            typeStore.AddOrReplace(inputStream.Name, objectType);
+                            break;
+                        }
+                    }
+                }
+
+                if (objectType != null)
+                {
+                    XmlAttributeOverrides xOver = CreateTypeNameOverride(objectType, objectType.FullName);
+
+                    XmlSerializer xs = factory.CreateSerializer(objectType, xOver);
+                    T item = (T)xs.Deserialize(inputStream);
+                    interfaceList.Add(item);
+                }
+                else
+                {
+                    throw new ApplicationException("Error in XmlToCollection method. Node unhandled: " + inputStream.Name);
+                }
+            }
+            // Move to the next element
+            inputStream.Read();
+        }
+
 
         public static string FormatXml(string xml)
         {

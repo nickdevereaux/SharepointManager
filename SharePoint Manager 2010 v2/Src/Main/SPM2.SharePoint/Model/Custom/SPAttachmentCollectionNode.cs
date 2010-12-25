@@ -14,7 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Attachments")]
 	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+    // The Attachment property is a boolean
+	//[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	public partial class SPAttachmentCollectionNode
 	{
 	}

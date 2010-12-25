@@ -33,7 +33,7 @@ namespace SPM2.Main
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    [Export(Workbench.MainWindowName, typeof(Window))]
+    [Export(AppModel.MAINWINDOW_CONTRACT_NAME, typeof(Window))]
     public partial class MainWindow : Window
     {
         public const string ToolBarTreyContainer_AddInID = "SPM2.Main.MainWindow.ToolBarTreyContainer";

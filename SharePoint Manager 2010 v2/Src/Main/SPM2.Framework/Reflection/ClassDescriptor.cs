@@ -15,9 +15,6 @@ namespace SPM2.Framework
         public static Type TitleAttributeType = typeof(TitleAttribute);
         public static Type DescriptionAttributeType = typeof(DescriptionAttribute);
         public static Type IconAttributeType = typeof(IconAttribute);
-        //public static Type AttachToAttributeType = typeof(AttachToAttribute);
-
-        //public static Type IAddInCommandType = typeof(IAddInCommand);
         public static Type IAddInDocumentWindow = typeof(IDocumentWindow);
         public static Type IAddInPadWindow = typeof(IPadWindow);
 
@@ -112,33 +109,44 @@ namespace SPM2.Framework
                 _title = value;
             }
         }
-        public AttributeCollection Attributes { get; set; }
-        //public List<AttachToAttribute> AttachTo { get; set; }
-        public Type[] Interfaces { get; set; }
-        public Type ClassType { get; set; }
 
-        private bool? _isAddInClass = null;
-        public bool IsAddIn
+        private AttributeCollection _attributes = null;
+        public AttributeCollection Attributes
         {
             get
             {
-                //if (_isAddInClass == null)
-                //{
-                //    _isAddInClass = false;
-                //    foreach (Type item in this.Interfaces)
-                //    {
-                //        if (item == IAddInCommandType || item == IAddInDocumentWindow || item == IAddInPadWindow)
-                //        {
-                //            _isAddInClass = true;
-                //            break;
-                //        }
-                //    }
-                //}
-                //return (bool)_isAddInClass;
-                return true;
+                if (_attributes == null)
+                {
+                    _attributes = new AttributeCollection(this.ClassType.GetCustomAttributes(true).OfType<Attribute>().ToArray());
+                }
+                return _attributes;
             }
-
+            set
+            {
+                _attributes = value;
+            }
         }
+
+
+        private Type[] _interfaces = null;
+        public Type[] Interfaces 
+        {
+            get
+            {
+                if (_interfaces == null)
+                {
+                    _interfaces = this.ClassType.GetInterfaces();
+                }
+                return _interfaces;
+            }
+            set
+            {
+                _interfaces = value;
+            }
+        }
+
+
+        public Type ClassType { get; set; }
 
 
         private IconAttribute _icon = null;
@@ -194,14 +202,6 @@ namespace SPM2.Framework
         public ClassDescriptor(Type type)
         {
             this.ClassType = TypeDescriptor.GetReflectionType(type);
-
-            this.Interfaces = this.ClassType.GetInterfaces();
-
-            if (this.IsAddIn)
-            {
-                this.Attributes = new AttributeCollection(this.ClassType.GetCustomAttributes(true).OfType<Attribute>().ToArray());
-                //this.AttachTo = new List<AttachToAttribute>(this.Attributes.OfType<AttachToAttribute>());
-            }
         }
 
 

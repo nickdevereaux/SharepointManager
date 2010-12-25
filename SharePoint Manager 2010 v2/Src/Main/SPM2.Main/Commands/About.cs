@@ -28,7 +28,7 @@ namespace SPM2.Main.Commands
 
         void About_Click(object sender, RoutedEventArgs e)
         {
-            AboutBox dialog = new AboutBox(Workbench.MainWindow);
+            AboutBox dialog = new AboutBox(Application.Current.MainWindow);
             
             dialog.ShowDialog();
         }

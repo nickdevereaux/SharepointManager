@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SPM2.Framework
+namespace SPM2.Framework.ComponentModel
 {
-    interface ISettings
+    public interface ISettingsModel : ITreeViewItemModel
     {
     }
 }

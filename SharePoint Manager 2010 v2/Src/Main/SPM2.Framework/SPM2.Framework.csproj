@@ -61,6 +61,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -69,17 +70,24 @@
     <Compile Include="Attributes\LoadAddInTypes.cs" />
     <Compile Include="Attributes\TitleAttribute.cs" />
     <Compile Include="Collections\IOrderMetadata.cs" />
+    <Compile Include="Collections\ObservableCollectionXML.cs" />
     <Compile Include="Collections\OrderingCollection.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\IContextMenuItem.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />
+    <Compile Include="ComponentModel\TreeView\DummyChild.cs" />
+    <Compile Include="ComponentModel\TreeView\ExportToSettingsAttribute.cs" />
+    <Compile Include="ComponentModel\TreeView\ISettingsModel.cs" />
+    <Compile Include="ComponentModel\TreeView\SettingsCurrentModel.cs" />
+    <Compile Include="ComponentModel\TreeView\SettingsModel.cs" />
+    <Compile Include="ComponentModel\TreeView\SettingsProvider.cs" />
     <Compile Include="ComponentModel\TypeNames.cs" />
-    <Compile Include="Components\TreeView\ITreeViewItemModel.cs" />
-    <Compile Include="Components\TreeView\TreeViewItemModel.cs" />
-    <Compile Include="Components\TreeView\ITreeViewModel.cs" />
-    <Compile Include="Components\TreeView\TreeViewModel.cs" />
+    <Compile Include="ComponentModel\TreeView\ITreeViewItemModel.cs" />
+    <Compile Include="ComponentModel\TreeView\TreeViewItemModel.cs" />
+    <Compile Include="ComponentModel\TreeView\ITreeViewModel.cs" />
+    <Compile Include="ComponentModel\TreeView\TreeViewModel.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
@@ -91,6 +99,12 @@
     <Compile Include="IO\Win32.cs" />
     <Compile Include="Properties\SPM2AssemblyInfo.cs" />
     <Compile Include="Providers\CompositionProvider.cs" />
+    <Compile Include="Validation\BaseValidator.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ValidatorCollection.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
+    <Compile Include="Validation\ValidationService.cs" />
+    <Compile Include="Validation\ValidatorException.cs" />
     <Compile Include="Window\ConsoleManager.cs" />
     <Compile Include="Window\IWindowsProvider.cs" />
     <Compile Include="Providers\AbstractProvider.cs" />
@@ -109,7 +123,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Window\IAddInWindow.cs" />
     <Compile Include="Window\IPadWindow.cs" />
-    <Compile Include="Interfaces\ISettings.cs" />
     <Compile Include="Window\IDocumentWindow.cs" />
     <Compile Include="Window\WindowCreatedEventHandler.cs" />
     <Compile Include="Window\WindowEventArgs.cs" />
@@ -126,6 +139,13 @@
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>MEF35</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\mbllistbullet.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,13 +13,15 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "TFALLT.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemVersionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
+    [ExportToNode(typeof(SPFileNode))]
 	public partial class SPListItemNode
 	{
+
 	}
 }

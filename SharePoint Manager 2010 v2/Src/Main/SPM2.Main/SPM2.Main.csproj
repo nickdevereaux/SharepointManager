@@ -83,11 +83,15 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WpfApplication1">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Projects\Test\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\About.cs" />
     <Compile Include="Commands\ContextMenu\SPFeatureNodeContextMenu.cs" />
     <Compile Include="Commands\ContextMenu\SPNodeContextMenu.cs" />
+    <Compile Include="Commands\Settings.cs" />
     <Compile Include="Commands\Help.cs" />
     <Compile Include="Commands\Save.cs" />
     <Compile Include="Commands\ToolBars\MainToolBar.cs" />
@@ -95,6 +99,7 @@
     <Compile Include="Commands\View.cs" />
     <Compile Include="Commands\File.cs" />
     <Compile Include="Commands\Exit.cs" />
+    <Compile Include="ComponentModel\GeneralSettings.cs" />
     <Compile Include="ComponentModel\StringEditor.cs" />
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Pads\BrowserPad.cs" />
@@ -104,9 +109,13 @@
     <Compile Include="GUI\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AppModel.cs" />
     <Compile Include="ViewModel\MainWindowModel.cs" />
+    <Compile Include="ViewModel\SplashScreenModel.cs" />
     <Compile Include="WindowsManager.cs" />
-    <Compile Include="Workbench.cs" />
     <Compile Include="Properties\WPFAssemblyInfo.cs" />
     <Page Include="GUI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +132,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="GUI\AboutBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +204,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\refresh3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SplashScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

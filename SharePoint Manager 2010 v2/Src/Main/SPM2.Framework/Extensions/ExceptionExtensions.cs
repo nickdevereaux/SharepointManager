@@ -37,6 +37,10 @@ namespace SPM2.Framework
                 }
             }
 
+#if DEBUG
+            sb.Append(" - StackTrace -> " + ex.StackTrace);
+#endif
+            
             return sb.ToString();
         }
     }

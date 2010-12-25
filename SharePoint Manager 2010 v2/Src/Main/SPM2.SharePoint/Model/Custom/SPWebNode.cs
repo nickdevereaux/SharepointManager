@@ -22,7 +22,7 @@ namespace SPM2.SharePoint.Model
         public override void Setup(object spObject)
         {
             base.Setup(spObject);
-
+            this.Text = this.Web.Title;
             this.Url = this.Web.Url;
         }
 

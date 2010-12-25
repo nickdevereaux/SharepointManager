@@ -64,6 +64,20 @@ namespace SPM2.SharePoint.Model
             return result;
         }
 
+        private IEnumerator _pointer = null;
+        protected IEnumerator Pointer
+        {
+            get 
+            {
+                return _pointer; 
+            }
+        }
+
+        
+        private int totalCount = 0;
+        private bool moveNext = true;
+
+
         public override void LoadChildren()
         {
             if (this.SPObject == null)
@@ -71,21 +85,30 @@ namespace SPM2.SharePoint.Model
                 return;
             }
 
-            this.Children.Clear();
+            int batchCount = SPExplorerSettings.Current.BatchNodeLoad;
 
-            List<INode> children = new List<INode>();
+            List<ITreeViewItemModel> list = new List<ITreeViewItemModel>();
+            int count = 0;
 
-            Dictionary<Type, SPNode> nodeDictionary = GetNodeDictionary();
-
-            IEnumerable collection = (IEnumerable)this.SPObject;
-            foreach (object instance in collection)
+            if (_pointer == null)
             {
-                Type instanceType = instance.GetType();
+                this.Children.Clear();
+                totalCount = 0;
+                IEnumerable collection = (IEnumerable)this.SPObject;
+                _pointer = collection.GetEnumerator();
+                _pointer.Reset();
+                moveNext = _pointer.MoveNext();
+            }
+
+            while (count <= batchCount && moveNext)
+            {
+
+                Type instanceType = this.Pointer.Current.GetType();
                 SPNode node = null;
 
-                if (nodeDictionary.ContainsKey(instanceType))
+                if (this.NodeDictionary.ContainsKey(instanceType))
                 {
-                    node = nodeDictionary[instanceType];
+                    node = this.NodeDictionary[instanceType];
                 }
                 else
                 {
@@ -99,23 +122,53 @@ namespace SPM2.SharePoint.Model
                 {
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     node = node.Clone();
-                    node.SPObject = instance;
+                    node.SPObject = this.Pointer.Current;
                     node.Setup(this.SPObject);
-                    children.Add(node);
+                    list.Add(node);
                 }
 
+                moveNext = this.Pointer.MoveNext();
+                count++;
+                totalCount++;
             }
 
-            var orderedList = from p in children.Cast<ITreeViewItemModel>()
-                                orderby p.Text
-                                select p;
-
-            foreach (ITreeViewItemModel item in orderedList)
+            // If there is more nodes in the collection, add a "More" item.
+            if (count >= batchCount && moveNext)
             {
-                this.Children.Add(item);
+                MoreNode node = new MoreNode(this);
+                node.Setup(this.SPObject);
+                list.Add(node);
+            }
+
+            if (totalCount <= batchCount)
+            {
+                // There are a low number of nodes, therefore sort nodes by Text.
+                this.Children.AddRange(list.OrderBy(p => p.Text));
+            }
+            else
+            {
+                // Just add the elements without any sort, because of the high number of nodes.
+                this.Children.AddRange(list);
             }
         }
 
+
+        public void LoadNextBatch()
+        {
+            // Ensure that the last node is the "MoreNode".
+            int nodeIndex = this.Children.Count - 1;
+            ITreeViewItemModel node = this.Children[nodeIndex];
+
+
+            if (node is MoreNode)
+            {
+                // Remove the "MoreNode" from this.Children.
+                this.Children.RemoveAt(nodeIndex);
+
+                // Load the next batch!
+                this.LoadChildren();
+            }
+        }
 
     }
 }

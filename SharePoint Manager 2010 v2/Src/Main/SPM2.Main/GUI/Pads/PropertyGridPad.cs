@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Forms;
 using System.Collections;
 using System.ComponentModel.Composition;
 
@@ -19,6 +18,8 @@ using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.Windows;
+
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -57,7 +58,7 @@ namespace SPM2.Main.GUI.Pads
             this.Title = PROPERTY_GRID_NAME;
 
             this.IsActiveDocumentChanged += new EventHandler(PropertyGridPad_IsActiveDocumentChanged);
-            this.PGrid.propertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
+            this.PGrid.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
 
             this.Content = PGrid;
 
@@ -66,9 +67,9 @@ namespace SPM2.Main.GUI.Pads
             this.UpdateTimer.Tick += new EventHandler(updateTimer_Tick);
             //this.UpdateTimer.Start();
 
-            Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
-            Workbench.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
-            Workbench.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
+            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
+            Application.Current.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
         }
 
         //void PropertyGridPad_Closed(object sender, EventArgs e)
@@ -114,9 +115,9 @@ namespace SPM2.Main.GUI.Pads
             }
         }
 
-        void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
-        {
 
+        void propertyGrid_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
+        {
             Hashtable propertyItems = null;
             if (!ChangedPropertyItems.ContainsKey(this.SelectedObject))
             {

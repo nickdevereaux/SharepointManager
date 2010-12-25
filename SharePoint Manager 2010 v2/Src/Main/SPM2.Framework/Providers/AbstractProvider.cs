@@ -38,23 +38,35 @@ namespace SPM2.Framework
         {
             I result = default(I);
 
-            ProviderAttribute attribute = GetProviderAttribute();
+            //ProviderAttribute attribute = GetProviderAttribute();
 
-            ProviderElement element = SPM2Configuration.Current.Providers[attribute.ProviderType];
+            //ProviderElement element = SPM2Configuration.Current.Providers[attribute.ProviderType];
 
-            if (element != null)
-            {
-                result = element.CreateInstance<I>();
-            }
+            //if (element != null)
+            //{
+            //    result = element.CreateInstance<I>();
+            //}
 
-            if (result == null)
-            {
-                Type defaultType = Type.GetType(attribute.DefaultType);
-                result = (I)Activator.CreateInstance(defaultType);
-            }
+            //if (result == null)
+            //{
+            //    Type defaultType = Type.GetType(attribute.DefaultType);
+            //    result = (I)Activator.CreateInstance(defaultType);
+            //}
+
+            //if (result != null)
+            //{
+            //    //result.Initialize();
+            //}
+            result = (I)Activator.CreateInstance<I>();
+
 
             return result;
         }
+
+        //protected virtual void Initialize()
+        //{
+
+        //}
 
 
         private static ProviderAttribute GetProviderAttribute()

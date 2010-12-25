@@ -85,7 +85,10 @@ namespace SPM2.SharePoint.Model
                         }
                     }
 
-                    PropertyGridTypeConverter.AddTo(this.SPObjectType);
+                    if (_spObjectType != null)
+                    {
+                        PropertyGridTypeConverter.AddTo(_spObjectType);
+                    }
                 }
                 return _spObjectType;
             }
@@ -329,8 +332,6 @@ namespace SPM2.SharePoint.Model
 
         private IEnumerable<ITreeViewItemModel> LoadUnorderedChildren()
         {
-            var nodes = CompositionProvider.GetExports<SPNode>(this.Descriptor.ClassType);
-
             PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
             foreach (PropertyDescriptor info in propertyDescriptors)
             {

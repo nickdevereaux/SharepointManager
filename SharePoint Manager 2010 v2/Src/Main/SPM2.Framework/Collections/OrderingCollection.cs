@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace SPM2.Framework.Collections
 {

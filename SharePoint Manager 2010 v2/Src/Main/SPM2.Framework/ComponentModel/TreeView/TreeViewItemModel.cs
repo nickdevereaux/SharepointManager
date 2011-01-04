@@ -216,18 +216,18 @@ namespace SPM2.Framework
         }
 
 
-        private ObservableCollectionXML<ITreeViewItemModel> _children = null;
+        private ObservableCollection<ITreeViewItemModel> _children = null;
         /// <summary>
         /// Returns the logical child items of this object.
         /// </summary>
         [Browsable(false)]
-        public ObservableCollectionXML<ITreeViewItemModel> Children
+        public ObservableCollection<ITreeViewItemModel> Children
         {
             get
             {
                 if (_children == null)
                 {
-                    _children = new ObservableCollectionXML<ITreeViewItemModel>();
+                    _children = new ObservableCollection<ITreeViewItemModel>();
                     if (this.LazyLoadChildren)
                     {
                         _children.Add(DummyChild);

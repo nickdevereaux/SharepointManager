@@ -29,7 +29,7 @@
                   Grid.Column="1" ResizeBehavior="PreviousAndNext"
                   Width="5" Background="#FFBCBCBC"/>
 
-        <my:WPFTreeView x:Name="TreeView" Grid.Column="0" />
+        <my:WPFTreeView x:Name="TreeView" Grid.Column="0" DataContext="{Binding Path=Root}" />
         <my:PropertyGridControl  x:Name="GridControl" Grid.Column="2" />
         
         <DockPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="10">

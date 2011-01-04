@@ -2,31 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using System.Diagnostics;
 using SPM2.Framework.Xml;
-
 
 namespace SPM2.Framework.Collections
 {
-    /// <summary>
-    /// An extended version of ObservableCollection that supports serializing with Interfaces.
-    /// </summary>
-    /// <typeparam name="T">Can be any type or interface</typeparam>
-    public class ObservableCollectionXML<T> : ObservableCollection<T>, IXmlSerializable
+    public class SerializableList<T> : List<T>, IXmlSerializable
     {
-
-        public ObservableCollectionXML() : 
+        public SerializableList() :
             base()
         {
         }
 
-        public ObservableCollectionXML(IEnumerable<T> collection) : 
+        public SerializableList(IEnumerable<T> collection) :
             base(collection)
         {
         }
 
-        public ObservableCollectionXML(List<T> list) : 
+        public SerializableList(List<T> list) :
             base(list)
         {
         }
@@ -44,7 +38,7 @@ namespace SPM2.Framework.Collections
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            Serializer.CollectionToXml<T>(writer, this);   
+            Serializer.CollectionToXml<T>(writer, this);
         }
     }
 }

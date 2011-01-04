@@ -15,6 +15,7 @@ using System.ComponentModel.Composition;
 using SPM2.Framework.ComponentModel;
 using System.Windows.Threading;
 using System.Threading;
+using SPM2.Framework.Configuration;
 
 namespace SPM2.Framework.WPF.Windows
 {
@@ -27,7 +28,7 @@ namespace SPM2.Framework.WPF.Windows
         public SettingsDialog()
         {
             InitializeComponent();
-            this.TreeView.DataContext = SettingsProvider.Current;
+
             this.TreeView.Explorer.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
 
             this.BtnOK.Click += new RoutedEventHandler(BtnOK_Click);
@@ -53,13 +54,13 @@ namespace SPM2.Framework.WPF.Windows
 
         void Explorer_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            object selected = this.TreeView.Explorer.SelectedItem;
+            SettingsModel selected = this.TreeView.Explorer.SelectedItem as SettingsModel;
 
-            if (this.GridControl.propertyGrid.SelectedObject != selected)
+            if (this.GridControl.propertyGrid.SelectedObject != selected.SettingsObject)
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
                 {
-                    this.GridControl.propertyGrid.SelectedObject = selected;
+                    this.GridControl.propertyGrid.SelectedObject = selected.SettingsObject;
                 }));
             }
         }

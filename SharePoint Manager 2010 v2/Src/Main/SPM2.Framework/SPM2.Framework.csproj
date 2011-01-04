@@ -72,27 +72,32 @@
     <Compile Include="Collections\IOrderMetadata.cs" />
     <Compile Include="Collections\ObservableCollectionXML.cs" />
     <Compile Include="Collections\OrderingCollection.cs" />
+    <Compile Include="Collections\SerializableList.cs" />
+    <Compile Include="Collections\ThreadSafeDictionary.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\IContextMenuItem.cs" />
+    <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />
     <Compile Include="ComponentModel\TreeView\DummyChild.cs" />
     <Compile Include="ComponentModel\TreeView\ExportToSettingsAttribute.cs" />
     <Compile Include="ComponentModel\TreeView\ISettingsModel.cs" />
-    <Compile Include="ComponentModel\TreeView\SettingsCurrentModel.cs" />
+    <Compile Include="Configuration\Settings.cs" />
     <Compile Include="ComponentModel\TreeView\SettingsModel.cs" />
-    <Compile Include="ComponentModel\TreeView\SettingsProvider.cs" />
+    <Compile Include="Configuration\SettingsProvider.cs" />
     <Compile Include="ComponentModel\TypeNames.cs" />
     <Compile Include="ComponentModel\TreeView\ITreeViewItemModel.cs" />
     <Compile Include="ComponentModel\TreeView\TreeViewItemModel.cs" />
     <Compile Include="ComponentModel\TreeView\ITreeViewModel.cs" />
     <Compile Include="ComponentModel\TreeView\TreeViewModel.cs" />
+    <Compile Include="Configuration\SettingsRoot.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
+    <Compile Include="Extensions\HashAlgorithmExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
@@ -130,6 +135,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\EnumDescConverter.cs" />
     <Compile Include="Xml\Serializer.cs" />
+    <Compile Include="Xml\XmlAttributeOverridesExtensions.cs" />
+    <Compile Include="Xml\XmlAttributeOverridesFactory.cs" />
+    <Compile Include="Xml\XmlAttributesEntensions.cs" />
+    <Compile Include="Xml\XmlSerializerFactoryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SPM2.snk" />

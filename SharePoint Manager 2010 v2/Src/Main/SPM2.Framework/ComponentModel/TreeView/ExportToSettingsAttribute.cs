@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.Composition;
+using SPM2.Framework.Configuration;
 
 namespace SPM2.Framework.ComponentModel
 {
@@ -15,19 +16,19 @@ namespace SPM2.Framework.ComponentModel
         /// Exports the class to the SettingsRoot.
         /// </summary>
         public ExportToSettingsAttribute()
-            : base(AttributedModelServices.GetContractName(typeof(SettingsProvider)), typeof(ISettingsModel))
+            : base(AttributedModelServices.GetContractName(typeof(SettingsRoot)), typeof(ISettings))
         {
 
         }
 
         public ExportToSettingsAttribute(string contractName)
-            : base(contractName, typeof(ISettingsModel))
+            : base(contractName, typeof(ISettings))
         {
 
         }
 
         public ExportToSettingsAttribute(Type contractType)
-            : base(AttributedModelServices.GetContractName(contractType), typeof(ISettingsModel))
+            : base(AttributedModelServices.GetContractName(contractType), typeof(ISettings))
         {
 
         }

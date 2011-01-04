@@ -6,11 +6,12 @@ using System.ComponentModel;
 using SPM2.Framework.Collections;
 using System.IO;
 using System.Xml.Serialization;
+using SPM2.Framework.Configuration;
 
 namespace SPM2.Framework.ComponentModel
 {
     [Serializable()]
-    public class SettingsModel : TreeViewItemModel, ISettingsModel
+    public class SettingsModel : TreeViewItemModel
     {
 
         [Browsable(false)]
@@ -65,24 +66,24 @@ namespace SPM2.Framework.ComponentModel
             }
         }
 
-        private OrderingCollection<ISettingsModel> _importedNodes = null;
-        [Browsable(false)]
-        [XmlIgnore]
-        public OrderingCollection<ISettingsModel> ImportedNodes
-        {
-            get
-            {
-                if (_importedNodes == null)
-                {
-                    _importedNodes = CompositionProvider.GetOrderedExports<ISettingsModel>(this.Descriptor.ClassType);
-                }
-                return _importedNodes;
-            }
-            set
-            {
-                _importedNodes = value;
-            }
-        }
+        //private OrderingCollection<ISettings> _importedNodes = null;
+        //[Browsable(false)]
+        //[XmlIgnore]
+        //public OrderingCollection<ISettings> ImportedNodes
+        //{
+        //    get
+        //    {
+        //        if (_importedNodes == null)
+        //        {
+        //            _importedNodes = CompositionProvider.GetOrderedExports<ISettings>(this.Descriptor.ClassType);
+        //        }
+        //        return _importedNodes;
+        //    }
+        //    set
+        //    {
+        //        _importedNodes = value;
+        //    }
+        //}
 
 
         private string _iconUri = null;
@@ -107,6 +108,9 @@ namespace SPM2.Framework.ComponentModel
             }
         }
 
+        [XmlIgnore]
+        public ISettings SettingsObject { get; set; }
+
 
         public SettingsModel() : base()
         {
@@ -118,9 +122,16 @@ namespace SPM2.Framework.ComponentModel
         {
             this.Children.Clear();
 
-            foreach (var item in this.ImportedNodes)
+            foreach (ISettings item in this.SettingsObject.Children.AsSafeEnumable())
 	        {
-                this.Children.Add(item.Value);
+                SettingsModel modelItem = new SettingsModel();
+                //modelItem.Parent = this;
+                modelItem.SettingsObject = item;
+                ClassDescriptor descriptor = new ClassDescriptor(item.GetType());
+                modelItem.Text = descriptor.Title;
+                modelItem.ToolTipText = descriptor.Description;
+                
+                this.Children.Add(modelItem);
 	        }
         }
 

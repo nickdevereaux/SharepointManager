@@ -63,6 +63,8 @@ namespace SPM2.Main.ViewModel
 
         public AppModel()
         {
+            Application.Current.MainWindow = this.MainWindow;
+
         }
 
 

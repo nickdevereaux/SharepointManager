@@ -24,6 +24,7 @@ using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using System.ComponentModel.Composition;
 using System.Windows;
+using SPM2.Framework.Xml;
 
 namespace SPM2.Main.GUI.Pads
 {

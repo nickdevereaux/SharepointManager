@@ -6,13 +6,14 @@ using SPM2.Framework.ComponentModel;
 using System.ComponentModel;
 using SPM2.Framework;
 using System.Xml.Serialization;
+using SPM2.Framework.Configuration;
 
 namespace SPM2.SharePoint.Model
 {
     [Title("SharePoint Explorer")]
     //[XmlType(TypeName = AddInID)]
     [ExportToSettings()]
-    public class SPExplorerSettings : SettingsCurrentModel<SPExplorerSettings>, ISettingsModel
+    public class SPExplorerSettings : Settings<SPExplorerSettings>
     {
         
         public const string AddInID = "SPM2.SharePoint.Model.SPExplorerSettings";

@@ -411,6 +411,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ICSharpCode.AvalonEdit.snk" />
     <None Include="Migrated rules for ICSharpCode.AvalonEdit.ruleset" />
   </ItemGroup>
   <ItemGroup>

@@ -11,15 +11,15 @@ using SPM2.Framework.Configuration;
 namespace SPM2.Framework.ComponentModel
 {
     [Serializable()]
-    public class SettingsModel : TreeViewItemModel
+    public class SettingsModel : ItemNode
     {
 
         [Browsable(false)]
-        public override string Text
+        public override object Text
         {
             get
             {
-                if (String.IsNullOrEmpty(base.Text))
+                if (String.IsNullOrEmpty(base.Text+string.Empty))
                 {
                     base.Text = this.Descriptor.Title;
                 }
@@ -103,7 +103,7 @@ namespace SPM2.Framework.ComponentModel
                 if (_iconUri != value)
                 {
                     _iconUri = value;
-                    this.OnPropertyChanged("IconUri");
+                    this.RaisePropertyChanged("IconUri");
                 }
             }
         }

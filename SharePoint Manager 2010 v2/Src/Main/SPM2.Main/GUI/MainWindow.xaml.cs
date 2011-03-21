@@ -27,6 +27,7 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.SharePoint.Model;
 using System.ComponentModel.Composition;
 using SPM2.Main.ViewModel;
+using SPM2.SharePoint;
 
 namespace SPM2.Main
 {
@@ -49,12 +50,14 @@ namespace SPM2.Main
             InitializeComponent();
             Build();
             CommandBinding();
-
         }
 
         protected override void OnInitialized(System.EventArgs e)
         {
             base.OnInitialized(e);
+
+            Uri iconUri = new Uri(SharePointContext.GetImagePath("admintitlegraphic.gif"), UriKind.Absolute);
+            this.Icon = BitmapFrame.Create(iconUri);
 
             MainWindowModel model = (MainWindowModel)this.Resources["Model"];
 

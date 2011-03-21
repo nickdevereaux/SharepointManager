@@ -31,44 +31,14 @@ namespace SPM2.Main
         public App()
         {
             timerWatch.Start();
-
+            
             this.model = new AppModel();
-
-            this.DispatcherUnhandledException += new System.Windows.Threading.DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
         }
 
 
         void Start(object sender, StartupEventArgs e)
         {
-            SPM2.Main.GUI.SplashScreen splash = new SPM2.Main.GUI.SplashScreen(new AsynchronousLoadDelegate(this.AsynchronousLoadHandler));
-            splash.Closing += new System.ComponentModel.CancelEventHandler(splash_Closing);
-            this.ShowWindow(splash);
-        }
-
-
-        void splash_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // Ensure to load the object model
-            Window win = this.model.MainWindow;
-
-            //Create the main window on the UI thread.
-            this.ShowWindow(win);
-
-            timerWatch.Stop();
-            Trace.WriteLine("Load of application: " + timerWatch.ElapsedMilliseconds + " milliseconds");
-        }
-
-
-        private void AsynchronousLoadHandler(SPM2.Main.GUI.SplashScreen splashWindow)
-        {
-            // Preload the assemlies in the async method
-            CompositionProvider.LoadAssemblies();
-
-            // Load Validators
-
-
-
-
+            this.ShowWindow(this.model.MainWindow);
         }
 
 

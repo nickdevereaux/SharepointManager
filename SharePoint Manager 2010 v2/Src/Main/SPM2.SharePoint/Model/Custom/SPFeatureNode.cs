@@ -78,7 +78,7 @@ namespace SPM2.SharePoint.Model
                 {
                     this._activated = value;
                     UpdateIconUri();
-                    this.OnPropertyChanged("Activated");
+                    this.RaisePropertyChanged("Activated");
                 }
             }
         }

@@ -41,8 +41,7 @@ namespace SPM2.Main.Commands.ContextMenu
 
         public void Execute()
         {
-            // Repload from Site or Farm
-
+            this.CurrentNode.ResetChildren(true);
         }
 
     }

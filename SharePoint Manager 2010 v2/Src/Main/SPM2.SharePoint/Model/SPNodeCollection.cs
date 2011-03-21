@@ -12,6 +12,7 @@ using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.Reflection;
 using Microsoft.SharePoint.Administration;
+using ICSharpCode.TreeView;
 
 
 namespace SPM2.SharePoint.Model
@@ -87,7 +88,7 @@ namespace SPM2.SharePoint.Model
 
             int batchCount = SPExplorerSettings.Current.BatchNodeLoad;
 
-            List<ITreeViewItemModel> list = new List<ITreeViewItemModel>();
+            List<SharpTreeNode> list = new List<SharpTreeNode>();
             int count = 0;
 
             if (_pointer == null)
@@ -96,7 +97,7 @@ namespace SPM2.SharePoint.Model
                 totalCount = 0;
                 IEnumerable collection = (IEnumerable)this.SPObject;
                 _pointer = collection.GetEnumerator();
-                _pointer.Reset();
+                //_pointer.Reset();
                 moveNext = _pointer.MoveNext();
             }
 
@@ -157,7 +158,7 @@ namespace SPM2.SharePoint.Model
         {
             // Ensure that the last node is the "MoreNode".
             int nodeIndex = this.Children.Count - 1;
-            ITreeViewItemModel node = this.Children[nodeIndex];
+            SharpTreeNode node = this.Children[nodeIndex];
 
 
             if (node is MoreNode)

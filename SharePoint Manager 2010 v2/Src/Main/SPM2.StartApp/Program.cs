@@ -18,6 +18,7 @@ namespace SPM2.StartApp
             using (ApplicationStarter appStarter = new ApplicationStarter())
             {
                 appStarter.OpenDebugWindow();
+                appStarter.OpenSplashScreen();
                 appStarter.Initialize();
                 appStarter.ParseCommandline(args);
                 appStarter.Execute(args);

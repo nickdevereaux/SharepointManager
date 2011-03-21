@@ -13,6 +13,9 @@ namespace SPM2.SharePoint.Validation
 
         public SPFInstalledValidator(String id) : base(id)
         {
+            this.QuestionString = "The application needs to run on a frontend server with SharePoint Foundation installed";
+            this.SuccessString = "Microsoft SharePoint Foundation found";
+            this.ErrorString = "Microsoft SharePoint Foundation missing";
         }
 
         protected override ValidationResult Validate()

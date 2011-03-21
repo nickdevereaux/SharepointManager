@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SPM2.Framework.ComponentModel
 {
-    public interface ISettingsModel : ITreeViewItemModel
+    public interface ISettingsModel : IItemNode
     {
     }
 }

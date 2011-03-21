@@ -6,8 +6,7 @@
         mc:Ignorable="d"
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
         xmlns:vm="clr-namespace:SPM2.Main.ViewModel"
-        Title="MainWindow" Height="568" Width="1000"
-        >
+        Title="SharePoint Manager 2010 v2" Height="568" Width="1000">
     <Window.Resources>
         <vm:MainWindowModel x:Key="Model" d:IsDataSource="True" />
     </Window.Resources>

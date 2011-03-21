@@ -31,5 +31,13 @@ namespace SPM2.Framework.WPF
             Uri iconUri = new Uri(uri, UriKind.Relative);
             return BitmapFrame.Create(iconUri);
         }
+
+        //public static Image LoadIcon(string name, string folder)
+        //{
+        //    var frame = BitmapFrame.Create(new Uri("pack://application:,,,/Images/" + name, UriKind.Absolute));
+        //    Image result = new Image();
+        //    result.Source = frame;
+        //    return result;
+        //}
     }
 }

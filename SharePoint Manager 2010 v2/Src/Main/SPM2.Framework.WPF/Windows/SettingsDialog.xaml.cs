@@ -29,7 +29,7 @@ namespace SPM2.Framework.WPF.Windows
         {
             InitializeComponent();
 
-            this.TreeView.Explorer.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
+            //this.TreeView.Explorer.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
 
             this.BtnOK.Click += new RoutedEventHandler(BtnOK_Click);
             this.BtnCancel.Click += new RoutedEventHandler(BtnCancel_Click);
@@ -52,18 +52,18 @@ namespace SPM2.Framework.WPF.Windows
         }
 
 
-        void Explorer_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            SettingsModel selected = this.TreeView.Explorer.SelectedItem as SettingsModel;
+        //void Explorer_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        //{
+        //    SettingsModel selected = this.TreeView.Explorer.SelectedItem as SettingsModel;
 
-            if (this.GridControl.propertyGrid.SelectedObject != selected.SettingsObject)
-            {
-                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
-                {
-                    this.GridControl.propertyGrid.SelectedObject = selected.SettingsObject;
-                }));
-            }
-        }
+        //    if (this.GridControl.propertyGrid.SelectedObject != selected.SettingsObject)
+        //    {
+        //        Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
+        //        {
+        //            this.GridControl.propertyGrid.SelectedObject = selected.SettingsObject;
+        //        }));
+        //    }
+        //}
 
         /// <summary>
         /// Constructor that takes a parent for this SettingsDialog dialog.

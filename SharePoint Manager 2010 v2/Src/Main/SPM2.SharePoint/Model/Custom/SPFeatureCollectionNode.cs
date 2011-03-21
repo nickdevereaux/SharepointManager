@@ -11,6 +11,7 @@ using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.ComponentModel;
 using System.Collections.Generic;
+using ICSharpCode.TreeView;
 
 namespace SPM2.SharePoint.Model
 {
@@ -36,7 +37,7 @@ namespace SPM2.SharePoint.Model
 
 
             // Unordered List
-            List<ITreeViewItemModel> unorderedList = new List<ITreeViewItemModel>();
+            List<SharpTreeNode> unorderedList = new List<SharpTreeNode>();
 
             foreach (var def in definitions)
             {

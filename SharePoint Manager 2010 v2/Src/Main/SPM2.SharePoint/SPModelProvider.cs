@@ -78,8 +78,6 @@ namespace SPM2.SharePoint
                 node.IsSelected = node.IsDefaultSelected();
 
                 ExpandNode(node.NodesToExpand());
-
-                
             }
         }
     }

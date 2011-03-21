@@ -83,9 +83,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="WpfApplication1">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Projects\Test\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\About.cs" />
@@ -103,18 +100,14 @@
     <Compile Include="ComponentModel\StringEditor.cs" />
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Pads\BrowserPad.cs" />
+    <Compile Include="GUI\Pads\SPTreeViewPad.cs" />
     <Compile Include="GUI\Pads\EditorPad.cs" />
     <Compile Include="GUI\Pads\PropertyGridPad.cs" />
-    <Compile Include="GUI\Pads\SPModelExporerPad.cs" />
     <Compile Include="GUI\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\AppModel.cs" />
     <Compile Include="ViewModel\MainWindowModel.cs" />
-    <Compile Include="ViewModel\SplashScreenModel.cs" />
     <Compile Include="WindowsManager.cs" />
     <Compile Include="Properties\WPFAssemblyInfo.cs" />
     <Page Include="GUI\App.xaml">
@@ -135,10 +128,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\SplashScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -155,6 +144,10 @@
     <ProjectReference Include="..\..\Libraries\AvalonEdit\AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
+      <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>
+      <Name>ICSharpCode.TreeView</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>

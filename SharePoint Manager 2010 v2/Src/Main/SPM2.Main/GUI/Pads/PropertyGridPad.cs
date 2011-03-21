@@ -19,6 +19,7 @@ using SPM2.SharePoint.Model;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows;
+using System.Threading;
 
 
 namespace SPM2.Main.GUI.Pads
@@ -48,7 +49,7 @@ namespace SPM2.Main.GUI.Pads
         /// </summary>
         //private DateTime SelectedObjectTimeStamp { get; set; }
 
-        private DispatcherTimer UpdateTimer { get;set;}
+        //private DispatcherTimer UpdateTimer { get;set;}
 
 
         protected override void OnInitialized(EventArgs e)
@@ -62,10 +63,12 @@ namespace SPM2.Main.GUI.Pads
 
             this.Content = PGrid;
 
-            this.UpdateTimer = new DispatcherTimer();
-            this.UpdateTimer.Interval = TimeSpan.FromMilliseconds(100);
-            this.UpdateTimer.Tick += new EventHandler(updateTimer_Tick);
+            //this.UpdateTimer = new DispatcherTimer();
+            //this.UpdateTimer.Interval = TimeSpan.FromMilliseconds(100);
+            //this.UpdateTimer.Tick += new EventHandler(updateTimer_Tick);
             //this.UpdateTimer.Start();
+
+            
 
             Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
             Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
@@ -88,16 +91,19 @@ namespace SPM2.Main.GUI.Pads
         {
         }
 
+        DispatcherOperation operation = null;
+
         void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.PreviousSelectedObject = this.SelectedObject;
             this.SelectedObject = e.Parameter;
 
-            if (!this.UpdateTimer.IsEnabled)
-            {
-                SetObject();
-                this.UpdateTimer.Start();
-            }
+            InvokeSetObject();
+            //if (!this.UpdateTimer.IsEnabled)
+            //{
+            //    Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
+            //    this.UpdateTimer.Start();
+            //}
         }
 
 
@@ -138,20 +144,30 @@ namespace SPM2.Main.GUI.Pads
             SetObject();
         }
 
-        void updateTimer_Tick(object sender, EventArgs e)
+        //void updateTimer_Tick(object sender, EventArgs e)
+        //{
+        //    if (this.IsWindowVisible)
+        //    {
+        //        if (this.SelectedObject != null && this.SelectedObject == this.PreviousSelectedObject)
+        //        {
+        //            SetObject();
+        //            this.UpdateTimer.Stop();
+        //        }
+        //        else
+        //        {
+        //            this.PreviousSelectedObject = this.SelectedObject;
+        //        }
+        //    }
+        //}
+
+        private void InvokeSetObject()
         {
-            if (this.IsWindowVisible)
+            if (operation == null || operation.Status == DispatcherOperationStatus.Completed || operation.Status == DispatcherOperationStatus.Aborted)
             {
-                if (this.SelectedObject != null && this.SelectedObject == this.PreviousSelectedObject)
-                {
-                    SetObject();
-                    this.UpdateTimer.Stop();
-                }
-                else
-                {
-                    this.PreviousSelectedObject = this.SelectedObject;
-                }
+                operation = Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
             }
+
+            
         }
 
         private void SetObject()
@@ -164,9 +180,13 @@ namespace SPM2.Main.GUI.Pads
 #if DEBUG
                     Stopwatch watch = new Stopwatch();
                     watch.Start();
-#endif
+#endif  
+        
+                    Mouse.OverrideCursor = Cursors.Wait;
 
                     PGrid.propertyGrid.SelectedObject = node.SPObject;
+
+                    Mouse.OverrideCursor = Cursors.Arrow;
 
 #if DEBUG
                     watch.Stop();
@@ -176,5 +196,11 @@ namespace SPM2.Main.GUI.Pads
                 }
             }
         }
+
+        //private void SetPropertyGrid(System.Windows.Forms.PropertyGrid grid, object obj)
+        //{
+        //    grid.SelectedObject = obj;
+
+        //}
     }
 }

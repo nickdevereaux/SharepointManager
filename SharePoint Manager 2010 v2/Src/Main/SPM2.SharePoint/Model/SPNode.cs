@@ -17,12 +17,15 @@ using SPM2.Framework.Reflection;
 using SPM2.Framework.ComponentModel;
 using SPM2.SharePoint;
 using System.Collections.ObjectModel;
+using ICSharpCode.TreeView;
 
 
 namespace SPM2.SharePoint.Model
 {
-    public class SPNode : TreeViewItemModel, ISPNode
+    public class SPNode : ItemNode, ISPNode
     {
+        
+
         public virtual string SPTypeName { get; set; }
         public virtual string AddInID { get; set; }
         public virtual string Url { get; set; }
@@ -99,11 +102,11 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override string Text
+        public override object Text
         {
             get
             {
-                if (String.IsNullOrEmpty(base.Text))
+                if (String.IsNullOrEmpty(base.Text+string.Empty))
                 {
                     base.Text = this.Descriptor.GetTitle(this.SPObject);
                 }
@@ -132,7 +135,7 @@ namespace SPM2.SharePoint.Model
         }
 
         private string _iconUri = null;
-        public virtual string IconUri
+        public override string IconUri
         {
             get 
             {
@@ -166,11 +169,19 @@ namespace SPM2.SharePoint.Model
                 if (_iconUri != value)
                 {
                     _iconUri = value;
-                    this.OnPropertyChanged("IconUri");
+                    this.RaisePropertyChanged("IconUri");
                 }
             }
         }
 
+
+        //public override object Icon
+        //{
+        //    get
+        //    {
+        //        return ImageExtensions;
+        //    }
+        //}
 
         private IEnumerable<Lazy<SPNode>> _importedNodes = null;
         public IEnumerable<Lazy<SPNode>> ImportedNodes
@@ -222,7 +233,7 @@ namespace SPM2.SharePoint.Model
 #if DEBUG
                 Trace.Fail(ex.Message, ex.StackTrace);
 #else
-                Trace.Fail(ex.Massage);
+                Trace.Fail(ex.Message);
 #endif
 
                 throw ex; 
@@ -319,8 +330,8 @@ namespace SPM2.SharePoint.Model
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 #endif
-                
-                this.Children.AddRange(LoadUnorderedChildren().OrderBy(p => p.Text));
+
+                this.Children.AddRange(LoadUnorderedChildren().OrderBy(p => p.Text).OfType<SharpTreeNode>());
 
 #if DEBUG
                 watch.Stop();
@@ -330,7 +341,7 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        private IEnumerable<ITreeViewItemModel> LoadUnorderedChildren()
+        private IEnumerable<IItemNode> LoadUnorderedChildren()
         {
             PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
             foreach (PropertyDescriptor info in propertyDescriptors)
@@ -375,8 +386,6 @@ namespace SPM2.SharePoint.Model
             }
             return types;
         }
-
-
 
     }
 }

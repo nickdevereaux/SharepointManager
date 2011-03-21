@@ -22,7 +22,7 @@ namespace SPM2.SharePoint.Validation
             {
                 if (SPFarm.Local == null)
                 {
-                    ErrorString = "Insufficient rights to access configuration database.";
+                    this.ErrorString = "Insufficient rights to access configuration database.";
                     return ValidationResult.Error;
                 }
 
@@ -37,7 +37,8 @@ namespace SPM2.SharePoint.Validation
                                 var serviceController = new ServiceController("SPTimerV4", server.Name);
                                 if (serviceController.Status != ServiceControllerStatus.Running)
                                 {
-                                    Trace.WriteLine(String.Format("Microsoft SharePoint Foundation Timer is not running on {0}", server.Name));
+                                    this.ErrorString = String.Format("Microsoft SharePoint Foundation Timer is not running on {0}", server.Name);
+                                    Trace.WriteLine(this.ErrorString);
                                     return ValidationResult.Error;
                                 }
 
@@ -45,7 +46,7 @@ namespace SPM2.SharePoint.Validation
                             catch (UnauthorizedAccessException ex)
                             {
                                 Trace.Fail(ex.Message, ex.StackTrace);
-                                QuestionString = String.Format("Failed to access Microsoft SharePoint Foundation Timer on {0}.", server.Name);
+                                this.ErrorString = String.Format("Failed to access Microsoft SharePoint Foundation Timer on {0}.", server.Name);
                                 return ValidationResult.Inconclusive;
                             }
                         }
@@ -54,24 +55,6 @@ namespace SPM2.SharePoint.Validation
 
                 return ValidationResult.Success;
                 
-                //
-                // LFN 2009-06-21: Do not restart the time service anymore. First it does
-                // not always work with Windows Server 2008 where it seems a local 
-                // admin may not necessarily be allowed to start and stop the service.
-                // Secondly, the timer service has become more stable with WSS SP1 and SP2.
-                //
-                /*TimeSpan timeout = new TimeSpan(0, 0, 60);
-                ServiceController sc = new ServiceController("SPTimerV3");
-                if (sc.Status == ServiceControllerStatus.Running)
-                {
-                  sc.Stop();
-                  sc.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
-                }
-
-                sc.Start();
-                sc.WaitForStatus(ServiceControllerStatus.Running, timeout);
-
-                return SystemCheckResult.Success;*/
             }
             catch (System.ServiceProcess.TimeoutException ex)
             {

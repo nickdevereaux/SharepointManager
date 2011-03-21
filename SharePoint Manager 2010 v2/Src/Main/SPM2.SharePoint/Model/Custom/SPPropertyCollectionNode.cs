@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using ICSharpCode.TreeView;
 
 namespace SPM2.SharePoint.Model
 {
@@ -43,7 +44,7 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            List<ITreeViewItemModel> list = new List<ITreeViewItemModel>();
+            List<SharpTreeNode> list = new List<SharpTreeNode>();
 
             foreach (DictionaryEntry entry in this.AllProperties)
             {

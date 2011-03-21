@@ -76,19 +76,18 @@
     <Compile Include="Collections\ThreadSafeDictionary.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\IContextMenuItem.cs" />
+    <Compile Include="ComponentModel\TreeView\ItemNode.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />
-    <Compile Include="ComponentModel\TreeView\DummyChild.cs" />
     <Compile Include="ComponentModel\TreeView\ExportToSettingsAttribute.cs" />
     <Compile Include="ComponentModel\TreeView\ISettingsModel.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="ComponentModel\TreeView\SettingsModel.cs" />
     <Compile Include="Configuration\SettingsProvider.cs" />
     <Compile Include="ComponentModel\TypeNames.cs" />
-    <Compile Include="ComponentModel\TreeView\ITreeViewItemModel.cs" />
-    <Compile Include="ComponentModel\TreeView\TreeViewItemModel.cs" />
+    <Compile Include="ComponentModel\TreeView\IItemNode.cs" />
     <Compile Include="ComponentModel\TreeView\ITreeViewModel.cs" />
     <Compile Include="ComponentModel\TreeView\TreeViewModel.cs" />
     <Compile Include="Configuration\SettingsRoot.cs" />
@@ -144,6 +143,10 @@
     <None Include="SPM2.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
+      <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>
+      <Name>ICSharpCode.TreeView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>MEF35</Name>

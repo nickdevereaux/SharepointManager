@@ -16,6 +16,7 @@ namespace SPM2.SharePoint.Model
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Utilities;
     using SPM2.Framework;
+    using ICSharpCode.TreeView;
 
 
     [Title("PropertyBag")]
@@ -37,7 +38,7 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            List<ITreeViewItemModel> list = new List<ITreeViewItemModel>();
+            List<SharpTreeNode> list = new List<SharpTreeNode>();
 
             foreach (DictionaryEntry entry in this.PropertyBag)
             {

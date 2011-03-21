@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using SPM2.Framework.Window;
 using SPM2.Framework.ComponentModel;
 using SPM2.Main.ComponentModel;
+using System.Reflection;
 
 
 namespace SPM2.StartApp
@@ -35,6 +36,14 @@ namespace SPM2.StartApp
 
         }
 
+        public void OpenSplashScreen()
+        {
+            Assembly assem = Assembly.Load("SPM2.Main");
+            SplashScreen screen = new SplashScreen(assem, "Resources/Images/SplashScreen.png");
+            screen.Show(true);
+        }
+
+
         public void Initialize()
         {
             PropertyGridTypeConverter.AddEditor(typeof(string), typeof(StringEditor));
@@ -42,6 +51,8 @@ namespace SPM2.StartApp
             System.Windows.Forms.Integration.WindowsFormsHost.EnableWindowsFormsInterop();
             ComponentDispatcher.ThreadIdle -= ComponentDispatcher_ThreadIdle; // ensure we don't register twice
             ComponentDispatcher.ThreadIdle += ComponentDispatcher_ThreadIdle;
+
+            CompositionProvider.LoadAssemblies();
         }
 
         public void ParseCommandline(string[] args)

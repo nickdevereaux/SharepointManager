@@ -10,6 +10,9 @@ namespace SPM2.SharePoint.Validation
     {
         public AdminRightsValidator(String id) : base(id)
         {
+            this.QuestionString = "Please ensure to run the application with Administrator rights";
+            this.SuccessString = "The current user is administrator";
+            this.ErrorString = "The current user is not administrator";
         }
 
         protected override ValidationResult Validate()

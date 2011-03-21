@@ -6,7 +6,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-    public interface INode : ITreeViewItemModel
+    public interface INode : IItemNode
     {
         object GetSPObject();
         Type GetSPObjectType();

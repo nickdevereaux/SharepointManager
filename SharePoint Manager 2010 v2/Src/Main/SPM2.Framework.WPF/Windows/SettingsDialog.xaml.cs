@@ -29,11 +29,24 @@ namespace SPM2.Framework.WPF.Windows
         {
             InitializeComponent();
 
-            //this.TreeView.Explorer.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(Explorer_SelectedItemChanged);
+            this.TreeView.SelectionChanged += new SelectionChangedEventHandler(TreeView_SelectionChanged);
 
             this.BtnOK.Click += new RoutedEventHandler(BtnOK_Click);
             this.BtnCancel.Click += new RoutedEventHandler(BtnCancel_Click);
             
+        }
+
+        void TreeView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SettingsModel selected = this.TreeView.SelectedItem as SettingsModel;
+
+            if (this.GridControl.propertyGrid.SelectedObject != selected.SettingsObject)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
+                {
+                    this.GridControl.propertyGrid.SelectedObject = selected.SettingsObject;
+                }));
+            }
         }
 
         void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -51,19 +64,6 @@ namespace SPM2.Framework.WPF.Windows
             SettingsProvider.Current.Save();
         }
 
-
-        //void Explorer_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        //{
-        //    SettingsModel selected = this.TreeView.Explorer.SelectedItem as SettingsModel;
-
-        //    if (this.GridControl.propertyGrid.SelectedObject != selected.SettingsObject)
-        //    {
-        //        Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ThreadStart(() =>
-        //        {
-        //            this.GridControl.propertyGrid.SelectedObject = selected.SettingsObject;
-        //        }));
-        //    }
-        //}
 
         /// <summary>
         /// Constructor that takes a parent for this SettingsDialog dialog.

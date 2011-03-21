@@ -38,5 +38,4 @@ using System.Windows.Markup;
 
 
 [assembly: XmlnsPrefix("http://icsharpcode.net/sharpdevelop/treeview", "treeview")]
-
 [assembly: XmlnsDefinition("http://icsharpcode.net/sharpdevelop/treeview", "ICSharpCode.TreeView")]

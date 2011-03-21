@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:my="clr-namespace:SPM2.Framework.WPF.Components"
         xmlns:vm="clr-namespace:SPM2.Framework.WPF.Windows.ViewModel"
+        xmlns:sharp="http://icsharpcode.net/sharpdevelop/treeview"
         mc:Ignorable="d"
-        Title="Settings" Height="562" Width="671" 
-        >
+        Title="Settings">
     <Window.Resources>
         <vm:SettingsDialogModel x:Key="Model" d:IsDataSource="True" />
     </Window.Resources>
+        
     <Grid DataContext="{Binding Source={StaticResource ResourceKey=Model}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -25,17 +26,20 @@
 
         
         <GridSplitter HorizontalAlignment="Right" 
-                  VerticalAlignment="Stretch" 
-                  Grid.Column="1" ResizeBehavior="PreviousAndNext"
-                  Width="5" Background="#FFBCBCBC"/>
+                    VerticalAlignment="Stretch" 
+                    Grid.Column="1" ResizeBehavior="PreviousAndNext"
+                    Width="5" Background="#FFBCBCBC"/>
 
+        <sharp:SharpTreeView x:Name="TreeView" Grid.Column="0" Root="{Binding Path=Root}" />
         <!--<my:WPFTreeView x:Name="TreeView" Grid.Column="0" DataContext="{Binding Path=Root}" />-->
         <my:PropertyGridControl  x:Name="GridControl" Grid.Column="2" />
-        
-        <DockPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="10">
+
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="3" Height="40">
             <Button x:Name="BtnOK" Content="Ok" Width="100" Command="{Binding OKCommand}"  />
             <Button x:Name="BtnCancel" Content="Cancel" Width="100" HorizontalAlignment="Right" />
         </DockPanel>
 
     </Grid>
+        
+
 </Window>

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Windows.Threading;
+using System.Diagnostics;
+using System.Windows;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +11,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections;
 using System.ComponentModel.Composition;
+using System.Windows.Media;
 
 using AvalonDock;
 
@@ -16,10 +21,8 @@ using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
-using System.Windows.Threading;
-using System.Diagnostics;
-using System.Windows;
-using System.Threading;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 
 
 namespace SPM2.Main.GUI.Pads
@@ -34,14 +37,15 @@ namespace SPM2.Main.GUI.Pads
 
         public PropertyGridControl PGrid = new PropertyGridControl();
 
-        public Dictionary<object, Hashtable> ChangedPropertyItems = new Dictionary<object, Hashtable>();
-        public bool ValueChanged { get; set; }
+        //public Dictionary<object, Hashtable> ChangedPropertyItems = new Dictionary<object, Hashtable>();
 
-        private object SelectedObject { get; set; }
-        private bool GridUpdated { get; set; }
+        //public bool ValueChanged { get; set; }
+
+        //private object SelectedObject { get; set; }
+        //private bool GridUpdated { get; set; }
 
 
-        private object PreviousSelectedObject { get; set; }
+        //private object PreviousSelectedObject { get; set; }
         
         /// <summary>
         /// Save the time of the Object Selected event.
@@ -57,23 +61,65 @@ namespace SPM2.Main.GUI.Pads
             base.OnInitialized(e);
 
             this.Title = PROPERTY_GRID_NAME;
-
-            this.IsActiveDocumentChanged += new EventHandler(PropertyGridPad_IsActiveDocumentChanged);
-            this.PGrid.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(propertyGrid_PropertyValueChanged);
-
             this.Content = PGrid;
+            var window = this.FindAncestor<Window>();
 
-            //this.UpdateTimer = new DispatcherTimer();
-            //this.UpdateTimer.Interval = TimeSpan.FromMilliseconds(100);
-            //this.UpdateTimer.Tick += new EventHandler(updateTimer_Tick);
-            //this.UpdateTimer.Start();
+            //Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
+            Messenger.Default.Register<ISPNode>(this, window, (p) => PGrid.SetObject(p.SPObject));
 
-            
+            ExecuteMessage.Register(this, ApplicationCommands.Save, message => this.PGrid.Update());
+            CanExecuteMessage.Register(this, ApplicationCommands.Save, message => message.CanExecute(this.PGrid.ValueChanged));
 
-            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
-            Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
-            Application.Current.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
+            //Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, (sender, param) => param.Handled = true);
+            //Application.Current.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, (sender, param) => param.CanExecute = true);
         }
+
+
+
+
+        //void propertyGrid_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
+        //{
+        //    Hashtable propertyItems = null;
+        //    if (!ChangedPropertyItems.ContainsKey(this.SelectedObject))
+        //    {
+        //        propertyItems = new Hashtable();
+        //        ChangedPropertyItems[this.SelectedObject] = propertyItems;
+        //    }
+        //    else
+        //    {
+        //        propertyItems = ChangedPropertyItems[this.SelectedObject];
+        //    }
+        //    propertyItems[e.ChangedItem] = e;
+
+        //    ValueChanged = true;
+        //    CommandManager.InvalidateRequerySuggested();
+        //}        
+
+        //private void Command_Executed(RoutedUICommand p)
+        //{
+        //    if (p == ApplicationCommands.Save)
+        //    {
+        //        if (this.ValueChanged)
+        //        {
+        //            // Save the changes from the property grid on the object, is the object supports a "Update" method.
+        //            this.SelectedObject.InvokeMethod("Update");
+        //        }
+        //    }
+
+
+        //}
+
+        //void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        //{
+        //    e.CanExecute = this.ValueChanged;
+        //}
+
+
+        //private void SetPropertyGrid(System.Windows.Forms.PropertyGrid grid, object obj)
+        //{
+        //    grid.SelectedObject = obj;
+
+        //}
 
         //void PropertyGridPad_Closed(object sender, EventArgs e)
         //{
@@ -81,68 +127,40 @@ namespace SPM2.Main.GUI.Pads
         //    Workbench.MainWindow.CommandBindings.RemoveCommandExecutedHandler(ApplicationCommands.Save, Save_Executed);
         //    Workbench.MainWindow.CommandBindings.RemoveCommandCanExecuteHandler(ApplicationCommands.Save, Save_CanExecute);
         //}
-        
-
-        void PropertyGridPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-        }
-
-        void PropertyGridPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-        }
-
-        DispatcherOperation operation = null;
-
-        void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.PreviousSelectedObject = this.SelectedObject;
-            this.SelectedObject = e.Parameter;
-
-            InvokeSetObject();
-            //if (!this.UpdateTimer.IsEnabled)
-            //{
-            //    Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
-            //    this.UpdateTimer.Start();
-            //}
-        }
 
 
-        void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.ValueChanged;
-        }
+        //void PropertyGridPad_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //}
 
-        void Save_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (this.ValueChanged)
-            {
-                // Save the changes from the property grid on the object, is the object supports a "Update" method.
-                this.SelectedObject.InvokeMethod("Update");
-            }
-        }
+        //void PropertyGridPad_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //}
+
+        //DispatcherOperation operation = null;
+
+        //void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    this.PreviousSelectedObject = this.SelectedObject;
+        //    this.SelectedObject = e.Parameter;
+
+        //    //InvokeSetObject();
+        //    //if (!this.UpdateTimer.IsEnabled)
+        //    //{
+        //    //    Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
+        //    //    this.UpdateTimer.Start();
+        //    //}
+        //}
 
 
-        void propertyGrid_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
-        {
-            Hashtable propertyItems = null;
-            if (!ChangedPropertyItems.ContainsKey(this.SelectedObject))
-            {
-                propertyItems = new Hashtable();
-                ChangedPropertyItems[this.SelectedObject] = propertyItems;
-            }
-            else
-            {
-                propertyItems = ChangedPropertyItems[this.SelectedObject];
-            }
-            propertyItems[e.ChangedItem] = e;
 
-            ValueChanged = true;
-        }
 
-        void PropertyGridPad_IsActiveDocumentChanged(object sender, EventArgs e)
-        {
-            SetObject();
-        }
+
+
+        //void PropertyGridPad_IsActiveDocumentChanged(object sender, EventArgs e)
+        //{
+        //    SetObject();
+        //}
 
         //void updateTimer_Tick(object sender, EventArgs e)
         //{
@@ -160,47 +178,16 @@ namespace SPM2.Main.GUI.Pads
         //    }
         //}
 
-        private void InvokeSetObject()
-        {
-            if (operation == null || operation.Status == DispatcherOperationStatus.Completed || operation.Status == DispatcherOperationStatus.Aborted)
-            {
-                operation = Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
-            }
-
-            
-        }
-
-        private void SetObject()
-        {
-            if (this.IsWindowVisible)
-            {
-                ISPNode node = (ISPNode)this.SelectedObject;
-                if (node != null && PGrid.propertyGrid.SelectedObject != node.SPObject)
-                {
-#if DEBUG
-                    Stopwatch watch = new Stopwatch();
-                    watch.Start();
-#endif  
-        
-                    Mouse.OverrideCursor = Cursors.Wait;
-
-                    PGrid.propertyGrid.SelectedObject = node.SPObject;
-
-                    Mouse.OverrideCursor = Cursors.Arrow;
-
-#if DEBUG
-                    watch.Stop();
-                    Trace.WriteLine(String.Format("PropertyGrid load: Type:{0} - Time {1} milliseconds.", node.SPObjectType.Name, watch.ElapsedMilliseconds));
-#endif
-
-                }
-            }
-        }
-
-        //private void SetPropertyGrid(System.Windows.Forms.PropertyGrid grid, object obj)
+        //private void InvokeSetObject()
         //{
-        //    grid.SelectedObject = obj;
+        //    if (operation == null || operation.Status == DispatcherOperationStatus.Completed || operation.Status == DispatcherOperationStatus.Aborted)
+        //    {
+        //        operation = Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
+        //    }
+
 
         //}
+
+
     }
 }

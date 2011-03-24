@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 namespace ICSharpCode.TreeView
 {
     public interface ISharpTreeNode
@@ -25,7 +26,6 @@ namespace ICSharpCode.TreeView
         System.Collections.Generic.IEnumerable<SharpTreeNode> ExpandedDescendants();
         System.Collections.Generic.IEnumerable<SharpTreeNode> ExpandedDescendantsAndSelf();
         string ExpandedIconUri { get; }
-        System.Windows.Controls.ContextMenu GetContextMenu();
         string IconUri { get; set; }
         bool IsCheckable { get; }
         bool? IsChecked { get; set; }
@@ -40,6 +40,7 @@ namespace ICSharpCode.TreeView
         void LoadChildren();
         string LoadEditText();
         SharpTreeNode Parent { get; }
+        //ContextMenu ContextMenu { get; set; }
         void Paste(System.Windows.IDataObject data);
         void RaisePropertyChanged(string name);
         bool SaveEditText(string value);

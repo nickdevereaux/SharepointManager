@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 
-namespace SPM2.Framework.Window
+namespace SPM2.Framework
 {
     [SuppressUnmanagedCodeSecurity]
     public static class ConsoleManager

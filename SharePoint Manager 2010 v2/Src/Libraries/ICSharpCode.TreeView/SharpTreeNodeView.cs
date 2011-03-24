@@ -56,9 +56,23 @@ namespace ICSharpCode.TreeView
 		protected override void OnVisualParentChanged(DependencyObject oldParent)
 		{
 			base.OnVisualParentChanged(oldParent);
-			ParentItem = this.FindAncestor<SharpTreeViewItem>();
+            ParentItem = FindAncestor<SharpTreeViewItem>(this);
 			ParentItem.NodeView = this;
 		}
+
+        private T FindAncestor<T>(DependencyObject d) where T : class
+        {
+            return AncestorsAndSelf(d).OfType<T>().FirstOrDefault();
+        }
+
+        private IEnumerable<DependencyObject> AncestorsAndSelf(DependencyObject d)
+        {
+            while (d != null)
+            {
+                yield return d;
+                d = VisualTreeHelper.GetParent(d);
+            }
+        }
 
 		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 		{

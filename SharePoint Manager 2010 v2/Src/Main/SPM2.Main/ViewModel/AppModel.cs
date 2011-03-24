@@ -7,7 +7,6 @@ using SPM2.Framework.Collections;
 using SPM2.Framework;
 using System.Windows;
 using System.Reflection;
-using SPM2.Framework.Window;
 using System.Diagnostics;
 
 namespace SPM2.Main.ViewModel

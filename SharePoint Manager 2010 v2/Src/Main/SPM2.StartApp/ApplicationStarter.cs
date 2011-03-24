@@ -6,7 +6,6 @@ using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Threading;
-using SPM2.Framework.Window;
 using SPM2.Framework.ComponentModel;
 using SPM2.Main.ComponentModel;
 using System.Reflection;

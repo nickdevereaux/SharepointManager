@@ -175,15 +175,15 @@ namespace SPM2.Framework
         }
 
 
-        [Browsable(false)]
-        [XmlAttribute]
-        public string ContextMenuVisible
-        {
-            get 
-            { 
-                return (this.ContextMenuItems != null && this.ContextMenuItems.Count > 0) ? "Visible" : "Hidden"; 
-            }
-        }
+        //[Browsable(false)]
+        //[XmlAttribute]
+        //public string ContextMenuVisible
+        //{
+        //    get 
+        //    { 
+        //        return (this.ContextMenuItems != null && this.ContextMenuItems.Count > 0) ? "Visible" : "Hidden"; 
+        //    }
+        //}
 
         //private bool _lazyLoadChildren = true;
         //[Browsable(false)]

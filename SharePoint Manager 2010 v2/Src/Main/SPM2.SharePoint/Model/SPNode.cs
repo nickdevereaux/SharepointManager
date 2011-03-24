@@ -223,10 +223,17 @@ namespace SPM2.SharePoint.Model
         {
             this.SPParent = spParent;
 
+
+        }
+
+        public override IEnumerable<object> GetContextMenuItems()
+        {
+            List<object> result = new List<object>();
+
             try
             {
-                SetupContextMenu();
-
+                result.AddRange(LoadContextMenuNodes(typeof(SPNode)));
+                result.AddRange(LoadContextMenuNodes(this.GetType()));
             }
             catch (Exception ex)
             {
@@ -236,28 +243,23 @@ namespace SPM2.SharePoint.Model
                 Trace.Fail(ex.Message);
 #endif
 
-                throw ex; 
+                throw ex;
             }
+
+            return result;
         }
 
-        private void SetupContextMenu()
+        private IEnumerable<object> LoadContextMenuNodes(Type fromType)
         {
-            LoadContextMenuNodes(typeof(SPNode));
-            LoadContextMenuNodes(this.GetType());
-
-            
-        }
-
-
-        private void LoadContextMenuNodes(Type fromType)
-        {
+            List<object> result = new List<object>();
             OrderingCollection<IContextMenuItem> orderedItems = CompositionProvider.GetOrderedExports<IContextMenuItem>(fromType);
             foreach (var item in orderedItems)
             {
                 IContextMenuItem menuItem = item.Value;
                 menuItem.SetupItem(this);
-                this.ContextMenuItems.Add(item.Value);
+                result.Add(menuItem);
             }
+            return result;
         }
 
 

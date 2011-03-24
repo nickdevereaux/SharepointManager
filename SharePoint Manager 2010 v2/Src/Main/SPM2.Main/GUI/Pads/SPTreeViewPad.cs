@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.ComponentModel.Composition;
 using System.Windows;
 using ICSharpCode.TreeView;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace SPM2.Main.GUI.Pads
 {
@@ -40,7 +41,7 @@ namespace SPM2.Main.GUI.Pads
 
             Application.Current.MainWindow.ContentRendered += new EventHandler((s,e) => SelectItem());
 
-            wpfView.PreviewMouseLeftButtonDown += new MouseButtonEventHandler((s,e) => this.DoSelect = true);
+            wpfView.PreviewMouseDown += new MouseButtonEventHandler((s,e) => this.DoSelect = true);
             wpfView.PreviewStylusDown += new StylusDownEventHandler((s, e) => this.DoSelect = true);
             wpfView.PreviewKeyDown += new KeyEventHandler(wpfView_PreviewKeyDown);
             wpfView.SelectionChanged += new SelectionChangedEventHandler(wpfView_SelectionChanged);
@@ -90,7 +91,8 @@ namespace SPM2.Main.GUI.Pads
                 {
                     // Select the node in the Window
                     ISPNode node = item as ISPNode;
-                    SPM2Commands.ObjectSelected.Execute(node, null);
+                    Messenger.Default.Send<ISPNode>(node, this.FindAncestor<Window>());
+                    //SPM2Commands.ObjectSelected.Execute(node, null);
                 }
             }
         }

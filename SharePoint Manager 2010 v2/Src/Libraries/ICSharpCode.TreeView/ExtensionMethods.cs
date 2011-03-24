@@ -14,18 +14,18 @@ namespace ICSharpCode.TreeView
 {
 	public static class ExtensionMethods
 	{
-		public static T FindAncestor<T>(this DependencyObject d) where T : class
-		{
-			return AncestorsAndSelf(d).OfType<T>().FirstOrDefault();
-		}
+        //public static T FindAncestor<T>(this DependencyObject d) where T : class
+        //{
+        //    return AncestorsAndSelf(d).OfType<T>().FirstOrDefault();
+        //}
 
-		public static IEnumerable<DependencyObject> AncestorsAndSelf(this DependencyObject d)
-		{
-			while (d != null) {
-				yield return d;
-				d = VisualTreeHelper.GetParent(d);
-			}
-		}
+        //public static IEnumerable<DependencyObject> AncestorsAndSelf(this DependencyObject d)
+        //{
+        //    while (d != null) {
+        //        yield return d;
+        //        d = VisualTreeHelper.GetParent(d);
+        //    }
+        //}
 
 		public static void AddOnce(this IList list, object item)
 		{

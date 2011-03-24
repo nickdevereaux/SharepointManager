@@ -106,8 +106,14 @@ namespace ICSharpCode.TreeView
 
         public void FocusNode(SharpTreeNode node)
         {
-            var item = GetTreeViewItem(node);
-            item.Focus();
+            if (node != null)
+            {
+                var item = GetTreeViewItem(node);
+                if (item != null)
+                {
+                    item.Focus();
+                }
+            }
         }
 
         public SharpTreeViewItem GetTreeViewItem(SharpTreeNode node)

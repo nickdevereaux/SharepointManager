@@ -242,10 +242,12 @@ namespace SPM2.SharePoint.Model
 
         private void SetupContextMenu()
         {
-            this.ContextMenuItems = new ObservableCollection<IContextMenuItem>();
             LoadContextMenuNodes(typeof(SPNode));
             LoadContextMenuNodes(this.GetType());
+
+            
         }
+
 
         private void LoadContextMenuNodes(Type fromType)
         {
@@ -265,23 +267,6 @@ namespace SPM2.SharePoint.Model
             {
                 this.SPObject.InvokeMethod("Update", true);
             }
-        }
-
-        public virtual SPNode Clone()
-        {
-            SPNode result = (SPNode)Activator.CreateInstance(this.GetType());
-            //result.AddInID = this.AddInID;
-            //result.IconUri = this.IconUri;
-            //result.SPParent = this.SPParent;
-            //result.SPObject = this.SPObject;
-            //result.SPObjectType = this.SPObjectType;
-            //result.Descriptor = this.Descriptor;
-            //result.Text = this.Text;
-            //result.ToolTipText = this.ToolTipText;
-            //result.SPTypeName = this.SPTypeName;
-            //result.Url = this.Url;
-
-            return result;
         }
 
         public virtual object GetSPObject()
@@ -352,7 +337,7 @@ namespace SPM2.SharePoint.Model
                     SPNode node = this.NodeDictionary[info.PropertyType];
 
                     //Ensure that the child node instance is unique in the TreeView
-                    node = node.Clone();
+                    node = (SPNode)Activator.CreateInstance(node.GetType());
                     node.Text = info.DisplayName;
                     node.Setup(this.SPObject);
 

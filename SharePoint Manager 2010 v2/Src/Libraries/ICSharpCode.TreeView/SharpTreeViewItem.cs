@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace ICSharpCode.TreeView
 {
@@ -43,10 +44,34 @@ namespace ICSharpCode.TreeView
 					Node.IsEditing = false;
 					break;
 				case Key.Left:
-					Node.IsExpanded = false;
+                    if (Node.IsExpanded && Node.Children.Count > 0)
+                    {
+                        Node.IsExpanded = false;
+                    }
+                    else
+                    {
+                        if (Node.IsExpanded)
+                        {
+                            Node.IsExpanded = false;
+                        }
+                        if (this.Node.Parent != null)
+                        {
+                            this.ParentTreeView.FocusNode(this.Node.Parent);
+                        }
+                    }
 					break;
 				case Key.Right:
-					Node.IsExpanded = true;
+                    if (!Node.IsExpanded)
+                    {
+                        Node.IsExpanded = true;
+                    }
+                    else
+                    {
+                        if (this.Node.Children.Count > 0)
+                        {
+                            this.ParentTreeView.FocusNode(this.Node.Children[0]);
+                        }
+                    }
 					break;
 			}
 		}

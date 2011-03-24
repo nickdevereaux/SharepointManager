@@ -14,7 +14,6 @@ using SPM2.Framework.Reflection;
 using Microsoft.SharePoint.Administration;
 using ICSharpCode.TreeView;
 
-
 namespace SPM2.SharePoint.Model
 {
     public class SPNodeCollection : SPNode
@@ -122,7 +121,7 @@ namespace SPM2.SharePoint.Model
                 if (node != null)
                 {
                     // Always create a new node, because the object has to be unique for each item in the treeview.
-                    node = node.Clone();
+                    node = (SPNode)Activator.CreateInstance(node.GetType());
                     node.SPObject = this.Pointer.Current;
                     node.Setup(this.SPObject);
                     list.Add(node);

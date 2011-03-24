@@ -175,27 +175,6 @@ namespace SPM2.Framework
         }
 
 
-        private ObservableCollection<IContextMenuItem> _contextMenuItems = null;
-        [Browsable(false)]
-        [XmlIgnore]
-        public virtual ObservableCollection<IContextMenuItem> ContextMenuItems
-        {
-            get
-            {
-                //if (_contextMenuItems.Count == 0)
-                //{
-                //    MenuItem item = new MenuItem(DateTime.Now.ToString());
-                //    _contextMenuItems.Add(item);
-                //}
-                return _contextMenuItems;
-            }
-            set
-            {
-                _contextMenuItems = value;
-            }
-
-        }
-
         [Browsable(false)]
         [XmlAttribute]
         public string ContextMenuVisible
@@ -269,17 +248,64 @@ namespace SPM2.Framework
 
         public virtual void ResetChildren(bool lazy)
         {
+            ItemNode clone = this.Clone();
+            ReloadChildren(this, clone);
             this.Children.Clear();
-            this.LazyLoading = lazy;
-            if (this.LazyLoading)
+            foreach (var child in clone.Children)
             {
-                //this.Children.Add(DummyChild);
+                this.Children.Add(child);
             }
 
-            if (this.IsExpanded)
+            //this.LazyLoading = lazy;
+            //if (this.LazyLoading)
+            //{
+            //    //this.Children.Add(DummyChild);
+            //}
+
+            //if (this.IsExpanded)
+            //{
+            //    this.LoadChildren();
+            //}
+        }
+
+
+        public virtual ItemNode Clone()
+        {
+            ItemNode result = (ItemNode)Activator.CreateInstance(this.GetType());
+            foreach (var prop in this.GetType().GetProperties())
             {
-                this.LoadChildren();
+                if (prop.CanWrite && prop.CanRead)
+                {
+                    //object value = prop.GetValue(this, null);
+                    //if(value != null)
+                    //{
+                    //    prop.SetValue(result, value, null);
+                    //}
+                }
             }
+
+
+            return result;
+        }
+
+
+        private void ReloadChildren(ItemNode source, ItemNode target)
+        {
+            if (source.IsExpanded)
+            {
+                target.EnsureLazyChildren();
+                if (source.Children.Count == target.Children.Count)
+                {
+                    for (int i = 0; i < source.Children.Count; i++)
+                    {
+                        ItemNode childSource = source.Children[i] as ItemNode;
+                        ItemNode childTarget = target.Children[i] as ItemNode;
+                        ReloadChildren(childSource, childTarget);
+                    }
+                }
+            }
+
+            
         }
 
         //#region INotifyPropertyChanged Members

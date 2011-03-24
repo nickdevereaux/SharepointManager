@@ -102,7 +102,21 @@ namespace ICSharpCode.TreeView
 		public static readonly DependencyProperty ShowAlternationProperty =
 			DependencyProperty.RegisterAttached("ShowAlternation", typeof(bool), typeof(SharpTreeView),
 			new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
-						
+
+
+        public void FocusNode(SharpTreeNode node)
+        {
+            var item = GetTreeViewItem(node);
+            item.Focus();
+        }
+
+        public SharpTreeViewItem GetTreeViewItem(SharpTreeNode node)
+        {
+            int index = flattener.List.IndexOf(node);
+            var item = ItemContainerGenerator.ContainerFromIndex(index) as SharpTreeViewItem;
+            return item;
+        }
+
 		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(e);
@@ -112,6 +126,7 @@ namespace ICSharpCode.TreeView
 				Reload();
 			}
 		}
+
 
 		TreeFlattener flattener;
 
@@ -167,7 +182,7 @@ namespace ICSharpCode.TreeView
 			foreach (SharpTreeNode node in e.AddedItems) {
 				SharpTreeNode.SelectedNodes.AddOnce(node);
 			}
-
+            
 			if (IsKeyboardFocusWithin) {
 				foreach (SharpTreeNode node in e.RemovedItems) {
 					SharpTreeNode.ActiveNodes.Remove(node);

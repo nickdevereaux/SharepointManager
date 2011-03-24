@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace ICSharpCode.TreeView
 {
@@ -41,37 +42,64 @@ namespace ICSharpCode.TreeView
 			Children = new SharpTreeNodeCollection(this);
 		}
 
-		public SharpTreeNodeCollection Children { get; private set; }
+        [XmlIgnore]
+        public SharpTreeNodeCollection Children { get; private set; }
+
+        [XmlIgnore]
 		public SharpTreeNode Parent { get; internal set; }
 
-		public virtual object Text
+        [XmlIgnore]
+        public virtual object Text
 		{
 			get { return null; }
             set { }
 		}
 
+        [XmlIgnore]
         public virtual string IconUri
         {
 			get { return null; }
             set { }
 		}
 
-		public virtual object ToolTip
+        [XmlIgnore]
+        public virtual object ToolTip
 		{
 			get { return null; }
             set { }
 		}
 
-		public int Level
+        [XmlIgnore]
+        public int Level
 		{
 			get { return Parent != null ? Parent.Level + 1 : 0; }
 		}
 
-		public bool IsRoot
+        [XmlIgnore]
+        public bool IsRoot
 		{
 			get { return Parent == null; }
 		}
 
+        private ObservableCollection<object> _contextMenuItems = null;
+        [Browsable(false)]
+        [XmlIgnore]
+        public virtual ObservableCollection<object> ContextMenuItems
+        {
+            get
+            {
+                if (_contextMenuItems == null)
+                {
+                    _contextMenuItems = new ObservableCollection<object>();
+                }
+                return _contextMenuItems;
+            }
+            set
+            {
+                _contextMenuItems = value;
+            }
+
+        }
 		//bool isSelected;
 
 		//public bool IsSelected
@@ -84,9 +112,21 @@ namespace ICSharpCode.TreeView
 		//    }
 		//}
 
+        private ContextMenu _contextMenu = null;
+
+
 		public virtual ContextMenu GetContextMenu()
 		{
-			return null;
+            if (_contextMenu == null)
+            {
+                _contextMenu = new ContextMenu();
+                foreach (var item in ContextMenuItems)
+                {
+                    _contextMenu.Items.Add(item);
+                }
+            }
+
+            return _contextMenu;
 		}
 
 		internal protected void OnChildrenChanged(NotifyCollectionChangedEventArgs e)

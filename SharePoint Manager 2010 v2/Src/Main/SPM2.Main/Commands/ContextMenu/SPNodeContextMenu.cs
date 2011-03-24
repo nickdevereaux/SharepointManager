@@ -11,6 +11,7 @@ using SPM2.SharePoint;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using SPM2.Framework.WPF;
+using ICSharpCode.TreeView;
 
 namespace SPM2.Main.Commands.ContextMenu
 {
@@ -41,7 +42,8 @@ namespace SPM2.Main.Commands.ContextMenu
 
         public void Execute()
         {
-            this.CurrentNode.ResetChildren(true);
+
+            //this.CurrentNode.ResetChildren(true);
         }
 
     }

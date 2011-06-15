@@ -91,8 +91,10 @@ namespace SPM2.Main.GUI.Pads
                 {
                     // Select the node in the Window
                     ISPNode node = item as ISPNode;
-                    Messenger.Default.Send<ISPNode>(node, this.FindAncestor<Window>());
-                    //SPM2Commands.ObjectSelected.Execute(node, null);
+                    if (SPM2Commands.ObjectSelected.CanExecute(node, this))
+                    {
+                        SPM2Commands.ObjectSelected.Execute(node, this);
+                    }
                 }
             }
         }

@@ -110,7 +110,14 @@ namespace SPM2.Framework.Collections
             return root.ToCollection();
         }
 
- 
+
+        public IEnumerable<T> Values
+        {
+            get
+            {
+                return this.Select(p => p.Value);
+            }
+        }
 
     }
 

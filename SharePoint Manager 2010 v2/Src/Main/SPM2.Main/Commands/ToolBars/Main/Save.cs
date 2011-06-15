@@ -17,7 +17,7 @@ namespace SPM2.Main.Commands.ToolBars.Main
     {
         public Save()
         {
-            this.Command = MessengerBinding.Bind(this, ApplicationCommands.Save);
+            this.Command = ApplicationCommands.Save;
             this.Icon.Source = ImageExtensions.LoadBitmapImage("/SPM2.Main;component/resources/images/save.png");
         }
     }

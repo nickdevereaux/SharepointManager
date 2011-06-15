@@ -12,7 +12,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("AlternateUrlCollections")]
+	[Title("AlternateUrl")]
 	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionNode")]

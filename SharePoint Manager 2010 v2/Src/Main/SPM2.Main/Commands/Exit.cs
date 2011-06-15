@@ -15,7 +15,7 @@ using System.ComponentModel.Composition;
 namespace SPM2.Main.Commands
 {
     //[Export(File.AddInID, typeof(MenuItem))]
-    [Export(typeof(File))]
+    [Export(typeof(FileMenu))]
     public class Exit : MenuItem
     {
         public Exit()

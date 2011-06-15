@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Kernel\Owssvr.cs" />
+    <Compile Include="Model\Custom\SPViewFieldNode.cs" />
     <Compile Include="Model\Custom\SPPropertyBagNode.cs" />
     <Compile Include="Model\Custom\SPPropertyCollectionNode.cs" />
     <Compile Include="Model\Custom\SPPropertyNode.cs" />

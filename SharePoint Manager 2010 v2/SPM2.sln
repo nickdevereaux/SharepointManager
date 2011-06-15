@@ -22,9 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM2.SharePoint2010", "Src\Main\SPM2.SharePoint\SPM2.SharePoint2010.csproj", "{CE144460-64CE-4FB5-A25E-25B7BB028D16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedResources", "SharedResources", "{A1181411-5713-463E-8244-F327E94894FF}"
-	ProjectSection(SolutionItems) = preProject
-		Src\Shared Resources\SPM2.snk = Src\Shared Resources\SPM2.snk
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM2.ClassGenerator", "SPM2.ClassGenerator\SPM2.ClassGenerator.csproj", "{DF0F93DA-B4F1-4AF7-B802-AC389103B605}"
 EndProject
@@ -34,18 +31,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEF35", "Src\Libraries\MEF\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Galasoft35", "Galasoft35", "{BCDD035B-8FAA-4138-AAAC-EC89D633F6B9}"
 	ProjectSection(SolutionItems) = preProject
-		Src\Libraries\GalaSoft\GalaSoft.MvvmLight.dll = Src\Libraries\GalaSoft\GalaSoft.MvvmLight.dll
-		Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.dll = Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.dll
-		Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.XML = Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.XML
-		Src\Libraries\GalaSoft\GalaSoft.MvvmLight.XML = Src\Libraries\GalaSoft\GalaSoft.MvvmLight.XML
-		Src\Libraries\GalaSoft\System.Windows.Interactivity.dll = Src\Libraries\GalaSoft\System.Windows.Interactivity.dll
+		Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.dll = Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.TreeView", "Src\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj", "{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaSoft.MvvmLight (NET35)", "Src\Libraries\GalaSoft\GalaSoft.MvvmLight (NET35)\GalaSoft.MvvmLight (NET35).csproj", "{ADB28C09-8DE9-4006-80D5-74856EB4A48B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaSoft.MvvmLight.Extras (NET35)", "Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras (NET35)\GalaSoft.MvvmLight.Extras (NET35).csproj", "{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaSoft.MvvmLight.Test (NET35)", "Src\Libraries\GalaSoft\GalaSoft.MvvmLight.Test (NET35)\GalaSoft.MvvmLight.Test (NET35).csproj", "{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{7EFA3060-58EC-46B2-BE17-88CEE74665A5}"
+	ProjectSection(SolutionItems) = preProject
+		Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.dll = Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.dll
+		Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.XML = Src\Libraries\GalaSoft\External\NET35\Microsoft.Practices.ServiceLocation.XML
+		Src\Libraries\GalaSoft\External\NET35\System.Windows.Interactivity.dll = Src\Libraries\GalaSoft\External\NET35\System.Windows.Interactivity.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
 		SccLocalPath0 = .
@@ -93,6 +99,18 @@ Global
 		SccProjectTopLevelParentUniqueName11 = SPM2.sln
 		SccProjectName11 = Src/Libraries/ICSharpCode.TreeView
 		SccLocalPath11 = Src\\Libraries\\ICSharpCode.TreeView
+		SccProjectUniqueName12 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight\u0020(NET35)\\GalaSoft.MvvmLight\u0020(NET35).csproj
+		SccProjectTopLevelParentUniqueName12 = SPM2.sln
+		SccProjectName12 = Src/Libraries/GalaSoft/GalaSoft.MvvmLight\u0020(NET35)
+		SccLocalPath12 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight\u0020(NET35)
+		SccProjectUniqueName13 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight.Extras\u0020(NET35)\\GalaSoft.MvvmLight.Extras\u0020(NET35).csproj
+		SccProjectTopLevelParentUniqueName13 = SPM2.sln
+		SccProjectName13 = Src/Libraries/GalaSoft/GalaSoft.MvvmLight.Extras\u0020(NET35)
+		SccLocalPath13 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight.Extras\u0020(NET35)
+		SccProjectUniqueName14 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight.Test\u0020(NET35)\\GalaSoft.MvvmLight.Test\u0020(NET35).csproj
+		SccProjectTopLevelParentUniqueName14 = SPM2.sln
+		SccProjectName14 = Src/Libraries/GalaSoft/GalaSoft.MvvmLight.Test\u0020(NET35)
+		SccLocalPath14 = Src\\Libraries\\GalaSoft\\GalaSoft.MvvmLight.Test\u0020(NET35)
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -366,7 +384,6 @@ Global
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Fast (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Fast (Debug)|Any CPU.Build.0 = Debug|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Fast (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Fast (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Fast (Debug)|x86.ActiveCfg = Debug|Any CPU
@@ -385,6 +402,78 @@ Global
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Fast (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Fast (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Fast (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Fast (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Generate (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Generate (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Generate (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Part1|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Part1|Any CPU.Build.0 = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Part1|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Part1|Mixed Platforms.Build.0 = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Part1|x86.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B}.Release|x86.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Fast (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Fast (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Fast (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Fast (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Generate (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Generate (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Generate (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Part1|Any CPU.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Part1|Any CPU.Build.0 = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Part1|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Part1|Mixed Platforms.Build.0 = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Part1|x86.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Fast (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Fast (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Fast (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Fast (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Generate (Debug)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Generate (Debug)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Generate (Debug)|x86.ActiveCfg = Debug|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Part1|Any CPU.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Part1|Any CPU.Build.0 = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Part1|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Part1|Mixed Platforms.Build.0 = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Part1|x86.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -402,5 +491,9 @@ Global
 		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3} = {6A14DFFA-342F-477F-BAF4-3697974A97D0}
 		{BCDD035B-8FAA-4138-AAAC-EC89D633F6B9} = {6A14DFFA-342F-477F-BAF4-3697974A97D0}
 		{DDE2A481-8271-4EAC-A330-8FA6A38D13D1} = {6A14DFFA-342F-477F-BAF4-3697974A97D0}
+		{ADB28C09-8DE9-4006-80D5-74856EB4A48B} = {BCDD035B-8FAA-4138-AAAC-EC89D633F6B9}
+		{78EECC01-BAE7-4914-BE2D-6BAB1059F29B} = {BCDD035B-8FAA-4138-AAAC-EC89D633F6B9}
+		{D08856FE-520C-48D8-9C2F-69B9CFDB92BE} = {BCDD035B-8FAA-4138-AAAC-EC89D633F6B9}
+		{7EFA3060-58EC-46B2-BE17-88CEE74665A5} = {BCDD035B-8FAA-4138-AAAC-EC89D633F6B9}
 	EndGlobalSection
 EndGlobal

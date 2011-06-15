@@ -36,7 +36,6 @@ namespace SPM2.Main.ViewModel
         [ImportMany(MainWindow.BottomDockPane_AddInID, typeof(DockableContent))]
         public OrderingCollection<DockableContent> BottomDockableContents { get; set; }
 
-
         public MainWindowModel()
         {
             if (IsInDesignMode)

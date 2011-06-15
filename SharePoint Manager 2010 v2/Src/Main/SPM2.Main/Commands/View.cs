@@ -13,7 +13,7 @@ using System.ComponentModel.Composition;
 namespace SPM2.Main.Commands
 {
     [Export(MainMenu.AddInID, typeof(MenuItem))]
-    [ExportMetadata("After",  File.AddInID)]
+    [ExportMetadata("After",  FileMenu.AddInID)]
     public class View : MenuItem
     {
         public const string AddInID = "SPM2.Main.Commands.View";

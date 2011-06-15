@@ -12,8 +12,8 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")]
+    [Title("SPAlternateUrlCollection")]
+    [Icon(Small = "BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]

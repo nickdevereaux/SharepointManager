@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.Windows;
 
 namespace SPM2.Framework.WPF.Commands
 {
     public class SPM2Commands
     {
-        private static RoutedCommand _objectSelected;
-        public static RoutedCommand ObjectSelected
+        private static RoutedUICommand _objectSelected;
+        public static RoutedUICommand ObjectSelected
         {
             get { return _objectSelected; }
         }
@@ -23,7 +24,7 @@ namespace SPM2.Framework.WPF.Commands
         static SPM2Commands()
         {
             // Initialize the command.
-            _objectSelected = new RoutedCommand("ObjectSelected", typeof(SPM2Commands));
+            _objectSelected = new RoutedUICommand("ObjectSelected", "ObjectSelected", typeof(Window));
             _editString = new RoutedCommand("EditString", typeof(EditStringCommand));
         }
 

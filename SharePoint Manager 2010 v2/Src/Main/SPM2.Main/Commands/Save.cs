@@ -12,13 +12,14 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace SPM2.Main.Commands
 {
-    [Export(typeof(File))]
+    [Export(typeof(FileMenu))]
     [ExportMetadata("Order", 20)]
     public class Save : MenuItem
     {
         public Save()
         {
-            this.Command = MessengerBinding.Bind(this, ApplicationCommands.Save);
+            //this.Command = MessengerBinding.Bind(this, ApplicationCommands.Save);
+            this.Command = ApplicationCommands.Save;
             this.Icon = ImageExtensions.LoadImage("/SPM2.Main;component/resources/images/save.png");
         }
     }

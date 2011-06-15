@@ -62,19 +62,26 @@ namespace SPM2.Main.GUI.Pads
 
             this.Title = PROPERTY_GRID_NAME;
             this.Content = PGrid;
-            var window = this.FindAncestor<Window>();
 
-            //Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(SPM2Commands.ObjectSelected, ObjectSelected_Executed);
-            Messenger.Default.Register<ISPNode>(this, window, (p) => PGrid.SetObject(p.SPObject));
+            ExecuteMessageEvent.Register(this, SPM2Commands.ObjectSelected, message => SelectObject(message.Parameter.Parameter));
+            ExecuteMessageEvent.Register(this, ApplicationCommands.Save, message => this.PGrid.Update(), message => message.CanExecute(this.PGrid.ValueChanged));
+        }
 
-            ExecuteMessage.Register(this, ApplicationCommands.Save, message => this.PGrid.Update());
-            CanExecuteMessage.Register(this, ApplicationCommands.Save, message => message.CanExecute(this.PGrid.ValueChanged));
-
-            //Application.Current.MainWindow.CommandBindings.AddCommandExecutedHandler(ApplicationCommands.Save, (sender, param) => param.Handled = true);
-            //Application.Current.MainWindow.CommandBindings.AddCommandCanExecuteHandler(ApplicationCommands.Save, (sender, param) => param.CanExecute = true);
+        private void SelectObject(object obj)
+        {
+            if (obj != null && obj is ISPNode)
+            {
+                ISPNode node = (ISPNode)obj;
+                PGrid.SetObject(node.SPObject);
+            }
         }
 
 
+
+        void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            PGrid.SetObject(e.Parameter);
+        }
 
 
         //void propertyGrid_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
@@ -139,18 +146,6 @@ namespace SPM2.Main.GUI.Pads
 
         //DispatcherOperation operation = null;
 
-        //void ObjectSelected_Executed(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    this.PreviousSelectedObject = this.SelectedObject;
-        //    this.SelectedObject = e.Parameter;
-
-        //    //InvokeSetObject();
-        //    //if (!this.UpdateTimer.IsEnabled)
-        //    //{
-        //    //    Dispatcher.BeginInvoke(new Action(SetObject), DispatcherPriority.Normal);
-        //    //    this.UpdateTimer.Start();
-        //    //}
-        //}
 
 
 

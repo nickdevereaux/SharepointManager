@@ -18,7 +18,9 @@
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="MenuContainer" x:FieldModifier="public" Grid.Row="0">
+        <StackPanel x:Name="MenuContainer" x:FieldModifier="public" Grid.Row="0" >
+            <ItemsControl ItemsSource="{Binding Path=Menus.Values}">
+            </ItemsControl>
         </StackPanel>
         <DockPanel Grid.Row="1">
             <ToolBarTray x:Name="ToolBarTrayControl" DockPanel.Dock="Top" >

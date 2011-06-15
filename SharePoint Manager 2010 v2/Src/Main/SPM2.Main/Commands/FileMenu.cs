@@ -15,11 +15,11 @@ namespace SPM2.Main.Commands
 {
     [Export(MainMenu.AddInID, typeof(MenuItem))]
     [ExportMetadata("Order", 100)]
-    public class File : MenuItem
+    public class FileMenu : MenuItem
     {
         public const string AddInID = "SPM2.Main.Commands.File";
 
-        [ImportMany(typeof(File))]
+        [ImportMany(typeof(FileMenu))]
         public OrderingCollection<MenuItem> LacyItems { get; set; }
 
         protected override void OnInitialized(EventArgs e)

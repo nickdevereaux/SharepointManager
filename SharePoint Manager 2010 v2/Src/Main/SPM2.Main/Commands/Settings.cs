@@ -18,7 +18,7 @@ using SPM2.Framework.WPF.Windows;
 namespace SPM2.Main.Commands
 {
     //[Icon("icasax.png")]
-    [Export(typeof(File))]
+    [Export(typeof(FileMenu))]
     [ExportMetadata("ID", AddInID)]
     public class Settings : MenuItem
     {

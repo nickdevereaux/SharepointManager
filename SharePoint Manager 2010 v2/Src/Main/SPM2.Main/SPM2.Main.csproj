@@ -62,12 +62,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -94,7 +88,7 @@
     <Compile Include="Commands\ToolBars\MainToolBar.cs" />
     <Compile Include="Commands\ToolBars\Main\Save.cs" />
     <Compile Include="Commands\View.cs" />
-    <Compile Include="Commands\File.cs" />
+    <Compile Include="Commands\FileMenu.cs" />
     <Compile Include="Commands\Exit.cs" />
     <Compile Include="ComponentModel\GeneralSettings.cs" />
     <Compile Include="ComponentModel\StringEditor.cs" />
@@ -144,6 +138,14 @@
     <ProjectReference Include="..\..\Libraries\AvalonEdit\AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\GalaSoft\GalaSoft.MvvmLight %28NET35%29\GalaSoft.MvvmLight %28NET35%29.csproj">
+      <Project>{ADB28C09-8DE9-4006-80D5-74856EB4A48B}</Project>
+      <Name>GalaSoft.MvvmLight %28NET35%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras %28NET35%29\GalaSoft.MvvmLight.Extras %28NET35%29.csproj">
+      <Project>{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}</Project>
+      <Name>GalaSoft.MvvmLight.Extras %28NET35%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
       <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>

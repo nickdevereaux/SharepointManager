@@ -8,6 +8,7 @@ using SPM2.Framework;
 using System.Windows;
 using System.Reflection;
 using System.Diagnostics;
+using SPM2.Framework.WPF;
 
 namespace SPM2.Main.ViewModel
 {
@@ -30,6 +31,7 @@ namespace SPM2.Main.ViewModel
                     if (orderedItems.Count > 0)
                     {
                         _mainWindow = orderedItems[0].Value;
+                        CommandToMessenger.Relay(_mainWindow);
                     }
                 }
                 return _mainWindow;

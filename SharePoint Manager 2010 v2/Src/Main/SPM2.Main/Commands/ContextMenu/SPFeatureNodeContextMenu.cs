@@ -8,6 +8,7 @@ using System.ComponentModel.Composition;
 using SPM2.SharePoint.Model;
 using GalaSoft.MvvmLight.Command;
 using SPM2.Framework.WPF.Commands;
+using System.Windows.Input;
 
 namespace SPM2.Main.Commands.ContextMenu
 {
@@ -34,8 +35,16 @@ namespace SPM2.Main.Commands.ContextMenu
 
         private void Execute()
         {
-            this.Node.ActivateFeature();
-            SPM2Commands.ObjectSelected.Execute(this.Node, null);
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                this.Node.ActivateFeature();
+                SPM2Commands.ObjectSelected.Execute(this.Node, null);
+            }
+            finally
+            {
+                Mouse.OverrideCursor = Cursors.Arrow;
+            }
         }
 
         private bool CanExecute()
@@ -69,8 +78,16 @@ namespace SPM2.Main.Commands.ContextMenu
 
         private void Execute()
         {
-            this.Node.DeactivateFeature();
-            SPM2Commands.ObjectSelected.Execute(this.Node, null);
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                this.Node.DeactivateFeature();
+                SPM2Commands.ObjectSelected.Execute(this.Node, null);
+            }
+            finally
+            {
+                Mouse.OverrideCursor = Cursors.Arrow;
+            }
         }
 
         private bool CanExecute()

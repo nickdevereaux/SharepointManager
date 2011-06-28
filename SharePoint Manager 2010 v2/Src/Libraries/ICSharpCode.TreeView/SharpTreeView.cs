@@ -112,9 +112,25 @@ namespace ICSharpCode.TreeView
                 if (item != null)
                 {
                     item.Focus();
+
                 }
             }
         }
+
+        public void SelectNode(SharpTreeNode node)
+        {
+            if (node != null)
+            {
+                var item = GetTreeViewItem(node);
+                if (item != null)
+                {
+                    item.IsSelected = true;
+
+                }
+            }
+        }
+
+
 
         public SharpTreeViewItem GetTreeViewItem(SharpTreeNode node)
         {

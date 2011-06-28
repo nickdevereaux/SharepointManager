@@ -152,6 +152,13 @@ namespace SPM2.SharePoint.Model
             }
         }
 
+        public override void ClearChildren()
+        {
+            this._pointer = null;
+            this.totalCount = 0;
+            this.moveNext = true;
+            this.Children.Clear();
+        }
 
         public void LoadNextBatch()
         {

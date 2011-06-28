@@ -328,6 +328,12 @@ namespace SPM2.SharePoint.Model
         }
 
 
+        public virtual void ClearChildren()
+        {
+            this.Children.Clear();
+            
+        }
+
         private IEnumerable<IItemNode> LoadUnorderedChildren()
         {
             PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(this.SPObjectType);
@@ -339,13 +345,19 @@ namespace SPM2.SharePoint.Model
                     SPNode node = this.NodeDictionary[info.PropertyType];
 
                     //Ensure that the child node instance is unique in the TreeView
-                    node = (SPNode)Activator.CreateInstance(node.GetType());
-                    node.Text = info.DisplayName;
-                    node.Setup(this.SPObject);
+                    node = Create(info.DisplayName, node.GetType(), this.SPObject);
 
                     yield return node;
                 }
             }
+        }
+
+        private static SPNode Create(string name, Type nodeType, object spObject)
+        {
+            SPNode node = (SPNode)Activator.CreateInstance(nodeType);
+            node.Text = name;
+            node.Setup(spObject);
+            return node;
         }
 
 
@@ -372,6 +384,91 @@ namespace SPM2.SharePoint.Model
                 }
             }
             return types;
+        }
+
+        public virtual SPNode Refresh()
+        {
+            SPNode result = this;
+            Type webType = typeof(SPWeb);
+            Type siteType = typeof(SPSite);
+
+            List<int> indexs = new List<int>();
+
+            SPNode target = this;
+            SPNode parent = target.Parent as SPNode;
+            if (parent == null)
+            {
+                return result;
+            }
+
+            int selectedIndex = target.Parent.Children.IndexOf(target);
+
+            indexs.Add(selectedIndex);
+
+            foreach (var node in target.Ancestors().OfType<SPNode>())
+            {
+                if (node.Parent == null)
+                {
+                    break;
+                }
+
+                indexs.Insert(0, node.Parent.Children.IndexOf(node));
+
+                if (node.SPObjectType == webType || node.SPObjectType == siteType)
+                {
+                    target = node;
+                    parent = target.Parent as SPNode;
+
+                    break;
+                }
+            }
+
+            if (target == this)
+            {
+                indexs = new List<int> { selectedIndex }; 
+            }
+
+
+            var enumerator = indexs.GetEnumerator();
+            if (enumerator.MoveNext())
+            {
+                foreach (var node in parent.Descendants())
+                {
+                    node.Text += " Old";
+                }
+                parent.LazyLoading = true;
+                parent.ClearChildren();
+                parent.IsExpanded = true;
+                result = parent.RefreshNodes(enumerator);
+            }
+            return result;
+        }
+
+
+        internal SPNode RefreshNodes(IEnumerator<int> enumerator)
+        {
+            SPNode result = null;
+            int index = enumerator.Current;
+            bool lastIndex = !enumerator.MoveNext();
+
+            if (this.Children.Count > index)
+            {
+                SPNode child = this.Children[index] as SPNode;
+                
+                if (lastIndex)
+                {
+                    child.IsSelected = true;
+                    result = child;
+                }
+                else
+                {
+                    // IsExpanded = true; Auto load of new nodes
+                    child.IsExpanded = true;
+                    result = child.RefreshNodes(enumerator);
+                }
+
+            }
+            return result;
         }
 
     }

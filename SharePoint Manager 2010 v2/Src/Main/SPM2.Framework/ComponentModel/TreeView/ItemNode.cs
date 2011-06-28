@@ -87,25 +87,6 @@ namespace SPM2.Framework
         //    }
         //}
 
-        bool _isSelected;
-        /// <summary>
-        /// Gets/sets whether the TreeViewItem 
-        /// associated with this object is selected.
-        /// </summary>
-        [Browsable(false)]
-        [XmlAttribute]
-        public bool IsSelected
-        {
-            get { return _isSelected; }
-            set
-            {
-                if (value != _isSelected)
-                {
-                    _isSelected = value;
-                    this.RaisePropertyChanged("IsSelected");
-                }
-            }
-        }
 
         private bool _isHidden;
         /// <summary>

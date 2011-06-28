@@ -48,6 +48,7 @@ namespace ICSharpCode.TreeView
 
 		public override void OnApplyTemplate()
 		{
+            
 			base.OnApplyTemplate();
 			LinesRenderer = Template.FindName("linesRenderer", this) as LinesRenderer;
 			UpdateTemplate();
@@ -99,7 +100,7 @@ namespace ICSharpCode.TreeView
 
 		void Node_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == "IsEditing") {
+            if (e.PropertyName == "IsEditing") {
 				OnIsEditingChanged();
 			}
 			else if (e.PropertyName == "IsLast") {

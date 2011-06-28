@@ -72,7 +72,7 @@ namespace SPM2.Main.GUI.Pads
         public void OnImportsSatisfied()
         {
             wpfView.Root = this.ModelProvider;
-
+           
             this.ModelProvider.ExpandToDefault();
         }
 

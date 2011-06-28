@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ICSharpCode.TreeView
 {
@@ -24,10 +25,12 @@ namespace ICSharpCode.TreeView
 			RegisterCommands();
 		}
 
+
 		public SharpTreeNode Node
 		{
 			get { return DataContext as SharpTreeNode; }
 		}
+
 
 		public SharpTreeNodeView NodeView { get; internal set; }
 		public SharpTreeView ParentTreeView { get; internal set; }		
@@ -75,6 +78,8 @@ namespace ICSharpCode.TreeView
 					break;
 			}
 		}
+
+
 
 		protected override void OnContextMenuOpening(ContextMenuEventArgs e)
 		{

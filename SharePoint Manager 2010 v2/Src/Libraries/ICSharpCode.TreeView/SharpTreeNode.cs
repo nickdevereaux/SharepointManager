@@ -210,7 +210,26 @@ namespace ICSharpCode.TreeView
 				RaisePropertyChanged("ShowExpander");
 			}
 		}
-		
+
+
+        bool _isSelected;
+        /// <summary>
+        /// Gets/sets whether the TreeViewItem 
+        /// associated with this object is selected.
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                if (value != _isSelected)
+                {
+                    _isSelected = value;
+                    RaisePropertyChanged("Hans");
+                }
+            }
+        }
+
 		//bool showIcon;
 		
 		public virtual bool ShowIcon

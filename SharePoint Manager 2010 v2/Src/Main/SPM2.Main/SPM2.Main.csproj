@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Build\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -66,9 +66,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity">
-      <HintPath>..\..\Libraries\GalaSoft\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -134,26 +131,32 @@
     <ProjectReference Include="..\..\Libraries\AvalonDock\AvalonDock35.csproj">
       <Project>{87E61430-4243-45F2-B74E-0A4C096CEBF3}</Project>
       <Name>AvalonDock35</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\AvalonEdit\AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>AvalonEdit</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GalaSoft\GalaSoft.MvvmLight %28NET35%29\GalaSoft.MvvmLight %28NET35%29.csproj">
       <Project>{ADB28C09-8DE9-4006-80D5-74856EB4A48B}</Project>
       <Name>GalaSoft.MvvmLight %28NET35%29</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GalaSoft\GalaSoft.MvvmLight.Extras %28NET35%29\GalaSoft.MvvmLight.Extras %28NET35%29.csproj">
       <Project>{78EECC01-BAE7-4914-BE2D-6BAB1059F29B}</Project>
       <Name>GalaSoft.MvvmLight.Extras %28NET35%29</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
       <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>
       <Name>ICSharpCode.TreeView</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>MEF35</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\SPM2.Framework.WPF\SPM2.Framework.WPF.csproj">
       <Project>{C97ECB36-3AF4-4788-8251-E57FAB93CB87}</Project>
@@ -168,6 +171,7 @@
     <ProjectReference Include="..\SPM2.SharePoint\SPM2.SharePoint2010.csproj">
       <Project>{CE144460-64CE-4FB5-A25E-25B7BB028D16}</Project>
       <Name>SPM2.SharePoint2010</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,10 @@ namespace SPM2.Framework
     {
 
         private static object lockObject = new object();
-        private static CompositionContainer _current = default(CompositionContainer);
+        private static CompositionContainer _current = null; // default(CompositionContainer);
+
+
+
 
         public static CompositionContainer Current
         {
@@ -28,7 +31,7 @@ namespace SPM2.Framework
                     {
                         if (_current == null)
                         {
-                            _current = Load("addins");
+                            _current = Load("addin");
                             
                         }
                     }
@@ -83,14 +86,17 @@ namespace SPM2.Framework
             //A catalog that can aggregate other catalogs
             var aggrCatalog = new AggregateCatalog();
             //A directory catalog
-            //var dirCatalog = new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\"+addinPath, "*.dll");
             aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.Framework.dll"));
             aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.Framework.WPF.dll"));
             aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.SharePoint.dll"));
             aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.Main.dll"));
+            //aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2AuditLog.dll"));
             
             //An assembly catalog
             aggrCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
+
+            var dirCatalog = new DirectoryCatalog(assmPath + "\\" + addinPath, "*.dll");
+            aggrCatalog.Catalogs.Add(dirCatalog);
 
             //Create a container
             return new CompositionContainer(aggrCatalog);

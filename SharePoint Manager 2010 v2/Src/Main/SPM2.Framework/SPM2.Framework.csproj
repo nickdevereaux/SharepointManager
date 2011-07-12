@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Build\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -146,10 +146,12 @@
     <ProjectReference Include="..\..\Libraries\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
       <Project>{DDE2A481-8271-4EAC-A330-8FA6A38D13D1}</Project>
       <Name>ICSharpCode.TreeView</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MEF\ComponentModel\MEF35.csproj">
       <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
       <Name>MEF35</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

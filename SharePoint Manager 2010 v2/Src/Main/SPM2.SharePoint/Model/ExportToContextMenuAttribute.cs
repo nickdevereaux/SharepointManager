@@ -10,6 +10,7 @@ namespace SPM2.SharePoint.Model
     /// <summary>
     /// Specialized ExportAttribute used for the SharePoint treeview object model.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple=true)]
     public class ExportToContextMenuAttribute : ExportAttribute
     {
         public ExportToContextMenuAttribute(string contractName)

@@ -78,10 +78,12 @@
     <ProjectReference Include="..\Src\Main\SPM2.Framework\SPM2.Framework.csproj">
       <Project>{5DE0D29F-DE15-4E15-9E89-3A873D849C40}</Project>
       <Name>SPM2.Framework</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Src\Main\SPM2.SharePoint\SPM2.SharePoint2010.csproj">
       <Project>{CE144460-64CE-4FB5-A25E-25B7BB028D16}</Project>
       <Name>SPM2.SharePoint2010</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

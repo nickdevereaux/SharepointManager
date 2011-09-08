@@ -4,58 +4,48 @@
  * ---------------------------
  */
 
-using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.Administration;
+using System.Linq;
 using SPM2.Framework;
-using ICSharpCode.TreeView;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("AllProperties")]
+    [Title("AllProperties")]
     [Icon(Small = "EXITGRID.GIF")]
     [ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFileVersionNode")]
-    [ExportToNode(typeof(SPListItemNode))]
-    [ExportToNode(typeof(SPJobDefinitionNode))]
-    [ExportToNode(typeof(SPServerNode))]
-    [ExportToNode(typeof(SPServiceNode))]
-    [ExportToNode(typeof(SPWebServiceNode))]
-    [ExportToNode(typeof(SPSolutionNode))]
+    [ExportToNode(typeof (SPListItemNode))]
+    [ExportToNode(typeof (SPJobDefinitionNode))]
+    [ExportToNode(typeof (SPServerNode))]
+    [ExportToNode(typeof (SPServiceNode))]
+    [ExportToNode(typeof (SPWebServiceNode))]
+    [ExportToNode(typeof (SPSolutionNode))]
     [AdapterItemType("System.Collections.Hashtable")]
-	public partial class SPPropertyCollectionNode : SPNodeCollection
-	{
-
+    public class SPPropertyCollectionNode : SPNodeCollection
+    {
         public Hashtable AllProperties
         {
-            get
-            {
-                return (Hashtable)this.SPObject;
-            }
+            get { return (Hashtable) SPObject; }
         }
 
 
         public override void LoadChildren()
         {
-            List<SharpTreeNode> list = new List<SharpTreeNode>();
+            var list = new List<ISPNode>();
 
-            foreach (DictionaryEntry entry in this.AllProperties)
+            foreach (DictionaryEntry entry in AllProperties)
             {
-                SPPropertyNode node = new SPPropertyNode();
+                var node = new SPPropertyNode();
                 node.SPObject = entry;
-                node.Setup(this.SPObject);
+                node.Setup(SPObject);
                 list.Add(node);
             }
 
-            this.Children.AddRange(list.OrderBy(p => p.Text));
+            Children.AddRange(list.OrderBy(p => p.Text));
         }
-
-	}
+    }
 }

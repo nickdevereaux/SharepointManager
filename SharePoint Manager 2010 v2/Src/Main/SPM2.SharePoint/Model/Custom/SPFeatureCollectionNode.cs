@@ -11,7 +11,6 @@ using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.ComponentModel;
 using System.Collections.Generic;
-using ICSharpCode.TreeView;
 
 namespace SPM2.SharePoint.Model
 {
@@ -37,7 +36,7 @@ namespace SPM2.SharePoint.Model
 
 
             // Unordered List
-            List<SharpTreeNode> unorderedList = new List<SharpTreeNode>();
+            List<ISPNode> unorderedList = new List<ISPNode>();
 
             foreach (var def in definitions)
             {
@@ -67,7 +66,7 @@ namespace SPM2.SharePoint.Model
 
 
             // Add Inactive Features node from definitions
-            this.Children.AddRange(unorderedList.OrderBy( p=> p.Text));
+            this.Children = unorderedList.OrderBy( p=> p.Text).ToList();
         }
 
         private IEnumerable<SPFeatureDefinition> GetFeatureDefinitionIndex()

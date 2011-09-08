@@ -19,6 +19,7 @@ using SPM2.Framework;
 using SPM2.Framework.WPF;
 using SPM2.Framework.WPF.Commands;
 using SPM2.Framework.WPF.Components;
+using SPM2.Main.ViewModel.TreeView;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 using GalaSoft.MvvmLight.Messaging;
@@ -69,9 +70,9 @@ namespace SPM2.Main.GUI.Pads
 
         private void SelectObject(object obj)
         {
-            if (obj != null && obj is ISPNode)
+            if (obj != null && obj is IItemNode)
             {
-                ISPNode node = (ISPNode)obj;
+                var node = ((IItemNode)obj).SPNode;
                 PGrid.SetObject(node.SPObject);
             }
         }

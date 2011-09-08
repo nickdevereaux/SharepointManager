@@ -25,33 +25,37 @@ namespace SPM2.SharePoint.Model
         public override void Setup(object spObject)
         {
             base.Setup(spObject);
-            
-            if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
-            {
-                this.Url = SPUrlUtility.CombineUrl(this.File.ParentFolder.ParentWeb.Url, this.File.Url);
-            }
 
-            this.IconUri = SharePointContext.GetImagePath(this.File.IconUrl);
-            this.Text = this.File.Name;
+            if (File != null)
+            {
+                if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.Url = SPUrlUtility.CombineUrl(this.File.ParentFolder.ParentWeb.Url, this.File.Url);
+                }
+                this.IconUri = SharePointContext.GetImagePath(this.File.IconUrl);
+                this.Text = this.File.Name;
+            }
         }
 
         public override void LoadChildren()
         {
             base.LoadChildren();
-
-            if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
+            if (File != null)
             {
-                try
+                if (this.File.Url.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase))
                 {
-                    SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.File);
+                    try
+                    {
+                        SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.File);
 
-                    webparts.Setup(this.SPObject);
+                        webparts.Setup(this.SPObject);
 
-                    this.Children.Add(webparts);
-                }
-                catch
-                {
-                    // Do nothing
+                        this.Children.Add(webparts);
+                    }
+                    catch
+                    {
+                        // Do nothing
+                    }
                 }
             }
         }

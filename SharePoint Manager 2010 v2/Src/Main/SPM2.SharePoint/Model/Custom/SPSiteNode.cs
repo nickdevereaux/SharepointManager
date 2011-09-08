@@ -33,7 +33,8 @@ namespace SPM2.SharePoint.Model
             if (webNode != null)
             {
                 // Move the WebNode to first position
-                this.Children.Move(this.Children.IndexOf(webNode), 0);
+                Children.Remove(webNode);
+                Children.Insert(0, webNode);
             }
         }
 	}

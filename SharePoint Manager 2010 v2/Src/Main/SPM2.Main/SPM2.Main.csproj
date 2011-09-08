@@ -89,6 +89,8 @@
     <Compile Include="Commands\Exit.cs" />
     <Compile Include="ComponentModel\GeneralSettings.cs" />
     <Compile Include="ComponentModel\StringEditor.cs" />
+    <Compile Include="ViewModel\TreeView\DummyChild.cs" />
+    <Compile Include="ViewModel\TreeView\TreeViewNodeProvider.cs" />
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Pads\BrowserPad.cs" />
     <Compile Include="GUI\Pads\SPTreeViewPad.cs" />
@@ -99,6 +101,9 @@
     </Compile>
     <Compile Include="ViewModel\AppModel.cs" />
     <Compile Include="ViewModel\MainWindowModel.cs" />
+    <Compile Include="ViewModel\TreeView\IItemNode.cs" />
+    <Compile Include="ViewModel\TreeView\ItemNode.cs" />
+    <Compile Include="ViewModel\TreeView\ITreeViewNodeProvider.cs" />
     <Compile Include="WindowsManager.cs" />
     <Compile Include="Properties\WPFAssemblyInfo.cs" />
     <Page Include="GUI\App.xaml">
@@ -175,6 +180,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ComponentModel\TreeView\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>

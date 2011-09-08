@@ -1,69 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
-using SPM2.Framework.Collections;
-using System.IO;
 using System.Xml.Serialization;
+using ICSharpCode.TreeView;
 using SPM2.Framework.Configuration;
 
-namespace SPM2.Framework.ComponentModel
+namespace SPM2.Framework.WPF.ViewModel.TreeView
 {
-    [Serializable()]
-    public class SettingsModel : ItemNode
+    [Serializable]
+    public class SettingsModel : SharpTreeNode
     {
+        private const string ResourceImagePath = "/SPM2.Framework;component/Resources/Images/";
+        private ClassDescriptor _descriptor;
+        private string _iconUri;
+        private string _toolTipText;
 
         [Browsable(false)]
         public override object Text
         {
             get
             {
-                if (String.IsNullOrEmpty(base.Text+string.Empty))
+                if (String.IsNullOrEmpty(base.Text + string.Empty))
                 {
-                    base.Text = this.Descriptor.Title;
+                    base.Text = Descriptor.Title;
                 }
                 return base.Text;
             }
-            set
-            {
-                base.Text = value;
-            }
+            set { base.Text = value; }
         }
 
-        public override string ToolTipText
+        public string ToolTipText
         {
             get
             {
-                if (String.IsNullOrEmpty(base.ToolTipText))
+                if (String.IsNullOrEmpty(_toolTipText))
                 {
-                    base.ToolTipText = this.Descriptor.ClassType.Name;
+                    _toolTipText = Descriptor.ClassType.Name;
                 }
-                return base.ToolTipText;
+                return _toolTipText;
             }
-            set
-            {
-                base.ToolTipText = value;
-            }
+            set { _toolTipText = value; }
         }
 
-        private ClassDescriptor _descriptor = null;
         [Browsable(false)]
         [XmlIgnore]
         public ClassDescriptor Descriptor
         {
-            get
-            {
-                if (_descriptor == null)
-                {
-                    _descriptor = new ClassDescriptor(this.GetType());
-                }
-                return _descriptor;
-            }
-            set
-            {
-                this._descriptor = value;
-            }
+            get { return _descriptor ?? (_descriptor = new ClassDescriptor(GetType())); }
+            set { _descriptor = value; }
         }
 
         //private OrderingCollection<ISettings> _importedNodes = null;
@@ -86,9 +69,8 @@ namespace SPM2.Framework.ComponentModel
         //}
 
 
-        private string _iconUri = null;
         [Browsable(false)]
-        public virtual string IconUri
+        public new string IconUri
         {
             get
             {
@@ -103,7 +85,7 @@ namespace SPM2.Framework.ComponentModel
                 if (_iconUri != value)
                 {
                     _iconUri = value;
-                    this.RaisePropertyChanged("IconUri");
+                    RaisePropertyChanged("IconUri");
                 }
             }
         }
@@ -112,36 +94,29 @@ namespace SPM2.Framework.ComponentModel
         public ISettings SettingsObject { get; set; }
 
 
-        public SettingsModel() : base()
+        public SettingsModel()
         {
-            //this.LoadChildren();
         }
-
 
         public override void LoadChildren()
         {
-            this.Children.Clear();
+            Children.Clear();
 
-            foreach (ISettings item in this.SettingsObject.Children.AsSafeEnumable())
-	        {
-                SettingsModel modelItem = new SettingsModel();
+            foreach (ISettings item in SettingsObject.Children.AsSafeEnumable())
+            {
+                var modelItem = new SettingsModel {SettingsObject = item};
                 //modelItem.Parent = this;
-                modelItem.SettingsObject = item;
-                ClassDescriptor descriptor = new ClassDescriptor(item.GetType());
+                var descriptor = new ClassDescriptor(item.GetType());
                 modelItem.Text = descriptor.Title;
                 modelItem.ToolTipText = descriptor.Description;
-                
-                this.Children.Add(modelItem);
-	        }
+
+                Children.Add(modelItem);
+            }
         }
 
-        private const string ResourceImagePath = "/SPM2.Framework;component/Resources/Images/";
         private static string GetResourceImagePath(string filename)
         {
             return ResourceImagePath + filename;
         }
-
-
-
     }
 }

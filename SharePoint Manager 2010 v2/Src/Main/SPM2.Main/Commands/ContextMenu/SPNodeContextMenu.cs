@@ -42,7 +42,7 @@ namespace SPM2.Main.Commands.ContextMenu
 
         public void Execute()
         {
-            this.CurrentNode = this.CurrentNode.Refresh();
+            //this.CurrentNode = this.CurrentNode.Refresh();
 
             //this.CurrentNode.ResetChildren(true);
         }

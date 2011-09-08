@@ -9,13 +9,38 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using System.Collections;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("Properties")]
-	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-	public partial class SPPropertyBagNode
+    [Icon(Small = "icon-property.gif", Source=IconSource.Assembly)]
+    [ExportToNode("SPM2.SharePoint.Model.SPPropertyBagCollectionNode")]
+    [AdapterItemType("System.Collections.DictionaryEntry")]
+    public partial class SPPropertyBagNode : SPNode
 	{
+
+
+        public DictionaryEntry Entry
+        {
+            get { return (DictionaryEntry)this.SPObject; }
+            set { this.SPObject = value; }
+        }
+
+
+        public override void Setup(object spParent)
+        {
+            base.Setup(spParent);
+
+            this.Text = this.Entry.Key.ToString();
+
+            // Remove the "Expand" icon from the Property, because the will never be children to this object.
+            //this.IsExpanded = true;
+        }
+
+        public override void LoadChildren()
+        {
+            // Do nothing!
+        }
+
 	}
 }

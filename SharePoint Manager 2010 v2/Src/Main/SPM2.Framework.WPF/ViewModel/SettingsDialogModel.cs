@@ -11,6 +11,7 @@ using System.Windows.Input;
 using SPM2.Framework.ComponentModel;
 using System.Diagnostics;
 using SPM2.Framework.Configuration;
+using SPM2.Framework.WPF.ViewModel.TreeView;
 using SPM2.Framework.Xml;
 
 namespace SPM2.Framework.WPF.Windows.ViewModel

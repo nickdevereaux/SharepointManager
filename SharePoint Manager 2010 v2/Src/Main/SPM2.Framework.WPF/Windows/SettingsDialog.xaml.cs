@@ -16,6 +16,7 @@ using SPM2.Framework.ComponentModel;
 using System.Windows.Threading;
 using System.Threading;
 using SPM2.Framework.Configuration;
+using SPM2.Framework.WPF.ViewModel.TreeView;
 
 namespace SPM2.Framework.WPF.Windows
 {

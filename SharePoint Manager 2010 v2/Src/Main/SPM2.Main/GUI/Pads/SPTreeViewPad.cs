@@ -1,56 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.Composition;
+using System.Windows;
 using System.Windows.Controls;
-using System.ComponentModel;
-
+using System.Windows.Input;
 using AvalonDock;
-
+using ICSharpCode.TreeView;
 using SPM2.Framework;
 using SPM2.Framework.WPF;
 using SPM2.Framework.WPF.Commands;
-using SPM2.Framework.WPF.Components;
-using SPM2.SharePoint;
+using SPM2.Main.ViewModel.TreeView;
 using SPM2.SharePoint.Model;
-using System.Windows.Input;
-using System.ComponentModel.Composition;
-using System.Windows;
-using ICSharpCode.TreeView;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace SPM2.Main.GUI.Pads
 {
-
     [Title("SharePoint Explorer")]
-    [Export("SPM2.Main.MainWindow.LeftDockPane", typeof(DockableContent))]
+    [Export("SPM2.Main.MainWindow.LeftDockPane", typeof (DockableContent))]
     [ExportMetadata("ID", "SPM2.Main.GUI.Pads.SPTreeViewPad")]
     public class SPTreeViewPad : AbstractPadWindow, IPartImportsSatisfiedNotification
     {
-        private bool DoSelect { get; set; }
+        private readonly SharpTreeView _wpfView = new SharpTreeView();
 
-        SharpTreeView wpfView = new SharpTreeView();
-
-        [Import()]
-        public SPModelProvider ModelProvider { get; set; }
 
         public SPTreeViewPad()
         {
-            this.Title = "SharePoint Explorer";
-            wpfView.ShowLines = false;
+            Title = "SharePoint Explorer";
+            _wpfView.ShowLines = false;
 
-            Application.Current.MainWindow.ContentRendered += new EventHandler((s,e) => SelectItem());
+            Application.Current.MainWindow.ContentRendered += (s, e) => SelectItem();
 
-            wpfView.PreviewMouseDown += new MouseButtonEventHandler((s,e) => this.DoSelect = true);
-            wpfView.PreviewStylusDown += new StylusDownEventHandler((s, e) => this.DoSelect = true);
-            wpfView.PreviewKeyDown += new KeyEventHandler(wpfView_PreviewKeyDown);
-            wpfView.SelectionChanged += new SelectionChangedEventHandler(wpfView_SelectionChanged);
+            _wpfView.PreviewMouseDown += (s, e) => DoSelect = true;
+            _wpfView.PreviewStylusDown += (s, e) => DoSelect = true;
+            _wpfView.PreviewKeyDown += WpfViewPreviewKeyDown;
+            _wpfView.SelectionChanged += WpfViewSelectionChanged;
 
-            this.Content = wpfView;
+            Content = _wpfView;
         }
 
+        private bool DoSelect { get; set; }
 
-        void wpfView_PreviewKeyDown(object sender, KeyEventArgs e)
+        [Import]
+        public TreeViewNodeProvider NodeProvider { get; set; }
+
+        #region IPartImportsSatisfiedNotification Members
+
+        public void OnImportsSatisfied()
+        {
+            var node = (SharpTreeNode) NodeProvider.LoadFarmNode();
+            _wpfView.Root = node;
+
+            //this.ModelProvider.ExpandToDefault();
+        }
+
+        #endregion
+
+        private void WpfViewPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
@@ -59,48 +61,38 @@ namespace SPM2.Main.GUI.Pads
         }
 
 
-        void wpfView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WpfViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.DoSelect)
+            if (DoSelect)
             {
                 SelectItem();
-                this.DoSelect = false;
+                DoSelect = false;
             }
         }
 
 
-        public void OnImportsSatisfied()
-        {
-            wpfView.Root = this.ModelProvider;
-           
-            this.ModelProvider.ExpandToDefault();
-        }
-
         private void SelectItem()
         {
-            object item = wpfView.SelectedItem;
-            if (item != null)
+            object item = _wpfView.SelectedItem;
+            if (item != null && item is IItemNode)
             {
-                if (item is MoreNode)
+                var treeNode = (IItemNode) item;
+                if (treeNode.SPNode is MoreNode)
                 {
                     // Excute the more 
-                    MoreNode node = (MoreNode)item;
-                    node.ParentNode.LoadNextBatch();
+                    var spNode = (MoreNode) treeNode.SPNode;
+
+                    //spNode.ParentNode.LoadChildren();
                 }
                 else
                 {
                     // Select the node in the Window
-                    ISPNode node = item as ISPNode;
-                    if (SPM2Commands.ObjectSelected.CanExecute(node, this))
+                    if (SPM2Commands.ObjectSelected.CanExecute(treeNode, this))
                     {
-                        SPM2Commands.ObjectSelected.Execute(node, this);
+                        SPM2Commands.ObjectSelected.Execute(treeNode, this);
                     }
                 }
             }
         }
-
-
-
-
     }
 }

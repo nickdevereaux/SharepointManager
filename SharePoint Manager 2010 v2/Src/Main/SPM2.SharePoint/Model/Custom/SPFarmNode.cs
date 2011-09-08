@@ -16,18 +16,17 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-    [ExportToNode(SPModelProvider.AddInID)]
 	public partial class SPFarmNode
 	{
         public SPFarmNode()
         {
-            this.IconUri = GetResourceImagePath("actionssettings.gif");
+            IconUri = GetResourceImagePath("actionssettings.gif");
         }
 
 
         public override IEnumerable<SPNode> NodesToExpand()
         {
-            return this.Children.OfType<SPServiceCollectionNode>().Cast<SPNode>();
+            return Children.OfType<SPServiceCollectionNode>().Cast<SPNode>();
         }
 	}
 }

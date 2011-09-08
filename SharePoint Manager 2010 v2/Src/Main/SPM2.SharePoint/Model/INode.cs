@@ -6,7 +6,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-    public interface INode : IItemNode
+    public interface INode
     {
         object GetSPObject();
         Type GetSPObjectType();

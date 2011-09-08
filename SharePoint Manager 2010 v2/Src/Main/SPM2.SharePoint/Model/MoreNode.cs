@@ -1,30 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SPM2.Framework;
+﻿using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-    [Icon(Small="RECUR.GIF")]
+    [Icon(Small = "RECUR.GIF")]
     [Title("More ... ")]
     public class MoreNode : SPNode
     {
-        public SPNodeCollection ParentNode { get; set; }
-
-        public MoreNode(SPNodeCollection parentNode)
+        public override string ToolTipText
         {
-            this.ParentNode = parentNode;
-            this.ToolTipText = "Fetch more items...";
-            this.SPObject = new object();
+            get
+            {
+                return "Fetch more items...";
+            }
+            set
+            {
+                base.ToolTipText = value;
+            }
         }
+
+        public MoreNode(ISPNodeCollection parentNode)
+        {
+            ParentNode = parentNode;
+            
+            SPObject = new object();
+        }
+
+        public ISPNodeCollection ParentNode { get; set; }
 
         public override void Setup(object spParent)
         {
             base.Setup(spParent);
 
             // Remove the expand arrow, by forcing a LoadChildren() call that will turn out empty.
-            this.IsExpanded = true;
+            //this.IsExpanded = true;
         }
 
         public override void LoadChildren()

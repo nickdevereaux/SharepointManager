@@ -76,20 +76,14 @@
     <Compile Include="Collections\ThreadSafeDictionary.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\IContextMenuItem.cs" />
-    <Compile Include="ComponentModel\TreeView\ItemNode.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
     <Compile Include="ComponentModel\PropertyGridEditValue.cs" />
-    <Compile Include="ComponentModel\TreeView\ExportToSettingsAttribute.cs" />
-    <Compile Include="ComponentModel\TreeView\ISettingsModel.cs" />
+    <Compile Include="ComponentModel\ExportToSettingsAttribute.cs" />
     <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="ComponentModel\TreeView\SettingsModel.cs" />
     <Compile Include="Configuration\SettingsProvider.cs" />
     <Compile Include="ComponentModel\TypeNames.cs" />
-    <Compile Include="ComponentModel\TreeView\IItemNode.cs" />
-    <Compile Include="ComponentModel\TreeView\ITreeViewModel.cs" />
-    <Compile Include="ComponentModel\TreeView\TreeViewModel.cs" />
     <Compile Include="Configuration\SettingsRoot.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
@@ -155,6 +149,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ComponentModel\TreeView\" />
     <Folder Include="Components\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>

@@ -93,7 +93,8 @@ namespace Keutmann.SharePointManager.Forms
                     toolStripSaveAll.Visible = false;
                 }
 
-                Explorer = new TreeViewExplorer();
+                //Explorer = new TreeViewExplorer();
+                Explorer = new SPTreeView();
                 this.Explorer.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.Explorer.HideSelection = false;
                 this.Explorer.Location = new System.Drawing.Point(0, 0);
@@ -125,6 +126,7 @@ namespace Keutmann.SharePointManager.Forms
             UpdateMenu(node);
 
             ArrayList nodeColl = new ArrayList(node.GetTabPages());
+            //ArrayList nodeColl = new ArrayList();
 
             int i = 0;
             while (i < tabControl.TabPages.Count)

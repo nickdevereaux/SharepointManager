@@ -10,6 +10,7 @@ using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.Administration;
 
 using Keutmann.SharePointManager.Library;
+using System.Windows.Forms;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -47,7 +48,18 @@ namespace Keutmann.SharePointManager.Components
         {
             base.LoadNodes();
 
-            this.AddNode(NodeDisplayLevelType.Medium, new FeatureCollectionDefinitionNode(Farm, Farm.FeatureDefinitions));
+            try
+            {
+                var farm = Farm;
+                //var def = Farm.FeatureDefinitions;
+                this.AddNode(NodeDisplayLevelType.Medium, new FeatureCollectionDefinitionNode(farm));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
             this.AddNode(NodeDisplayLevelType.Advanced, new SolutionCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new ServerCollectionNode(Farm));
             this.AddNode(NodeDisplayLevelType.Advanced, new ServiceCollectionNode(Farm));

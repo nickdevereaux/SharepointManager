@@ -3,19 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint Manager 15", "SharePoint Manager 2007\SharePoint Manager 15.csproj", "{414997CA-AC7E-4D66-9939-25FD990DA4F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2010", "..\..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj", "{CE144460-64CE-4FB5-A25E-25B7BB028D16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.Framework", "..\..\Libraries\SPM2.Framework\SPM40.Framework.csproj", "{5DE0D29F-DE15-4E15-9E89-3A873D849C40}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccLocalPath0 = .
 		SccLocalPath1 = SharePoint\u0020Manager\u00202007
-		SccNumberOfProjects = 2
+		SccLocalPath2 = ..\\..\\Libraries\\SPM2.SharePoint
+		SccLocalPath3 = ..\\..\\Libraries\\SPM2.Framework
+		SccNumberOfProjects = 4
 		SccProjectName1 = SharePoint\u0020Manager\u00202007
+		SccProjectName2 = ../../Libraries/SPM2.SharePoint
+		SccProjectName3 = ../../Libraries/SPM2.Framework
 		SccProjectUniqueName1 = SharePoint\u0020Manager\u00202007\\SharePoint\u0020Manager\u002015.csproj
+		SccProjectUniqueName2 = ..\\..\\Libraries\\SPM2.SharePoint\\SPM40.SharePoint2010.csproj
+		SccProjectUniqueName3 = ..\\..\\Libraries\\SPM2.Framework\\SPM40.Framework.csproj
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		Generate (Debug)|Any CPU = Generate (Debug)|Any CPU
+		Generate (Debug)|x64 = Generate (Debug)|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -24,10 +36,32 @@ Global
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Debug|x64.ActiveCfg = Debug|x64
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Debug|x64.Build.0 = Debug|x64
+		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Generate (Debug)|x64.ActiveCfg = Debug|x64
+		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Generate (Debug)|x64.Build.0 = Debug|x64
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Release|x64.ActiveCfg = Release|x64
 		{414997CA-AC7E-4D66-9939-25FD990DA4F9}.Release|x64.Build.0 = Release|x64
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|Any CPU.ActiveCfg = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|Any CPU.Build.0 = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|x64.ActiveCfg = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|x64.ActiveCfg = Release|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|Any CPU.ActiveCfg = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|Any CPU.Build.0 = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|x64.ActiveCfg = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

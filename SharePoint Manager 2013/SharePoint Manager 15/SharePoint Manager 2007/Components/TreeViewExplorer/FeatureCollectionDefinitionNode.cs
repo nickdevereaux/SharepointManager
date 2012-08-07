@@ -13,20 +13,22 @@ namespace Keutmann.SharePointManager.Components
 {
     class FeatureCollectionDefinitionNode : ExplorerNodeBase
     {
+        private SPFarm CurrentFarm;
 
         public int InstalledIndex = -1;
         public int UnInstalledIndex = -1;
 
         public SPFeatureDefinitionCollection FeatureDefinitions;
 
-        public FeatureCollectionDefinitionNode(object spParent, SPFeatureDefinitionCollection featureDefinitions)
+        public FeatureCollectionDefinitionNode(SPFarm farm)
         {
             this.Text = SPMLocalization.GetString("FeaturesDefinitions_Text");
             this.ToolTipText = SPMLocalization.GetString("FeaturesDefinitions_ToolTip");
             this.Name = "FeaturesDefinitions";
-            this.Tag = featureDefinitions;
-            this.SPParent = spParent;
-            this.FeatureDefinitions = featureDefinitions;
+            //this.Tag = featureDefinitions;
+            this.SPParent = farm;
+            CurrentFarm = farm;
+            //this.FeatureDefinitions = featureDefinitions;
 
             int index = Program.Window.Explorer.AddImage(this.ImageUrl());
             this.ImageIndex = index;
@@ -43,6 +45,9 @@ namespace Keutmann.SharePointManager.Components
         {
             base.LoadNodes();
             CultureInfo cultureInfo = new CultureInfo(1033);
+
+            this.FeatureDefinitions = CurrentFarm.FeatureDefinitions;
+            this.Tag = this.FeatureDefinitions;
 
             foreach (SPFeatureDefinition definition in FeatureDefinitions)
             {

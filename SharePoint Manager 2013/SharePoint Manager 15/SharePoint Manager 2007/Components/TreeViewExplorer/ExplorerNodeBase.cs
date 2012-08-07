@@ -11,6 +11,7 @@ using Microsoft.SharePoint.Administration;
 
 using Keutmann.SharePointManager.Library;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -124,7 +125,7 @@ namespace Keutmann.SharePointManager.Components
             : base(text, imageIndex, selectedImageIndex, children)
         { }
 
-
+        [DebuggerStepThroughAttribute()]
         public virtual TabPage[] GetTabPages()
         {
             ArrayList alPages = new ArrayList();

@@ -28,7 +28,8 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>C:\Temp\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -54,6 +55,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -82,6 +85,9 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>default</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
@@ -120,6 +126,11 @@
       <DependentUpon>SPMListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Menu\MenuStripRefresh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ViewModel\TreeView\TreeViewNodeProvider.cs" />
+    <Compile Include="ViewModel\TreeView\SPTreeNode.cs" />
+    <Compile Include="Components\SPTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\TabControl\ReadOnlyPropertyGrid.cs">
@@ -314,6 +325,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SPManagerLanguage.sv.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\TreeView\ITreeViewNodeProvider.cs" />
     <EmbeddedResource Include="Components\FileListView\FileListView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FileListView.cs</DependentUpon>
@@ -377,6 +389,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -422,6 +435,11 @@
     <None Include="Properties\spm2007key.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0</ProductName>
@@ -435,6 +453,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Functions\EventHandler\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libraries\SPM2.Framework\SPM40.Framework.csproj">
+      <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
+      <Name>SPM40.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj">
+      <Project>{ce144460-64ce-4fb5-a25e-25b7bb028d16}</Project>
+      <Name>SPM40.SharePoint2010</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

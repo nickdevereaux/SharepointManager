@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("FormTemplates")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.FormsServiceNode")]
 	public partial class FormTemplateCollectionNode
 	{

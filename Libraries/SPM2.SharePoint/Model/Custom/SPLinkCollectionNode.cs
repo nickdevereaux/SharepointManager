@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ForwardLinks")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
 	public partial class SPLinkCollectionNode

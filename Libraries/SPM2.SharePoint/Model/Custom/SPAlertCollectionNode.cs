@@ -14,7 +14,7 @@ using System.IO;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Alerts")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	public partial class SPAlertCollectionNode

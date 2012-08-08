@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Attachments")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
     // The Attachment property is a boolean
 	//[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	public partial class SPAttachmentCollectionNode

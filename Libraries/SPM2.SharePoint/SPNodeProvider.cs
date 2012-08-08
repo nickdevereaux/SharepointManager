@@ -19,6 +19,14 @@ namespace SPM2.SharePoint
     {
         public const string AddInId = "SPM2.SharePoint.SPNodeProvider";
 
+        public string View { get; set; }
+
+
+        public SPNodeProvider()
+        {
+            View = "Full";
+        }
+
         public ISPNode LoadFarmNode()
         {
             return Create("Farm", typeof(SPFarmNode), SharePointContext.Instance.Farm);
@@ -101,7 +109,6 @@ namespace SPM2.SharePoint
             PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
             try
             {
-
                 // ReSharper disable LoopCanBeConvertedToQuery
                 foreach (PropertyDescriptor info in propertyDescriptors)
                 {
@@ -109,8 +116,15 @@ namespace SPM2.SharePoint
                     {
                         ISPNode node = sourceNode.NodeTypes[info.PropertyType];
 
+                        // Exclude the node if it do not match the correct view
+                        if(!MatchView(node.GetType())) continue;
+                        
+
                         //Ensure that the child node instance is unique in the TreeView
                         node = Create(info.DisplayName, node.GetType(), sourceNode.SPObject);
+
+                        
+
                         list.Add(node);
                         //yield return node;
                     }
@@ -123,6 +137,14 @@ namespace SPM2.SharePoint
                 MessageBox.Show(ex.Message);
             }
             return list;
+        }
+
+        private bool MatchView(Type type)
+        {
+            var list = type.GetCustomAttributes(true).OfType<ViewAttribute>();
+            if (list.Count() == 0) return true;
+
+            return list.Any(p => View.Equals(p.Name));
         }
 
         public  Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)

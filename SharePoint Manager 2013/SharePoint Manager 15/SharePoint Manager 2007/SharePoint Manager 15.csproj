@@ -128,6 +128,12 @@
     <Compile Include="Components\Menu\MenuStripRefresh.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\TreeView\TreeViewNodeProvider.cs" />
     <Compile Include="ViewModel\TreeView\SPTreeNode.cs" />
     <Compile Include="Components\SPTreeView.cs">
@@ -269,12 +275,6 @@
     </Compile>
     <Compile Include="Forms\OpenDBConnection.Designer.cs">
       <DependentUpon>OpenDBConnection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\ExportImport\RestoreForm.cs">
       <SubType>Form</SubType>
@@ -420,7 +420,7 @@
     <Content Include="Resources\Images\GlobalServer.gif" />
     <Content Include="Resources\Images\icon-property.gif" />
     <Content Include="Resources\Images\Internet.gif" />
-    <None Include="Resources\Images\loading.png" />
+    <SplashScreen Include="Resources\Images\loading.png" />
     <Content Include="Resources\Images\server.gif" />
     <Content Include="Resources\Images\ServerConfig.gif" />
     <Content Include="Resources\Images\system.gif" />

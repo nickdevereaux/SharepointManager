@@ -13,8 +13,8 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.AccessServerWebServiceInstanceNode")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
+    [ExportToNode("SPM2.SharePoint.Model.AccessServerWebServiceInstanceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
 	public partial class AccessServerWebServiceNode
 	{

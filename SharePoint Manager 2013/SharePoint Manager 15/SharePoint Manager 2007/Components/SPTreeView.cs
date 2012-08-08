@@ -19,6 +19,9 @@ namespace Keutmann.SharePointManager.Components
         public int oldNodeIndex = -1;
         public SPFarm CurrentFarm = SPFarm.Local;
 
+
+        public SPTreeNode FarmNode { get; set; }
+
         public SPTreeView()
         {
             this.ShowNodeToolTips = true;
@@ -84,19 +87,18 @@ namespace Keutmann.SharePointManager.Components
             BeginUpdate();
             TreeViewNodeSorter = new NodeSorter();
 
-            //ExplorerNodeBase root = null;
-            //root = new FarmNode(CurrentFarm);
+            var nodeProvider = new SPNodeProvider();
+            //nodeProvider.View = "Simple";
 
-
-            var provider = new TreeViewNodeProvider(new SPNodeProvider());
-            var root = provider.LoadFarmNode();
-            this.Nodes.Add(root);
+            var treeViewProvider = new TreeViewNodeProvider(nodeProvider);
+            FarmNode = treeViewProvider.LoadFarmNode();
+            this.Nodes.Add(FarmNode);
 
             Sort();
-
+            
             //DefaultExpand(root);
 
-            this.SelectedNode = root;
+            this.SelectedNode = FarmNode;
 
             EndUpdate();
             Cursor.Current = Cursors.Default;

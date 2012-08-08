@@ -39,7 +39,7 @@ namespace Keutmann.SharePointManager.Components
             : this()
         {
             this.Text = title;
-            this.Grid.SelectedObject = obj;
+            //this.Grid.SelectedObject = obj;
         }
 
     }

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
 	[Title("WebApplications")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPWebApplicationCollectionNode
 	{

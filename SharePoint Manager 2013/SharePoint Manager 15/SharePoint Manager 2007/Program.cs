@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -36,23 +37,33 @@ namespace Keutmann.SharePointManager
             Trace.WriteLine("Application started");
             Watch.Start();
 
-            SplashScreen.ShowSplashScreen();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            CompositionProvider.LoadAssemblies();
-            
-            Window = new MainWindow();
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            Application.Run(Window);
+
+            Window = new MainWindow();
+            SplashScreen.ShowSplashScreen(Setup);
             
+            Application.Run(Window);
+
+          
             Trace.WriteLine("Application ended");
         }
+
+        static Form Setup()
+        {
+            CompositionProvider.LoadAssemblies();
+            Window.SplashScreenLoad();
+            return null;
+        } 
+
+       
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             Cursor.Current = Cursors.Default;
             MessageBox.Show(e.Exception.Message, SPMLocalization.GetString("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
     }
 }

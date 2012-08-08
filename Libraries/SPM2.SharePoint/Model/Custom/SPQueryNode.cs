@@ -12,7 +12,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	public partial class SPQueryNode
 	{
 	}

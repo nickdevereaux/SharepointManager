@@ -12,58 +12,44 @@ namespace Keutmann.SharePointManager.Forms
 {
     public partial class SplashScreen : Form
     {
-        static Thread thread = null;
-        static SplashScreen frmSplash = null;
+        Func<Form> Setup;
+        Form result;
 
-        public SplashScreen()
+        public SplashScreen(Func<Form> setup)
         {
             InitializeComponent();
+            Setup = setup;
         }
-       static public void ShowSplashScreen()
+
+        protected override void OnLoad(EventArgs e)
         {
-            // Make sure it is only launched once.
-            if (frmSplash != null)
-                return;
-            thread = new Thread(new ThreadStart(SplashScreen.ShowForm));
-            thread.IsBackground = false ;
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
+            base.OnLoad(e);
 
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+            worker.RunWorkerAsync();
+
+            this.Update();
         }
 
-
-
-        static private void ShowForm()
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            frmSplash = new SplashScreen();
-            Application.Run(frmSplash);
+            this.Close();
         }
 
-        static public SplashScreen SplashForm
+        void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            get
-            {
-                return frmSplash;
-            }
-        }
+            result = Setup.Invoke();
+        } 
 
-        static public void CloseForm()
+
+        static public Form ShowSplashScreen(Func<Form> setup)
         {
-            if (frmSplash != null && !frmSplash.IsDisposed)
-            {
-                // Make it start going away.
-                frmSplash.Hide();
-                frmSplash.Dispose();
-                frmSplash = null;   
-            }
-            if (thread.IsAlive)
-            {
-                thread.Abort();
-                thread = null;  // we do not need these any more.
-            }
+            var screen = new SplashScreen(setup);
+            Application.Run(screen);
+
+            return screen.result;
         }
-
-
-
     }
 }

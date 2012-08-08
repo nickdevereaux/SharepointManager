@@ -16,6 +16,7 @@ using Microsoft.SharePoint.Administration;
 using Keutmann.SharePointManager.Components;
 using Keutmann.SharePointManager.Library;
 using Keutmann.SharePointManager.Properties;
+using SPM2.Framework.ComponentModel;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -35,8 +36,39 @@ namespace Keutmann.SharePointManager.Forms
             InitializeComponent();
         }
 
+        public void SplashScreenLoad()
+        {
 
-        private void MainWindow_Load(object sender, EventArgs e) 
+            // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
+            PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
+            PropertyGridTypeConverter.AddTo(typeof(SPFarm));
+            PropertyGridTypeConverter.AddTo(typeof(SPWebService));
+
+
+            //Explorer = new TreeViewExplorer();
+            Explorer = new SPTreeView();
+            this.Explorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Explorer.HideSelection = false;
+            this.Explorer.Location = new System.Drawing.Point(0, 0);
+            this.Explorer.Name = "Explorer";
+            this.Explorer.ShowNodeToolTips = true;
+            this.Explorer.Size = new System.Drawing.Size(408, 440);
+            this.Explorer.TabIndex = 0;
+            this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Explorer_KeyUp);
+            this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Explorer_NodeMouseClick);
+            this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
+
+            splitContainer.Panel1.Controls.Add(Explorer);
+
+            Explorer.Build();
+
+            // Call default expand after Explorer.Build();
+            ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
+            TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
+            propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);
+        }
+
+        public void MainWindow_Load(object sender, EventArgs e) 
         {
             string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
             if (language == null)
@@ -84,38 +116,16 @@ namespace Keutmann.SharePointManager.Forms
                         englishToolStripMenuItem.Checked = true;
                         break;
                 }
-
-                InitializeInterfaceStrings();
-
-                if (Properties.Settings.Default.ReadOnly)
-                {
-                    toolStripSave.Visible = false;
-                    toolStripSaveAll.Visible = false;
-                }
-
-                //Explorer = new TreeViewExplorer();
-                Explorer = new SPTreeView();
-                this.Explorer.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.Explorer.HideSelection = false;
-                this.Explorer.Location = new System.Drawing.Point(0, 0);
-                this.Explorer.Name = "Explorer";
-                this.Explorer.ShowNodeToolTips = true;
-                this.Explorer.Size = new System.Drawing.Size(408, 440);
-                this.Explorer.TabIndex = 0;
-                this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Explorer_KeyUp);
-                this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Explorer_NodeMouseClick);
-                this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
-
-                splitContainer.Panel1.Controls.Add(Explorer);
-
-                Explorer.Build();
-
-                // Call default expand after Explorer.Build();
-                ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
-                TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
-                propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);
             }
-            SplashScreen.CloseForm();
+
+            InitializeInterfaceStrings();
+
+            if (Properties.Settings.Default.ReadOnly)
+            {
+                toolStripSave.Visible = false;
+                toolStripSaveAll.Visible = false;
+            }
+            //SplashScreen.CloseForm();
         }
        
         private void ExplorerClick(ExplorerNodeBase node)

@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("UserToken")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPUserTokenNode

@@ -102,6 +102,49 @@ namespace Keutmann.SharePointManager.Components
             return refresh;
         }
 
+        public ToolStripMenuItem CreateFocus()
+        {
+            ToolStripMenuItem focus = new ToolStripMenuItem();
+            focus.Text = "Focus";
+            focus.Name = "Focus";
+            //focus.Image = global::Keutmann.SharePointManager.Properties.Resources.refresh3;
+            focus.Click += focus_Click;
+            return focus;
+        }
+
+        void focus_Click(object sender, EventArgs e)
+        {
+            var node = CurrentNode;
+            if (node != null && node != Program.Window.Explorer.FarmNode)
+            {
+                Program.Window.Explorer.Nodes.Clear();
+                Program.Window.Explorer.Nodes.Add(node);
+                Program.Window.Explorer.SelectedNode = node;
+            }            
+        }
+
+
+        public ToolStripMenuItem CreateUnfocus()
+        {
+            ToolStripMenuItem Unfocus = new ToolStripMenuItem();
+            Unfocus.Text = "Unfocus";
+            Unfocus.Name = "Unfocus";
+            //focus.Image = global::Keutmann.SharePointManager.Properties.Resources.refresh3;
+            Unfocus.Click += unfocus_Click;
+            return Unfocus;
+        }
+
+        void unfocus_Click(object sender, EventArgs e)
+        {
+            var node = CurrentNode;
+            if (node != null && node != Program.Window.Explorer.FarmNode)
+            {
+                Program.Window.Explorer.Nodes.Clear();
+                Program.Window.Explorer.Nodes.Add(Program.Window.Explorer.FarmNode);
+                Program.Window.Explorer.SelectedNode = node;
+            }            
+        }
+
         public SPMStandardMenuItems()
         {
             //this.Refresh = CreateRefresh();

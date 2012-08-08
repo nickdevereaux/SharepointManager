@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("BaseTemplate")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowAssociationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWorkflowTemplateCollectionNode")]
 	public partial class SPWorkflowTemplateNode

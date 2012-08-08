@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("RestrictedTypes")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPRestrictedObjectModelNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPClientCallableSettingsNode")]
 	public partial class SPObjectModelTypeCollectionNode

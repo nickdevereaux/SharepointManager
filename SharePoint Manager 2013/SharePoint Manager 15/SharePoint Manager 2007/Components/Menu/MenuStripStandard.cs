@@ -22,6 +22,8 @@ namespace Keutmann.SharePointManager.Components
         public ToolStripItem PasteItem;
         public ToolStripItem DeleteItem;
         public ToolStripItem RefreshItem;
+        public ToolStripItem FocusItem;
+        public ToolStripItem UnfocusItem;
 
         public bool InReadOnlyMode
         {
@@ -66,6 +68,8 @@ namespace Keutmann.SharePointManager.Components
                 
             }
             this.Items.AddRange(new ToolStripItem[] {
+                //SPMMenu.Items.CreateFocus(),
+                //SPMMenu.Items.CreateUnfocus(),
                 RefreshItem
                });
                 

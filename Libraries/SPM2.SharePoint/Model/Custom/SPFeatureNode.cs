@@ -15,7 +15,7 @@ using System.ComponentModel;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPFeature")]
-	[Icon(Small="BULLET.GIF")]
+	[Icon(Small="BULLET.GIF")][View("Full")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFeatureCollectionNode")]
 	public partial class SPFeatureNode
 	{

@@ -37,7 +37,7 @@ namespace SPM2.SharePoint.Model
             {
                 if (String.IsNullOrEmpty(_toolTipText))
                 {
-                    _toolTipText = Descriptor.ClassType.Name;
+                    _toolTipText = SPObjectType.Name;
                 }
                 return _toolTipText;
             }
@@ -61,7 +61,7 @@ namespace SPM2.SharePoint.Model
                                     _iconUri = SharePointContext.GetImagePath(Descriptor.Icon.Small);
                                     break;
                                 default:
-                                    _iconUri = GetResourceImagePath(Descriptor.Icon.Small);
+                                    _iconUri = GetResourceImagePath(Descriptor);
                                     break;
                             }
                         }
@@ -231,13 +231,22 @@ namespace SPM2.SharePoint.Model
             }
         }
 
-        public static string GetResourceImagePath(string filename)
+        public static string GetResourceImagePath(ClassDescriptor descriptor )
         {
-            if (String.IsNullOrEmpty(filename)) return string.Empty;
+            string name = descriptor.Icon.Small;
 
-            var name = Path.GetFileNameWithoutExtension(filename);
+            if (String.IsNullOrEmpty(name)) return string.Empty;
 
-            var result = String.Format("{0};{1};{2}", Assembly.GetExecutingAssembly().FullName, "SPM2.SharePoint.Properties.Resources", name);
+            var assembly = descriptor.ClassType.Assembly;
+            var length = name.LastIndexOf('.');
+            if(length < 1) return string.Empty;
+
+            var path = name.Substring(0, length); // "SPM2.SharePoint.Properties.Resources";
+            name = name.Substring(length+1);
+
+            if (String.IsNullOrEmpty(name)) return string.Empty;
+
+            var result = String.Format("{0};{1};{2}", assembly.FullName, path, name);
             //Trace.WriteLine("Resource: " + result);
             return result;
         }

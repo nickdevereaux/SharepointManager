@@ -13,12 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ApplicationPools")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.AppPool", Source = IconSource.Assembly)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPApplicationPoolCollectionNode
 	{
-        public SPApplicationPoolCollectionNode()
-        {
-            this.IconUri = GetResourceImagePath("AppPool.gif");
-        }
 	}
 }

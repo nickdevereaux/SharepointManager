@@ -14,6 +14,7 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
     [Title(PropertyName = "DisplayName")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.Internet", Source = IconSource.Assembly)]
     [ExportToNode("SPM2.SharePoint.Model.SPJobDefinitionNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPWebApplicationCollectionNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
@@ -26,12 +27,6 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
     public partial class SPWebApplicationNode
     {
-        public SPWebApplicationNode()
-        {
-            this.IconUri = GetResourceImagePath("Internet.gif");
-        }
-
-
         public override IEnumerable<SPNode> NodesToExpand()
         {
             return this.Children.OfType<SPSiteCollectionNode>().Take(1).Cast<SPNode>();

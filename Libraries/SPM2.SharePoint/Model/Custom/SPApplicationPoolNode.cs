@@ -13,14 +13,11 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.WebAppPool", Source = IconSource.Assembly)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPApplicationPoolCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPApplicationPoolNode
 	{
-        public SPApplicationPoolNode()
-        {
-            this.IconUri = GetResourceImagePath("WebAppPool.gif");
-        }
 	}
 }

@@ -16,11 +16,12 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.actionssettings", Source = IconSource.Assembly)]
 	public partial class SPFarmNode
 	{
         public SPFarmNode()
         {
-            IconUri = GetResourceImagePath("actionssettings.gif");
+            //IconUri = GetResourceImagePath("actionssettings.gif");
         }
 
 

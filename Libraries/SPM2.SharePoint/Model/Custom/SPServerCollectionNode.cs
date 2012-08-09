@@ -13,13 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Servers")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.server", Source = IconSource.Assembly)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServerCollectionNode
 	{
-        public SPServerCollectionNode()
-        {
-            this.IconUri = GetResourceImagePath("server.gif");
-        }
 	}
 }

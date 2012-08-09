@@ -14,6 +14,7 @@ using System.IO;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.server", Source = IconSource.Assembly)]
 	[ExportToNode("SPM2.SharePoint.Model.SPServerCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SessionStateDatabaseNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]
@@ -26,9 +27,5 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPServerNode
 	{
-        public SPServerNode()
-        {
-            this.IconUri = GetResourceImagePath("server.gif");
-        }
 	}
 }

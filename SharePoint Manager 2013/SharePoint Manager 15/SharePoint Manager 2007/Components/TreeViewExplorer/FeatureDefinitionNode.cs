@@ -27,7 +27,7 @@ namespace Keutmann.SharePointManager.Components
         public bool IsInstalled = true;
 
 
-        public SPTreeView Explorer
+        public TreeViewComponent Explorer
         {
             get
             {

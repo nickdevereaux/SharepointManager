@@ -13,7 +13,7 @@ using System.Collections;
 
 namespace SPM2.SharePoint.Model
 {
-    [Icon(Small = "icon-property.gif", Source=IconSource.Assembly)]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.icon_property", Source = IconSource.Assembly)]
     [ExportToNode("SPM2.SharePoint.Model.SPPropertyCollectionNode")]
     [AdapterItemType("System.Collections.DictionaryEntry")]
 	public partial class SPPropertyNode : SPNode

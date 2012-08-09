@@ -13,19 +13,21 @@ using SPM2.SharePoint;
 
 namespace Keutmann.SharePointManager.Components
 {
-    public class SPTreeView : TreeView
+    public class TreeViewComponent : TreeView
     {
-        public NodeDisplayLevelType DisplayLevel = NodeDisplayLevelType.Advanced | NodeDisplayLevelType.Medium | NodeDisplayLevelType.Simple;
         public int oldNodeIndex = -1;
         public SPFarm CurrentFarm = SPFarm.Local;
+
+        public string ViewName { get; set; }
 
 
         public SPTreeNode FarmNode { get; set; }
 
-        public SPTreeView()
+        public TreeViewComponent()
         {
             this.ShowNodeToolTips = true;
             this.HideSelection = false;
+            ViewName = "Full";
         }
 
         public int AddImage(string path)
@@ -88,7 +90,7 @@ namespace Keutmann.SharePointManager.Components
             TreeViewNodeSorter = new NodeSorter();
 
             var nodeProvider = new SPNodeProvider();
-            //nodeProvider.View = "Simple";
+            nodeProvider.View = ViewName;
 
             var treeViewProvider = new TreeViewNodeProvider(nodeProvider);
             FarmNode = treeViewProvider.LoadFarmNode();

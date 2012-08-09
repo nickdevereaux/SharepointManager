@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("WorkflowAssociations")]
-    [Icon(Small = "workflows.gif")]
+    [Icon(Small = "workflows.png")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]

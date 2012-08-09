@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Webs")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+    [Icon(Small = "orgchange.png")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPWebCollectionNode

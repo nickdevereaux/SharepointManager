@@ -14,15 +14,10 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
 	[Title("WebApplications")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
-	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
+    [Icon(Small = "SPM2.SharePoint.Properties.Resources.GlobalServer", Source = IconSource.Assembly)]
+    [ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPWebApplicationCollectionNode
 	{
-        public SPWebApplicationCollectionNode()
-        {
-            this.IconUri = GetResourceImagePath("GlobalServer.gif");
-        }
-
         public override IEnumerable<SPNode> NodesToExpand()
         {
             return this.Children.OfType<SPWebApplicationNode>().Take(1).Cast<SPNode>();

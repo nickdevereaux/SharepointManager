@@ -46,7 +46,7 @@ namespace Keutmann.SharePointManager.Forms
 
 
             //Explorer = new TreeViewExplorer();
-            Explorer = new SPTreeView();
+            Explorer = new TreeViewComponent();
             this.Explorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Explorer.HideSelection = false;
             this.Explorer.Location = new System.Drawing.Point(0, 0);
@@ -66,17 +66,25 @@ namespace Keutmann.SharePointManager.Forms
             ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
             TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
             propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);
+
+            if (Properties.Settings.Default.ReadOnly)
+            {
+                toolStripSave.Visible = false;
+                toolStripSaveAll.Visible = false;
+            }
         }
 
         public void MainWindow_Load(object sender, EventArgs e) 
         {
-            string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
-            if (language == null)
-            {
-                SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_EN);
-            }
-            else
-            {
+            ChangeLanguage(SPMLocalization.C_CULTURE_EN);
+
+            //string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
+            //if (language == null)
+            //{
+            //    SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_EN);
+            //}
+            //else
+            //{
                 /* NEW LANGUAGE INSTRUCTIONS
                  * - Add a new constant in Library-SPMLocalization.cs  (public const string C_CULTURE_XX = "XX";)
                  * - Add a new sub-menu ("Xxxxx") in the MainForm.cs under "Languages", and his Click Event
@@ -98,34 +106,8 @@ namespace Keutmann.SharePointManager.Forms
 
                 //Uncheck everything in the Language Menu
 
-                switch (language)
-                {
-                    case SPMLocalization.C_CULTURE_EN:
-                        englishToolStripMenuItem.Checked = true;
-                        break;
-                    case SPMLocalization.C_CULTURE_ES:
-                        spanishToolStripMenuItem.Checked = true;
-                        break;
-                    case SPMLocalization.C_CULTURE_NL:
-                        dutchToolStripMenuItem.Checked = true;
-                        break;
-                    case SPMLocalization.C_CULTURE_SV:
-                        swedishToolStripMenuItem.Checked = true;
-                        break;
-                    default:
-                        englishToolStripMenuItem.Checked = true;
-                        break;
-                }
-            }
+            ////}
 
-            InitializeInterfaceStrings();
-
-            if (Properties.Settings.Default.ReadOnly)
-            {
-                toolStripSave.Visible = false;
-                toolStripSaveAll.Visible = false;
-            }
-            //SplashScreen.CloseForm();
         }
        
         private void ExplorerClick(ExplorerNodeBase node)
@@ -357,13 +339,11 @@ namespace Keutmann.SharePointManager.Forms
             ToolStripMenuItem item = sender as ToolStripMenuItem;
 
             minimalToolStripMenuItem.Checked = false;
-            mediumToolStripMenuItem.Checked = false;
             fullToolStripMenuItem.Checked = false;
 
             item.Checked = true;
 
-            int filter = int.Parse(item.Tag as string);
-            Explorer.DisplayLevel = (NodeDisplayLevelType)filter;
+            Explorer.ViewName = item.Tag as string;
             Explorer.Build();
         }
 
@@ -377,82 +357,25 @@ namespace Keutmann.SharePointManager.Forms
             statusStrip.Visible = MenuItemStatusBarVisible.Checked;
         }
 
-        private void InitializeInterfaceStrings()
-        {
-            fileToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_File_Text");
-            fileToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_File_ToolTip");
-            openDatabaseToolStripMenuItem.Text          = SPMLocalization.GetString("Interface_OpenDatabase_Text");
-            openDatabaseToolStripMenuItem.ToolTipText   = SPMLocalization.GetString("Interface_OpenDatabase_ToolTip");
-            saveToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Save_Text");
-            saveToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_Save_ToolTip");
-            saveallToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SaveAll_Text");
-            saveallToolStripMenuItem.ToolTipText        = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
-            cancelToolStripMenuItem.Text                = SPMLocalization.GetString("Interface_Cancel_Text");
-            cancelToolStripMenuItem.ToolTipText         = SPMLocalization.GetString("Interface_Cancel_ToolTip");
-            exitToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Exit_Text");
-            exitToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_Exit_ToolTip");
-            editToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Edit_Text");
-            editToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_Edit_ToolTip");
-            refreshToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_Refresh_Text");
-            refreshToolStripMenuItem.ToolTipText        = SPMLocalization.GetString("Interface_Refresh_ToolTip");
-            shallowmodeToolStripMenuItem.Text           = SPMLocalization.GetString("Interface_ShallowExpand");
-            viewToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_View_Text");
-            viewToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_View_ToolTip");
-            objectModelToolStripMenuItem.Text           = SPMLocalization.GetString("Interface_ObjectModel_Text");
-            objectModelToolStripMenuItem.ToolTipText    = SPMLocalization.GetString("Interface_ObjectModel_ToolTip");
-            minimalToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_Minimal_Text");
-            minimalToolStripMenuItem.ToolTipText        = SPMLocalization.GetString("Interface_Minimal_ToolTip");
-            mediumToolStripMenuItem.Text                = SPMLocalization.GetString("Interface_Medium_Text");
-            mediumToolStripMenuItem.ToolTipText         = SPMLocalization.GetString("Interface_Medium_ToolTip");
-            fullToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Full_Text");
-            fullToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_Full_ToolTip");
-            MenuItemStandardBarVisible.Text             = SPMLocalization.GetString("Interface_ToolBar_Text");
-            MenuItemStandardBarVisible.ToolTipText      = SPMLocalization.GetString("Interface_ToolBar_ToolTip");
-            MenuItemStatusBarVisible.Text               = SPMLocalization.GetString("Interface_StatusBar_Text");
-            MenuItemStatusBarVisible.ToolTipText        = SPMLocalization.GetString("Interface_StatusBar_ToolTip");
-            helpToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Help_Text");
-            helpToolStripMenuItem.ToolTipText           = SPMLocalization.GetString("Interface_Help_ToolTip");
-            aboutToolStripMenuItem.Text                 = SPMLocalization.GetString("Interface_About_Text");
-            aboutToolStripMenuItem.ToolTipText          = SPMLocalization.GetString("Interface_About_ToolTip");
-            toolStripDBConnection.Text                  = SPMLocalization.GetString("Interface_OpenDataBaseConn_Text");
-            toolStripDBConnection.ToolTipText           = SPMLocalization.GetString("Interface_OpenDataBaseConn_ToolTip");
-            toolStripRefresh.Text                       = SPMLocalization.GetString("Interface_RefreshNode_Text");
-            toolStripRefresh.ToolTipText                = SPMLocalization.GetString("Interface_RefreshNode_ToolTip");
-            languageToolStripMenuItem.Text              = SPMLocalization.GetString("Interface_Languages");
-            englishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_EnglishLanguage");
-            spanishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SpanishLanguage");
-            dutchToolStripMenuItem.Text                 = SPMLocalization.GetString("Interface_DutchLanguage");
-            swedishToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SwedishLanguage");
-            saveToolStripMenuItem.Text                  = SPMLocalization.GetString("Interface_Save_ToolTip");
-            saveallToolStripMenuItem.Text               = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
-            cancelToolStripMenuItem.Text                = SPMLocalization.GetString("Interface_Cancel_ToolTip");
-        }
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_EN);
-            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_EN;
-            this.MainWindow_Load(null, null);
+            ChangeLanguage(SPMLocalization.C_CULTURE_EN);
         }
 
         private void spanishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_ES);
-            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_ES;
-            this.MainWindow_Load(null, null);
+            ChangeLanguage(SPMLocalization.C_CULTURE_ES);
         }
 
         private void dutchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_NL;
-            //SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_NL);
-            this.MainWindow_Load(null, null);
+            ChangeLanguage(SPMLocalization.C_CULTURE_NL);
         }
 
         void swedishToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            SPMLocalization.SelectedLanguage = SPMLocalization.C_CULTURE_SV;
-            this.MainWindow_Load(null, null);
+            ChangeLanguage(SPMLocalization.C_CULTURE_SV);
         }
 
         void Explorer_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -466,5 +389,97 @@ namespace Keutmann.SharePointManager.Forms
         {
             ExplorerClick(e.Node as ExplorerNodeBase);
         }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangeLanguage(string localization)
+        {
+            SPMLocalization.SelectedLanguage = localization;
+            UpdateLanguageButtons();
+            InitializeInterfaceStrings();
+        }
+
+        private void UpdateLanguageButtons()
+        {
+            englishToolStripMenuItem.Checked = false;
+            spanishToolStripMenuItem.Checked = false;
+            dutchToolStripMenuItem.Checked = false;
+            swedishToolStripMenuItem.Checked = false;
+            englishToolStripMenuItem.Checked = false;
+
+
+            switch (SPMLocalization.SelectedLanguage)
+            {
+                case SPMLocalization.C_CULTURE_EN:
+                    englishToolStripMenuItem.Checked = true;
+                    break;
+                case SPMLocalization.C_CULTURE_ES:
+                    spanishToolStripMenuItem.Checked = true;
+                    break;
+                case SPMLocalization.C_CULTURE_NL:
+                    dutchToolStripMenuItem.Checked = true;
+                    break;
+                case SPMLocalization.C_CULTURE_SV:
+                    swedishToolStripMenuItem.Checked = true;
+                    break;
+                default:
+                    englishToolStripMenuItem.Checked = true;
+                    break;
+            }
+
+        }
+
+        private void InitializeInterfaceStrings()
+        {
+            fileToolStripMenuItem.Text = SPMLocalization.GetString("Interface_File_Text");
+            fileToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_File_ToolTip");
+            openDatabaseToolStripMenuItem.Text = SPMLocalization.GetString("Interface_OpenDatabase_Text");
+            openDatabaseToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_OpenDatabase_ToolTip");
+            saveToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Save_Text");
+            saveToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Save_ToolTip");
+            saveallToolStripMenuItem.Text = SPMLocalization.GetString("Interface_SaveAll_Text");
+            saveallToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
+            cancelToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Cancel_Text");
+            cancelToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Cancel_ToolTip");
+            exitToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Exit_Text");
+            exitToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Exit_ToolTip");
+            editToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Edit_Text");
+            editToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Edit_ToolTip");
+            refreshToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Refresh_Text");
+            refreshToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Refresh_ToolTip");
+            shallowmodeToolStripMenuItem.Text = SPMLocalization.GetString("Interface_ShallowExpand");
+            viewToolStripMenuItem.Text = SPMLocalization.GetString("Interface_View_Text");
+            viewToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_View_ToolTip");
+            objectModelToolStripMenuItem.Text = SPMLocalization.GetString("Interface_ObjectModel_Text");
+            objectModelToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_ObjectModel_ToolTip");
+            minimalToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Minimal_Text");
+            minimalToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Minimal_ToolTip");
+            fullToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Full_Text");
+            fullToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Full_ToolTip");
+            MenuItemStandardBarVisible.Text = SPMLocalization.GetString("Interface_ToolBar_Text");
+            MenuItemStandardBarVisible.ToolTipText = SPMLocalization.GetString("Interface_ToolBar_ToolTip");
+            MenuItemStatusBarVisible.Text = SPMLocalization.GetString("Interface_StatusBar_Text");
+            MenuItemStatusBarVisible.ToolTipText = SPMLocalization.GetString("Interface_StatusBar_ToolTip");
+            helpToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Help_Text");
+            helpToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Help_ToolTip");
+            aboutToolStripMenuItem.Text = SPMLocalization.GetString("Interface_About_Text");
+            aboutToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_About_ToolTip");
+            toolStripDBConnection.Text = SPMLocalization.GetString("Interface_OpenDataBaseConn_Text");
+            toolStripDBConnection.ToolTipText = SPMLocalization.GetString("Interface_OpenDataBaseConn_ToolTip");
+            toolStripRefresh.Text = SPMLocalization.GetString("Interface_RefreshNode_Text");
+            toolStripRefresh.ToolTipText = SPMLocalization.GetString("Interface_RefreshNode_ToolTip");
+            languageToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Languages");
+            englishToolStripMenuItem.Text = SPMLocalization.GetString("Interface_EnglishLanguage");
+            spanishToolStripMenuItem.Text = SPMLocalization.GetString("Interface_SpanishLanguage");
+            dutchToolStripMenuItem.Text = SPMLocalization.GetString("Interface_DutchLanguage");
+            swedishToolStripMenuItem.Text = SPMLocalization.GetString("Interface_SwedishLanguage");
+            saveToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Save_ToolTip");
+            saveallToolStripMenuItem.Text = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
+            cancelToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Cancel_ToolTip");
+        }
+
     }
 }

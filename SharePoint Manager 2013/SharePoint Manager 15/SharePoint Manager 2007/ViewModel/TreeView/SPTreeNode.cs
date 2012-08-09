@@ -48,7 +48,8 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         public override void Setup()
         {
             this.Text = Model.Text + string.Empty;
-            this.Name = Model.ToolTipText;
+            this.Name = Model.SPObjectType.FullName;
+            this.ToolTipText = Model.ToolTipText;
         }
 
         //public override string ImageUrl()

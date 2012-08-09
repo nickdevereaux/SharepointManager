@@ -14,7 +14,7 @@ namespace Keutmann.SharePointManager.Components
     public class ContextMenuStripBase : ContextMenuStrip
     {
 
-        public SPTreeView Explorer
+        public TreeViewComponent Explorer
         {
             get
             {

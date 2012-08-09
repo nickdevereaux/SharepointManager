@@ -136,7 +136,7 @@
     </Compile>
     <Compile Include="ViewModel\TreeView\TreeViewNodeProvider.cs" />
     <Compile Include="ViewModel\TreeView\SPTreeNode.cs" />
-    <Compile Include="Components\SPTreeView.cs">
+    <Compile Include="Components\TreeViewComponent.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\TabControl\ReadOnlyPropertyGrid.cs">

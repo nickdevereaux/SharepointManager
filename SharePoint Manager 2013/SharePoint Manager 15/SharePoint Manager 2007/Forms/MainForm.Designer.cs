@@ -49,7 +49,6 @@ namespace Keutmann.SharePointManager.Forms
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemStandardBarVisible = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +72,7 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl = new Keutmann.SharePointManager.Components.SPMTabControl();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -87,7 +87,8 @@ namespace Keutmann.SharePointManager.Forms
             this.statusStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel,
-            this.toolStripProgressBar});
+            this.toolStripProgressBar,
+            this.toolStripStatusLabel1});
             this.statusStrip.Location = new System.Drawing.Point(0, 489);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(872, 22);
@@ -222,7 +223,6 @@ namespace Keutmann.SharePointManager.Forms
             // 
             this.objectModelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.minimalToolStripMenuItem,
-            this.mediumToolStripMenuItem,
             this.fullToolStripMenuItem});
             this.objectModelToolStripMenuItem.Name = "objectModelToolStripMenuItem";
             this.objectModelToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
@@ -231,26 +231,18 @@ namespace Keutmann.SharePointManager.Forms
             // minimalToolStripMenuItem
             // 
             this.minimalToolStripMenuItem.Name = "minimalToolStripMenuItem";
-            this.minimalToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.minimalToolStripMenuItem.Tag = "1";
+            this.minimalToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.minimalToolStripMenuItem.Tag = "Minimal";
             this.minimalToolStripMenuItem.Text = "&Minimal";
             this.minimalToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
-            // 
-            // mediumToolStripMenuItem
-            // 
-            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.mediumToolStripMenuItem.Tag = "3";
-            this.mediumToolStripMenuItem.Text = "Me&dium";
-            this.mediumToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
             // 
             // fullToolStripMenuItem
             // 
             this.fullToolStripMenuItem.Checked = true;
             this.fullToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fullToolStripMenuItem.Name = "fullToolStripMenuItem";
-            this.fullToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.fullToolStripMenuItem.Tag = "7";
+            this.fullToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.fullToolStripMenuItem.Tag = "Full";
             this.fullToolStripMenuItem.Text = "&Full";
             this.fullToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
             // 
@@ -451,6 +443,12 @@ namespace Keutmann.SharePointManager.Forms
             this.splitContainer.SplitterDistance = 408;
             this.splitContainer.TabIndex = 2;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
             // tabControl
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -496,7 +494,7 @@ namespace Keutmann.SharePointManager.Forms
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
-        public SPTreeView Explorer;
+        public TreeViewComponent Explorer;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -523,7 +521,6 @@ namespace Keutmann.SharePointManager.Forms
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objectModelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem minimalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mediumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem MenuItemStandardBarVisible;
@@ -535,6 +532,7 @@ namespace Keutmann.SharePointManager.Forms
         private System.Windows.Forms.ToolStripMenuItem dutchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem swedishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shallowmodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

@@ -27,7 +27,7 @@ namespace SPM2.SharePoint.Model
             {
                 if (_featureCollection == null)
                 {
-                    _featureCollection = (SPFeatureCollection)this.SPParent;
+                    _featureCollection = (SPFeatureCollection)Parent.SPObject;
                 }
                 return _featureCollection;
             }
@@ -84,9 +84,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spParent)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spParent);
+            base.Setup(parent);
             
 
 
@@ -102,7 +102,7 @@ namespace SPM2.SharePoint.Model
                     if (this.Definition.Hidden)
                     {
                         this.Text += " (Hidden)";
-                        this.TextColor = "Gray";
+                        this.State = "Gray";
                     }
                 }
                 else

@@ -19,9 +19,9 @@ namespace SPM2.SharePoint.Model
 	public partial class SPWebNode
 	{
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
             this.Text = this.Web.Title;
             this.Url = this.Web.Url;
         }

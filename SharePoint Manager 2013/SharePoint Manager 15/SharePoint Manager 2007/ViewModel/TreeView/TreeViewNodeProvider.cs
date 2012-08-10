@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SPM2.SharePoint;
+using SPM2.SharePoint.Model;
 
 namespace Keutmann.SharePointManager.ViewModel.TreeView
 {
@@ -10,9 +11,9 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
     //[PartCreationPolicy(CreationPolicy.Shared)]
     public class TreeViewNodeProvider : ITreeViewNodeProvider
     {
-        public SPNodeProvider SPProvider { get; set; }
+        public ISPNodeProvider SPProvider { get; set; }
 
-        public TreeViewNodeProvider(SPNodeProvider provider)
+        public TreeViewNodeProvider(ISPNodeProvider provider)
         {
             SPProvider = provider;
         }
@@ -23,6 +24,26 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             var node = SPTreeNode.Create(this, spFarmNode);
             //node.IsExpanded = true;
             return node;
+        }
+
+        public SPTreeNode Load(ISPNode spNode)
+        {
+            var root = SPTreeNode.Create(this, spNode);
+            LoadTreeNodes(root);
+
+            return root;
+        }
+
+        private void LoadTreeNodes(SPTreeNode parent)
+        {
+            if (parent.Model.Children.Count == 0) return;
+
+            parent.Nodes.AddRange(parent.Model.Children.Select(spNode => SPTreeNode.Create(this, spNode)).ToArray());
+
+            foreach (SPTreeNode item in parent.Nodes)
+            {
+                LoadTreeNodes(item);
+            }
         }
 
         public IEnumerable<SPTreeNode> LoadChildren(SPTreeNode parentNode)

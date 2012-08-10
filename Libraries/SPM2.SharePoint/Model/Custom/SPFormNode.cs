@@ -18,9 +18,9 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPFormCollectionNode")]
 	public partial class SPFormNode
 	{
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             this.Text = this.Form.Url.Substring(this.Form.Url.LastIndexOf("/") + 1);
             this.ToolTipText = this.Form.Url;
@@ -34,7 +34,7 @@ namespace SPM2.SharePoint.Model
 
             SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.Form.ParentList.ParentWeb, this.Form.Url);
 
-            webparts.Setup(this.SPObject);
+            webparts.Setup(this);
 
             this.Children.Add(webparts);
         }

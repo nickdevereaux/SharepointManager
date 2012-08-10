@@ -34,7 +34,7 @@ namespace SPM2.SharePoint.Model
             {
                 var node = new SPPropertyNode();
                 node.SPObject = entry;
-                node.Setup(SPObject);
+                node.Setup(this);
                 list.Add(node);
             }
 

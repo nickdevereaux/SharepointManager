@@ -22,15 +22,15 @@ namespace SPM2.SharePoint.Model
             this.IconUri = SharePointContext.GetImagePath("MARR.GIF");
         }
 
-        public override void Setup(object spParent)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spParent);
+            base.Setup(parent);
 
             this.Text = this.ContentType.Name;
             if (this.ContentType.Hidden)
             {
                 this.Text = this.Text + " (Hidden)";
-                this.TextColor = "Gray";
+                this.State = "Gray";
             }
         }
         
@@ -40,7 +40,7 @@ namespace SPM2.SharePoint.Model
             base.LoadChildren();
 
             SPContentTypeUsageCollectionNode node = new SPContentTypeUsageCollectionNode();
-            node.Setup(this.SPObject);
+            node.Setup(this);
             this.Children.Add(node);
         }
     }

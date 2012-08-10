@@ -5,7 +5,7 @@
  */
 
 using System;
-
+using System.Xml.Serialization;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
@@ -15,6 +15,7 @@ namespace SPM2.SharePoint.Model
 	[Icon(Small="BULLET.GIF")][View("Full")]
 	public partial class SPViewStyleNode
 	{
+        [XmlIgnore]
         public SPViewStyle ViewStyle
         {
             get
@@ -28,9 +29,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
             this.Text = (String.IsNullOrEmpty(this.ViewStyle.Title)) ? "(Noname)" : this.ViewStyle.Title;
         }
 

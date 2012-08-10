@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
@@ -27,6 +28,7 @@ namespace SPM2.SharePoint.Model
     [AdapterItemType("System.Collections.Hashtable")]
     public class SPPropertyCollectionNode : SPNodeCollection
     {
+        [XmlIgnore]
         public Hashtable AllProperties
         {
             get { return (Hashtable) SPObject; }
@@ -41,7 +43,7 @@ namespace SPM2.SharePoint.Model
             {
                 var node = new SPPropertyNode();
                 node.SPObject = entry;
-                node.Setup(SPObject);
+                node.Setup(this);
                 list.Add(node);
             }
 

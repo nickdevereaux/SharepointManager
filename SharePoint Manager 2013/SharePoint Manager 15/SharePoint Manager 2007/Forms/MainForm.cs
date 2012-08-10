@@ -17,6 +17,7 @@ using Keutmann.SharePointManager.Components;
 using Keutmann.SharePointManager.Library;
 using Keutmann.SharePointManager.Properties;
 using SPM2.Framework.ComponentModel;
+using Keutmann.SharePointManager.ViewModel.TreeView;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -38,7 +39,6 @@ namespace Keutmann.SharePointManager.Forms
 
         public void SplashScreenLoad()
         {
-
             // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
             PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
             PropertyGridTypeConverter.AddTo(typeof(SPFarm));
@@ -76,7 +76,7 @@ namespace Keutmann.SharePointManager.Forms
 
         public void MainWindow_Load(object sender, EventArgs e) 
         {
-            ChangeLanguage(SPMLocalization.C_CULTURE_EN);
+            SetLanguage(SPMLocalization.C_CULTURE_EN);
 
             //string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
             //if (language == null)
@@ -327,7 +327,7 @@ namespace Keutmann.SharePointManager.Forms
             {
                 SPFarm newFarm = SPFarm.Open(connectionForm.ConnectionString);
 
-                Explorer.DisposeObjectModel();
+                Explorer.Dispose();
                 Explorer.CurrentFarm = newFarm;
                 Explorer.Build();
             }
@@ -360,22 +360,22 @@ namespace Keutmann.SharePointManager.Forms
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeLanguage(SPMLocalization.C_CULTURE_EN);
+            SetLanguage(SPMLocalization.C_CULTURE_EN);
         }
 
         private void spanishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeLanguage(SPMLocalization.C_CULTURE_ES);
+            SetLanguage(SPMLocalization.C_CULTURE_ES);
         }
 
         private void dutchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeLanguage(SPMLocalization.C_CULTURE_NL);
+            SetLanguage(SPMLocalization.C_CULTURE_NL);
         }
 
         void swedishToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            ChangeLanguage(SPMLocalization.C_CULTURE_SV);
+            SetLanguage(SPMLocalization.C_CULTURE_SV);
         }
 
         void Explorer_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -395,7 +395,7 @@ namespace Keutmann.SharePointManager.Forms
 
         }
 
-        private void ChangeLanguage(string localization)
+        private void SetLanguage(string localization)
         {
             SPMLocalization.SelectedLanguage = localization;
             UpdateLanguageButtons();
@@ -479,6 +479,56 @@ namespace Keutmann.SharePointManager.Forms
             saveToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Save_ToolTip");
             saveallToolStripMenuItem.Text = SPMLocalization.GetString("Interface_SaveAll_ToolTip");
             cancelToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Cancel_ToolTip");
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var node = (SPTreeNode)Explorer.FarmNode;
+            
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            saveFileDialog1.FileName = node.Text + ".xml";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                var xml = Explorer.SPProvider.Serialize(node.Model);
+                File.WriteAllText(saveFileDialog1.FileName, xml);
+
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            //openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    var xml = File.ReadAllText(openFileDialog1.FileName);
+                    var node = Explorer.SPProvider.Deserialize(xml);
+
+                    Cursor.Current = Cursors.Default;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+
         }
 
     }

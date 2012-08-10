@@ -21,9 +21,9 @@ namespace SPM2.SharePoint.Model
             //this.IconUri = SharePointContext.GetImagePath("MARR.GIF");
         }
 
-        public override void Setup(object spParent)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spParent);
+            base.Setup(parent);
             this.Text = ContentTypeUsage.Url;
         }
 

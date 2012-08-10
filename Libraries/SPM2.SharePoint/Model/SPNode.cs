@@ -5,45 +5,86 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.ComponentModel;
+using SPM2.Framework.Xml;
 
 namespace SPM2.SharePoint.Model
 {
-    public class SPNode : ISPNode
+    [Serializable]
+    public class SPNode : ISPNode, IDisposable
     {
-        //public const string ResourceImagePath = "/SPM2.SharePoint;component/Resources/Images/";
-        public const string ResourceImagePath = "";
+
         private ClassDescriptor _descriptor;
         private string _iconUri;
         private object _spObject;
         private Type _spObjectType;
-        private object _text;
+        private string _text;
         private string _toolTipText;
 
-        public virtual string SPTypeName { get; set; }
-        public List<ISPNode> Children { get; set; }
+        #region ISPNode Members
 
+        public virtual string Text
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_text + string.Empty))
+                {
+                    _text = Descriptor.GetTitle(SPObject);
+                }
+                return _text;
+            }
+            set { _text = value; }
+        }
+
+        private string _spTypeName = null;
+        public virtual string SPTypeName
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_spTypeName))
+                {
+                    _spTypeName = SPObjectType.Name;
+                }
+                return _spTypeName;
+            }
+            set { _spTypeName = value; }
+        }
+
+        public Guid? ID { get; set; }
+
+        [XmlIgnore]
         public Dictionary<Type, ISPNode> NodeTypes { get; set; }
 
+        [XmlIgnore]
         public ISPNodeProvider NodeProvider { get; set; }
 
-        public string TextColor { get; set; }
+        [XmlIgnore]
+        public string State { get; set; }
 
+        [XmlIgnore]
+        public ISPNode Parent { get; set; }
+
+        [XmlIgnore]
         public virtual string ToolTipText
         {
             get
             {
                 if (String.IsNullOrEmpty(_toolTipText))
                 {
-                    _toolTipText = SPObjectType.Name;
+                    _toolTipText = SPTypeName;
                 }
                 return _toolTipText;
             }
             set { _toolTipText = value; }
         }
 
+        [XmlIgnore]
         public virtual string IconUri
         {
             get
@@ -78,12 +119,13 @@ namespace SPM2.SharePoint.Model
             set { _iconUri = value; }
         }
 
-        #region ISPNode Members
-
+        [XmlIgnore]
         public virtual string AddInID { get; set; }
+
+        [XmlIgnore]
         public virtual string Url { get; set; }
 
-
+        [XmlIgnore]
         public object SPObject
         {
             get { return _spObject ?? (_spObject = GetSPObject()); }
@@ -91,14 +133,14 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public object SPParent { get; set; }
-
+        [XmlIgnore]
         public ClassDescriptor Descriptor
         {
             get { return _descriptor ?? (_descriptor = new ClassDescriptor(GetType())); }
             set { _descriptor = value; }
         }
 
+        [XmlIgnore]
         public Type SPObjectType
         {
             get
@@ -129,50 +171,39 @@ namespace SPM2.SharePoint.Model
             set { _spObjectType = value; }
         }
 
-        public virtual object Text
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(_text + string.Empty))
-                {
-                    _text = Descriptor.GetTitle(SPObject);
-                }
-                return _text;
-            }
-            set { _text = value; }
-        }
-
+        public SerializableList<ISPNode> Children { get; set; }
 
         
         public SPNode()
         {
-            TextColor = "Black";
-            Children = new List<ISPNode>();
+            State = "Black";
+            Children = new SerializableList<ISPNode>();
         }
 
-        public virtual void Setup(object spParent)
+        public virtual void Setup(ISPNode parent)
         {
-            SPParent = spParent;
+            if (parent == null) return;
+            Parent = parent;
+            NodeProvider = parent.NodeProvider;
         }
 
         public virtual object GetSPObject()
         {
             object result = null;
-            if (SPParent != null)
+
+            // This ensures that a chain of objects are created
+            if (Parent.SPObject == null) return result;
+
+            var des = TypeDescriptor.GetProperties(Parent.SPObject.GetType());
+            foreach (PropertyDescriptor propertyDescriptor in des)
             {
-                PropertyDescriptorCollection des = TypeDescriptor.GetProperties(SPParent.GetType());
-                foreach (PropertyDescriptor info in des)
-                {
-                    if (SPObjectType == info.PropertyType)
-                    {
-                        // Use the name from the Property in the object model.
-                        Descriptor.Title = info.DisplayName;
+                // Check for the correct property
+                if (SPObjectType != propertyDescriptor.PropertyType || Text != propertyDescriptor.DisplayName) continue;
 
-                        result = info.GetValue(SPParent);
-
-                        break;
-                    }
-                }
+                // Use the name from the Property in the object model.
+                Descriptor.Title = propertyDescriptor.DisplayName;
+                result = propertyDescriptor.GetValue(Parent.SPObject);
+                break;
             }
 
             return result;
@@ -250,27 +281,51 @@ namespace SPM2.SharePoint.Model
             //Trace.WriteLine("Resource: " + result);
             return result;
         }
-
-
+        
         public virtual void LoadChildren()
         {
-            if (SPObject != null)
-            {
-                ClearChildren();
-                EnsureNodeTypes();
-#if DEBUG
-                var watch = new Stopwatch();
-                watch.Start();
-#endif
-                Children.AddRange(NodeProvider.LoadChildren(this)); 
+            if (SPObject == null) return;
+            EnsureNodeTypes();
 
-#if DEBUG
-                watch.Stop();
-                Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.",
-                                              SPObjectType.Name, watch.ElapsedMilliseconds));
-#endif
+            if (Children.Count == 0)
+            {
+                LoadNewChildren();
+            }
+            else
+            {
+                InitializeChildren();              
             }
         }
+
+        private void LoadNewChildren()
+        {
+#if DEBUG
+            var watch = new Stopwatch();
+            watch.Start();
+#endif
+            Children.AddRange(NodeProvider.LoadChildren(this)); 
+
+#if DEBUG
+            watch.Stop();
+            Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.",
+                                            SPObjectType.Name, watch.ElapsedMilliseconds));
+#endif
+        }
+
+        private void InitializeChildren()
+        {
+            foreach (var item in Children)
+            {
+                //instanceNode.SPObject = parentNode.Pointer.Current;
+
+                item.Setup(this);
+                if (item.Children.Count > 0)
+                {
+                    item.LoadChildren();
+                }
+            }
+        }
+
 
         public virtual void EnsureNodeTypes()
         {
@@ -297,90 +352,24 @@ namespace SPM2.SharePoint.Model
             return false;
         }
 
+ 
 
-        //public virtual SPNode Refresh()
-        //{
-        //    SPNode result = this;
-        //    Type webType = typeof(SPWeb);
-        //    Type siteType = typeof(SPSite);
+        public void Dispose()
+        {
+            foreach (ISPNode child in Children)
+            {
+                child.Dispose();
+            }
 
-        //    List<int> indexs = new List<int>();
-
-        //    SPNode target = this;
-        //    SPNode parent = target.Parent as SPNode;
-        //    if (parent == null)
-        //    {
-        //        return result;
-        //    }
-
-        //    int selectedIndex = target.Parent.Children.IndexOf(target);
-
-        //    indexs.Add(selectedIndex);
-
-        //    foreach (var node in target.Ancestors().OfType<SPNode>())
-        //    {
-        //        if (node.Parent == null)
-        //        {
-        //            break;
-        //        }
-
-        //        indexs.Insert(0, node.Parent.Children.IndexOf(node));
-
-        //        if (node.SPObjectType == webType || node.SPObjectType == siteType)
-        //        {
-        //            target = node;
-        //            parent = target.Parent as SPNode;
-
-        //            break;
-        //        }
-        //    }
-
-        //    if (target == this)
-        //    {
-        //        indexs = new List<int> { selectedIndex }; 
-        //    }
-
-
-        //    var enumerator = indexs.GetEnumerator();
-        //    if (enumerator.MoveNext())
-        //    {
-        //        foreach (var node in parent.Descendants())
-        //        {
-        //            node.Text += " Old";
-        //        }
-        //        parent.LazyLoading = true;
-        //        parent.ClearChildren();
-        //        parent.IsExpanded = true;
-        //        result = parent.RefreshNodes(enumerator);
-        //    }
-        //    return result;
-        //}
-
-
-        //internal SPNode RefreshNodes(IEnumerator<int> enumerator)
-        //{
-        //    SPNode result = null;
-        //    int index = enumerator.Current;
-        //    bool lastIndex = !enumerator.MoveNext();
-
-        //    if (this.Children.Count > index)
-        //    {
-        //        SPNode child = this.Children[index] as SPNode;
-
-        //        if (lastIndex)
-        //        {
-        //            child.IsSelected = true;
-        //            result = child;
-        //        }
-        //        else
-        //        {
-        //            // IsExpanded = true; Auto load of new nodes
-        //            child.IsExpanded = true;
-        //            result = child.RefreshNodes(enumerator);
-        //        }
-
-        //    }
-        //    return result;
-        //}
+            if (SPObject == null) return;
+            if (SPObject is IDisposable)
+            {
+                ((IDisposable)SPObject).Dispose();
+            }
+            else if (SPObject is SPPersistedObject)
+            {
+                ((SPPersistedObject)SPObject).Uncache();
+            }
+        }
     }
 }

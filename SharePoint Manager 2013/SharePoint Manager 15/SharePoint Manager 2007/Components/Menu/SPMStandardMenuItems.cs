@@ -202,6 +202,7 @@ namespace Keutmann.SharePointManager.Components
             if (CurrentNode != null)
             {
                 CurrentNode.Refresh();
+
                 Program.Window.ChangedNodes.Remove(CurrentNode);
                 Program.Window.UpdateMenu(CurrentNode);
             }

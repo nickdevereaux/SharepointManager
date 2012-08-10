@@ -12,6 +12,8 @@ using Microsoft.SharePoint.Administration;
 using Keutmann.SharePointManager.Library;
 using System.Drawing;
 using System.Diagnostics;
+using SPM2.SharePoint.Model;
+using System.Collections.Generic;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -196,132 +198,7 @@ namespace Keutmann.SharePointManager.Components
         }
 
 
-        private ExplorerNodeBase GetWebApp(ExplorerNodeBase start)
-        {
-            ExplorerNodeBase child = start;
-            while (child != null)
-            {
-                if (child.Tag is SPWebApplication)
-                {
-                    return child;
-                }
-                child = child.Parent as ExplorerNodeBase;
-            }
-            return null;
-        }
 
-
-        private ArrayList SaveStucture(ExplorerNodeBase currentNode)
-        {
-            ArrayList list = new ArrayList();
-
-            list.Add(currentNode.Name.Clone());
-            ExplorerNodeBase child = currentNode.Parent as ExplorerNodeBase;
-            while (child != null)
-            {
-                list.Insert(0, child.Name.Clone());
-                if (child.Tag is SPSiteCollection)
-                {
-                    break;
-                }
-                child = child.Parent as ExplorerNodeBase;
-            }
-
-            return list;
-        }
-
-        private void Reload(ExplorerNodeBase parent, ArrayList list)
-        {
-            if (list.Count > 0)
-            {
-                parent.HasChildrenLoaded = false;
-                Program.Window.Explorer.ExpandNode(parent);
-
-                string name = list[0] as string;
-                list.RemoveAt(0);
-                foreach (ExplorerNodeBase node in parent.Nodes)
-                {
-                    if (node.Name.Equals(name))
-                    {
-                        Program.Window.Explorer.SelectedNode = node;
-                        //Program.Window.propertyGrid.SelectedObject = node.Tag;
-                        Reload(node, list);
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        protected void RefreshSPPersistedObject()
-        {
-            ExplorerNodeBase parent = this.Parent as ExplorerNodeBase;
-            Program.Window.Explorer.SelectedNode = null;
-            Program.Window.Explorer.DisposeObjectModelNodes(parent);
-            parent.HasChildrenLoaded = false;
-            Program.Window.Explorer.ExpandNode(parent);
-
-            foreach (ExplorerNodeBase node in parent.Nodes)
-            {
-                if (node.Name.Equals(this.Name))
-                {
-                    Program.Window.Explorer.SelectedNode = node;
-                    //Program.Window.propertyGrid.SelectedObject = node.Tag;
-
-                    if (this.IsExpanded)
-                    {
-                        node.HasChildrenLoaded = false;
-                        //Program.Window.Explorer.ExpandNode(node);
-                        this.Expand();
-//                        this.Toggle();
-                    }
-                    break;
-                }
-            }
-        }
-
-        
-        protected void RefreshSPPersistedObjectCollection()
-        {
-            Program.Window.Explorer.DisposeObjectModelNodes(this);
-            this.Nodes.Clear();
-
-            this.HasChildrenLoaded = false;
-            Program.Window.Explorer.ExpandNode(this);
-        }
-  
-        protected void RefreshWss2Objects()
-        {
-            ArrayList list = SaveStucture(this);
-
-            if (list.Count > 0)
-            {
-                ExplorerNodeBase appNode = GetWebApp(this);
-                Program.Window.Explorer.SelectedNode = null;
-                if (appNode != null && appNode.Tag is SPWebApplication)
-                {
-                    Program.Window.Explorer.DisposeObjectModelNodes(appNode);
-                    ((SPPersistedObject)appNode.Tag).Uncache();
-
-                    Reload(appNode, list);
-
-                    if (this.IsExpanded)
-                    {
-                        this.HasChildrenLoaded = false;
-                        //Program.Window.Explorer.ExpandNode(CurrentNode);
-                        this.Expand();
-                    }
-                }
-            }
-            else
-            {
-                throw new ApplicationException(SPMLocalization.GetString("ExplorerBase_Error"));
-            }
-        }
-
-        protected void RefreshSPBaseCollection()
-        {
-        }
 
 
 
@@ -359,39 +236,6 @@ namespace Keutmann.SharePointManager.Components
 
         public virtual void Refresh()
         {
-            if (this.Parent != null)
-            {
-                if (this.Tag is SPPersistedObject)
-                {
-                    RefreshSPPersistedObject();
-                }
-                else if (this.Tag is SPBaseCollection)
-                {
-                    RefreshSPPersistedObject();
-                }
-                else
-                {
-                    Type tagType = this.Tag.GetType();
-                    Type baseType = tagType.BaseType;
-                    string baseName = baseType.Name;
-                    if (baseName.IndexOf("SPPersistedObjectCollection") >= 0 ||
-                        baseName.IndexOf("SPPersistedChildCollection") >= 0)
-                    {
-                        RefreshSPPersistedObjectCollection();
-                    }
-                    else
-                    {
-                        RefreshWss2Objects();
-                    }
-                }
-            }
-            else
-            {
-                // Reload the TreeView, because there is no parent to the node.
-                // It is properly the root that haven been selected.
-                Program.Window.Explorer.DisposeObjectModel();
-                Program.Window.Explorer.Build();
-            }
         }
         #endregion
 

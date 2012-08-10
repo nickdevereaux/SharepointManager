@@ -10,11 +10,13 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace SPM2.SharePoint.Model
 {
 	public partial class SPContentTypeUsageCollectionNode : SPNodeCollection
 	{
+        [XmlIgnore]
         public IList<SPContentTypeUsage> ContentTypeUsageCollection
         {
             get

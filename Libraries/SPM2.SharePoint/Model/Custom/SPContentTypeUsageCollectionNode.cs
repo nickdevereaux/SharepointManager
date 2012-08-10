@@ -18,9 +18,9 @@ namespace SPM2.SharePoint.Model
         {
         }
 
-        public override void Setup(object spParent)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spParent);
+            base.Setup(parent);
 
             this.Text = "ContentTypeUsages";
             
@@ -28,7 +28,7 @@ namespace SPM2.SharePoint.Model
 
         public override object GetSPObject()
         {
-            return SPContentTypeUsage.GetUsages((SPContentType)this.SPParent);
+            return SPContentTypeUsage.GetUsages((SPContentType)Parent.SPObject);
         }
 	}
 }

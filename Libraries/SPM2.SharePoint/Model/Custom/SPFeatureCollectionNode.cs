@@ -11,6 +11,7 @@ using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.ComponentModel;
 using System.Collections.Generic;
+using SPM2.Framework.Collections;
 
 namespace SPM2.SharePoint.Model
 {
@@ -36,13 +37,13 @@ namespace SPM2.SharePoint.Model
 
 
             // Unordered List
-            List<ISPNode> unorderedList = new List<ISPNode>();
+            var unorderedList = new SerializableList<ISPNode>();
 
             foreach (var def in definitions)
             {
                 SPFeatureNode node = new SPFeatureNode();
                 node.Definition = def;
-                node.Setup(this.SPObject);
+                node.Setup(this);
 
                 if (featureIndex.ContainsKey(def.Id))
                 {
@@ -59,14 +60,14 @@ namespace SPM2.SharePoint.Model
             {
                 SPFeatureNode node = new SPFeatureNode();
                 node.Definition = null;
-                node.Setup(this.SPObject);
+                node.Setup(this);
 
                 unorderedList.Add(node);
             }
 
 
             // Add Inactive Features node from definitions
-            this.Children = unorderedList.OrderBy( p=> p.Text).ToList();
+            this.Children = new SerializableList<ISPNode>(unorderedList.OrderBy( p=> p.Text));
         }
 
         private IEnumerable<SPFeatureDefinition> GetFeatureDefinitionIndex()
@@ -74,33 +75,33 @@ namespace SPM2.SharePoint.Model
             IEnumerable<SPFeatureDefinition> result = null;
 
 
-            if (result == null && this.SPParent is SPWebService)
+            if (result == null && Parent.SPObject is SPWebService)
             {
                 result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Farm);
             }
 
-            if (result == null && this.SPParent is SPWebApplication)
+            if (result == null && Parent.SPObject is SPWebApplication)
             {
                 result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
             }
 
-            if (result == null && this.SPParent is SPAdministrationWebApplication)
+            if (result == null && Parent.SPObject is SPAdministrationWebApplication)
             {
                 result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
             }
 
-            if (result == null && this.SPParent is SPSite)
+            if (result == null && Parent.SPObject is SPSite)
             {
-                SPSite site = (SPSite)this.SPParent;
+                SPSite site = (SPSite)Parent.SPObject;
                 List<SPFeatureDefinition> list = new List<SPFeatureDefinition>();
                 list.AddRange(site.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Site));
                 list.AddRange(SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Site));
                 result = list;
             }
 
-            if (result == null && this.SPParent is SPWeb)
+            if (result == null && Parent.SPObject is SPWeb)
             {
-                SPSite site = ((SPWeb)this.SPParent).Site;
+                SPSite site = ((SPWeb)Parent.SPObject).Site;
                 List<SPFeatureDefinition> list = new List<SPFeatureDefinition>();
                 list.AddRange(site.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Web));
                 list.AddRange(SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Web));

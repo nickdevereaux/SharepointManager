@@ -35,6 +35,7 @@ namespace Keutmann.SharePointManager.Forms
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,8 @@ namespace Keutmann.SharePointManager.Forms
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +75,6 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl = new Keutmann.SharePointManager.Components.SPMTabControl();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -108,6 +110,12 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             this.toolStripProgressBar.Visible = false;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -131,7 +139,9 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripMenuItem2,
             this.cancelToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.exportToolStripMenuItem,
+            this.importToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -140,7 +150,7 @@ namespace Keutmann.SharePointManager.Forms
             // 
             this.openDatabaseToolStripMenuItem.Image = global::Keutmann.SharePointManager.Properties.Resources.dbconnection;
             this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
-            this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openDatabaseToolStripMenuItem.Text = "Open Database";
             this.openDatabaseToolStripMenuItem.ToolTipText = "Open Databse Connection";
             this.openDatabaseToolStripMenuItem.Visible = false;
@@ -150,7 +160,7 @@ namespace Keutmann.SharePointManager.Forms
             // 
             this.saveToolStripMenuItem.Image = global::Keutmann.SharePointManager.Properties.Resources.save;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Save changes to SharePoint";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -159,7 +169,7 @@ namespace Keutmann.SharePointManager.Forms
             // 
             this.saveallToolStripMenuItem.Image = global::Keutmann.SharePointManager.Properties.Resources.saveall;
             this.saveallToolStripMenuItem.Name = "saveallToolStripMenuItem";
-            this.saveallToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.saveallToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveallToolStripMenuItem.Text = "Save &all";
             this.saveallToolStripMenuItem.ToolTipText = "Save all changes to SharePoint";
             this.saveallToolStripMenuItem.Click += new System.EventHandler(this.saveallToolStripMenuItem_Click);
@@ -167,13 +177,13 @@ namespace Keutmann.SharePointManager.Forms
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(146, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Image = global::Keutmann.SharePointManager.Properties.Resources.undo;
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
-            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cancelToolStripMenuItem.Text = "&Cancel";
             this.cancelToolStripMenuItem.ToolTipText = "Cancel all changes";
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
@@ -181,15 +191,31 @@ namespace Keutmann.SharePointManager.Forms
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(146, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Close program";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Visible = false;
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Visible = false;
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -443,12 +469,6 @@ namespace Keutmann.SharePointManager.Forms
             this.splitContainer.SplitterDistance = 408;
             this.splitContainer.TabIndex = 2;
             // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
             // tabControl
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -471,7 +491,6 @@ namespace Keutmann.SharePointManager.Forms
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainWindow";
             this.Text = "SharePoint Manager 2013 (beta)";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);
@@ -533,6 +552,8 @@ namespace Keutmann.SharePointManager.Forms
         private System.Windows.Forms.ToolStripMenuItem swedishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shallowmodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
     }
 }
 

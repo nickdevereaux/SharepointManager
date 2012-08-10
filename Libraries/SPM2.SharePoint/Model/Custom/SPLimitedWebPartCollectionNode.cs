@@ -7,6 +7,7 @@ using Microsoft.SharePoint.WebPartPages;
 
 using SPM2.Framework;
 using Microsoft.SharePoint;
+using System.Xml.Serialization;
 
 namespace SPM2.SharePoint.Model
 {
@@ -18,6 +19,7 @@ namespace SPM2.SharePoint.Model
         public SPWeb Web { get; set; }
         public string PageUrl { get; set; }
 
+        [XmlIgnore]
         public SPLimitedWebPartCollection WebParts
         {
             get
@@ -31,6 +33,7 @@ namespace SPM2.SharePoint.Model
         }
 
         private SPLimitedWebPartManager _manager = null;
+        [XmlIgnore]
         public SPLimitedWebPartManager Manager
         {
             get
@@ -67,9 +70,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
             this.Text = "WebParts";
             this.IconUri = SharePointContext.GetImagePath("itgen.GIF");
         }
@@ -85,7 +88,7 @@ namespace SPM2.SharePoint.Model
             {
                 SPWebPartNode node = new SPWebPartNode();
                 node.SPObject = webpart;
-                node.Setup(this.Manager);
+                node.Setup(this);
                 this.Children.Add(node);
             } 
         }

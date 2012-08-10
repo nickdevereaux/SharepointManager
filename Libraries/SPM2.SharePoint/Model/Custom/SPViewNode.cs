@@ -25,9 +25,9 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPViewNode
 	{
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             this.Url = SPUrlUtility.CombineUrl(View.ParentList.ParentWeb.Url, View.Url);
         }

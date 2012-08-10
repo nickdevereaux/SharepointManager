@@ -1,4 +1,5 @@
-﻿using SPM2.Framework;
+﻿using System.Xml.Serialization;
+using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
@@ -25,15 +26,8 @@ namespace SPM2.SharePoint.Model
             SPObject = new object();
         }
 
+        [XmlIgnore]
         public ISPNodeCollection ParentNode { get; set; }
-
-        public override void Setup(object spParent)
-        {
-            base.Setup(spParent);
-
-            // Remove the expand arrow, by forcing a LoadChildren() call that will turn out empty.
-            //this.IsExpanded = true;
-        }
 
         public override void LoadChildren()
         {

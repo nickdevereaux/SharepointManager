@@ -22,9 +22,9 @@ namespace SPM2.SharePoint.Model
 	public partial class SPFileNode
 	{
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             if (File != null)
             {
@@ -48,7 +48,7 @@ namespace SPM2.SharePoint.Model
                     {
                         SPLimitedWebPartCollectionNode webparts = new SPLimitedWebPartCollectionNode(this.File);
 
-                        webparts.Setup(this.SPObject);
+                        webparts.Setup(this);
 
                         this.Children.Add(webparts);
                     }

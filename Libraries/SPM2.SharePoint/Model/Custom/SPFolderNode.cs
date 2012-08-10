@@ -25,9 +25,9 @@ namespace SPM2.SharePoint.Model
     public partial class SPFolderNode
 	{
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             this.Text = this.Folder.Name;
         }

@@ -10,6 +10,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.Collections;
+using System.Xml.Serialization;
 
 namespace SPM2.SharePoint.Model
 {
@@ -18,6 +19,7 @@ namespace SPM2.SharePoint.Model
     [AdapterItemType("System.Collections.DictionaryEntry")]
     public partial class SPPropertyBagNode : SPNode
 	{
+        [XmlIgnore]
         public DictionaryEntry Entry
         {
             get { return (DictionaryEntry)this.SPObject; }
@@ -25,9 +27,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spParent)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spParent);
+            base.Setup(parent);
 
             this.Text = this.Entry.Key.ToString();
 

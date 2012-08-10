@@ -19,12 +19,6 @@ namespace SPM2.SharePoint.Model
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.actionssettings", Source = IconSource.Assembly)]
 	public partial class SPFarmNode
 	{
-        public SPFarmNode()
-        {
-            //IconUri = GetResourceImagePath("actionssettings.gif");
-        }
-
-
         public override IEnumerable<SPNode> NodesToExpand()
         {
             return Children.OfType<SPServiceCollectionNode>().Cast<SPNode>();

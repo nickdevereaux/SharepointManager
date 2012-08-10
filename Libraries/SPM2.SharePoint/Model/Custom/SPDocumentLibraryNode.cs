@@ -20,16 +20,16 @@ namespace SPM2.SharePoint.Model
 	public partial class SPDocumentLibraryNode
 	{
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             string title = (String.IsNullOrEmpty(this.DocumentLibrary.Title)) ? this.DocumentLibrary.ID.ToString() : this.DocumentLibrary.Title;
             this.Text = String.Format("{0} ({1})", title, this.DocumentLibrary.ItemCount);
 
             if (this.DocumentLibrary.Hidden)
             {
-                this.TextColor = "Gray";
+                this.State = "Gray";
             }
 
             this.Url = SPUtility.GetFullUrl(this.DocumentLibrary.ParentWeb.Site, this.DocumentLibrary.DefaultViewUrl);

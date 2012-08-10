@@ -22,7 +22,7 @@ namespace SPM2.SharePoint.Model
 
         public SPLimitedWebPartManager WebPartManager
         {
-            get { return (SPLimitedWebPartManager)this.SPParent; }
+            get { return (SPLimitedWebPartManager)this.Parent.SPObject; }
         }
         
 
@@ -35,9 +35,9 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             string title = this.ASPWebPart.Title;
             if (title.Length == 0)

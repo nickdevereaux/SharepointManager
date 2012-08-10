@@ -7,8 +7,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Client;
 using SPM2.Framework;
+using SPM2.Framework.Xml;
 using SPM2.SharePoint.Model;
 
 namespace SPM2.SharePoint
@@ -29,7 +31,10 @@ namespace SPM2.SharePoint
 
         public ISPNode LoadFarmNode()
         {
-            return Create("Farm", typeof(SPFarmNode), SharePointContext.Instance.Farm);
+            var node = Create("Farm", typeof(SPFarm), typeof(SPFarmNode), null);
+            node.SPObject = SharePointContext.Instance.Farm;
+
+            return node;
         }
 
         public  IEnumerable<ISPNode> LoadCollectionChildren(ISPNodeCollection parentNode)
@@ -70,12 +75,13 @@ namespace SPM2.SharePoint
                 {
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
-                    instanceNode.NodeProvider = parentNode.NodeProvider;
                     instanceNode.SPObject = parentNode.Pointer.Current;
-                    instanceNode.Setup(parentNode.SPObject);
+                    instanceNode.ID = GetID(instanceNode.SPObject);
+                    
+                    instanceNode.Setup(parentNode);
                     list.Add(instanceNode);
                 }
-
+                
                 parentNode.MoveNext = parentNode.Pointer.MoveNext();
                 count++;
                 parentNode.TotalCount++;
@@ -84,7 +90,7 @@ namespace SPM2.SharePoint
             if (count >= batchCount && parentNode.MoveNext)
             {
                 var node = new MoreNode(parentNode);
-                node.Setup(parentNode.SPObject);
+                node.Setup(parentNode);
                 list.Add(node);
             }
 
@@ -97,6 +103,14 @@ namespace SPM2.SharePoint
             return list;
         }
 
+        private Guid? GetID(object spObject)
+        {
+            var info = spObject.GetType().GetProperty("UniqueID");
+            if (info == null) return null;
+            var result = (Guid)info.GetValue(spObject, null);
+            return result;
+        }
+
 
         public  IEnumerable<ISPNode> LoadChildren(ISPNode node)
         {
@@ -106,27 +120,24 @@ namespace SPM2.SharePoint
         public  IEnumerable<ISPNode> LoadUnorderedChildren(ISPNode sourceNode)
         {
             var list = new List<ISPNode>();
-            PropertyDescriptorCollection propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
+            var propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
             try
             {
                 // ReSharper disable LoopCanBeConvertedToQuery
-                foreach (PropertyDescriptor info in propertyDescriptors)
+                foreach (PropertyDescriptor descriptor in propertyDescriptors)
                 {
-                    if (sourceNode.NodeTypes.ContainsKey(info.PropertyType))
+                    if (sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
                     {
-                        ISPNode node = sourceNode.NodeTypes[info.PropertyType];
+                        ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
 
                         // Exclude the node if it do not match the correct view
                         if(!MatchView(node.GetType())) continue;
                         
 
                         //Ensure that the child node instance is unique in the TreeView
-                        node = Create(info.DisplayName, node.GetType(), sourceNode.SPObject);
-
-                        
+                        node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode);
 
                         list.Add(node);
-                        //yield return node;
                     }
                 }
                 // ReSharper restore LoopCanBeConvertedToQuery
@@ -196,14 +207,26 @@ namespace SPM2.SharePoint
             return result;
         }
 
-
-        private ISPNode Create(string name, Type nodeType, object spObject)
+        private ISPNode Create(string text, Type spObjectType, Type nodeType, ISPNode parent)
         {
             var node = (ISPNode) Activator.CreateInstance(nodeType);
             node.NodeProvider = this;
-            node.Text = name;
-            node.Setup(spObject);
+            node.Text = text;
+            node.SPObjectType = spObjectType;
+            node.Setup(parent);
             return node;
+        }
+
+        public string Serialize(ISPNode node)
+        {
+            string xml = Serializer.ObjectToXML(node);
+            return xml;
+        }
+
+        public ISPNode Deserialize(string xml)
+        {
+            if (String.IsNullOrEmpty(xml)) return null;
+            return Serializer.XmlToObject<SPFarmNode>(xml);
         }
     }
 }

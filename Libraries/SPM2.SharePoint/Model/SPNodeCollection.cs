@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Xml.Serialization;
 using Microsoft.SharePoint.Client;
 using SPM2.Framework;
 
@@ -12,7 +13,7 @@ namespace SPM2.SharePoint.Model
     public class SPNodeCollection : SPNode, ISPNodeCollection
     {
         private ISPNode _defaultNode;
-
+        [XmlIgnore]
         public ISPNode DefaultNode
         {
             get
@@ -26,11 +27,14 @@ namespace SPM2.SharePoint.Model
             set { _defaultNode = value; }
         }
 
+        [XmlIgnore]
         public IEnumerator Pointer { get; set; }
 
+        [XmlIgnore]
         public bool MoveNext { get; set; }
 
         public int TotalCount { get; set; }
+
 
         public SPNodeCollection()
         {
@@ -40,11 +44,22 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            if (SPObject == null)
-            {
-                return;
-            }
+            if (SPObject == null) return;
 
+            if (Children.Count == 0 || Children[0].Parent != null)
+            {
+                LoadNewChildren();
+            }
+            else
+            {
+                // Not functional
+                //InitializeChildren();
+            }
+        }
+
+        private void LoadNewChildren()
+        {
+            
             if (Children.Count > 0)
             {
                 // Ensure that the last node is the "MoreNode".
@@ -59,7 +74,6 @@ namespace SPM2.SharePoint.Model
             }
             else
             {
-                ClearChildren();
                 EnsureNodeTypes();
             }
 #if DEBUG
@@ -74,8 +88,22 @@ namespace SPM2.SharePoint.Model
             Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.",
                                           SPObjectType.Name, watch.ElapsedMilliseconds));
 #endif
-
         }
+
+        private void InitializeChildren()
+        {
+            EnsureNodeTypes();
+
+            foreach (var item in Children)
+            {
+                item.Setup(this);
+                if (item.Children.Count > 0)
+                {
+                    item.LoadChildren();
+                }
+            }
+        }
+
 
         public override void ClearChildren()
         {

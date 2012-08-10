@@ -17,16 +17,16 @@ namespace SPM2.SharePoint.Model
 	public partial class SPListNode
 	{
 
-        public override void Setup(object spObject)
+        public override void Setup(ISPNode parent)
         {
-            base.Setup(spObject);
+            base.Setup(parent);
 
             string title = (String.IsNullOrEmpty(this.List.Title)) ? this.List.ID.ToString() : this.List.Title;
             this.Text = String.Format("{0} ({1})", title, this.List.ItemCount);
 
             if (this.List.Hidden)
             {
-                this.TextColor = "Gray";
+                this.State = "Gray";
             }
 
             this.Url = SPUtility.GetFullUrl(List.ParentWeb.Site, List.DefaultViewUrl);

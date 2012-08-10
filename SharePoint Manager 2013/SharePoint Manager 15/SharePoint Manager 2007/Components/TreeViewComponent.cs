@@ -19,7 +19,7 @@ namespace Keutmann.SharePointManager.Components
         public SPFarm CurrentFarm = SPFarm.Local;
 
         public string ViewName { get; set; }
-
+        public ISPNodeProvider SPProvider { get; set; }
 
         public SPTreeNode FarmNode { get; set; }
 
@@ -89,10 +89,10 @@ namespace Keutmann.SharePointManager.Components
             BeginUpdate();
             TreeViewNodeSorter = new NodeSorter();
 
-            var nodeProvider = new SPNodeProvider();
-            nodeProvider.View = ViewName;
+            SPProvider = new SPNodeProvider();
+            SPProvider.View = ViewName;
 
-            var treeViewProvider = new TreeViewNodeProvider(nodeProvider);
+            var treeViewProvider = new TreeViewNodeProvider(SPProvider);
             FarmNode = treeViewProvider.LoadFarmNode();
             this.Nodes.Add(FarmNode);
 
@@ -132,40 +132,15 @@ namespace Keutmann.SharePointManager.Components
         }
 
 
-        public void DisposeObjectModelNodes(TreeNode parent)
-        {
-            foreach (TreeNode child in parent.Nodes)
-            {
-                DisposeObjectModelNodes(child);
-                if (child.Tag != null)
-                {
-                    if (child.Tag is IDisposable)
-                    {
-                        ((IDisposable)child.Tag).Dispose();
-                    }
-                    else if (child.Tag is SPPersistedObject)
-                    {
-                        ((SPPersistedObject)child.Tag).Uncache();
-                    }
-                }
-            }
-        }
-
-        public void DisposeObjectModel()
-        {
-            foreach (TreeNode node in this.Nodes)
-            {
-                DisposeObjectModelNodes(node as ExplorerNodeBase);
-            }
-            this.Nodes.Clear();
-
-        }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                DisposeObjectModel();
+                foreach (SPTreeNode item in Nodes)
+                {
+                    item.Dispose();
+                }
             }
             base.Dispose(disposing);
         }

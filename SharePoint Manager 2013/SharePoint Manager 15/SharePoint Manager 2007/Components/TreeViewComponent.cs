@@ -82,7 +82,12 @@ namespace Keutmann.SharePointManager.Components
 
         public void Build()
         {
+            Build(new StuctureItemCollection());
+        }
 
+
+        public void Build(StuctureItemCollection list)
+        {
             Cursor.Current = Cursors.WaitCursor;
             this.ImageList = Program.Window.SPMimageList;
             Nodes.Clear();
@@ -96,15 +101,14 @@ namespace Keutmann.SharePointManager.Components
             FarmNode = treeViewProvider.LoadFarmNode();
             this.Nodes.Add(FarmNode);
 
-            Sort();
+            FarmNode.Reload(FarmNode, list);
             
+            //Sort();
             //DefaultExpand(root);
-
-            this.SelectedNode = FarmNode;
+            //this.SelectedNode = FarmNode;
 
             EndUpdate();
             Cursor.Current = Cursors.Default;
-
         }
 
 

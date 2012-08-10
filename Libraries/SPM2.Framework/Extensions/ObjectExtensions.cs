@@ -29,5 +29,35 @@ namespace SPM2.Framework
             }
         }
 
+        public static bool PropertyExist(this object source, string name, BindingFlags flags)
+        {
+            if (source == null ) new ArgumentNullException("source");
+            if (String.IsNullOrEmpty(name)) new ArgumentException("Parameter name may not be null or empty");
+
+            var type = source.GetType();
+            var property = type.GetProperty(name, flags);
+
+            return (property != null);
+        }
+
+        public static T GetPropertyValue<T>(this object source, string name, BindingFlags flags)
+        {
+            if (source == null) new ArgumentNullException("source");
+            if (String.IsNullOrEmpty(name)) new ArgumentException("Parameter name may not be null or empty");
+
+            var result = default(T);
+
+            var type = source.GetType();
+            var property = type.GetProperty(name, flags);
+
+            if (property == null) return result;
+
+            result = (T)property.GetValue(source, null);
+
+            return result;
+        }
+
+
+
     }
 }

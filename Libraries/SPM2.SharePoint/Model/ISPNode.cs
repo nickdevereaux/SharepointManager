@@ -22,8 +22,7 @@ namespace SPM2.SharePoint.Model
         ISPNodeProvider NodeProvider { get; set; }
         
         ISPNode Parent { get; set; }
-        Guid? ID { get; set; }
-
+        string ID { get; set; }
 
         Type SPObjectType { get; set; }
         void LoadChildren();
@@ -34,5 +33,7 @@ namespace SPM2.SharePoint.Model
 
         void Setup(ISPNode parent);
 
+
+        void Dispose();
     }
 }

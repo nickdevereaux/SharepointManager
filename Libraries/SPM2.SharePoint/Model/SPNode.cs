@@ -56,19 +56,20 @@ namespace SPM2.SharePoint.Model
             set { _spTypeName = value; }
         }
 
-        public Guid? ID { get; set; }
+        [XmlIgnore]
+        public virtual string ID { get; set; }
 
         [XmlIgnore]
-        public Dictionary<Type, ISPNode> NodeTypes { get; set; }
+        public virtual Dictionary<Type, ISPNode> NodeTypes { get; set; }
 
         [XmlIgnore]
-        public ISPNodeProvider NodeProvider { get; set; }
+        public virtual ISPNodeProvider NodeProvider { get; set; }
 
         [XmlIgnore]
-        public string State { get; set; }
+        public virtual string State { get; set; }
 
         [XmlIgnore]
-        public ISPNode Parent { get; set; }
+        public virtual ISPNode Parent { get; set; }
 
         [XmlIgnore]
         public virtual string ToolTipText
@@ -141,7 +142,7 @@ namespace SPM2.SharePoint.Model
         }
 
         [XmlIgnore]
-        public Type SPObjectType
+        public virtual Type SPObjectType
         {
             get
             {
@@ -370,6 +371,7 @@ namespace SPM2.SharePoint.Model
             {
                 ((SPPersistedObject)SPObject).Uncache();
             }
+
         }
     }
 }

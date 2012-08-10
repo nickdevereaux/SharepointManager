@@ -160,7 +160,5 @@ namespace SPM2.Framework
             return types;
         }
 
-
-
     }
 }

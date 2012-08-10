@@ -8,6 +8,7 @@ using Keutmann.SharePointManager.Components;
 using Keutmann.SharePointManager.Library;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.WebControls;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 
@@ -76,54 +77,21 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             }
         }
 
-
         public override void Refresh()
         {
-            //this.Dispose();
-            //Model.LoadChildren();            
-            if (this.Parent != null)
-            {
-                if (Model.SPObject is SPPersistedObject)
-                {
-                    RefreshSPPersistedObject();
-                }
-                else if (Model.SPObject is SPBaseCollection)
-                {
-                    RefreshSPPersistedObject();
-                }
-                else
-                {
-                    Type tagType = this.Model.SPObjectType;
-                    Type baseType = tagType.BaseType;
-                    string baseName = baseType.Name;
-                    if (baseName.IndexOf("SPPersistedObjectCollection") >= 0 ||
-                        baseName.IndexOf("SPPersistedChildCollection") >= 0)
-                    {
-                        RefreshSPPersistedObjectCollection();
-                    }
-                    else
-                    {
-                        RefreshWss2Objects();
-                    }
-                }
-            }
-            else
-            {
-                // Reload the TreeView, because there is no parent to the node.
-                // It is properly the root that haven been selected.
-                ClearNodes(Program.Window.Explorer.Nodes);
-                Program.Window.Explorer.Build();
-            }
-        }
 
-        class StuctureItem
-        {
-            //public Type ObjectType;
-            public string ID;
-        }
+            Trace.WriteLine("Refresh() called on node: " + this.Text);
 
-        class StuctureItemCollection : List<StuctureItem>
-        {
+            // Save the structure of open nodes.
+            var list = SaveStucture(this);
+            if (list.Count == 0) return;
+
+            var treeView = (TreeViewComponent)this.TreeView;
+            
+            // Dispose all objects
+            ClearNodes(this.TreeView.Nodes);
+
+            treeView.Build(list);
         }
 
         private StuctureItemCollection SaveStucture(SPTreeNode currentNode)
@@ -135,10 +103,6 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             while (child != null)
             {
                 list.Insert(0, CloneNode(child));
-                if (child.Tag is SPSiteCollection)
-                {
-                    break;
-                }
                 child = child.Parent as SPTreeNode;
             }
 
@@ -148,62 +112,35 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         private StuctureItem CloneNode(SPTreeNode source)
         {
             var result = new StuctureItem();
-            result.ID = String.Concat(source.Model.SPObjectType.FullName, source.Text);
-
+            result.ID = source.Model.ID;
             return result;
         }
 
-        private void Reload(SPTreeNode parent, StuctureItemCollection list)
+        public void Reload(SPTreeNode parent, StuctureItemCollection list)
         {
-            if (list.Count > 0)
+            if (list == null || list.Count <= 1)
             {
-                parent.HasChildrenLoaded = false;
-                Program.Window.Explorer.ExpandNode(parent);
-
-                var item = list[0];
-                list.RemoveAt(0);
-                foreach (SPTreeNode node in parent.Nodes)
-                {
-                    if (GetNodeID(node) == item.ID)
-                    {
-                        Reload(node, list);
-                        break;
-                    }
-                }
+                // End of the line, set the selectedNode and return
+                Program.Window.Explorer.SelectedNode = parent;
+                return;
             }
-            Program.Window.Explorer.SelectedNode = parent;
-        }
 
-        private string GetNodeID(SPTreeNode node)
-        {
-            var nodeID = String.Concat(node.Model.SPObjectType.FullName, node.Text);
-            return nodeID;
-        }
+            list.RemoveAt(0);
 
-        protected void RefreshSPPersistedObject()
-        {
-            var currentID = GetNodeID(this);
-            var parent = this.Parent as SPTreeNode;
-            Program.Window.Explorer.SelectedNode = null;
-            ClearNodes(parent.Nodes);
+            var item = list[0];
+
+            Trace.WriteLine("Expand node: " + parent.Text);
+
             parent.HasChildrenLoaded = false;
             Program.Window.Explorer.ExpandNode(parent);
 
             foreach (SPTreeNode node in parent.Nodes)
             {
-
-                if (GetNodeID(node) == currentID)
+                if (node.Model.ID == item.ID)
                 {
-                    Program.Window.Explorer.SelectedNode = node;
-                    //Program.Window.propertyGrid.SelectedObject = node.Tag;
+                    Trace.WriteLine("Reload of node: " + item.ID);
 
-                    if (this.IsExpanded)
-                    {
-                        node.HasChildrenLoaded = false;
-                        //Program.Window.Explorer.ExpandNode(node);
-                        this.Expand();
-                        //                        this.Toggle();
-                    }
+                    Reload(node, list);
                     break;
                 }
             }
@@ -216,67 +153,6 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
                 item.Dispose();
             }
             collection.Clear();
-        }
-
-        protected void RefreshSPPersistedObjectCollection()
-        {
-            ClearNodes(Nodes);
-
-            this.HasChildrenLoaded = false;
-            Program.Window.Explorer.ExpandNode(this);
-        }
-
-        protected void RefreshWss2Objects()
-        {
-            var list = SaveStucture(this);
-
-            if (list.Count > 0)
-            {
-                var appNode = GetWebApp(this);
-                if (appNode != null && appNode.Model.SPObject is SPWebApplication)
-                {
-                    appNode.Dispose();
-
-                    //Program.Window.Explorer.DisposeObjectModelNodes(appNode);
-                    //((SPPersistedObject)appNode.Tag).Uncache();
-
-                    Reload(appNode, list);
-
-                    if (this.IsExpanded)
-                    {
-                        this.HasChildrenLoaded = false;
-                        //Program.Window.Explorer.ExpandNode(CurrentNode);
-                        this.Expand();
-                    }
-                }
-                else
-                {
-                    
-                    //Reload(appNode, list);
-                }
-            }
-            else
-            {
-                throw new ApplicationException(SPMLocalization.GetString("ExplorerBase_Error"));
-            }
-        }
-
-        protected void RefreshSPBaseCollection()
-        {
-        }
-
-        private SPTreeNode GetWebApp(SPTreeNode start)
-        {
-            var child = start;
-            while (child != null)
-            {
-                if (child.Model.SPObject is SPWebApplication)
-                {
-                    return child;
-                }
-                child = child.Parent as SPTreeNode;
-            }
-            return null;
         }
 
 

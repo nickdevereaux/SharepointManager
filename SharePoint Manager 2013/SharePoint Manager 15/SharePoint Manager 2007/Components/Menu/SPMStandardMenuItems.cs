@@ -18,7 +18,8 @@ namespace Keutmann.SharePointManager.Components
         {
             get
             {
-                return Program.Window.Explorer.SelectedNode as ExplorerNodeBase;
+                var node =  Program.Window.Explorer.SelectedNode as ExplorerNodeBase ?? Program.Window.Explorer.Nodes[0] as ExplorerNodeBase;
+                return node;
             }
         }
 
@@ -201,10 +202,14 @@ namespace Keutmann.SharePointManager.Components
             //RefreshFunction();
             if (CurrentNode != null)
             {
+                Program.Window.Explorer.SuspendLayout();
+                
                 CurrentNode.Refresh();
 
                 Program.Window.ChangedNodes.Remove(CurrentNode);
                 Program.Window.UpdateMenu(CurrentNode);
+
+                Program.Window.Explorer.ResumeLayout();
             }
             else
             {

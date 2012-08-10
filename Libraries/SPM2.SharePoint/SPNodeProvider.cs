@@ -76,7 +76,7 @@ namespace SPM2.SharePoint
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
                     instanceNode.SPObject = parentNode.Pointer.Current;
-                    instanceNode.ID = GetID(instanceNode.SPObject);
+                    instanceNode.ID = GetCollectionItemID(instanceNode.SPObject);
                     
                     instanceNode.Setup(parentNode);
                     list.Add(instanceNode);
@@ -103,12 +103,25 @@ namespace SPM2.SharePoint
             return list;
         }
 
-        private Guid? GetID(object spObject)
+        private string GetCollectionItemID(object spObject)
         {
-            var info = spObject.GetType().GetProperty("UniqueID");
-            if (info == null) return null;
-            var result = (Guid)info.GetValue(spObject, null);
-            return result;
+            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
+            if (spObject.PropertyExist("id", flags))
+            {
+                return spObject.GetPropertyValue<object>("id", flags).ToString();
+            }
+
+            if (spObject.PropertyExist("uniqueid", BindingFlags.IgnoreCase))
+            {
+                return spObject.GetPropertyValue<object>("uniqueid", flags).ToString();
+            }
+
+            if (spObject.PropertyExist("name", BindingFlags.IgnoreCase))
+            {
+                return spObject.GetPropertyValue<object>("name", flags).ToString();
+            }
+
+            return spObject.GetType().FullName;
         }
 
 
@@ -136,7 +149,7 @@ namespace SPM2.SharePoint
 
                         //Ensure that the child node instance is unique in the TreeView
                         node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode);
-
+                        
                         list.Add(node);
                     }
                 }
@@ -213,6 +226,7 @@ namespace SPM2.SharePoint
             node.NodeProvider = this;
             node.Text = text;
             node.SPObjectType = spObjectType;
+            node.ID = spObjectType.FullName;
             node.Setup(parent);
             return node;
         }

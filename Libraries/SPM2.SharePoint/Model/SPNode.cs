@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -174,7 +175,9 @@ namespace SPM2.SharePoint.Model
 
         public SerializableList<ISPNode> Children { get; set; }
 
-        
+        //[ImportMany("SPFeature", typeof(MenuItem))]
+        public OrderingCollection<ActionItem> MenuItemCollection { get; set; }
+
         public SPNode()
         {
             State = "Black";

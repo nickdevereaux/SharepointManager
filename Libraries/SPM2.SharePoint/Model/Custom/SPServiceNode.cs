@@ -12,6 +12,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
+    [Icon("SETTINGS.GIF")]
 	[Title(PropertyName="DisplayName")]
 	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceInstanceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
@@ -19,9 +20,5 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPServiceNode
 	{
-        public SPServiceNode()
-        {
-            this.IconUri = SharePointContext.GetImagePath("SETTINGS.GIF");
-        }
 	}
 }

@@ -23,16 +23,18 @@ namespace SPM2.SharePoint
 
         public string View { get; set; }
 
+        public SPFarm Farm { get; set; }
 
-        public SPNodeProvider()
+        public SPNodeProvider(SPFarm farm)
         {
             View = "Full";
+            Farm = farm;
         }
 
         public ISPNode LoadFarmNode()
         {
             var node = Create("Farm", typeof(SPFarm), typeof(SPFarmNode), null);
-            node.SPObject = SharePointContext.Instance.Farm;
+            node.SPObject = Farm;
 
             return node;
         }
@@ -145,7 +147,6 @@ namespace SPM2.SharePoint
 
                         // Exclude the node if it do not match the correct view
                         if(!MatchView(node.GetType())) continue;
-                        
 
                         //Ensure that the child node instance is unique in the TreeView
                         node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode);

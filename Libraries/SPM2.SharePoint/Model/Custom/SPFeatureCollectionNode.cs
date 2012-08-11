@@ -12,6 +12,7 @@ using SPM2.Framework;
 using System.ComponentModel;
 using System.Collections.Generic;
 using SPM2.Framework.Collections;
+using System.Collections;
 
 namespace SPM2.SharePoint.Model
 {
@@ -30,7 +31,7 @@ namespace SPM2.SharePoint.Model
         {
 
             // Load Definitions
-            IEnumerable<SPFeatureDefinition> definitions = GetFeatureDefinitionIndex();
+            var definitions = GetFeatureDefinitionIndex().Distinct(new SPFeatureDefinitionComparer());
 
             // Load Active Features
             Dictionary<Guid, SPFeature> featureIndex = this.FeatureCollection.ToDictionary(p => p.DefinitionId);
@@ -61,6 +62,7 @@ namespace SPM2.SharePoint.Model
                 SPFeatureNode node = new SPFeatureNode();
                 node.Definition = null;
                 node.Setup(this);
+                node.Text += " (Error: Missing definition)";
 
                 unorderedList.Add(node);
             }
@@ -77,17 +79,17 @@ namespace SPM2.SharePoint.Model
 
             if (result == null && Parent.SPObject is SPWebService)
             {
-                result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Farm);
+                result = NodeProvider.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Farm);
             }
 
             if (result == null && Parent.SPObject is SPWebApplication)
             {
-                result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
+                result = NodeProvider.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
             }
 
             if (result == null && Parent.SPObject is SPAdministrationWebApplication)
             {
-                result = SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
+                result = NodeProvider.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.WebApplication);
             }
 
             if (result == null && Parent.SPObject is SPSite)
@@ -95,7 +97,7 @@ namespace SPM2.SharePoint.Model
                 SPSite site = (SPSite)Parent.SPObject;
                 List<SPFeatureDefinition> list = new List<SPFeatureDefinition>();
                 list.AddRange(site.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Site));
-                list.AddRange(SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Site));
+                list.AddRange(NodeProvider.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Site));
                 result = list;
             }
 
@@ -104,7 +106,7 @@ namespace SPM2.SharePoint.Model
                 SPSite site = ((SPWeb)Parent.SPObject).Site;
                 List<SPFeatureDefinition> list = new List<SPFeatureDefinition>();
                 list.AddRange(site.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Web));
-                list.AddRange(SharePointContext.Instance.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Web));
+                list.AddRange(NodeProvider.Farm.FeatureDefinitions.Where(p => p.Scope == SPFeatureScope.Web));
                 result = list;
             }
 
@@ -112,6 +114,22 @@ namespace SPM2.SharePoint.Model
         }
 
 
+        class SPFeatureDefinitionComparer : IEqualityComparer<SPFeatureDefinition>
+        {
+            #region IEqualityComparer<SPFeatureDefinition> Members
+
+            public bool Equals(SPFeatureDefinition x, SPFeatureDefinition y)
+            {
+                return x.Id.Equals(y.Id);
+            }
+
+            public int GetHashCode(SPFeatureDefinition obj)
+            {
+                return obj.Id.GetHashCode();
+            }
+
+            #endregion
+        }
 
 	}
 }

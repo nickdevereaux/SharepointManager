@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.SharePoint.Administration;
 using SPM2.SharePoint.Model;
 
 namespace SPM2.SharePoint
@@ -16,5 +17,6 @@ namespace SPM2.SharePoint
         ISPNode LoadFarmNode();
         string Serialize(ISPNode node);
         ISPNode Deserialize(string xml);
+        SPFarm Farm {get;set;}
     }
 }

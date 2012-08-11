@@ -21,6 +21,45 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         public ITreeViewNodeProvider NodeProvider { get; set; }
 
 
+        public override ContextMenuStrip ContextMenuStrip
+        {
+            get
+            {
+                if (base.ContextMenuStrip == MenuStripBase && !InReadOnlyMode)
+                {
+                    var menu = new MenuStripRefresh();
+
+                    if (Model.MenuItemCollection != null)
+                    {
+                        foreach (Lazy<ActionItem> item in Model.MenuItemCollection)
+                        {
+                            menu.Items.Add(Create(item.Value));
+                        }
+                    }
+
+                    //menu.Items.Add(2, new ToolStripSeparator());
+
+                    base.ContextMenuStrip = menu;
+                }
+                return base.ContextMenuStrip;
+            }
+            set
+            {
+                base.ContextMenuStrip = value;
+            }
+        }
+
+        private ToolStripItem Create(ActionItem item)
+        {
+            var result = new ToolStripButton();
+            result.Text = item.Text;
+            result.ToolTipText = item.ToolTipText;
+            result.Click += item.Click;
+            result.Enabled = item.Enabled;
+            return result;
+        }
+
+
         public SPTreeNode(ISPNode modelNode)
         {
             Model = modelNode;

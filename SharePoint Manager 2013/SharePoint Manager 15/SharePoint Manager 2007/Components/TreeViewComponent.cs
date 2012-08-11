@@ -94,7 +94,7 @@ namespace Keutmann.SharePointManager.Components
             BeginUpdate();
             TreeViewNodeSorter = new NodeSorter();
 
-            SPProvider = new SPNodeProvider();
+            SPProvider = new SPNodeProvider(SPFarm.Local);
             SPProvider.View = ViewName;
 
             var treeViewProvider = new TreeViewNodeProvider(SPProvider);

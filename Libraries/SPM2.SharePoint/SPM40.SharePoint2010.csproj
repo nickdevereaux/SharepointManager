@@ -94,7 +94,11 @@
     <Compile Include="Model\ExportToNodeAttribute.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageCollectionNode.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
+    <Compile Include="Model\IActionItem.cs" />
     <Compile Include="Model\ISPNodeCollection.cs" />
+    <Compile Include="Model\ActionItem.cs" />
+    <Compile Include="Model\Menu\SPFeatureDeactivateActionItem.cs" />
+    <Compile Include="Model\Menu\SPFeatureActivateActionItem.cs" />
     <Compile Include="Model\MoreNode.cs" />
     <Compile Include="Model\SPExplorerSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

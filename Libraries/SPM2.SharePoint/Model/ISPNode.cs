@@ -24,6 +24,8 @@ namespace SPM2.SharePoint.Model
         ISPNode Parent { get; set; }
         string ID { get; set; }
 
+        OrderingCollection<ActionItem> MenuItemCollection { get; set; }
+
         Type SPObjectType { get; set; }
         void LoadChildren();
         void ClearChildren();

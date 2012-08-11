@@ -133,14 +133,14 @@ namespace SPM2.SharePoint
 
         #region Singleton
 
-        SharePointContext() : this(SPFarm.Local)
+        SharePointContext()// : this(SPFarm.Local)
         {
         }
 
-        public SharePointContext(SPFarm farm)
-        {
-            this.Farm = farm;
-        }
+        //public SharePointContext(SPFarm farm)
+        //{
+        //    this.Farm = farm;
+        //}
 
         public static SharePointContext Instance
         {

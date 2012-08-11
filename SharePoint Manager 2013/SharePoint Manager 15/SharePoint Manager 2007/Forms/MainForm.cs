@@ -18,6 +18,9 @@ using Keutmann.SharePointManager.Library;
 using Keutmann.SharePointManager.Properties;
 using SPM2.Framework.ComponentModel;
 using Keutmann.SharePointManager.ViewModel.TreeView;
+using SPM2.Framework;
+using System.Diagnostics;
+using SPM2.SharePoint.Model;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -39,6 +42,12 @@ namespace Keutmann.SharePointManager.Forms
 
         public void SplashScreenLoad()
         {
+
+            
+            var collection = CompositionProvider.GetOrderedExports<ActionItem>("SPFeatureActionItems");
+            ////var value = collection[0].Value;
+            Trace.WriteLine(String.Format("Collection : {0}", collection.Count));
+                
             // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
             PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
             PropertyGridTypeConverter.AddTo(typeof(SPFarm));

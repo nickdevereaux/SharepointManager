@@ -25,11 +25,13 @@ namespace SPM2.SharePoint.Model
     public partial class SPFolderNode
 	{
 
-        public override void Setup(ISPNode parent)
+        public SPFolderNode()
         {
-            base.Setup(parent);
-
-            this.Text = this.Folder.Name;
+            Text = this.Folder.Name;
+            if (String.IsNullOrEmpty(Text) && "SPWeb".Equals(Parent.SPObjectType.Name))
+            {
+                Text = "Root";
+            }
         }
 
 

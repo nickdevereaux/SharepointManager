@@ -17,7 +17,7 @@ namespace SPM2.Framework.Collections
         [DefaultValue(null)]
         string After { get; }
 
-        [DefaultValue(1000)]
+        [DefaultValue(int.MaxValue)]
         int Order { get; }
     }
 }

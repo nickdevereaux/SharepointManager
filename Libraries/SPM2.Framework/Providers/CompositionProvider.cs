@@ -85,18 +85,15 @@ namespace SPM2.Framework
             string assmPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             //A catalog that can aggregate other catalogs
             var aggrCatalog = new AggregateCatalog();
-            //A directory catalog
-            //aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.Framework.dll"));
-            //aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2.SharePoint.dll"));
-            //aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "SPM2AuditLog.dll"));
             
             //An assembly catalog
-            aggrCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-
+            var currentAssemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+            aggrCatalog.Catalogs.Add(currentAssemblyCatalog);
+            
             //var dirCatalog = new DirectoryCatalog(assmPath + "\\" + addinPath, "*.dll");
 
-            var dirCatalog = new DirectoryCatalog(assmPath, "*.dll");
-            aggrCatalog.Catalogs.Add(dirCatalog);
+            aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "*.dll"));
+            aggrCatalog.Catalogs.Add(new DirectoryCatalog(assmPath, "*.exe"));
 
             //Create a container
             return new CompositionContainer(aggrCatalog);

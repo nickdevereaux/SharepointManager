@@ -86,7 +86,6 @@
     <Compile Include="Model\Custom\SPPropertyBagNode.cs" />
     <Compile Include="Model\Custom\SPPropertyCollectionNode.cs" />
     <Compile Include="Model\Custom\SPPropertyNode.cs" />
-    <Compile Include="Model\ExportToContextMenuAttribute.cs" />
     <Compile Include="Model\Custom\SPContentTypeUsageCollectionNode.cs" />
     <Compile Include="Model\Custom\SPContentTypeUsageNode.cs" />
     <Compile Include="Model\Custom\SPLimitedWebPartCollectionNode.cs" />
@@ -96,10 +95,8 @@
     <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
     <Compile Include="Model\IActionItem.cs" />
     <Compile Include="Model\ISPNodeCollection.cs" />
-    <Compile Include="Model\ActionItem.cs" />
-    <Compile Include="Model\Menu\SPFeatureDeactivateActionItem.cs" />
-    <Compile Include="Model\Menu\SPFeatureActivateActionItem.cs" />
     <Compile Include="Model\MoreNode.cs" />
+    <Compile Include="Model\NotifyPropertyChanged.cs" />
     <Compile Include="Model\SPExplorerSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

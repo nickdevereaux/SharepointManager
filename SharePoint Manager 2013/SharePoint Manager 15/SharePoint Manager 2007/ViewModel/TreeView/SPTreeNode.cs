@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -9,54 +10,31 @@ using Keutmann.SharePointManager.Library;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.WebControls;
+using SPM2.Framework.Collections;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 
 namespace Keutmann.SharePointManager.ViewModel.TreeView
 {
-    public class SPTreeNode : ExplorerNodeBase, IDisposable
+    public class SPTreeNode : ExplorerNodeBase, IDisposable, IBindableComponent
     {
         public ISPNode Model;
 
         public ITreeViewNodeProvider NodeProvider { get; set; }
 
-
         public override ContextMenuStrip ContextMenuStrip
         {
             get
             {
-                if (base.ContextMenuStrip == MenuStripBase && !InReadOnlyMode)
-                {
-                    var menu = new MenuStripRefresh();
 
-                    if (Model.MenuItemCollection != null)
-                    {
-                        foreach (Lazy<ActionItem> item in Model.MenuItemCollection)
-                        {
-                            menu.Items.Add(Create(item.Value));
-                        }
-                    }
-
-                    //menu.Items.Add(2, new ToolStripSeparator());
-
-                    base.ContextMenuStrip = menu;
-                }
+                if (base.ContextMenuStrip != null) return base.ContextMenuStrip;
+                base.ContextMenuStrip = new SPContextMenu(this);
                 return base.ContextMenuStrip;
             }
             set
             {
                 base.ContextMenuStrip = value;
             }
-        }
-
-        private ToolStripItem Create(ActionItem item)
-        {
-            var result = new ToolStripButton();
-            result.Text = item.Text;
-            result.ToolTipText = item.ToolTipText;
-            result.Click += item.Click;
-            result.Enabled = item.Enabled;
-            return result;
         }
 
 
@@ -66,14 +44,13 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             this.Tag = Model.SPObject;
             this.DefaultExpand = false;
 
-            var imageUrl = Model.IconUri;
-            int index = Program.Window.Explorer.AddImage(imageUrl);
+            int index = Program.Window.Explorer.AddImage(Model.IconUri);
             this.ImageIndex = index;
             this.SelectedImageIndex = index;
-            
-            //Trace.WriteLine(String.Format("Node.ImageUrl: {0}, Index: {1}",imageUrl, index));
 
-            this.Setup();
+            this.DataBindings.Add("Text", Model, "Text");
+            this.DataBindings.Add("ToolTipText", Model, "ToolTipText");
+            this.Name = Model.SPObjectType.FullName;
 
             this.Nodes.Add(new ExplorerNodeBase("Dummy"));
         }
@@ -90,17 +67,10 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
         public override void Setup()
         {
-            this.Text = Model.Text + string.Empty;
-            
-            this.Name = Model.SPObjectType.FullName;
-            this.ToolTipText = Model.ToolTipText;
+            Model.Setup(Model.Parent);
         }
 
-        //public override string ImageUrl()
-        //{
-        //    return Model.IconUri;
-        //}
-            
+           
 
         public override void LoadNodes()
         {
@@ -118,7 +88,6 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
         public override void Refresh()
         {
-
             Trace.WriteLine("Refresh() called on node: " + this.Text);
 
             // Save the structure of open nodes.
@@ -132,6 +101,14 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
             treeView.Build(list);
         }
+
+        //public void RefreshParent()
+        //{
+        //    // Dispose all objects
+        //    ClearNodes(Parent.Nodes);
+        //    Parent.Expand();
+        //}
+
 
         private StuctureItemCollection SaveStucture(SPTreeNode currentNode)
         {
@@ -200,5 +177,59 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         {
             Model.Dispose();
         }
+
+
+        #region IBindableComponent Members
+
+        private ISite _site;
+        private BindingContext bindingContext;
+        private ControlBindingsCollection dataBindings;
+
+        public event EventHandler Disposed;
+
+        public System.ComponentModel.ISite Site
+        {
+            get
+            {
+                return _site;
+            }
+            set
+            {
+                _site = value;
+            }
+        }
+
+        public BindingContext BindingContext
+        {
+            get
+            {
+                if (bindingContext == null)
+                {
+                    bindingContext = new BindingContext();
+                }
+                return bindingContext;
+            }
+            set
+            {
+                bindingContext = value;
+            }
+        }
+
+        public ControlBindingsCollection DataBindings
+        {
+            get
+            {
+                if (dataBindings == null)
+                {
+                    dataBindings = new ControlBindingsCollection(this);
+                }
+                return dataBindings;
+            }
+        }
+
+        #endregion
+
+
+
     }
 }

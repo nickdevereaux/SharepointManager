@@ -126,9 +126,23 @@
     <Compile Include="Components\FileListView\SPMListView.Designer.cs">
       <DependentUpon>SPMListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Menu\MenuStripRefresh.cs">
+    <Compile Include="Components\Menu\SPFileRecycle.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Menu\SPFileDownload.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\GenericRefesh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\ISPMenuItem.cs" />
+    <Compile Include="Components\Menu\SPFeatureDeactivate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\SPFeatureActivate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\TreeViewExplorer\NodeSorter.cs" />
     <Compile Include="Forms\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,115 +177,16 @@
     <Compile Include="Components\TabControl\TabTextPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\TreeViewExplorer\ContentTypeCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ContentTypeNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ContentTypeUsageCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ContentTypeUsageNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ApplicationProxiyNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ApplicationProxyCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\SiteSubscriptionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\SiteSubscriptionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ExplorerNodeNew2010Feature.cs" />
-    <Compile Include="Components\TreeViewExplorer\IisSettingNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\IisSettingsCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServiceProxyCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServiceProxyNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\SolutionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\UserSolutionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListTemplateNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListTemplateCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\EventReceiverDefinitionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\GroupCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\GroupNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\RoleDefinitionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\RoleDefinitionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebPartNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebPartCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\QuotaTemplateNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\QoutaTemplateCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FormCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FormNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ViewNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ViewCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FeatureDefinitionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowTaskNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowTaskCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowModificationNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowModificationCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowAssociationNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WorkflowAssociationCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\AlertCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\AlertNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ApplicationPoolNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ApplicationPoolCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\JobDefinitionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\JobDefinitionNode.cs" />
-    <Compile Include="Components\Menu\MenuStripStandard.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\TreeViewExplorer\NodeDisplayLevelType.cs" />
-    <Compile Include="Components\TreeViewExplorer\RunningJobCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\RunningJobNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\UserCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\UserNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FieldNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FieldCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListItemCollectionNode.cs" />
-    <Compile Include="Components\Menu\SiteMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\TreeViewExplorer\SiteCollectionNode.cs" />
-    <Compile Include="Components\Menu\SiteCollectionMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\TreeViewExplorer\RecycleBinItemCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\RecycleBinNode.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\TreeViewExplorer\FarmNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FeatureCollectionDefinitionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FeatureNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FileNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FileVersionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\FileVersionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListItemNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListItemVersionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListItemVersionNode.cs" />
-    <Compile Include="Components\Menu\SPMMenu.cs" />
-    <Compile Include="Components\Menu\SPMStandardMenuItems.cs" />
-    <Compile Include="Components\Menu\SPMStandardMenuStrips.cs" />
-    <Compile Include="Components\TreeViewExplorer\PropertyBagCollection.cs" />
-    <Compile Include="Components\TreeViewExplorer\PropertyCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServerNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServiceCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServiceNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\UserSolutionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebCollectionNode.cs" />
-    <Compile Include="Components\Menu\ContextMenuStripBase.cs">
+    <Compile Include="Components\Menu\SPContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\TreeViewExplorer\ExplorerNodeBase.cs" />
-    <Compile Include="Components\TreeViewExplorer\FolderNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ListNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\ServerCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\SiteNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\SolutionCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\TreeViewExplorer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\TreeViewExplorer\FeatureCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebApplicationCollectionNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebApplicationNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebNode.cs" />
-    <Compile Include="Components\TreeViewExplorer\WebServiceNode.cs" />
     <Compile Include="Forms\OpenDBConnection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,7 +199,6 @@
     <Compile Include="Functions\ExportImport\RestoreForm.Designer.cs">
       <DependentUpon>RestoreForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Library\SPMClassLibrary.cs" />
     <Compile Include="Library\SPMFarmHelper.cs" />
     <Compile Include="Library\SPMLocalization.cs" />
     <Compile Include="Library\SPMObjectType.cs" />
@@ -299,7 +213,6 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\TreeViewExplorer\NodeSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPManagerLanguage.Designer.cs">

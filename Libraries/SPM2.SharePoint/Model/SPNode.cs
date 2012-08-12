@@ -18,7 +18,7 @@ using SPM2.Framework.Xml;
 namespace SPM2.SharePoint.Model
 {
     [Serializable]
-    public class SPNode : ISPNode, IDisposable
+    public class SPNode : NotifyPropertyChanged, ISPNode, IDisposable
     {
 
         private ClassDescriptor _descriptor;
@@ -34,13 +34,16 @@ namespace SPM2.SharePoint.Model
         {
             get
             {
-                if (String.IsNullOrEmpty(_text + string.Empty))
-                {
-                    _text = Descriptor.GetTitle(SPObject);
-                }
                 return _text;
             }
-            set { _text = value; }
+            set 
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    OnPropertyChanged("Text");
+                }
+            }
         }
 
         private string _spTypeName = null;
@@ -175,9 +178,6 @@ namespace SPM2.SharePoint.Model
 
         public SerializableList<ISPNode> Children { get; set; }
 
-        //[ImportMany("SPFeature", typeof(MenuItem))]
-        public OrderingCollection<ActionItem> MenuItemCollection { get; set; }
-
         public SPNode()
         {
             State = "Black";
@@ -189,6 +189,8 @@ namespace SPM2.SharePoint.Model
             if (parent == null) return;
             Parent = parent;
             NodeProvider = parent.NodeProvider;
+
+            Text = Descriptor.GetTitle(SPObject);
         }
 
         public virtual object GetSPObject()

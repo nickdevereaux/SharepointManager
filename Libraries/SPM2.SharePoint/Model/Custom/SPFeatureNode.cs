@@ -86,20 +86,12 @@ namespace SPM2.SharePoint.Model
 
         public SPFeatureNode() : base()
         {
-            MenuItemCollection = CompositionProvider.GetOrderedExports<ActionItem>("SPFeatureActionItems");
-            foreach (var item in MenuItemCollection)
-            {
-                var action = item.Value;
-                action.Node = this;
-            }
         }
 
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
             
-
-
             try 
         	{	        
                 if(this.Definition != null)
@@ -151,7 +143,7 @@ namespace SPM2.SharePoint.Model
             }
         }
 
-        private void UpdateIconUri()
+        public void UpdateIconUri()
         {
             if (this.Activated)
             {

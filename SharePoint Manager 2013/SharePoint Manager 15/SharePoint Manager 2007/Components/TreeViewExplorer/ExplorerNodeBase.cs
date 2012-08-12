@@ -26,8 +26,6 @@ namespace Keutmann.SharePointManager.Components
 
         public bool HasChildrenLoaded = false;
 
-        public object SPParent;
-
         private string _BrowserUrl = string.Empty;
         private bool _DefaultExpand = false;
 
@@ -67,31 +65,6 @@ namespace Keutmann.SharePointManager.Components
         }
 
 
-
-        protected ContextMenuStrip MenuStripBase = SPMMenu.Strips.Standard;
-        public override ContextMenuStrip ContextMenuStrip
-        {
-            get
-            {
-                if (base.ContextMenuStrip == null)
-                {
-                    base.ContextMenuStrip = MenuStripBase;
-                }
-                if (base.ContextMenuStrip is ContextMenuStripBase)
-                {
-                    ContextMenuStripBase menu = base.ContextMenuStrip as ContextMenuStripBase;
-                    //Program.Window.Explorer.SelectedNode = this;
-                }
-                
-                return base.ContextMenuStrip;
-            }
-            set
-            {
-                base.ContextMenuStrip = value;
-            }
-        }
-
-
         #endregion 
 
         #region Methods
@@ -127,7 +100,6 @@ namespace Keutmann.SharePointManager.Components
             : base(text, imageIndex, selectedImageIndex, children)
         { }
 
-        [DebuggerStepThroughAttribute()]
         public virtual TabPage[] GetTabPages()
         {
             ArrayList alPages = new ArrayList();
@@ -155,26 +127,26 @@ namespace Keutmann.SharePointManager.Components
         }
 
 
-        public void AddNode(NodeDisplayLevelType requiredlevel, ExplorerNodeBase node)
-        {
-            if (node.NewFeatureIn2010)
-            {
-                node.BackColor = Color.LightGray;
-            }
-            else
-            {
-                node.BackColor = Color.Empty;
-            }
+        //public void AddNode(NodeDisplayLevelType requiredlevel, ExplorerNodeBase node)
+        //{
+        //    if (node.NewFeatureIn2010)
+        //    {
+        //        node.BackColor = Color.LightGray;
+        //    }
+        //    else
+        //    {
+        //        node.BackColor = Color.Empty;
+        //    }
 
-            TreeViewExplorer exp = this.TreeView as TreeViewExplorer;
+        //    TreeViewExplorer exp = this.TreeView as TreeViewExplorer;
 
-            int level = (int)exp.DisplayLevel;
-            int result = level & (int)requiredlevel;
-            if (result >= 1)
-            {
-                this.Nodes.Add(node);
-            }
-        }
+        //    int level = (int)exp.DisplayLevel;
+        //    int result = level & (int)requiredlevel;
+        //    if (result >= 1)
+        //    {
+        //        this.Nodes.Add(node);
+        //    }
+        //}
 
         public virtual void LoadNodes()
         {

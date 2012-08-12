@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.IO;
 using System.Collections;
@@ -21,6 +22,7 @@ using Keutmann.SharePointManager.ViewModel.TreeView;
 using SPM2.Framework;
 using System.Diagnostics;
 using SPM2.SharePoint.Model;
+using Keutmann.SharePointManager.Components.Menu;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -43,10 +45,18 @@ namespace Keutmann.SharePointManager.Forms
         public void SplashScreenLoad()
         {
 
+
+            var collection = CompositionProvider.GetOrderedExports<ToolStripItem>("SPM2.SharePoint.Model.SPFeatureNode");
+            //var collection = CompositionProvider.Current.GetExportedValues<ISPMenuItem>();
             
-            var collection = CompositionProvider.GetOrderedExports<ActionItem>("SPFeatureActionItems");
+
+            //var collection = CompositionProvider.GetOrderedExports<ActionItem>("SPFeatureActionItems");
             ////var value = collection[0].Value;
-            Trace.WriteLine(String.Format("Collection : {0}", collection.Count));
+            Trace.WriteLine(String.Format("Collection : {0}", collection.Count()));
+            foreach (var item in collection)
+            {
+                Trace.WriteLine(string.Format("Type: {0}", item.Value.GetType().Name));
+            }
                 
             // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
             PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
@@ -321,7 +331,11 @@ namespace Keutmann.SharePointManager.Forms
 
         private void toolStripRefresh_Click(object sender, EventArgs e)
         {
-            SPMMenu.Items.Refresh_Click(sender, e);
+            var node = Program.Window.Explorer.SelectedNode as SPTreeNode;
+            if (node != null)
+            {
+                node.Refresh();
+            }
         }
 
         private void toolStripDBConnection_Click(object sender, EventArgs e)

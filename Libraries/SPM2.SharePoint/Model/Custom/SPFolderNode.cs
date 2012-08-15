@@ -24,11 +24,12 @@ namespace SPM2.SharePoint.Model
     //[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
     public partial class SPFolderNode
 	{
-
-        public SPFolderNode()
+        public override void Setup(ISPNode parent)
         {
+            base.Setup(parent);
+
             Text = this.Folder.Name;
-            if (String.IsNullOrEmpty(Text) && "SPWeb".Equals(Parent.SPObjectType.Name))
+            if (String.IsNullOrEmpty(Text))
             {
                 Text = "Root";
             }

@@ -60,8 +60,8 @@ namespace SPM2.SharePoint.Model
             set { _spTypeName = value; }
         }
 
-        [XmlIgnore]
         public virtual string ID { get; set; }
+        public virtual int Index { get; set; }
 
         [XmlIgnore]
         public virtual Dictionary<Type, ISPNode> NodeTypes { get; set; }

@@ -128,7 +128,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         private StuctureItem CloneNode(SPTreeNode source)
         {
             var result = new StuctureItem();
-            result.ID = source.Model.ID;
+            result.ID = (String.IsNullOrEmpty(source.Model.ID)) ? source.Index.ToString() : source.Model.ID;
             return result;
         }
 
@@ -152,7 +152,8 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
             foreach (SPTreeNode node in parent.Nodes)
             {
-                if (node.Model.ID == item.ID)
+                var nodeID = (String.IsNullOrEmpty(node.Model.ID)) ? node.Index.ToString() : node.Model.ID;
+                if (nodeID == item.ID)
                 {
                     Trace.WriteLine("Reload of node: " + item.ID);
 

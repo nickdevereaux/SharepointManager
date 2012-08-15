@@ -13,6 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Icon(Small="BULLET.GIF")][View("Full")]
+    [ExportToNode("SPM2.SharePoint.Model.SPRoleCollectionNode")]
 	public partial class SPRoleNode
 	{
 	}

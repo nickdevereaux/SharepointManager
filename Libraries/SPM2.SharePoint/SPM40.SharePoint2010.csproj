@@ -91,6 +91,7 @@
     <Compile Include="Model\Custom\SPLimitedWebPartCollectionNode.cs" />
     <Compile Include="Model\Custom\SPWebPartNode.cs" />
     <Compile Include="Model\ExportToNodeAttribute.cs" />
+    <Compile Include="Model\Generated\SPRoleNode.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageCollectionNode.cs" />
     <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
     <Compile Include="Model\IActionItem.cs" />

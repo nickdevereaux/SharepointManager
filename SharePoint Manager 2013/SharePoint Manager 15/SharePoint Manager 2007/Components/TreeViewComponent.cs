@@ -80,9 +80,11 @@ namespace Keutmann.SharePointManager.Components
             }
         }
 
+        private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode", "SPWebNode" };
+
         public void Build()
         {
-            Build(new StuctureItemCollection());
+            Build(null);
         }
 
 
@@ -99,16 +101,47 @@ namespace Keutmann.SharePointManager.Components
 
             var treeViewProvider = new TreeViewNodeProvider(SPProvider);
             FarmNode = treeViewProvider.LoadFarmNode();
+
+            
             this.Nodes.Add(FarmNode);
 
-            FarmNode.Reload(FarmNode, list);
-            
+            if (list != null)
+            {
+                FarmNode.Reload(FarmNode, list);
+            }
+            else
+            {
+                ExpandToDefault(FarmNode, DefaultExpandTypes);
+            }
             //Sort();
             //DefaultExpand(root);
             //this.SelectedNode = FarmNode;
 
             EndUpdate();
             Cursor.Current = Cursors.Default;
+        }
+
+        private void ExpandToDefault(SPTreeNode parent, List<string> types)
+        {
+            if(types == null || types.Count <= 0)
+            {
+                this.SelectedNode = parent;
+            }
+
+            ExpandNode(parent);
+            parent.Expand();
+            var item = types[0];
+
+            types.RemoveAt(0);
+
+            foreach (SPTreeNode node in parent.Nodes)
+            {
+                if (item.Equals(node.Model.GetType().Name))
+                {
+                    ExpandToDefault(node, types);
+                    break;
+                }
+            }
         }
 
 

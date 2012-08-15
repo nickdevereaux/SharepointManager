@@ -33,7 +33,7 @@ namespace SPM2.SharePoint
 
         public ISPNode LoadFarmNode()
         {
-            var node = Create("Farm", typeof(SPFarm), typeof(SPFarmNode), null);
+            var node = Create("Farm", typeof(SPFarm), typeof(SPFarmNode), null, 0);
             node.SPObject = Farm;
 
             return node;
@@ -78,13 +78,17 @@ namespace SPM2.SharePoint
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
                     instanceNode.SPObject = parentNode.Pointer.Current;
-                    instanceNode.ID = GetCollectionItemID(instanceNode.SPObject);
-                    
+                    instanceNode.ID = GetCollectionItemID(instanceNode.SPObject, parentNode.TotalCount);
+
+                    // Save the index for finding the node again with having to get the SPObject
+                    instanceNode.Index = parentNode.TotalCount;
+
                     instanceNode.Setup(parentNode);
                     list.Add(instanceNode);
                 }
                 
                 parentNode.MoveNext = parentNode.Pointer.MoveNext();
+                
                 count++;
                 parentNode.TotalCount++;
             }
@@ -105,7 +109,7 @@ namespace SPM2.SharePoint
             return list;
         }
 
-        private string GetCollectionItemID(object spObject)
+        private string GetCollectionItemID(object spObject, int index)
         {
             var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
             if (spObject.PropertyExist("id", flags))
@@ -123,7 +127,7 @@ namespace SPM2.SharePoint
                 return spObject.GetPropertyValue<object>("name", flags).ToString();
             }
 
-            return spObject.GetType().FullName;
+            return spObject.GetType().FullName + index;
         }
 
 
@@ -149,8 +153,7 @@ namespace SPM2.SharePoint
                         if(!MatchView(node.GetType())) continue;
 
                         //Ensure that the child node instance is unique in the TreeView
-                        node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode);
-                        
+                        node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
                         list.Add(node);
                     }
                 }
@@ -221,13 +224,14 @@ namespace SPM2.SharePoint
             return result;
         }
 
-        private ISPNode Create(string text, Type spObjectType, Type nodeType, ISPNode parent)
+        private ISPNode Create(string text, Type spObjectType, Type nodeType, ISPNode parent, int index)
         {
             var node = (ISPNode) Activator.CreateInstance(nodeType);
             node.NodeProvider = this;
             node.Text = text;
             node.SPObjectType = spObjectType;
-            node.ID = spObjectType.FullName;
+            node.ID = spObjectType.FullName + index;
+            node.Index = index;
             node.Setup(parent);
             return node;
         }

@@ -23,6 +23,7 @@ namespace SPM2.SharePoint.Model
         
         ISPNode Parent { get; set; }
         string ID { get; set; }
+        int Index { get; set; }
 
         Type SPObjectType { get; set; }
         void LoadChildren();

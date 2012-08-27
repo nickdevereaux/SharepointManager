@@ -108,18 +108,8 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
             var treeView = (TreeViewComponent)this.TreeView;
             
-            // Dispose all objects
-            ClearNodes(this.TreeView.Nodes);
-
             treeView.Build(list);
         }
-
-        //public void RefreshParent()
-        //{
-        //    // Dispose all objects
-        //    ClearNodes(Parent.Nodes);
-        //    Parent.Expand();
-        //}
 
 
         public StuctureItemCollection SaveStucture()
@@ -174,16 +164,6 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
                 }
             }
         }
-
-        private void ClearNodes(TreeNodeCollection collection)
-        {
-            foreach (SPTreeNode item in collection.OfType<SPTreeNode>())
-            {
-                item.Dispose();
-            }
-            collection.Clear();
-        }
-
 
         public virtual TabPage[] GetTabPages()
         {

@@ -13,6 +13,9 @@ namespace SPM2.SharePoint.Model
     public class SPNodeCollection : SPNode, ISPNodeCollection
     {
         private ISPNode _defaultNode;
+        /// <summary>
+        /// The default node used if the node type is unknown.
+        /// </summary>
         [XmlIgnore]
         public ISPNode DefaultNode
         {
@@ -44,64 +47,7 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            if (SPObject == null) return;
-
-            if (Children.Count == 0 || Children[0].Parent != null)
-            {
-                LoadNewChildren();
-            }
-            else
-            {
-                // Not functional
-                //InitializeChildren();
-            }
-        }
-
-        private void LoadNewChildren()
-        {
-           
-            if (Children.Count > 0)
-            {
-                // Ensure that the last node is the "MoreNode".
-                int nodeIndex = Children.Count - 1;
-                ISPNode node = Children[nodeIndex];
-
-                if (node is MoreNode)
-                {
-                    // Remove the "MoreNode" from this.Children.
-                    Children.RemoveAt(nodeIndex);
-                }
-            }
-            else
-            {
-                EnsureNodeTypes();
-            }
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
-            // Load the next batch!
-            Children.AddRange(NodeProvider.LoadCollectionChildren(this));
-
-#if DEBUG
-            watch.Stop();
-            Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.",
-                                          SPObjectType.Name, watch.ElapsedMilliseconds));
-#endif
-        }
-
-        private void InitializeChildren()
-        {
-            EnsureNodeTypes();
-
-            foreach (var item in Children)
-            {
-                item.Setup(this);
-                if (item.Children.Count > 0)
-                {
-                    item.LoadChildren();
-                }
-            }
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, int.MaxValue));
         }
 
 

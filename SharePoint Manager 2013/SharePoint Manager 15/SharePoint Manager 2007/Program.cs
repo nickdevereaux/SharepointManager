@@ -33,7 +33,6 @@ namespace Keutmann.SharePointManager
 #if DEBUG
             Win32.AllocConsole();
 #endif
-
             Trace.WriteLine("Application started");
             Watch.Start();
 

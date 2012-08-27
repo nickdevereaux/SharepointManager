@@ -18,10 +18,5 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPWebApplicationCollectionNode
 	{
-        public override IEnumerable<SPNode> NodesToExpand()
-        {
-            return this.Children.OfType<SPWebApplicationNode>().Take(1).Cast<SPNode>();
-        }
-
 	}
 }

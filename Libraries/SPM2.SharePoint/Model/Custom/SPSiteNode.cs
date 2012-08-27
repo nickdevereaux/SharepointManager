@@ -19,12 +19,6 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionSiteCollectionNode")]
 	public partial class SPSiteNode
 	{
-        public override IEnumerable<SPNode> NodesToExpand()
-        {
-            return this.Children.OfType<SPWebNode>().Take(1).Cast<SPNode>();
-        }
-
-
         public override void LoadChildren()
         {
             base.LoadChildren();

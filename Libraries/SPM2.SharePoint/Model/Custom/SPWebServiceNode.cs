@@ -14,17 +14,13 @@ using System.Collections.Generic;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
+    [Icon(Small = "SETTINGS.GIF")]
     //[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPWebServiceInstanceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
 	public partial class SPWebServiceNode
 	{
-        public SPWebServiceNode()
-        {
-            this.IconUri = SharePointContext.GetImagePath("SETTINGS.GIF");
-        }
-
         public bool IsAdministrationService
         {
             get
@@ -32,11 +28,5 @@ namespace SPM2.SharePoint.Model
                 return this.WebService == SPWebService.AdministrationService;
             }
         }
-
-        public override IEnumerable<SPNode> NodesToExpand()
-        {
-            return this.Children.OfType<SPWebApplicationCollectionNode>().Cast<SPNode>();
-        }
-
 	}
 }

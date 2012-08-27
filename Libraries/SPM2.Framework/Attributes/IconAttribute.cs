@@ -9,7 +9,7 @@ namespace SPM2.Framework
     public enum IconSource
     {
         Assembly,
-        File
+        SharePointImageFile
     }
 
     [AttributeUsage(System.AttributeTargets.Class, AllowMultiple=false)]
@@ -19,7 +19,7 @@ namespace SPM2.Framework
         public string Small { get; set; }
 
 
-        private IconSource _source = IconSource.File;
+        private IconSource _source = IconSource.SharePointImageFile;
         public IconSource Source
         {
             get { return _source; }

@@ -92,9 +92,11 @@ namespace Keutmann.SharePointManager.Components
         public void Build(StuctureItemCollection list)
         {
             Cursor.Current = Cursors.WaitCursor;
-            this.ImageList = Program.Window.SPMimageList;
-            Nodes.Clear();
             BeginUpdate();
+
+            this.ImageList = Program.Window.SPMimageList;
+            // Dispose all objects
+            ClearNodes(this.Nodes);
 
             SPProvider = new SPNodeProvider(SPFarm.Local);
             SPProvider.View = ViewName;
@@ -142,6 +144,14 @@ namespace Keutmann.SharePointManager.Components
             }
         }
 
+        private void ClearNodes(TreeNodeCollection collection)
+        {
+            foreach (SPTreeNode item in collection.OfType<SPTreeNode>())
+            {
+                item.Dispose();
+            }
+            collection.Clear();
+        }
 
 
         public void ExpandNode(ExplorerNodeBase node)

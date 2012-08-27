@@ -18,9 +18,5 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceCollectionNode
 	{
-        public override IEnumerable<SPNode> NodesToExpand()
-        {
-            return this.Children.OfType<SPWebServiceNode>().Where(p => !p.IsAdministrationService).Cast<SPNode>();
-        }
 	}
 }

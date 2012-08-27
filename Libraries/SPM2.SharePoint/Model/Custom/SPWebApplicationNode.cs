@@ -27,10 +27,5 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
     public partial class SPWebApplicationNode
     {
-        public override IEnumerable<SPNode> NodesToExpand()
-        {
-            return this.Children.OfType<SPSiteCollectionNode>().Take(1).Cast<SPNode>();
-        }
-
     }
 }

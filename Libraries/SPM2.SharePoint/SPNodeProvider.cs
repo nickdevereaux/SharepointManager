@@ -39,11 +39,11 @@ namespace SPM2.SharePoint
             return node;
         }
 
-        public  IEnumerable<ISPNode> LoadCollectionChildren(ISPNodeCollection parentNode)
+        public IEnumerable<ISPNode> LoadCollectionChildren(ISPNodeCollection parentNode, int batchCount)
         {
-            int batchCount = SPExplorerSettings.Current.BatchNodeLoad;
-
             var list = new List<ISPNode>();
+            if (parentNode.SPObject == null) return list;
+
             int count = 0;
             
  
@@ -142,6 +142,9 @@ namespace SPM2.SharePoint
         public  IEnumerable<ISPNode> LoadUnorderedChildren(ISPNode sourceNode)
         {
             var list = new List<ISPNode>();
+
+            if (sourceNode.SPObject == null) return list;
+
             var propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
             try
             {

@@ -35,6 +35,6 @@ namespace SPM2.SharePoint.Model
         void Setup(ISPNode parent);
 
 
-        void Dispose();
+        //void Dispose();
     }
 }

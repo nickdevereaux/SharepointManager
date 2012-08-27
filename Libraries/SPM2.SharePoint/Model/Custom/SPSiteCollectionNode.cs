@@ -20,38 +20,10 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPContentDatabaseNode")]
 	public partial class SPSiteCollectionNode
 	{
-        public override IEnumerable<SPNode> NodesToExpand()
+
+        public override void LoadChildren()
         {
-            return this.Children.OfType<SPSiteNode>().Take(1).Cast<SPNode>();
-        }
-
-        //public override void LoadChildren()
-        //{
-        //    if (SPObject == null) return;
-        //    EnsureNodeTypes();
-            
-        //    if (Children.Count == 0)
-        //    {
-        //        Children.AddRange(NodeProvider.LoadCollectionChildren(this));
-        //    }
-        //    else
-        //    {
-        //        SetupChildren();
-        //    }
-        //}
-
-        //private void SetupChildren()
-        //{
-        //    foreach (var item in Children)
-        //    {
-        //        //instanceNode.SPObject = parentNode.Pointer.Current;
-
-        //        item.Setup(this);
-        //        if (item.Children.Count > 0)
-        //        {
-        //            item.LoadChildren();
-        //        }
-        //    }
-        //}
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+       }
 	}
 }

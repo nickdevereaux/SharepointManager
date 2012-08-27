@@ -104,6 +104,8 @@
     <Compile Include="IO\Win32.cs" />
     <Compile Include="Properties\SPM2AssemblyInfo.cs" />
     <Compile Include="Providers\CompositionProvider.cs" />
+    <Compile Include="Threading\ITask.cs" />
+    <Compile Include="Threading\Task.cs" />
     <Compile Include="Validation\BaseValidator.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidatorCollection.cs" />

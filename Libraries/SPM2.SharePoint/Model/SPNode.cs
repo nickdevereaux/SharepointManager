@@ -63,8 +63,24 @@ namespace SPM2.SharePoint.Model
         public virtual string ID { get; set; }
         public virtual int Index { get; set; }
 
+        private Dictionary<Type, ISPNode> _nodeTypes = null;
+
         [XmlIgnore]
-        public virtual Dictionary<Type, ISPNode> NodeTypes { get; set; }
+        public virtual Dictionary<Type, ISPNode> NodeTypes 
+        {
+            get
+            {
+                if (_nodeTypes == null)
+                {
+                    _nodeTypes = NodeProvider.GetChildrenTypes(this);
+                }
+                return _nodeTypes;
+            }
+            set
+            {
+                _nodeTypes = value;
+            }
+        }
 
         [XmlIgnore]
         public virtual ISPNodeProvider NodeProvider { get; set; }
@@ -103,7 +119,7 @@ namespace SPM2.SharePoint.Model
                         {
                             switch (Descriptor.Icon.Source)
                             {
-                                case IconSource.File:
+                                case IconSource.SharePointImageFile:
                                     _iconUri = SharePointContext.GetImagePath(Descriptor.Icon.Small);
                                     break;
                                 default:
@@ -191,6 +207,16 @@ namespace SPM2.SharePoint.Model
             NodeProvider = parent.NodeProvider;
 
             Text = Descriptor.GetTitle(SPObject);
+
+            // Make sure to update all children if exist!
+            foreach (var item in Children)
+            {
+                item.Setup(this);
+                if (item.Children.Count > 0)
+                {
+                    item.LoadChildren();
+                }
+            }
         }
 
         public virtual object GetSPObject()
@@ -290,67 +316,12 @@ namespace SPM2.SharePoint.Model
         
         public virtual void LoadChildren()
         {
-            if (SPObject == null) return;
-            EnsureNodeTypes();
-
-            if (Children.Count == 0)
-            {
-                LoadNewChildren();
-            }
-            else
-            {
-                InitializeChildren();              
-            }
+            Children.AddRange(NodeProvider.LoadChildren(this));
         }
-
-        private void LoadNewChildren()
-        {
-#if DEBUG
-            var watch = new Stopwatch();
-            watch.Start();
-#endif
-            Children.AddRange(NodeProvider.LoadChildren(this)); 
-
-#if DEBUG
-            watch.Stop();
-            Trace.WriteLine(String.Format("Load Properties: Type:{0} - Time {1} milliseconds.",
-                                            SPObjectType.Name, watch.ElapsedMilliseconds));
-#endif
-        }
-
-        private void InitializeChildren()
-        {
-            foreach (var item in Children)
-            {
-                //instanceNode.SPObject = parentNode.Pointer.Current;
-
-                item.Setup(this);
-                if (item.Children.Count > 0)
-                {
-                    item.LoadChildren();
-                }
-            }
-        }
-
-
-        public virtual void EnsureNodeTypes()
-        {
-            if (NodeTypes == null)
-            {
-                NodeTypes = NodeProvider.GetChildrenTypes(this);
-            }
-        }
-
 
         public virtual void ClearChildren()
         {
             Children.Clear();
-        }
-
-
-        public virtual IEnumerable<SPNode> NodesToExpand()
-        {
-            return null;
         }
 
         public virtual bool IsDefaultSelected()

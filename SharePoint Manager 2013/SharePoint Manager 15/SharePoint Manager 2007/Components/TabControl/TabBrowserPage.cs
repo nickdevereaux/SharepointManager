@@ -1,6 +1,6 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
-
 using Keutmann.SharePointManager.Library;
 
 namespace Keutmann.SharePointManager.Components
@@ -27,11 +27,12 @@ namespace Keutmann.SharePointManager.Components
         {
             get
             {
-                return Browser.Url.AbsoluteUri;
+                return Browser.Url + string.Empty;
             }
             set
             {
                 Browser.Url = new Uri(value);
+                Trace.WriteLine("Browser updated with url: " + value);
             }
         }
 
@@ -45,12 +46,18 @@ namespace Keutmann.SharePointManager.Components
             
         }
 
-
         public TabBrowserPage(string titel, string url)
             : this()
         {
             this.Text = titel;
             this.Url = url;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
         }
 
     }

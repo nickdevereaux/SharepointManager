@@ -45,20 +45,22 @@ namespace SPM2.SharePoint
 
             var list = new List<ISPNode>();
             int count = 0;
-
+            
+ 
             if (parentNode.Pointer == null)
             {
                 parentNode.ClearChildren();
                 parentNode.TotalCount = 0;
                 var collection = (IEnumerable)parentNode.SPObject;
                 parentNode.Pointer = collection.GetEnumerator();
-                //_pointer.Reset();
-                parentNode.MoveNext = parentNode.Pointer.MoveNext();
+                //parentNode.Pointer.Reset();
+                parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
             }
 
-            while (count <= batchCount && parentNode.MoveNext)
+            while (count <= batchCount && parentNode.LoadingChildren)
             {
-                Type instanceType = parentNode.Pointer.Current.GetType();
+                var current = parentNode.Pointer.Current;
+                Type instanceType = current.GetType();
                 ISPNode node = null;
 
                 if (parentNode.NodeTypes.ContainsKey(instanceType))
@@ -87,13 +89,14 @@ namespace SPM2.SharePoint
                     list.Add(instanceNode);
                 }
                 
-                parentNode.MoveNext = parentNode.Pointer.MoveNext();
+                parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
                 
                 count++;
                 parentNode.TotalCount++;
             }
+            
             // If there is more nodes in the collection, add a "More" item.
-            if (count >= batchCount && parentNode.MoveNext)
+            if (count >= batchCount && parentNode.LoadingChildren)
             {
                 var node = new MoreNode(parentNode);
                 node.Setup(parentNode);

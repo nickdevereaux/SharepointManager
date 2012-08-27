@@ -97,6 +97,10 @@
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Forms\TreeViewExtended.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\TreeViewSelectedNodeChangedArgs.cs" />
     <Compile Include="IO\Win32.cs" />
     <Compile Include="Properties\SPM2AssemblyInfo.cs" />
     <Compile Include="Providers\CompositionProvider.cs" />

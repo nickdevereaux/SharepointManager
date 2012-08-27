@@ -249,6 +249,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SPMListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\TabControl\TabBrowserPage.resx">
+      <DependentUpon>TabBrowserPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>

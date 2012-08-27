@@ -18,7 +18,7 @@ namespace SPM2.SharePoint.Model
         
         public const string AddInID = "SPM2.SharePoint.Model.SPExplorerSettings";
 
-        private int _batchNodeLoad = 200;
+        private int _batchNodeLoad = int.MaxValue;
         [DisplayName("Batch load")]
         [Description("If a list contains a high number of items, the explorer will only load the number of items specified. It will be possible to load more items by selecting the last node in the collection.")]
         public int BatchNodeLoad

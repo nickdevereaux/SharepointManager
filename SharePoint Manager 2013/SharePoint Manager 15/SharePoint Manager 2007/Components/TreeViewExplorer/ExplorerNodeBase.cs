@@ -100,31 +100,7 @@ namespace Keutmann.SharePointManager.Components
             : base(text, imageIndex, selectedImageIndex, children)
         { }
 
-        public virtual TabPage[] GetTabPages()
-        {
-            ArrayList alPages = new ArrayList();
 
-            alPages.Add(TabPages.GetPropertyPage(TabPages.PROPERTIES, this.Tag));
-
-            if (this.BrowserUrl.Length > 0)
-            {
-                alPages.Add(TabPages.GetBrowserPage("Browser", this.BrowserUrl));
-            }
-
-
-            if (this.Tag != null)
-            {
-                Type type = Tag.GetType();
-                PropertyInfo propInfo = type.GetProperty("SchemaXml", typeof(string));
-                if (propInfo != null)
-                {
-                    alPages.Add(TabPages.GetXmlPage("Schema Xml", propInfo.GetValue(Tag, null) as string));
-                }
-            }
-            
-            return (TabPage[])alPages.ToArray(typeof(TabPage));
-
-        }
 
 
         //public void AddNode(NodeDisplayLevelType requiredlevel, ExplorerNodeBase node)
@@ -150,9 +126,11 @@ namespace Keutmann.SharePointManager.Components
 
         public virtual void LoadNodes()
         {
+            if (Nodes.Count == 1 && Nodes[0].Text == "Dummy")
+            {
+                Nodes.Clear();
+            }
             HasChildrenLoaded = true;
-            this.Nodes.Clear();
-           
         }
 
         public ExplorerNodeBase GetNodeByTag(object objTag)

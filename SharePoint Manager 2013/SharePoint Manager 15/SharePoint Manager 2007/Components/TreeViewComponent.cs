@@ -9,11 +9,12 @@ using System.Text;
 using System.Windows.Forms;
 using Keutmann.SharePointManager.ViewModel.TreeView;
 using Microsoft.SharePoint.Administration;
+using SPM2.Framework.Forms;
 using SPM2.SharePoint;
 
 namespace Keutmann.SharePointManager.Components
 {
-    public class TreeViewComponent : TreeView
+    public class TreeViewComponent : TreeViewExtended
     {
         public int oldNodeIndex = -1;
         public SPFarm CurrentFarm = SPFarm.Local;
@@ -94,7 +95,6 @@ namespace Keutmann.SharePointManager.Components
             this.ImageList = Program.Window.SPMimageList;
             Nodes.Clear();
             BeginUpdate();
-            TreeViewNodeSorter = new NodeSorter();
 
             SPProvider = new SPNodeProvider(SPFarm.Local);
             SPProvider.View = ViewName;
@@ -113,10 +113,7 @@ namespace Keutmann.SharePointManager.Components
             {
                 ExpandToDefault(FarmNode, DefaultExpandTypes);
             }
-            //Sort();
-            //DefaultExpand(root);
-            //this.SelectedNode = FarmNode;
-
+            
             EndUpdate();
             Cursor.Current = Cursors.Default;
         }
@@ -126,6 +123,7 @@ namespace Keutmann.SharePointManager.Components
             if(types == null || types.Count <= 0)
             {
                 this.SelectedNode = parent;
+                return;
             }
 
             ExpandNode(parent);

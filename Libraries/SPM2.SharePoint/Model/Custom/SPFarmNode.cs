@@ -23,5 +23,15 @@ namespace SPM2.SharePoint.Model
         {
             return Children.OfType<SPServiceCollectionNode>().Cast<SPNode>();
         }
+
+        public override void Setup(ISPNode parent)
+        {
+            base.Setup(parent);
+            var webapp = SPAdministrationWebApplication.Local;
+            if (webapp.Sites.Count > 0)
+            {
+                this.Url = webapp.Sites["/"].Url;
+            }
+        }
 	}
 }

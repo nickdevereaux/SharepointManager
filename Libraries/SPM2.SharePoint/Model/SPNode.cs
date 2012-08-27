@@ -370,11 +370,25 @@ namespace SPM2.SharePoint.Model
             if (SPObject == null) return;
             if (SPObject is IDisposable)
             {
-                ((IDisposable)SPObject).Dispose();
+                try
+                {
+                    ((IDisposable)SPObject).Dispose();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.Message);
+                }
             }
             else if (SPObject is SPPersistedObject)
             {
-                ((SPPersistedObject)SPObject).Uncache();
+                try
+                {
+                    ((SPPersistedObject)SPObject).Uncache();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.Message);
+                }
             }
 
         }

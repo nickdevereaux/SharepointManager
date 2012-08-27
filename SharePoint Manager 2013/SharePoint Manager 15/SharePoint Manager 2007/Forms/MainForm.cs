@@ -76,13 +76,20 @@ namespace Keutmann.SharePointManager.Forms
             this.Explorer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Explorer_KeyUp);
             this.Explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Explorer_NodeMouseClick);
             this.Explorer.Click += new System.EventHandler(this.Explorer_Click);
+            this.Explorer.LocationChanged += Explorer_LocationChanged;
+            this.Explorer.BeforeExpand += Explorer_BeforeExpand;
+            this.Explorer.AfterSelect += Explorer_AfterSelect;
+            this.Explorer.BeforeSelect += Explorer_BeforeSelect;
+            this.Explorer.MouseClick += Explorer_MouseClick;
+            
 
             splitContainer.Panel1.Controls.Add(Explorer);
 
             Explorer.Build();
 
             // Call default expand after Explorer.Build();
-            ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
+            ExplorerClick(Explorer.SelectedNode as SPTreeNode);
+
             TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
             propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);
 
@@ -91,6 +98,70 @@ namespace Keutmann.SharePointManager.Forms
                 toolStripSave.Visible = false;
                 toolStripSaveAll.Visible = false;
             }
+        }
+
+        void Explorer_MouseClick(object sender, MouseEventArgs e)
+        {
+            //ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
+            Trace.WriteLine("MouseClick: " + Explorer.SelectedNode.Text);
+            Trace.WriteLine("--------------------------------------");
+        }
+
+
+        void Explorer_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Return)
+            {
+                Trace.WriteLine("KeyUp: " + Explorer.SelectedNode.Text);
+                ExplorerClick(Explorer.SelectedNode as SPTreeNode);
+            }
+        }
+
+        bool Reload;
+
+        void Explorer_NodeMouseClick(object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
+        {
+            Trace.WriteLine("NodeMouseClick: " + e.Node.Text);
+        }
+
+        void Explorer_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if(Explorer.SelectedNode != null)
+                Trace.WriteLine("BeforeSelect: " + Explorer.SelectedNode.Text+ " = "+ e.Node.Text);
+
+            var treeNode = (SPTreeNode)e.Node;
+
+            if (treeNode.Model is MoreNode)
+            {
+                e.Cancel = true;
+                var parent = ((SPTreeNode)treeNode.Parent);
+                parent.LoadNodes();
+                //parent.IsSelected = true;
+                //Explorer.SelectedNode = parent.Nodes[parent.Nodes.Count - 1];
+                //Explorer.SelectedNode = parent;
+            }
+        }
+
+        private void Explorer_Click(object sender, EventArgs e)
+        {
+            Trace.WriteLine("Click: " + Explorer.SelectedNode.Text);
+            ExplorerClick(Explorer.SelectedNode as SPTreeNode);
+        }
+
+        void Explorer_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (Explorer.SelectedNode != null && e.Node != null)
+                Trace.WriteLine("AfterSelect: " + Explorer.SelectedNode.Text + " = " + e.Node.Text);
+        }
+
+        void Explorer_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            Trace.WriteLine("Explorer_BeforeExpand: " + e.Node.Text);
+        }
+
+        void Explorer_LocationChanged(object sender, EventArgs e)
+        {
+            Trace.WriteLine("LocationChanged: " + Explorer.SelectedNode.Text);
         }
 
         public void MainWindow_Load(object sender, EventArgs e) 
@@ -129,16 +200,16 @@ namespace Keutmann.SharePointManager.Forms
 
         }
        
-        private void ExplorerClick(ExplorerNodeBase node)
+        private void ExplorerClick(SPTreeNode treeNode)
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            this.toolStripStatusLabel.Text = node.ToolTipText;
-            UpdateMenu(node);
+            this.toolStripStatusLabel.Text = treeNode.ToolTipText;
+            UpdateMenu(treeNode);
 
-            ArrayList nodeColl = new ArrayList(node.GetTabPages());
+            ArrayList nodeColl = new ArrayList(treeNode.GetTabPages());
             //ArrayList nodeColl = new ArrayList();
-
+           
             int i = 0;
             while (i < tabControl.TabPages.Count)
             {
@@ -161,15 +232,8 @@ namespace Keutmann.SharePointManager.Forms
                 }
             }
 
-            
-
-            //tabControl.Update();
+           //tabControl.Update();
             Cursor.Current = Cursors.Default;
-        }
-
-
-        private void Explorer_Click(object sender, EventArgs e)
-        {
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -367,7 +431,9 @@ namespace Keutmann.SharePointManager.Forms
             item.Checked = true;
 
             Explorer.ViewName = item.Tag as string;
-            Explorer.Build();
+
+            //Explorer.Build();
+            ((SPTreeNode)Explorer.SelectedNode).Refresh();
         }
 
         private void toolBarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -399,18 +465,6 @@ namespace Keutmann.SharePointManager.Forms
         void swedishToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             SetLanguage(SPMLocalization.C_CULTURE_SV);
-        }
-
-        void Explorer_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (e.KeyCode == System.Windows.Forms.Keys.Return)
-            {
-                ExplorerClick(Explorer.SelectedNode as ExplorerNodeBase);
-            }
-        }
-        void Explorer_NodeMouseClick(object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
-        {
-            ExplorerClick(e.Node as ExplorerNodeBase);
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)

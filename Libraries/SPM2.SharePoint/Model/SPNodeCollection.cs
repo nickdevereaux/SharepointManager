@@ -31,14 +31,14 @@ namespace SPM2.SharePoint.Model
         public IEnumerator Pointer { get; set; }
 
         [XmlIgnore]
-        public bool MoveNext { get; set; }
+        public bool LoadingChildren { get; set; }
 
         public int TotalCount { get; set; }
 
 
         public SPNodeCollection()
         {
-            MoveNext = true;
+            LoadingChildren = true;
         }
 
 
@@ -59,7 +59,7 @@ namespace SPM2.SharePoint.Model
 
         private void LoadNewChildren()
         {
-            
+           
             if (Children.Count > 0)
             {
                 // Ensure that the last node is the "MoreNode".
@@ -109,7 +109,7 @@ namespace SPM2.SharePoint.Model
         {
             Pointer = null;
             TotalCount = 0;
-            MoveNext = true;
+            LoadingChildren = true;
             Children.Clear();
         }
     }

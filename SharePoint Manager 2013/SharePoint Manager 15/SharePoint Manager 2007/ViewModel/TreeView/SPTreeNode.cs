@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Keutmann.SharePointManager.Components;
@@ -50,9 +52,13 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
             this.DataBindings.Add("Text", Model, "Text");
             this.DataBindings.Add("ToolTipText", Model, "ToolTipText");
+            this.DataBindings.Add("BrowserUrl", Model, "Url");
             this.Name = Model.SPObjectType.FullName;
 
-            this.Nodes.Add(new ExplorerNodeBase("Dummy"));
+            if (!(modelNode is MoreNode))
+            {
+                this.Nodes.Add(new ExplorerNodeBase("Dummy"));
+            }
         }
 
 
@@ -75,15 +81,21 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         public override void LoadNodes()
         {
             base.LoadNodes();
+            
+            this.TreeView.BeginUpdate();
 
-            this.Nodes.Clear();
             if (NodeProvider != null)
             {
-                foreach (var childnode in NodeProvider.LoadChildren(this))
-                {
-                    Nodes.Add(childnode);
-                }
+                var nodes = NodeProvider.LoadChildren(this);
+                
+                //foreach (var childnode in )
+                //{
+                //    Nodes.Add(childnode);
+                //}
             }
+
+            this.TreeView.EndUpdate();
+
         }
 
         public override void Refresh()
@@ -91,7 +103,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             Trace.WriteLine("Refresh() called on node: " + this.Text);
 
             // Save the structure of open nodes.
-            var list = SaveStucture(this);
+            var list = SaveStucture();
             if (list.Count == 0) return;
 
             var treeView = (TreeViewComponent)this.TreeView;
@@ -110,12 +122,12 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         //}
 
 
-        private StuctureItemCollection SaveStucture(SPTreeNode currentNode)
+        public StuctureItemCollection SaveStucture()
         {
             var list = new StuctureItemCollection();
 
-            list.Add(CloneNode(currentNode));
-            var child = currentNode.Parent as SPTreeNode;
+            list.Add(CloneNode(this));
+            var child = this.Parent as SPTreeNode;
             while (child != null)
             {
                 list.Insert(0, CloneNode(child));
@@ -173,6 +185,31 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         }
 
 
+        public virtual TabPage[] GetTabPages()
+        {
+            ArrayList alPages = new ArrayList();
+
+            alPages.Add(TabPages.GetPropertyPage(TabPages.PROPERTIES, this.Tag));
+
+            if (this.BrowserUrl.Length > 0)
+            {
+                alPages.Add(TabPages.GetBrowserPage("Browser", this.BrowserUrl));
+            }
+
+
+            if (this.Tag != null)
+            {
+                Type type = Tag.GetType();
+                PropertyInfo propInfo = type.GetProperty("SchemaXml", typeof(string));
+                if (propInfo != null)
+                {
+                    alPages.Add(TabPages.GetXmlPage("Schema Xml", propInfo.GetValue(Tag, null) as string));
+                }
+            }
+
+            return (TabPage[])alPages.ToArray(typeof(TabPage));
+
+        }
 
         public void Dispose()
         {

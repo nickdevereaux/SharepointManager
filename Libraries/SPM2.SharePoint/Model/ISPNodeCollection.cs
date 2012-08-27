@@ -10,7 +10,7 @@ namespace SPM2.SharePoint.Model
     {
         ISPNode DefaultNode { get; set; }
         IEnumerator Pointer { get; set; }
-        bool MoveNext { get; set; }
+        bool LoadingChildren { get; set; }
         int TotalCount { get; set; }
     }
 }

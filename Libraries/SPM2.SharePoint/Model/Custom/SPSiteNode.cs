@@ -19,18 +19,18 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteSubscriptionSiteCollectionNode")]
 	public partial class SPSiteNode
 	{
-        public override void LoadChildren()
-        {
-            base.LoadChildren();
+        //public override void LoadChildren()
+        //{
+        //    base.LoadChildren();
 
-            SPWebNode webNode = this.Children.OfType<SPWebNode>().FirstOrDefault();
-            if (webNode != null)
-            {
-                // Move the WebNode to first position
-                Children.Remove(webNode);
-                Children.Insert(0, webNode);
-            }
-        }
+        //    //SPWebNode webNode = this.Children.OfType<SPWebNode>().FirstOrDefault();
+        //    //if (webNode != null)
+        //    //{
+        //    //    // Move the WebNode to first position
+        //    //    Children.Remove(webNode);
+        //    //    Children.Insert(0, webNode);
+        //    //}
+        //}
 	}
 
 }

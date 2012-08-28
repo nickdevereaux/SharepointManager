@@ -86,9 +86,9 @@ namespace Keutmann.SharePointManager.Forms
             splitContainer.Panel1.Controls.Add(Explorer);
 
             Explorer.Build();
-
+            //((SPTreeNode)Explorer.SelectedNode).Refresh();
             // Call default expand after Explorer.Build();
-            ExplorerClick(Explorer.SelectedNode as SPTreeNode);
+            //ExplorerClick(Explorer.SelectedNode as SPTreeNode);
 
             TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
             propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);

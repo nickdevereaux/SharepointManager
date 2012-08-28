@@ -37,6 +37,7 @@ namespace Keutmann.SharePointManager.Components.Menu
             feature.ActivateFeature();
             feature.UpdateIconUri();
             TreeNode.ImageIndex = Program.Window.Explorer.AddImage(feature.IconUri);
+            TreeNode.SelectedImageIndex = TreeNode.ImageIndex;
         }
     }
 }

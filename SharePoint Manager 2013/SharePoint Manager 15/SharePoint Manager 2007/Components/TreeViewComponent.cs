@@ -81,7 +81,8 @@ namespace Keutmann.SharePointManager.Components
             }
         }
 
-        private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode", "SPWebNode" };
+        //private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode", "SPWebNode" };
+        private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode" };
 
         public void Build()
         {
@@ -92,7 +93,7 @@ namespace Keutmann.SharePointManager.Components
         public void Build(StuctureItemCollection list)
         {
             Cursor.Current = Cursors.WaitCursor;
-            BeginUpdate();
+            //BeginUpdate();
 
             this.ImageList = Program.Window.SPMimageList;
             // Dispose all objects
@@ -116,7 +117,7 @@ namespace Keutmann.SharePointManager.Components
                 ExpandToDefault(FarmNode, DefaultExpandTypes);
             }
             
-            EndUpdate();
+            //EndUpdate();
             Cursor.Current = Cursors.Default;
         }
 
@@ -127,9 +128,7 @@ namespace Keutmann.SharePointManager.Components
                 this.SelectedNode = parent;
                 return;
             }
-
             ExpandNode(parent);
-            parent.Expand();
             var item = types[0];
 
             types.RemoveAt(0);

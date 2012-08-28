@@ -19,30 +19,17 @@ namespace Keutmann.SharePointManager.Forms
         {
             InitializeComponent();
             Setup = setup;
+            Shown += SplashScreen_Shown;
         }
 
-        protected override void OnLoad(EventArgs e)
+        void SplashScreen_Shown(object sender, EventArgs e)
         {
-            base.OnLoad(e);
+            Application.DoEvents();
 
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-            worker.RunWorkerAsync();
+            result = Setup.Invoke();
 
-            this.Update();
-        }
-
-        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
             this.Close();
         }
-
-        void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            result = Setup.Invoke();
-        } 
-
 
         static public Form ShowSplashScreen(Func<Form> setup)
         {

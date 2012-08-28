@@ -169,7 +169,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         {
             ArrayList alPages = new ArrayList();
 
-            alPages.Add(TabPages.GetPropertyPage(TabPages.PROPERTIES, this.Tag));
+            alPages.Add(TabPages.GetPropertyPage(TabPages.PROPERTIES, Model.SPObject));
 
             if (this.BrowserUrl.Length > 0)
             {
@@ -177,13 +177,13 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             }
 
 
-            if (this.Tag != null)
+            if (Model.SPObject != null)
             {
-                Type type = Tag.GetType();
-                PropertyInfo propInfo = type.GetProperty("SchemaXml", typeof(string));
+
+                PropertyInfo propInfo = Model.SPObjectType.GetProperty("SchemaXml", typeof(string));
                 if (propInfo != null)
                 {
-                    alPages.Add(TabPages.GetXmlPage("Schema Xml", propInfo.GetValue(Tag, null) as string));
+                    alPages.Add(TabPages.GetXmlPage("Schema Xml", propInfo.GetValue(Model.SPObject, null) as string));
                 }
             }
 

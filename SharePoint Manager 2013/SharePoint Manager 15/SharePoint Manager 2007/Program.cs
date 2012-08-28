@@ -42,9 +42,9 @@ namespace Keutmann.SharePointManager
 
             Window = new MainWindow();
             SplashScreen.ShowSplashScreen(Setup);
+
             
             Application.Run(Window);
-
           
             Trace.WriteLine("Application ended");
         }

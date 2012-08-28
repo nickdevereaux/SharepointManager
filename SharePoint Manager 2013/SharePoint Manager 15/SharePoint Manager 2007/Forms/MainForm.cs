@@ -40,29 +40,17 @@ namespace Keutmann.SharePointManager.Forms
         {
             
             InitializeComponent();
+            Shown += MainWindow_Shown;
         }
+
 
         public void SplashScreenLoad()
         {
-
-
-            var collection = CompositionProvider.GetOrderedExports<ToolStripItem>("SPM2.SharePoint.Model.SPFeatureNode");
-            //var collection = CompositionProvider.Current.GetExportedValues<ISPMenuItem>();
-            
-
-            //var collection = CompositionProvider.GetOrderedExports<ActionItem>("SPFeatureActionItems");
-            ////var value = collection[0].Value;
-            Trace.WriteLine(String.Format("Collection : {0}", collection.Count()));
-            foreach (var item in collection)
-            {
-                Trace.WriteLine(string.Format("Type: {0}", item.Value.GetType().Name));
-            }
-                
+            Trace.WriteLine("SplashScreenLoad()");
             // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
             PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
             PropertyGridTypeConverter.AddTo(typeof(SPFarm));
             PropertyGridTypeConverter.AddTo(typeof(SPWebService));
-
 
             //Explorer = new TreeViewExplorer();
             Explorer = new TreeViewComponent();
@@ -81,14 +69,12 @@ namespace Keutmann.SharePointManager.Forms
             this.Explorer.AfterSelect += Explorer_AfterSelect;
             this.Explorer.BeforeSelect += Explorer_BeforeSelect;
             this.Explorer.MouseClick += Explorer_MouseClick;
-            
 
             splitContainer.Panel1.Controls.Add(Explorer);
 
             Explorer.Build();
             //((SPTreeNode)Explorer.SelectedNode).Refresh();
             // Call default expand after Explorer.Build();
-            //ExplorerClick(Explorer.SelectedNode as SPTreeNode);
 
             TabPropertyPage propertyPage = TabPages.GetPropertyPage(TabPages.PROPERTIES, null);
             propertyPage.Grid.PropertyValueChanged += new PropertyValueChangedEventHandler(Grid_PropertyValueChanged);
@@ -98,6 +84,12 @@ namespace Keutmann.SharePointManager.Forms
                 toolStripSave.Visible = false;
                 toolStripSaveAll.Visible = false;
             }
+        }
+
+        void MainWindow_Shown(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            ExplorerClick(Explorer.SelectedNode as SPTreeNode);
         }
 
         void Explorer_MouseClick(object sender, MouseEventArgs e)

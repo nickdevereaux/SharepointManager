@@ -109,23 +109,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\FileListView\LoadWorker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\FileListView\ListViewItemComparer.cs" />
-    <Compile Include="Components\FileListView\FileListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\FileListView\FileListView.Designer.cs">
-      <DependentUpon>FileListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\FileListView\LoadWorkerParameters.cs" />
-    <Compile Include="Components\FileListView\SPMListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\FileListView\SPMListView.Designer.cs">
-      <DependentUpon>SPMListView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\Menu\SPFileRecycle.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -205,7 +188,6 @@
     <Compile Include="Library\SPMReflection.cs" />
     <Compile Include="Library\SPMRegistry.cs" />
     <Compile Include="Library\SPMSecurity.cs" />
-    <Compile Include="Library\SPMUtility.cs" />
     <Compile Include="Library\SPMPaths.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -241,14 +223,6 @@
       <DependentUpon>SPManagerLanguage.sv.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TreeView\ITreeViewNodeProvider.cs" />
-    <EmbeddedResource Include="Components\FileListView\FileListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FileListView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\FileListView\SPMListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SPMListView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Components\TabControl\TabBrowserPage.resx">
       <DependentUpon>TabBrowserPage.cs</DependentUpon>
     </EmbeddedResource>

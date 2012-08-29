@@ -16,13 +16,13 @@ namespace SPM2.SharePoint.Model
 	[Title(PropertyName="Title")]
     [Icon(Small = "itgen.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPViewCollectionNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPViewContextNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPMobileContextNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
-	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPViewContextNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPMobileContextNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
+    //[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPViewNode
 	{
         public override void Setup(ISPNode parent)

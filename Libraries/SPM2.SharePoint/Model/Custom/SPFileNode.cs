@@ -12,6 +12,7 @@ using SPM2.Framework;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebPartPages;
 
+
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Name")]

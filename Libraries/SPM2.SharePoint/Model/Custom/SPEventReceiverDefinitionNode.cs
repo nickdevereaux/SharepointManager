@@ -13,7 +13,8 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
     [Icon(Small = "MARR.gif")]
-	public partial class SPEventReceiverDefinitionNode
+    [ExportToNode("SPM2.SharePoint.Model.SPEventReceiverDefinitionCollectionNode")]
+    public partial class SPEventReceiverDefinitionNode
 	{
 	}
 }

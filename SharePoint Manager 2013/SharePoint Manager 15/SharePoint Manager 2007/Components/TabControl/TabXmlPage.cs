@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 
 using Keutmann.SharePointManager.Library;
+using SPM2.Framework.Xml;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -32,7 +33,7 @@ namespace Keutmann.SharePointManager.Components
             }
             set
             {
-                RichTextBox.Text = SPMUtility.FormatXml(value); 
+                RichTextBox.Text = Serializer.FormatXml(value); 
             }
         }
 

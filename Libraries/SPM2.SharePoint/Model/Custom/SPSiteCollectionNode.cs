@@ -24,7 +24,8 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+            //Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, int.MaxValue));
        }
 
         //private IEnumerable<ISPNode> LoadCollectionChildren(SPSiteCollection collection, int batchCount)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using SPM2.Framework.Collections;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
 
@@ -49,35 +51,43 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
         public IEnumerable<SPTreeNode> LoadChildren(SPTreeNode parentNode)
         {
-            var index = parentNode.Model.Children.Count;
+            var model = parentNode.Model;
 
-            var moreNode = IsThereMoreNodes(parentNode.Model.Children) ? 1 : 0;
+            var index = model.Children.Count;
 
-            parentNode.Model.LoadChildren();
-            
-            var moreNodeFound = false;
+            model.LoadChildren();
 
+            // Load new nodes
             var list = new List<SPTreeNode>();
-            for (var count = index - moreNode; count < parentNode.Model.Children.Count; count++)
+            for (var count = index; count < parentNode.Model.Children.Count; count++)
             {
                 var spNode = parentNode.Model.Children[count];
-                if (spNode is MoreNode)
-                {
-                    moreNodeFound = true;
-                    if (moreNode > 0)
-                    {
-                        continue;
-                    }
-                }
 
                 var treeNode = SPTreeNode.Create(this, spNode);
                 parentNode.Nodes.Insert(count, treeNode);
                 list.Add(treeNode);
             }
 
-            if (moreNode > 0 && !moreNodeFound)
+
+            var modelCollection = model as ISPNodeCollection;
+            if (modelCollection == null) return list;
+
+            bool moreNodeExist = parentNode.LastNode is SPMoreNode;
+
+            // Add more node
+            if (modelCollection.LoadingChildren && !moreNodeExist)
             {
-                parentNode.Nodes.RemoveAt(parentNode.Nodes.Count - 1);
+                var moreNode = new MoreNode(modelCollection);
+                moreNode.NodeProvider = modelCollection.NodeProvider;
+                var spNode = SPMoreNode.Create(this, moreNode);
+                list.Add(spNode);
+                parentNode.Nodes.Add(spNode);
+            }
+
+            // Remove more node
+            if (!modelCollection.LoadingChildren && moreNodeExist)
+            {
+                parentNode.LastNode.Remove();
             }
 
             return list;

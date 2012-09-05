@@ -1,11 +1,12 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SPM2.Framework.Validation
 {
-    public class ValidatorCollection : BaseValidator
+    public class ValidatorCollection : BaseValidator, IEnumerable<BaseValidator>
     {
         private readonly IList<BaseValidator> validators = new List<BaseValidator>();
 
@@ -60,6 +61,17 @@ namespace SPM2.Framework.Validation
             {
                 return validators.Count;
             }
+        }
+
+
+        public IEnumerator<BaseValidator> GetEnumerator()
+        {
+            return this.validators.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.validators.GetEnumerator();
         }
     }
 }

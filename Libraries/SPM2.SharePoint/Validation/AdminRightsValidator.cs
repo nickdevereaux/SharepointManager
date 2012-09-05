@@ -1,18 +1,26 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
+using System.ComponentModel.Composition;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework.Validation;
 
 namespace SPM2.SharePoint.Validation
 {
+    [Export(typeof(BaseValidator))]
     public class AdminRightsValidator : BaseValidator, IValidator
     {
-        public AdminRightsValidator(String id) : base(id)
+
+        public AdminRightsValidator()
+            : base()
         {
             this.QuestionString = "Please ensure to run the application with Administrator rights";
             this.SuccessString = "The current user is administrator";
             this.ErrorString = "The current user is not administrator";
+        }
+
+        public AdminRightsValidator(String id) : base(id)
+        {
         }
 
         protected override ValidationResult Validate()
@@ -41,7 +49,8 @@ namespace SPM2.SharePoint.Validation
         {
             get
             {
-                return new SPFInstalledValidator(String.Empty).RunValidator() == ValidationResult.Success;
+                //return new SPFInstalledValidator(String.Empty).RunValidator() == ValidationResult.Success;
+                return true;
             }
         }
     }

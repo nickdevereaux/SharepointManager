@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using SPM2.Framework.Validation;
 
 namespace Keutmann.SharePointManager.Forms
 {
     public partial class SplashScreen : Form
     {
-        Func<Form> Setup;
-        Form result;
+        Func<SplashScreen, ValidationResult> Setup;
+        ValidationResult result;
 
-        public SplashScreen(Func<Form> setup)
+        public SplashScreen(Func<SplashScreen, ValidationResult> setup)
         {
             InitializeComponent();
             Setup = setup;
@@ -26,12 +27,18 @@ namespace Keutmann.SharePointManager.Forms
         {
             Application.DoEvents();
 
-            result = Setup.Invoke();
+            result = Setup.Invoke(this);
 
             this.Close();
         }
 
-        static public Form ShowSplashScreen(Func<Form> setup)
+        public void UpdateProgress(string message)
+        {
+            ProgressLabel.Text = message;
+            Application.DoEvents();
+        }
+
+        static public ValidationResult ShowSplashScreen(Func<SplashScreen, ValidationResult> setup)
         {
             var screen = new SplashScreen(setup);
             Application.Run(screen);

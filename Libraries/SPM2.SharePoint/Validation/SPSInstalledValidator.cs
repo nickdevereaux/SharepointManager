@@ -1,15 +1,23 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
+using System.ComponentModel.Composition;
 using System.Security;
 using Microsoft.Win32;
 using SPM2.Framework.Validation;
 
 namespace SPM2.SharePoint.Validation
 {
+    // This check should be in a SPS project
+    //[Export(typeof(BaseValidator))]
     public class SPSInstalledValidator : BaseValidator, IValidator
     {
-        public const String SPSPath = @"SOFTWARE\Microsoft\Office Server\14.0";
+        public const String SPSPath = @"SOFTWARE\Microsoft\Office Server\15.0";
+
+        public SPSInstalledValidator()
+            : base()
+        {
+        }
 
         public SPSInstalledValidator(String id)
             : base(id)
@@ -27,7 +35,7 @@ namespace SPM2.SharePoint.Validation
                     if (version != null)
                     {
                         var buildVersion = new Version(version);
-                        if (buildVersion.Major == 14)
+                        if (buildVersion.Major == 15)
                         {
                             return ValidationResult.Success;
                         }

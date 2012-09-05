@@ -7,11 +7,23 @@ using System.Diagnostics;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
+using System.ComponentModel.Composition;
 
 namespace SPM2.SharePoint.Validation
 {
+    // Is not necessary for SPM to run
+    //[Export(typeof(BaseValidator))]
     public class TimerServiceValidator : BaseValidator, IValidator
     {
+        public TimerServiceValidator()
+            : base()
+        {
+            this.QuestionString = "The application needs to run on a frontend server with SharePoint Foundation installed";
+            this.SuccessString = "Microsoft SharePoint Timer Service found";
+            this.ErrorString = "Microsoft SharePoint Timer Service missing";
+
+        }
+
         public TimerServiceValidator(String id) : base(id)
         {
         }

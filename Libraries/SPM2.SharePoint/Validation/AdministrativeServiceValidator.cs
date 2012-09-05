@@ -7,16 +7,24 @@ using System.Diagnostics;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
+using System.ComponentModel.Composition;
 
 namespace SPM2.SharePoint.Validation
 {
+    // Is not necessary for SPM to run
+    //[Export(typeof(BaseValidator))]
     public class AdministrativeServiceValidator : BaseValidator, IValidator
     {
+        public AdministrativeServiceValidator()
+            : base()
+        {
+            this.QuestionString = "Please ensure to run the application with Administrator rights";
+            this.SuccessString = "The current user is administrator";
+            this.ErrorString = "The current user is not administrator";
+        }
+
         public AdministrativeServiceValidator(String id) : base(id)
         {
-            //this.QuestionString = "Please ensure to run the application with Administrator rights";
-            //this.SuccessString = "The current user is administrator";
-            //this.ErrorString = "The current user is not administrator";
         }
 
         protected override ValidationResult Validate()

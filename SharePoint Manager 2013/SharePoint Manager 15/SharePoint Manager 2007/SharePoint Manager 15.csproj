@@ -132,6 +132,8 @@
     <Compile Include="Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreflightController.cs" />
+    <Compile Include="ViewModel\TreeView\SPMoreNode.cs" />
     <Compile Include="ViewModel\TreeView\StuctureItem.cs" />
     <Compile Include="ViewModel\TreeView\TreeViewNodeProvider.cs" />
     <Compile Include="ViewModel\TreeView\SPTreeNode.cs" />

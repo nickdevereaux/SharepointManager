@@ -57,7 +57,7 @@ namespace SPM2.SharePoint
                 parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
             }
 
-            while (count <= batchCount && parentNode.LoadingChildren)
+            while (count < batchCount && parentNode.LoadingChildren)
             {
                 var current = parentNode.Pointer.Current;
                 Type instanceType = current.GetType();
@@ -96,12 +96,12 @@ namespace SPM2.SharePoint
             }
             
             // If there is more nodes in the collection, add a "More" item.
-            if (count >= batchCount && parentNode.LoadingChildren)
-            {
-                var node = new MoreNode(parentNode);
-                node.Setup(parentNode);
-                list.Add(node);
-            }
+            //if (count >= batchCount && parentNode.LoadingChildren)
+            //{
+            //    var node = new MoreNode(parentNode);
+            //    node.Setup(parentNode);
+            //    list.Add(node);
+            //}
 
             if (parentNode.TotalCount <= batchCount)
             {

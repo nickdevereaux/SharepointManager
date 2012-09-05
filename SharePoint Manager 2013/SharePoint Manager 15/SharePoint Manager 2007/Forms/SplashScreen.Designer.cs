@@ -29,22 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
+            this.ProgressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // ProgressLabel
+            // 
+            this.ProgressLabel.AutoSize = true;
+            this.ProgressLabel.BackColor = System.Drawing.Color.DodgerBlue;
+            this.ProgressLabel.Location = new System.Drawing.Point(13, 62);
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(0, 13);
+            this.ProgressLabel.TabIndex = 0;
             // 
             // SplashScreen
             // 
             this.BackgroundImage = global::Keutmann.SharePointManager.Properties.Resources.loading;
-            this.ClientSize = new System.Drawing.Size(350, 75);
+            this.ClientSize = new System.Drawing.Size(350, 90);
+            this.Controls.Add(this.ProgressLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.CenterToScreen();
             this.Name = "SplashScreen";
-            //this.ShowInTaskbar = false;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label ProgressLabel;
 
     }
 }

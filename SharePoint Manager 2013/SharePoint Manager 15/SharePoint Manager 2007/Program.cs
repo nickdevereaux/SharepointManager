@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Keutmann.SharePointManager.Forms;
 using Keutmann.SharePointManager.Library;
 using SPM2.Framework;
+using SPM2.Framework.Validation;
 
 namespace Keutmann.SharePointManager
 {
@@ -41,20 +42,28 @@ namespace Keutmann.SharePointManager
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
 
             Window = new MainWindow();
-            SplashScreen.ShowSplashScreen(Setup);
-
-            
-            Application.Run(Window);
-          
+            var result = SplashScreen.ShowSplashScreen(Setup);
+            if (result == ValidationResult.Success)
+            {
+                Application.Run(Window);
+            }
             Trace.WriteLine("Application ended");
         }
 
-        static Form Setup()
+        static ValidationResult Setup(SplashScreen splashScreen)
         {
             CompositionProvider.LoadAssemblies();
-            Window.SplashScreenLoad();
-            return null;
-        } 
+
+            var engine = new PreflightController(splashScreen);
+            if (!engine.Validate())
+            {
+                return ValidationResult.Error;
+            }
+            
+            Window.SplashScreenLoad(splashScreen);
+            return ValidationResult.Success;
+        }
+
 
        
 

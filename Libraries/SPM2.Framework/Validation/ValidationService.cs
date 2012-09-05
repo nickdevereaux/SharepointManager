@@ -13,11 +13,7 @@ namespace SPM2.Framework.Validation
 
     public class ValidationService : IDisposable
     {
-        private readonly Timer timer = new Timer();
-
         private readonly ValidatorCollection validators = new ValidatorCollection(String.Empty);
-
-
         
         public event ValidateEventHandler ValidatorSucceed;
         public event ValidateEventHandler ValidatorFailed;
@@ -25,13 +21,22 @@ namespace SPM2.Framework.Validation
 
         public event Operation ValidationFinished;
 
-        private int index;
+        public ValidatorCollection Validators
+        {
+            get
+            {
+                return validators;
+            }
+        }
+
+        public int Errors
+        {
+            get;
+            private set;
+        }
 
         public ValidationService()
         {
-            timer.Interval = 100;
-            timer.Tick += OnTimerTick;
-            index = 0;
             Errors = 0;
         }
 
@@ -40,9 +45,47 @@ namespace SPM2.Framework.Validation
             validators.AddValidator(validator);
         }
 
+        public void AddRange(IEnumerable<BaseValidator> collection)
+        {
+            foreach (var item in collection)
+            {
+                validators.AddValidator(item);
+            }
+        }
+
+
+
         public void Run()
         {
-            timer.Start();
+            //timer.Start();
+            ValidationResult result;
+            for (var i = 0; i < validators.Count; i++ )
+            {
+                var validator = validators[i];
+                try
+                {
+                    result = validator.RunValidator();
+                }
+                catch (ValidatorExcpetion ex)
+                {
+                    result = ValidationResult.Error;
+                    validator.ErrorString = ex.Message;
+                }
+                if (result == ValidationResult.Success)
+                {
+                    OnValidatorSucceed(validator);
+                }
+                else if (result == ValidationResult.Error)
+                {
+                    OnValidatorFailed(validator);
+                }
+                else if (result == ValidationResult.Inconclusive)
+                {
+                    OnValidatorSkipped(validator);
+                }
+            }
+
+            OnValidationFinished();
         }
 
         private void OnValidatorSucceed(BaseValidator validator)
@@ -82,60 +125,9 @@ namespace SPM2.Framework.Validation
             }
         }
 
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            timer.Stop();
-
-            if (index < validators.Count)
-            {
-                ValidationResult result;
-                try
-                {
-                    result = validators[index].RunValidator();
-                }
-                catch(ValidatorExcpetion ex)
-                {
-                    result = ValidationResult.Error;
-                    validators[index].ErrorString = ex.Message;
-                }
-                if (result == ValidationResult.Success)
-                {
-                    OnValidatorSucceed(validators[index]);                    
-                }
-                else if(result == ValidationResult.Error)
-                {
-                    OnValidatorFailed(validators[index]);
-                }
-                else if (result == ValidationResult.Inconclusive)
-                {
-                    OnValidatorSkipped(validators[index]);
-                }
-                index++;
-                timer.Start();
-                return;
-            }
-
-            OnValidationFinished();
-        }
-
         public void Dispose()
         {
-            if(timer != null)
-                timer.Dispose();
         }
 
-        public ValidatorCollection Validators
-        {
-            get
-            {
-                return validators;
-            }
-        }
-
-        public int Errors
-        {
-            get; 
-            private set;
-        }
     }
 }

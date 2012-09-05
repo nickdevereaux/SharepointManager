@@ -1,21 +1,28 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
+using System.ComponentModel.Composition;
 using System.Security;
 using Microsoft.Win32;
 using SPM2.Framework.Validation;
 
 namespace SPM2.SharePoint.Validation
 {
+    [Export(typeof(BaseValidator))]
     public class SPFInstalledValidator : BaseValidator, IValidator
     {
-        public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions\14.0";
+        public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions\15.0";
 
-        public SPFInstalledValidator(String id) : base(id)
+        public SPFInstalledValidator()
+            : base()
         {
             this.QuestionString = "The application needs to run on a frontend server with SharePoint Foundation installed";
             this.SuccessString = "Microsoft SharePoint Foundation found";
             this.ErrorString = "Microsoft SharePoint Foundation missing";
+        }
+
+        public SPFInstalledValidator(String id) : base(id)
+        {
         }
 
         protected override ValidationResult Validate()

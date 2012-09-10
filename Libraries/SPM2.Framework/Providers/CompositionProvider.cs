@@ -51,6 +51,12 @@ namespace SPM2.Framework
             return Current.GetExports<T>(name);
         }
 
+        // Gets a ordered collection from the type of T
+        public static OrderingCollection<T> GetOrderedExports<T>()
+        {
+            string name = AttributedModelServices.GetContractName(typeof(T));
+            return GetOrderedExports<T>(name);
+        }
 
         public static OrderingCollection<T> GetOrderedExports<T>(Type contractType)
         {

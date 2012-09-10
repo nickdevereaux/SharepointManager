@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ChangeSchedule")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPManagedAccountNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPJobDefinitionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]

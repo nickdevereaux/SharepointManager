@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
     [Title("AllProperties")]
     [Icon(Small = "EXITGRID.GIF")]
+    [View(50)]
     [ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]

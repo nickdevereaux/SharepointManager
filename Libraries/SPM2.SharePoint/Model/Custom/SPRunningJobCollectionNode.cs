@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RunningJobs")]
     [Icon(Small = "SCT16.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceNode")]

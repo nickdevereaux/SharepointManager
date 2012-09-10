@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ItemContext")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
     //[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
     //[ExportToNode("SPM2.SharePoint.Model.TemplateContainerNode")]
 	public partial class SPContextNode

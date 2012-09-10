@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ExternalSiteMapProvider")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPSiteLookupProviderNode
 	{

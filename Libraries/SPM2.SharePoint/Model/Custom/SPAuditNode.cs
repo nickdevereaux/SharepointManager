@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Audit")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]

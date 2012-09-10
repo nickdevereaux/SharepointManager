@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Solutions")]
     [Icon(Small = "GenericFeature.gif")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPUserSolutionCollectionNode
 	{

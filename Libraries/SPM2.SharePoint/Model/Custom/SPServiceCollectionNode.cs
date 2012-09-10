@@ -15,7 +15,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Services")]
     [Icon(Small = "SERVICES.GIF")]
-	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
+    [View(1)]
+    [ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceCollectionNode
 	{
 	}

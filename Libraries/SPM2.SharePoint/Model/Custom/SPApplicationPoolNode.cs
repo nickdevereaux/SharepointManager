@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.WebAppPool", Source = IconSource.Assembly)]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPApplicationPoolCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]

@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("InitialSweepSchedule")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsSqlDmvProviderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsULSProviderNode")]

@@ -419,13 +419,17 @@ namespace Keutmann.SharePointManager.Forms
             ToolStripMenuItem item = sender as ToolStripMenuItem;
 
             minimalToolStripMenuItem.Checked = false;
+            mediumToolStripMenuItem.Checked = false;
             fullToolStripMenuItem.Checked = false;
 
             item.Checked = true;
 
-            Explorer.ViewName = item.Tag as string;
+            int level = 100;
+            if(int.TryParse(item.Tag as string, out level))
+            {
+                Explorer.ViewLevel = level;
+            }
 
-            //Explorer.Build();
             ((SPTreeNode)Explorer.SelectedNode).Refresh();
         }
 
@@ -527,6 +531,8 @@ namespace Keutmann.SharePointManager.Forms
             objectModelToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_ObjectModel_ToolTip");
             minimalToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Minimal_Text");
             minimalToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Minimal_ToolTip");
+            mediumToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Medium_Text");
+            mediumToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Medium_ToolTip");
             fullToolStripMenuItem.Text = SPMLocalization.GetString("Interface_Full_Text");
             fullToolStripMenuItem.ToolTipText = SPMLocalization.GetString("Interface_Full_ToolTip");
             MenuItemStandardBarVisible.Text = SPMLocalization.GetString("Interface_ToolBar_Text");

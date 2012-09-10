@@ -15,6 +15,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
     [Icon(Small = "SETTINGS.GIF")]
+    [View(1)]
     //[ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPWebServiceInstanceNode")]

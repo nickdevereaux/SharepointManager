@@ -10,8 +10,10 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Client;
 using SPM2.Framework;
+using SPM2.Framework.Components;
 using SPM2.Framework.Xml;
 using SPM2.SharePoint.Model;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint
 {
@@ -21,14 +23,19 @@ namespace SPM2.SharePoint
     {
         public const string AddInId = "SPM2.SharePoint.SPNodeProvider";
 
-        public string View { get; set; }
+        public int ViewLevel { get; set; }
 
         public SPFarm Farm { get; set; }
 
-        public SPNodeProvider(SPFarm farm)
+        private FirstAcceptRuleEngine<ISPNode> _ruleEngine;
+
+        public SPNodeProvider(SPFarm farm, IEnumerable<INodeIncludeRule> rules)
         {
-            View = "Full";
+            ViewLevel = 100;
             Farm = farm;
+
+          
+            _ruleEngine = new FirstAcceptRuleEngine<ISPNode>(rules);
         }
 
         public ISPNode LoadFarmNode()
@@ -75,7 +82,7 @@ namespace SPM2.SharePoint
                     }
                 }
 
-                if (node != null)
+                if (node != null && RunIncludeRules(node))
                 {
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
@@ -156,7 +163,7 @@ namespace SPM2.SharePoint
                         ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
 
                         // Exclude the node if it do not match the correct view
-                        if(!MatchView(node.GetType())) continue;
+                        if(!RunIncludeRules(node)) continue;
 
                         //Ensure that the child node instance is unique in the TreeView
                         node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
@@ -173,12 +180,9 @@ namespace SPM2.SharePoint
             return list;
         }
 
-        private bool MatchView(Type type)
+        private bool RunIncludeRules(ISPNode node)
         {
-            var list = type.GetCustomAttributes(true).OfType<ViewAttribute>();
-            if (list.Count() == 0) return true;
-
-            return list.Any(p => View.Equals(p.Name));
+            return _ruleEngine.Check(node, true);
         }
 
         public  Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)

@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("TitleResource")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
     [ExportToNode("SPM2.SharePoint.Model.SPUserResourceCollectionNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPUserCustomActionNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]

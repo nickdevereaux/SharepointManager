@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("FeatureDefinitions")]
     [Icon(Small = "GenericFeature.gif")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPFeatureDefinitionCollectionNode

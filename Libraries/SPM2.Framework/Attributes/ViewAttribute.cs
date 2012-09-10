@@ -8,11 +8,11 @@ namespace SPM2.Framework
     [AttributeUsage(System.AttributeTargets.Class, AllowMultiple=true)]
     public class ViewAttribute : Attribute
     {
-        public string Name { get; set; }
+        public int Level { get; set; }
 
-        public ViewAttribute(string name)
+        public ViewAttribute(int level)
         {
-            this.Name = name;
+            this.Level = level;
         }
     }
 }

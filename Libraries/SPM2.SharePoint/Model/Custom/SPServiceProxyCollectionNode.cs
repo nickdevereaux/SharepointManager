@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ServiceProxies")]
     [Icon(Small = "SERVICES.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServiceProxyCollectionNode
 	{

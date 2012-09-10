@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Folders")]
     [Icon(Small = "Folder.gif")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPFolderCollectionNode

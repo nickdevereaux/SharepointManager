@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("EventReceivers")]
     [Icon(Small = "TBSPRDSH.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]

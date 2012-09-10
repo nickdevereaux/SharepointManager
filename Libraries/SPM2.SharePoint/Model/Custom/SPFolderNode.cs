@@ -13,6 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
     [Icon(Small = "Folder.gif")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPMobileContextNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
@@ -20,6 +21,7 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
     public partial class SPFolderNode
@@ -31,7 +33,7 @@ namespace SPM2.SharePoint.Model
             Text = this.Folder.Name;
             if (String.IsNullOrEmpty(Text))
             {
-                Text = "Root";
+                Text = "RootFolder";
             }
         }
 

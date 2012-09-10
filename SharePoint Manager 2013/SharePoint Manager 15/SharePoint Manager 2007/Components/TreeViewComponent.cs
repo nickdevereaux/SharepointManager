@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,8 +10,10 @@ using System.Text;
 using System.Windows.Forms;
 using Keutmann.SharePointManager.ViewModel.TreeView;
 using Microsoft.SharePoint.Administration;
+using SPM2.Framework;
 using SPM2.Framework.Forms;
 using SPM2.SharePoint;
+using SPM2.SharePoint.Rules;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -19,7 +22,7 @@ namespace Keutmann.SharePointManager.Components
         public int oldNodeIndex = -1;
         public SPFarm CurrentFarm = SPFarm.Local;
 
-        public string ViewName { get; set; }
+        public int ViewLevel { get; set; }
         public ISPNodeProvider SPProvider { get; set; }
 
         public SPTreeNode FarmNode { get; set; }
@@ -28,7 +31,7 @@ namespace Keutmann.SharePointManager.Components
         {
             this.ShowNodeToolTips = true;
             this.HideSelection = false;
-            ViewName = "Full";
+            ViewLevel = 100;
         }
 
         public int AddImage(string path)
@@ -99,9 +102,11 @@ namespace Keutmann.SharePointManager.Components
             // Dispose all objects
             ClearNodes(this.Nodes);
 
-            SPProvider = new SPNodeProvider(SPFarm.Local);
-            SPProvider.View = ViewName;
+            var rules = CompositionProvider.GetOrderedExports<INodeIncludeRule>();
 
+            SPProvider = new SPNodeProvider(SPFarm.Local, rules.Values);
+            SPProvider.ViewLevel = ViewLevel;
+            Trace.WriteLine("ViewLevel: " + SPProvider.ViewLevel);
             var treeViewProvider = new TreeViewNodeProvider(SPProvider);
             FarmNode = treeViewProvider.LoadFarmNode();
 

@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Servers")]
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.server", Source = IconSource.Assembly)]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPServerCollectionNode
 	{

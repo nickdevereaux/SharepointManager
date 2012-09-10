@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
     [Icon("SETTINGS.GIF")]
 	[Title(PropertyName="DisplayName")]
+    [View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPTimerServiceInstanceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SessionStateServiceApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]

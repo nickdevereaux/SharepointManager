@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Users")]
     [Icon(Small = "MNGATT.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPUserCollectionNode

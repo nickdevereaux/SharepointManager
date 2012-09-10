@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
     [Icon(Small = "CAT.GIF")]
+    [View(1)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPWebNode

@@ -16,7 +16,7 @@ using Microsoft.SharePoint.WebPartPages;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Name")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileCollectionNode")]
 	//[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]

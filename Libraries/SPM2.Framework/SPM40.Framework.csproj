@@ -72,6 +72,7 @@
     <Compile Include="Attributes\ViewAttribute.cs" />
     <Compile Include="Attributes\LoadAddInTypes.cs" />
     <Compile Include="Attributes\TitleAttribute.cs" />
+    <Compile Include="Components\IRule.cs" />
     <Compile Include="Collections\IOrderMetadata.cs" />
     <Compile Include="Collections\ObservableCollectionXML.cs" />
     <Compile Include="Collections\OrderingCollection.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Collections\ThreadSafeDictionary.cs" />
     <Compile Include="Collections\TypesCollection.cs" />
     <Compile Include="ComponentModel\IContextMenuItem.cs" />
+    <Compile Include="Components\RuleEngine.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="ComponentModel\PropertyGridPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\PropertyGridTypeConverter.cs" />
@@ -147,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ComponentModel\TreeView\" />
-    <Folder Include="Components\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>

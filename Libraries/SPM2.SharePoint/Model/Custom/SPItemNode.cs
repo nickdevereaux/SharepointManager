@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPItem")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
 	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]

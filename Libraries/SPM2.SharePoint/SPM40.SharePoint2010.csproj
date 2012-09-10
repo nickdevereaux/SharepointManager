@@ -105,6 +105,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rules\INodeIncludeRule.cs" />
+    <Compile Include="Rules\StandardIncludeRule.cs" />
     <Compile Include="SharePointContext.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceInstanceNode.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceNode.cs" />

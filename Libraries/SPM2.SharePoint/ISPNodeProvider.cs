@@ -7,7 +7,7 @@ namespace SPM2.SharePoint
 {
     public interface ISPNodeProvider
     {
-        string View { get; set; }
+        int ViewLevel { get; set; }
 
         IEnumerable<ISPNode> LoadChildren(ISPNode node);
         IEnumerable<ISPNode> LoadUnorderedChildren(ISPNode sourceNode);

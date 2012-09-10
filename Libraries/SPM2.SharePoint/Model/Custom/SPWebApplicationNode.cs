@@ -15,6 +15,7 @@ namespace SPM2.SharePoint.Model
 {
     [Title(PropertyName = "DisplayName")]
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.Internet", Source = IconSource.Assembly)]
+    [View(1)]
     [ExportToNode("SPM2.SharePoint.Model.SPJobDefinitionNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPWebApplicationCollectionNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsBlockingQueryProviderNode")]

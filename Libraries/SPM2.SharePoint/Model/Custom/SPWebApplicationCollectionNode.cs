@@ -15,6 +15,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("WebApplications")]
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.GlobalServer", Source = IconSource.Assembly)]
+    [View(1)]
     [ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPWebApplicationCollectionNode
 	{

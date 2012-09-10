@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceProxyCollectionNode")]
 	public partial class BIMonitoringServiceProxyNode
 	{

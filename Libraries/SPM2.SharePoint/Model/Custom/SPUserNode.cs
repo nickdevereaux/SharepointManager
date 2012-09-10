@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SystemAccount")]
     [Icon(Small = "ULS16.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPUserCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]

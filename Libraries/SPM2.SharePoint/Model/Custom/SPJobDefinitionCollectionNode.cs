@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("JobDefinitions")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPServiceNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDatabaseServiceNode")]

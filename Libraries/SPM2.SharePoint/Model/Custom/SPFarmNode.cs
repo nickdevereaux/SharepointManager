@@ -17,6 +17,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
     [Icon(Small = "SPM2.SharePoint.Properties.Resources.actionssettings", Source = IconSource.Assembly)]
+    [View(1)]
 	public partial class SPFarmNode
 	{
         public override void Setup(ISPNode parent)

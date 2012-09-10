@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Fields")]
     [Icon(Small = "ICSMRTPG.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]

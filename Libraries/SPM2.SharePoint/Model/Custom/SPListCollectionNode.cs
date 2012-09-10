@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
     [Title("Lists")]
     [Icon(Small = "itgen.GIF")]
+    [View(1)]
     [ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]

@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RecycleBin")]
     [Icon(Small = "RECYCBIN.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPRecycleBinItemCollectionNode

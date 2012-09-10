@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ApplicationProxies")]
-	[Icon(Small="BULLET.GIF")][View("Full")]
+	[Icon(Small="BULLET.GIF")][View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.BdcServiceProxyNode")]
 	[ExportToNode("SPM2.SharePoint.Model.WordServiceProxyNode")]
 	[ExportToNode("SPM2.SharePoint.Model.StateServiceProxyNode")]

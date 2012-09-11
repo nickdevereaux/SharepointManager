@@ -10,6 +10,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using System.Collections.Generic;
+using SPM2.Framework.Collections;
 
 namespace SPM2.SharePoint.Model
 {
@@ -28,5 +29,22 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
     public partial class SPWebApplicationNode
     {
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+
+            var node = new SPIisSettingsCollectionNode();
+            var index = this.Children.Count;
+            node.NodeProvider = this.NodeProvider;
+            node.Text = "Iis Settings";
+            node.SPObject = WebApplication.IisSettings;
+            node.SPObjectType = node.SPObject.GetType();
+            node.ID = node.SPObject.GetType().FullName + index;
+            node.Index = index;
+            node.Setup(this);
+
+            this.Children.Add(node);
+
+        }
     }
 }

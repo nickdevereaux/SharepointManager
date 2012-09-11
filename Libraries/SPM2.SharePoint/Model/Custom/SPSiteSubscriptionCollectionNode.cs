@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("SiteSubscriptions")]
-    [Icon(Small = "BULLET.GIF")][View(100)]
+    [Icon(Small = "BULLET.GIF")][View(50)]
     [ExportToNode("SPM2.SharePoint.Model.SPWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPContentDatabaseNode")]

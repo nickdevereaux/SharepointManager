@@ -12,7 +12,9 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Icon(Small="BULLET.GIF")][View(100)]
+	[Icon(Small="BULLET.GIF")]
+    [View(50)]
+    [ExportToNode("SPM2.SharePoint.Model.SPIisSettingsCollectionNode")]
 	public partial class SPIisSettingsNode
 	{
 	}

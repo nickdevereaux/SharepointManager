@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("QuotaTemplates")]
-	[Icon(Small="BULLET.GIF")][View(100)]
+	[Icon(Small="BULLET.GIF")][View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPQuotaTemplateCollectionNode
 	{

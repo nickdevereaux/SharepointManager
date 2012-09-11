@@ -13,13 +13,18 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ListItems")]
-	[Icon(Small="BULLET.GIF")][View(100)]
-	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+	[Icon(Small="BULLET.GIF")]
+	//[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPListItemCollectionNode
 	{
+        public override void LoadChildren()
+        {
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+        }
+
 	}
 }

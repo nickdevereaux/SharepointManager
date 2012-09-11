@@ -20,6 +20,7 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPFileVersionNode")]
+    [ExportToNode("SPM2.SharePoint.Model.SPProcessIdentityNode")]
     [ExportToNode(typeof (SPListItemNode))]
     [ExportToNode(typeof (SPJobDefinitionNode))]
     [ExportToNode(typeof (SPServerNode))]

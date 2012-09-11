@@ -13,10 +13,14 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Files")]
-	[Icon(Small="BULLET.GIF")][View(100)]
+	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPFileCollectionNode
 	{
+        public override void LoadChildren()
+        {
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+        }
 	}
 }

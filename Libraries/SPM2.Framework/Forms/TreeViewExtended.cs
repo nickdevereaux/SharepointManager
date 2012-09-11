@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace SPM2.Framework.Forms
 {
+    public interface IShadowNode 
+    {
+    }
+
     public class TreeViewExtended : TreeView
     {
         private TreeViewSelectedNodeChangedArgs _selectedNodeChanged;
@@ -21,8 +25,10 @@ namespace SPM2.Framework.Forms
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
             base.OnNodeMouseClick(e);
-
-            SelectedNode = e.Node;
+            if (!(e.Node is IShadowNode))
+            {
+                SelectedNode = e.Node;
+            }
         }
 
         protected override void OnBeforeSelect(TreeViewCancelEventArgs e)

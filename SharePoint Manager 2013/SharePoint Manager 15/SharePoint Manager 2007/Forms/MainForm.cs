@@ -128,7 +128,12 @@ namespace Keutmann.SharePointManager.Forms
             {
                 e.Cancel = true;
                 var parent = ((SPTreeNode)treeNode.Parent);
+
+                parent.Nodes.Remove(e.Node);
+
                 parent.LoadNodes();
+
+
                 //parent.IsSelected = true;
                 //Explorer.SelectedNode = parent.Nodes[parent.Nodes.Count - 1];
                 //Explorer.SelectedNode = parent;
@@ -430,7 +435,8 @@ namespace Keutmann.SharePointManager.Forms
                 Explorer.ViewLevel = level;
             }
 
-            ((SPTreeNode)Explorer.SelectedNode).Refresh();
+            if(Explorer.SelectedNode != null)
+                ((SPTreeNode)Explorer.SelectedNode).Refresh();
         }
 
         private void toolBarToolStripMenuItem_Click(object sender, EventArgs e)

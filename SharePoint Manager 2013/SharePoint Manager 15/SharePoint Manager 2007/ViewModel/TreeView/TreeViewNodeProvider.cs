@@ -72,22 +72,14 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             var modelCollection = model as ISPNodeCollection;
             if (modelCollection == null) return list;
 
-            bool moreNodeExist = parentNode.LastNode is SPMoreNode;
-
             // Add more node
-            if (modelCollection.LoadingChildren && !moreNodeExist)
+            if (modelCollection.LoadingChildren)
             {
                 var moreNode = new MoreNode(modelCollection);
                 moreNode.NodeProvider = modelCollection.NodeProvider;
                 var spNode = SPMoreNode.Create(this, moreNode);
                 list.Add(spNode);
                 parentNode.Nodes.Add(spNode);
-            }
-
-            // Remove more node
-            if (!modelCollection.LoadingChildren && moreNodeExist)
-            {
-                parentNode.LastNode.Remove();
             }
 
             return list;

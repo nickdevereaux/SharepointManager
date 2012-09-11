@@ -41,7 +41,6 @@ namespace SPM2.SharePoint.Model
 
         public SPNodeCollection()
         {
-            LoadingChildren = true;
         }
 
 
@@ -55,7 +54,7 @@ namespace SPM2.SharePoint.Model
         {
             Pointer = null;
             TotalCount = 0;
-            LoadingChildren = true;
+            LoadingChildren = false;
             Children.Clear();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
@@ -17,6 +18,7 @@ namespace SPM2.SharePoint.Model
         object SPObject { get; set; }
         
         ClassDescriptor Descriptor { get; set; }
+        PropertyDescriptor ParentPropertyDescriptor { get; set; }
         SerializableList<ISPNode> Children { get; set; }
         Dictionary<Type, ISPNode> NodeTypes { get; set; }
         ISPNodeProvider NodeProvider { get; set; }

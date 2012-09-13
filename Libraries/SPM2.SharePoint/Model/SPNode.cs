@@ -162,6 +162,9 @@ namespace SPM2.SharePoint.Model
         }
 
         [XmlIgnore]
+        public PropertyDescriptor ParentPropertyDescriptor { get; set; }
+
+        [XmlIgnore]
         public virtual Type SPObjectType
         {
             get
@@ -206,7 +209,7 @@ namespace SPM2.SharePoint.Model
             Parent = parent;
             NodeProvider = parent.NodeProvider;
 
-            Text = Descriptor.GetTitle(SPObject);
+            Text = GetTitle();
 
             // Make sure to update all children if exist!
             foreach (var item in Children)
@@ -219,24 +222,36 @@ namespace SPM2.SharePoint.Model
             }
         }
 
+        protected virtual string GetTitle()
+        {
+            if (this.Parent is ISPNodeCollection)
+            {
+                return Descriptor.GetTitle(SPObject, this.Text);
+            }
+            return this.Text;
+        }
+
         public virtual object GetSPObject()
         {
             object result = null;
 
             // This ensures that a chain of objects are created
             if (Parent.SPObject == null) return result;
+            if (ParentPropertyDescriptor == null) return result;
 
-            var des = TypeDescriptor.GetProperties(Parent.SPObject.GetType());
-            foreach (PropertyDescriptor propertyDescriptor in des)
-            {
-                // Check for the correct property
-                if (SPObjectType != propertyDescriptor.PropertyType || Text != propertyDescriptor.DisplayName) continue;
+            result = ParentPropertyDescriptor.GetValue(Parent.SPObject);
+            
+            //var des = TypeDescriptor.GetProperties(Parent.SPObject.GetType());
+            //foreach (PropertyDescriptor propertyDescriptor in des)
+            //{
+            //    // Check for the correct property
+            //    if (SPObjectType != propertyDescriptor.PropertyType || Text != propertyDescriptor.DisplayName) continue;
 
-                // Use the name from the Property in the object model.
-                Descriptor.Title = propertyDescriptor.DisplayName;
-                result = propertyDescriptor.GetValue(Parent.SPObject);
-                break;
-            }
+            //    // Use the name from the Property in the object model.
+            //    Descriptor.Title = propertyDescriptor.DisplayName;
+            //    result = propertyDescriptor.GetValue(Parent.SPObject);
+            //    break;
+            //}
 
             return result;
         }

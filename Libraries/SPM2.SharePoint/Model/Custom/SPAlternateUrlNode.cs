@@ -12,11 +12,12 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("AlternateUrl")]
+	[Title(PropertyName="IncomingUrl")]
 	[Icon(Small="BULLET.GIF")][View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionManagerNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPAlternateUrlCollectionNode")]
 	public partial class SPAlternateUrlNode
 	{
+
 	}
 }

@@ -225,7 +225,7 @@ namespace SPM2.Framework
             return result;
         }
 
-        public string GetTitle(object instance)
+        public string GetTitle(object instance, string defaultTitle)
         {
             string result = null;
             if (instance != null)
@@ -266,6 +266,12 @@ namespace SPM2.Framework
                 }
 
             }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                result = defaultTitle;
+            }
+
             if (String.IsNullOrEmpty(result))
             {
 

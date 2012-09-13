@@ -11,16 +11,17 @@ namespace SPM2.SharePoint.Model
     /// </summary>
     public class ExportToNodeAttribute : ExportAttribute
     {
+        public bool AutoBind { get; set; }
+
+        public ExportToNodeAttribute(Type contractType)
+            : this(AttributedModelServices.GetContractName(contractType))
+        {
+        }
+
         public ExportToNodeAttribute(string contractName)
             : base(contractName, typeof(SPNode))
         {
-
-        }
-
-        public ExportToNodeAttribute(Type contractType)
-            : base(AttributedModelServices.GetContractName(contractType), typeof(SPNode))
-        {
-
+            AutoBind = true;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("RoleDefinitions")]
     [Icon(Small = "TASKPANE.GIF")]
-    [View(50)]
+    [View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPRoleDefinitionCollectionNode
 	{

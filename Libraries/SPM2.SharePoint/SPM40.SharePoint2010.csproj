@@ -899,7 +899,6 @@
     <Compile Include="Model\SPNode.cs" />
     <Compile Include="Model\SPNodeCollection.cs" />
     <Compile Include="Model\ISPNode.cs" />
-    <Compile Include="Model\SharedTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPNodeProvider.cs" />
     <Compile Include="Validation\AdministrativeServiceValidator.cs" />

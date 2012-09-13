@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Workflows")]
     [Icon(Small = "workflows.png")]
-    [View(50)]
+    [View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPWorkflowCollectionNode

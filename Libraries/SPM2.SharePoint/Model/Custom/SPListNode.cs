@@ -36,6 +36,10 @@ namespace SPM2.SharePoint.Model
             this.IconUri = SharePointContext.GetImagePath(filename);
         }
 
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+        }
 
 
 	}

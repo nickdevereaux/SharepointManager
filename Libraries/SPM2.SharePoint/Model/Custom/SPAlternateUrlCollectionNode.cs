@@ -19,5 +19,10 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPAlternateUrlCollectionNode
 	{
+        //protected override string GetTitle()
+        //{
+        //    // Just use the PropertyName
+        //    return this.Text;
+        //}
 	}
 }

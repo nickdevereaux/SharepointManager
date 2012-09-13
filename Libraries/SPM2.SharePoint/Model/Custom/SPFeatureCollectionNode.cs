@@ -16,7 +16,6 @@ using System.Collections;
 
 namespace SPM2.SharePoint.Model
 {
-	[Title("Features")]
     [Icon(Small = "GenericFeature.gif")]
     [View(50)]
     [ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]

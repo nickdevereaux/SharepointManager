@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("WorkflowAssociations")]
     [Icon(Small = "workflows.png")]
-    [View(50)]
+    [View(100)]
 	[ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]

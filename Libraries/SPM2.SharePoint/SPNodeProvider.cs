@@ -40,7 +40,7 @@ namespace SPM2.SharePoint
 
         public ISPNode LoadFarmNode()
         {
-            var node = Create("Farm", typeof(SPFarm), typeof(SPFarmNode), null, 0);
+            var node = Create(null, "Farm", typeof(SPFarm), typeof(SPFarmNode), null, 0);
             node.SPObject = Farm;
 
             return node;
@@ -158,17 +158,25 @@ namespace SPM2.SharePoint
                 // ReSharper disable LoopCanBeConvertedToQuery
                 foreach (PropertyDescriptor descriptor in propertyDescriptors)
                 {
-                    if (sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
-                    {
-                        ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
+                    // Ensure that the property are supported by a Node
+                    if (!sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
+                        continue;
+                    
+                    ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
 
-                        // Exclude the node if it do not match the correct view
-                        if(!RunIncludeRules(node)) continue;
+                    // Ignore nodes with the AutoBind set to false
+                    if (node.Descriptor.Attributes.OfType<ExportToNodeAttribute>().Any(p => p.ContractName == sourceNode.GetType().FullName && !p.AutoBind))
+                        continue;
 
-                        //Ensure that the child node instance is unique in the TreeView
-                        node = Create(descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
-                        list.Add(node);
-                    }
+
+                    // Exclude the node if it do not match the correct view
+                    if(!RunIncludeRules(node)) continue;
+
+                    //Ensure that the child node instance is unique in the TreeView
+                    node = Create(descriptor, descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
+                    
+                    list.Add(node);
+                    
                 }
                 // ReSharper restore LoopCanBeConvertedToQuery
             }
@@ -234,9 +242,10 @@ namespace SPM2.SharePoint
             return result;
         }
 
-        private ISPNode Create(string text, Type spObjectType, Type nodeType, ISPNode parent, int index)
+        private ISPNode Create(PropertyDescriptor descriptor, string text, Type spObjectType, Type nodeType, ISPNode parent, int index)
         {
             var node = (ISPNode) Activator.CreateInstance(nodeType);
+            node.ParentPropertyDescriptor = descriptor;
             node.NodeProvider = this;
             node.Text = text;
             node.SPObjectType = spObjectType;

@@ -14,6 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ListTemplates")]
     [View(50)]
+    [Icon(Small = "itgen.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPListTemplateCollectionNode
 	{

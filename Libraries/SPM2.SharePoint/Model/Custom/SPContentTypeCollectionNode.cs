@@ -12,7 +12,7 @@ using SPM2.Framework;
 
 namespace SPM2.SharePoint.Model
 {
-    [Icon(Small = "ICSMRTPG.GIF")]
+    [Icon(Small = "ICODCT.GIF")]
     [View(50)]
     [ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
@@ -24,6 +24,23 @@ namespace SPM2.SharePoint.Model
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
+        }
+
+        public override bool Accept()
+        {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            if (Parent.SPObject is SPWeb)
+            {
+                var web = (SPWeb)Parent.SPObject;
+                if (web.IsRootWeb && ParentPropertyDescriptor.Name != "ContentTypes")
+                    return false;
+
+                if (!web.IsRootWeb && ParentPropertyDescriptor.Name == "ContentTypes")
+                    return false;
+            }
+            return true;
         }
 	}
 }

@@ -37,6 +37,14 @@ namespace SPM2.SharePoint.Model
         }
 
 
+        public override bool Accept()
+        {
+            if (ParentPropertyDescriptor != null && ParentPropertyDescriptor.Name == "UpgradedPersistedProperties")
+                return false;
+            
+            return base.Accept();
+        }
+
         public override void LoadChildren()
         {
             var list = new List<ISPNode>();

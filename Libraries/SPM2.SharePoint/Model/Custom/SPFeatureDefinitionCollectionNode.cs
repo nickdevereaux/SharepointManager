@@ -19,9 +19,6 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPFeatureDefinitionCollectionNode
 	{
-        public SPFeatureDefinitionCollectionNode()
-        {
-            this.IconUri = SharePointContext.GetImagePath("GenericFeature.gif");
-        }
+
 	}
 }

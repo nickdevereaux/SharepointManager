@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")][View(100)]
+	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFeatureNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFeatureDefinitionCollectionNode")]
 	public partial class SPFeatureDefinitionNode

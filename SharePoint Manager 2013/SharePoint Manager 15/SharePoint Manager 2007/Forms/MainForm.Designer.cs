@@ -52,6 +52,7 @@ namespace Keutmann.SharePointManager.Forms
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemStandardBarVisible = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +77,6 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabControl = new Keutmann.SharePointManager.Components.SPMTabControl();
-            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripToolBarStandard.SuspendLayout();
@@ -264,10 +264,18 @@ namespace Keutmann.SharePointManager.Forms
             this.minimalToolStripMenuItem.Text = "&Minimal";
             this.minimalToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
             // 
+            // mediumToolStripMenuItem
+            // 
+            this.mediumToolStripMenuItem.Checked = true;
+            this.mediumToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mediumToolStripMenuItem.Tag = "50";
+            this.mediumToolStripMenuItem.Text = "Medium";
+            this.mediumToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
+            // 
             // fullToolStripMenuItem
             // 
-            this.fullToolStripMenuItem.Checked = true;
-            this.fullToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fullToolStripMenuItem.Name = "fullToolStripMenuItem";
             this.fullToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fullToolStripMenuItem.Tag = "100";
@@ -480,14 +488,6 @@ namespace Keutmann.SharePointManager.Forms
             this.tabControl.Size = new System.Drawing.Size(460, 440);
             this.tabControl.TabIndex = 0;
             // 
-            // mediumToolStripMenuItem
-            // 
-            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.mediumToolStripMenuItem.Tag = "50";
-            this.mediumToolStripMenuItem.Text = "Medium";
-            this.mediumToolStripMenuItem.Click += new System.EventHandler(this.OMViewSelectToolStripMenuItem_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -500,7 +500,7 @@ namespace Keutmann.SharePointManager.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainWindow";
-            this.Text = "SharePoint Manager 2013 (beta)";
+            this.Text = "SharePoint Manager 2013 (beta2)";
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);

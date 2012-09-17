@@ -26,15 +26,18 @@ namespace SPM2.SharePoint.Model
     //[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
     public partial class SPFolderNode
 	{
-        public override void Setup(ISPNode parent)
+        protected override string GetTitle()
         {
-            base.Setup(parent);
-
-            Text = this.Folder.Name;
-            if (String.IsNullOrEmpty(Text))
+            string text = base.GetTitle();
+            if (ParentPropertyDescriptor != null)
             {
-                Text = "RootFolder";
+                text = ParentPropertyDescriptor.Name;
             }
+            if (String.IsNullOrEmpty(text))
+            {
+                text = "RootFolder";
+            }
+            return text;
         }
 
 

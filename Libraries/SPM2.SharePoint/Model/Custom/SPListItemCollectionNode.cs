@@ -13,8 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("ListItems")]
-	[Icon(Small="BULLET.GIF")]
-	//[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
+    [Icon(Small = "list.gif")]
     [ExportToNode("SPM2.SharePoint.Model.SPDocumentLibraryNode", AutoBind = true)]
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode", AutoBind=true)]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
@@ -24,8 +23,14 @@ namespace SPM2.SharePoint.Model
         public override void LoadChildren()
         {
             Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+        }
 
+        public override bool Accept()
+        {
+            if (ParentPropertyDescriptor.Name == "Folders")
+                return false;
 
+            return true;
         }
 
 	}

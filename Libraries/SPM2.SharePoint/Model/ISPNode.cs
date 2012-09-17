@@ -28,15 +28,16 @@ namespace SPM2.SharePoint.Model
         int Index { get; set; }
 
         Type SPObjectType { get; set; }
-        void LoadChildren();
-        void ClearChildren();
+
+        void Setup(ISPNode parent);
+        bool Accept();
 
         object GetSPObject();
         Type GetSPObjectType();
 
-        void Setup(ISPNode parent);
+        void LoadChildren();
+        void ClearChildren();
 
 
-        //void Dispose();
     }
 }

@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
@@ -220,6 +221,11 @@ namespace SPM2.SharePoint.Model
                     item.LoadChildren();
                 }
             }
+        }
+
+        public virtual bool Accept()
+        {
+            return true;
         }
 
         protected virtual string GetTitle()

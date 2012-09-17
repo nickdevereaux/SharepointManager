@@ -13,7 +13,8 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Solutions")]
-	[Icon(Small="BULLET.GIF")][View(50)]
+    [Icon(Small = "TBNAIL.GIF")]
+    [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFarmNode")]
 	public partial class SPSolutionCollectionNode
 	{

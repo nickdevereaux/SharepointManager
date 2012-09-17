@@ -20,5 +20,18 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPFieldCollectionNode
 	{
+        public override bool Accept()
+        {
+            if (Parent.SPObject is SPWeb)
+            {
+                var web = (SPWeb)Parent.SPObject;
+                if (web.IsRootWeb && ParentPropertyDescriptor.Name != "Fields")
+                    return false;
+
+                if (!web.IsRootWeb && ParentPropertyDescriptor.Name == "Fields")
+                    return false;
+            }
+            return true;
+        }
 	}
 }

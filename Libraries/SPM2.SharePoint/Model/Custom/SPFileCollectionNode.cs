@@ -13,7 +13,7 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title("Files")]
-	[Icon(Small="BULLET.GIF")]
+    [Icon(Small = "ITS16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPFileCollectionNode

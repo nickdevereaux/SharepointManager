@@ -19,5 +19,12 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPUserCollectionNode
 	{
+        public override bool Accept()
+        {
+            if (ParentPropertyDescriptor.Name == "Users")
+                return true;
+
+            return false;
+        }
 	}
 }

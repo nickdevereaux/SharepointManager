@@ -31,7 +31,7 @@ namespace Keutmann.SharePointManager.Components
         {
             this.ShowNodeToolTips = true;
             this.HideSelection = false;
-            ViewLevel = 100;
+            ViewLevel = 50;
         }
 
         public int AddImage(string path)

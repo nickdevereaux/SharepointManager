@@ -19,9 +19,12 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	public partial class SPFolderCollectionNode
 	{
-        public override void Setup(ISPNode parent)
+        public override bool Accept()
         {
-            base.Setup(parent);
+            if (ParentPropertyDescriptor != null && Parent is SPFolderNode)
+                return true;
+
+            return false;
         }
 	}
 }

@@ -165,8 +165,8 @@ namespace SPM2.SharePoint
                     ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
 
                     // Ignore nodes with the AutoBind set to false
-                    if (node.Descriptor.Attributes.OfType<ExportToNodeAttribute>().Any(p => p.ContractName == sourceNode.GetType().FullName && !p.AutoBind))
-                        continue;
+                    //if (node.Descriptor.Attributes.OfType<ExportToNodeAttribute>().Any(p => p.ContractName == sourceNode.GetType().FullName && !p.AutoBind))
+                    //    continue;
 
 
                     // Exclude the node if it do not match the correct view
@@ -174,6 +174,9 @@ namespace SPM2.SharePoint
 
                     //Ensure that the child node instance is unique in the TreeView
                     node = Create(descriptor, descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
+
+                    // If the node do not accept the situation, then continue.
+                    if (ViewLevel < 100 && !node.Accept()) continue;
                     
                     list.Add(node);
                     
@@ -249,7 +252,14 @@ namespace SPM2.SharePoint
             node.NodeProvider = this;
             node.Text = text;
             node.SPObjectType = spObjectType;
-            node.ID = spObjectType.FullName + index;
+            if (descriptor != null)
+            {
+                node.ID = descriptor.GetHashCode().ToString();
+            }
+            else
+            {
+                node.ID = index.ToString();
+            }
             node.Index = index;
             node.Setup(parent);
             return node;

@@ -233,6 +233,16 @@
     <Compile Include="Model\Generated\WSSSyncUsageDefinitionNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SPM2.Framework\SPM40.Framework.csproj">
+      <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
+      <Name>SPM40.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPM2.SharePoint\SPM40.SharePoint2010.csproj">
+      <Project>{ce144460-64ce-4fb5-a25e-25b7bb028d16}</Project>
+      <Name>SPM40.SharePoint2010</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

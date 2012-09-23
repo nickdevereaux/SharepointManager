@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2010", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.Framework", "..\..\Libraries\SPM2.Framework\SPM40.Framework.csproj", "{5DE0D29F-DE15-4E15-9E89-3A873D849C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM2.SharePoint2013", "..\..\Libraries\SPM2.SharePoint2013\SPM2.SharePoint2013.csproj", "{48E7192B-2165-4561-B9B0-9A1BDB492893}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2013", "..\..\Libraries\SPM2.SharePoint2013\SPM40.SharePoint2013.csproj", "{48E7192B-2165-4561-B9B0-9A1BDB492893}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -16,13 +16,16 @@ Global
 		SccLocalPath1 = SharePoint\u0020Manager\u00202007
 		SccLocalPath2 = ..\\..\\Libraries\\SPM2.SharePoint
 		SccLocalPath3 = ..\\..\\Libraries\\SPM2.Framework
-		SccNumberOfProjects = 4
+		SccLocalPath4 = ..\\..\\Libraries\\SPM2.SharePoint2013
+		SccNumberOfProjects = 5
 		SccProjectName1 = SharePoint\u0020Manager\u00202007
 		SccProjectName2 = ../../Libraries/SPM2.SharePoint
 		SccProjectName3 = ../../Libraries/SPM2.Framework
+		SccProjectName4 = ../../Libraries/SPM2.SharePoint2013
 		SccProjectUniqueName1 = SharePoint\u0020Manager\u00202007\\SharePoint\u0020Manager\u002015.csproj
 		SccProjectUniqueName2 = ..\\..\\Libraries\\SPM2.SharePoint\\SPM40.SharePoint2010.csproj
 		SccProjectUniqueName3 = ..\\..\\Libraries\\SPM2.Framework\\SPM40.Framework.csproj
+		SccProjectUniqueName4 = ..\\..\\Libraries\\SPM2.SharePoint2013\\SPM40.SharePoint2013.csproj
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

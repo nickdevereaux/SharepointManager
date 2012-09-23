@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Schedule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteSizeDiagnosticProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteSizeDiagnosticProviderNode")]
 	public partial class SPDailyScheduleNode
 	{
 	}

@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.AccessServicesWebServiceInstanceNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.AccessServicesWebServiceInstanceNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceCollectionNode")]
 	public partial class AccessServicesWebServiceNode
 	{
 	}

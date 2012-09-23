@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPThrottlingRule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPThrottlingRuleCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPThrottlingRuleCollectionNode")]
 	public partial class SPThrottlingRuleNode
 	{
 	}

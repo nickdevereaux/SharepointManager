@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("MaximumFileSizePerExtension")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAdministrationWebApplicationNode")]
 	public partial class SPMaxFileSizeDictionaryNode
 	{
 	}

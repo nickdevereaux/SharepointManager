@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPDiagnosticsCondition")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsConditionsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsConditionsNode")]
 	public partial class SPDiagnosticsConditionNode
 	{
 	}

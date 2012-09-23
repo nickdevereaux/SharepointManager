@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUsageDefinitionCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUsageDefinitionCollectionNode")]
 	public partial class SPSqlExceptionsUsageDefinitionNode
 	{
 	}

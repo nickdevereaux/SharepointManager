@@ -14,9 +14,9 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("Rules")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPResourceTrackingSettingsNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserResourceTrackingSettingsNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPAppResourceTrackingSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPResourceTrackingSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserResourceTrackingSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPAppResourceTrackingSettingsNode")]
 	public partial class SPResourceTrackingRuleCollectionNode
 	{
 	}

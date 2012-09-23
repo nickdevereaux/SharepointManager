@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("MachinePools")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRequestManagementSettingsNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRequestManagementSettingsNode")]
 	public partial class SPRoutingMachinePoolCollectionNode
 	{
 	}

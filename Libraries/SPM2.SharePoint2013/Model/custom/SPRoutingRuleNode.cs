@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPRoutingRule")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPRoutingRuleCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPRoutingRuleCollectionNode")]
 	public partial class SPRoutingRuleNode
 	{
 	}

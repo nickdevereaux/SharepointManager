@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPFollowableList")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPFollowableListCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPFollowableListCollectionNode")]
 	public partial class SPFollowableListNode
 	{
 	}

@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("SPPushNotificationSubscriber")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPPushNotificationSubscriberCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPPushNotificationSubscriberCollectionNode")]
 	public partial class SPPushNotificationSubscriberNode
 	{
 	}

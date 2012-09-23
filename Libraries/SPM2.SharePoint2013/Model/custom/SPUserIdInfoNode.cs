@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("UserId")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPUserNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPUserNode")]
 	public partial class SPUserIdInfoNode
 	{
 	}

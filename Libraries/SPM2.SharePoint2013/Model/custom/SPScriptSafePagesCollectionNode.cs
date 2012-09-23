@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("ScriptSafePages")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPSiteNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
 	public partial class SPScriptSafePagesCollectionNode
 	{
 	}

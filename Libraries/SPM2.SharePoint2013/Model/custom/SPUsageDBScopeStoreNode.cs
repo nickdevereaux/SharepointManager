@@ -14,8 +14,8 @@ namespace SPM2.SharePoint.Model
 {
 	[Title("DataStore")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsMetricsProviderNode")]
-	[AttachTo("SPM2.SharePoint.Model.SPDiagnosticsXEventQueryDataProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsMetricsProviderNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsXEventQueryDataProviderNode")]
 	public partial class SPUsageDBScopeStoreNode
 	{
 	}

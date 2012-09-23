@@ -14,7 +14,7 @@ namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]
-	[AttachTo("SPM2.SharePoint.Model.SPServiceProxyCollectionNode")]
+	[ExportToNode("SPM2.SharePoint.Model.SPServiceProxyCollectionNode")]
 	public partial class TranslationServiceProxyNode
 	{
 	}

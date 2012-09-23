@@ -1,4 +1,4 @@
-        /* ---------------------------
+/* ---------------------------
  * SharePoint Manager 2010 v2
  * Created by Carsten Keutmann
  * ---------------------------
@@ -13,10 +13,9 @@ using SPM2.Framework;
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="DisplayName")]
-	[Icon(Small="BULLET.GIF")][View(100)]
-	[ExportToNode("SPM2.SharePoint.Model.SPServiceInstanceCollectionNode")]
-    [View(100)]
-	public partial class AccessServerWebServiceInstanceNode
+	[Icon(Small="BULLET.GIF")]
+	[AttachTo("SPM2.SharePoint.Model.SPServiceInstanceCollectionNode")]
+	public partial class AccessServicesWebServiceInstanceNode
 	{
 	}
 }

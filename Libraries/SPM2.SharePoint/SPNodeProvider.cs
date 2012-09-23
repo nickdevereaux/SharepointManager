@@ -176,7 +176,7 @@ namespace SPM2.SharePoint
                     node = Create(descriptor, descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
 
                     // If the node do not accept the situation, then continue.
-                    if (ViewLevel < 100 && !node.Accept()) continue;
+                    if (!node.Accept()) continue;
                     
                     list.Add(node);
                     

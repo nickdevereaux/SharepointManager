@@ -17,5 +17,12 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPWebServiceNode")]
 	public partial class SPDeveloperDashboardSettingsNode
 	{
+
+        public override bool Accept()
+        {
+            var service = Parent as SPWebServiceNode;
+            
+            return !service.IsAdministrationService;
+        }
 	}
 }

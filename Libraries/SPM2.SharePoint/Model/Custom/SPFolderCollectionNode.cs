@@ -21,6 +21,9 @@ namespace SPM2.SharePoint.Model
 	{
         public override bool Accept()
         {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
             if (ParentPropertyDescriptor != null && Parent is SPFolderNode)
                 return true;
 

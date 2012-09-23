@@ -22,6 +22,9 @@ namespace SPM2.SharePoint.Model
 	{
         public override bool Accept()
         {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
             if (Parent.SPObject is SPWeb)
             {
                 var web = (SPWeb)Parent.SPObject;

@@ -353,6 +353,10 @@
       <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
       <Name>SPM40.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Libraries\SPM2.SharePoint2013\SPM40.SharePoint2013.csproj">
+      <Project>{48e7192b-2165-4561-b9b0-9a1bdb492893}</Project>
+      <Name>SPM40.SharePoint2013</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj">
       <Project>{ce144460-64ce-4fb5-a25e-25b7bb028d16}</Project>
       <Name>SPM40.SharePoint2010</Name>

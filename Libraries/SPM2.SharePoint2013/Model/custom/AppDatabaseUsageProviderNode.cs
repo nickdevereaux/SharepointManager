@@ -8,9 +8,10 @@ using System;
 
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
-using SPM2.Framework;
+using SPM2.Framework; using SPM2.SharePoint.Model;
+using SPM2.SharePoint.Model;
 
-namespace SPM2.SharePoint.Model
+namespace SPM2.SharePoint2013.Model
 {
 	[Title(PropertyName="DisplayName")]
 	[Icon(Small="BULLET.GIF")]

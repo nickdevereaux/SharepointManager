@@ -20,6 +20,24 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
 	public partial class SPListItemCollectionNode
 	{
+
+        //public override object GetSPObject()
+        //{
+        //    if (Parent.SPObject is SPList)
+        //    {
+        //        var list = (SPList)Parent.SPObject;
+        //        if (list.ItemCount > 5000)
+        //        {
+        //            //var query = new SPQuery(list.DefaultView);
+
+
+        //            return list.GetItems(list.DefaultView); 
+        //        }
+        //    }
+
+        //    return base.GetSPObject();
+        //}
+
         public override void LoadChildren()
         {
             Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));

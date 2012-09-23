@@ -246,19 +246,7 @@ namespace SPM2.SharePoint.Model
             if (ParentPropertyDescriptor == null) return result;
 
             result = ParentPropertyDescriptor.GetValue(Parent.SPObject);
-            
-            //var des = TypeDescriptor.GetProperties(Parent.SPObject.GetType());
-            //foreach (PropertyDescriptor propertyDescriptor in des)
-            //{
-            //    // Check for the correct property
-            //    if (SPObjectType != propertyDescriptor.PropertyType || Text != propertyDescriptor.DisplayName) continue;
-
-            //    // Use the name from the Property in the object model.
-            //    Descriptor.Title = propertyDescriptor.DisplayName;
-            //    result = propertyDescriptor.GetValue(Parent.SPObject);
-            //    break;
-            //}
-
+         
             return result;
         }
 

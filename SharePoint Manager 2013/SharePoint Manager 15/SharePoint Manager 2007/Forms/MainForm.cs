@@ -49,9 +49,12 @@ namespace Keutmann.SharePointManager.Forms
             Trace.WriteLine("SplashScreenLoad()");
             // The property "NeedsUpgradeIncludeChildren" of SPFarm is very slow to resolve. Therefore exclude it from the PropertyGrid
             PropertyGridTypeConverter.ExcludedProperties.Add("NeedsUpgradeIncludeChildren");
+            //PropertyGridTypeConverter.ExcludedProperties.Add("Xml");
+            //PropertyGridTypeConverter.ExcludedProperties.Add("XmlDataSchema");
             PropertyGridTypeConverter.AddTo(typeof(SPFarm));
             PropertyGridTypeConverter.AddTo(typeof(SPWebService));
-
+//            PropertyGridTypeConverter.AddTo(typeof(SPListItemCollection));
+            
             splashScreen.UpdateProgress("Loading SharePoint Model...");
 
             Explorer = new TreeViewComponent();

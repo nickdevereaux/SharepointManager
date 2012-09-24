@@ -68,7 +68,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\AdapterItemTypeAttribute.cs" />
     <Compile Include="Attributes\ViewAttribute.cs" />
     <Compile Include="Attributes\LoadAddInTypes.cs" />
     <Compile Include="Attributes\TitleAttribute.cs" />

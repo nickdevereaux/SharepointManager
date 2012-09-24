@@ -68,13 +68,10 @@ namespace SPM2.SharePoint
             {
                 var current = parentNode.Pointer.Current;
                 Type instanceType = current.GetType();
-                ISPNode node = null;
+                //ISPNode node = null;
 
-                if (parentNode.NodeTypes.ContainsKey(instanceType))
-                {
-                    node = parentNode.NodeTypes[instanceType];
-                }
-                else
+                ISPNode node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(instanceType.FullName);
+                if (node == null)
                 {
                     if (parentNode.DefaultNode != null)
                     {
@@ -82,7 +79,19 @@ namespace SPM2.SharePoint
                     }
                 }
 
-                if (node != null && RunIncludeRules(node))
+                //if (parentNode.NodeTypes.ContainsKey(instanceType))
+                //{
+                //    node = parentNode.NodeTypes[instanceType];
+                //}
+                //else
+                //{
+                //    if (parentNode.DefaultNode != null)
+                //    {
+                //        node = parentNode.DefaultNode;
+                //    }
+                //}
+
+                if (node != null)
                 {
                     // Always create a new node, because the object has to be unique for each item in the treeview.
                     var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
@@ -93,7 +102,10 @@ namespace SPM2.SharePoint
                     instanceNode.Index = parentNode.TotalCount;
 
                     instanceNode.Setup(parentNode);
-                    list.Add(instanceNode);
+                    if (RunIncludeRules(instanceNode))
+                    {
+                        list.Add(instanceNode);
+                    }
                 }
                 
                 parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
@@ -152,6 +164,8 @@ namespace SPM2.SharePoint
 
             if (sourceNode.SPObject == null) return list;
 
+            ISPNode node = null;
+
             var propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
             try
             {
@@ -159,21 +173,18 @@ namespace SPM2.SharePoint
                 foreach (PropertyDescriptor descriptor in propertyDescriptors)
                 {
                     // Ensure that the property are supported by a Node
-                    if (!sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
-                        continue;
-                    
-                    ISPNode node = sourceNode.NodeTypes[descriptor.PropertyType];
-
-                    // Ignore nodes with the AutoBind set to false
-                    //if (node.Descriptor.Attributes.OfType<ExportToNodeAttribute>().Any(p => p.ContractName == sourceNode.GetType().FullName && !p.AutoBind))
+                    //if (!sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
                     //    continue;
 
+                    node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(descriptor.PropertyType.FullName);
+                    if (node == null) continue;
 
-                    // Exclude the node if it do not match the correct view
-                    if(!RunIncludeRules(node)) continue;
 
                     //Ensure that the child node instance is unique in the TreeView
                     node = Create(descriptor, descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
+
+                    // Exclude the node if it do not match the correct view
+                    if (!RunIncludeRules(node)) continue;
 
                     // If the node do not accept the situation, then continue.
                     if (!node.Accept()) continue;
@@ -186,7 +197,7 @@ namespace SPM2.SharePoint
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message+ " : "+node.GetType().FullName+ " : "+ex.StackTrace);
             }
             return list;
         }
@@ -196,7 +207,10 @@ namespace SPM2.SharePoint
             return _ruleEngine.Check(node, true);
         }
 
-        public  Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)
+
+
+
+        public Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)
         {
             IEnumerable<Lazy<SPNode>> importedNodes = CompositionProvider.GetExports<SPNode>(parentNode.Descriptor.ClassType);
             var types = new Dictionary<Type, ISPNode>();
@@ -204,11 +218,11 @@ namespace SPM2.SharePoint
             {
                 SPNode node = lazyItem.Value;
                 node.NodeProvider = parentNode.NodeProvider;
-    
-                if (node.Descriptor.AdapterItemType != null)
-                {
-                    types.AddOrReplace(node.Descriptor.AdapterItemType, node);
-                }
+
+                //if (node.Descriptor.AdapterItemType != null)
+                //{
+                //    types.AddOrReplace(node.Descriptor.AdapterItemType, node);
+                //}
             }
             return types;
         }
@@ -236,9 +250,12 @@ namespace SPM2.SharePoint
                     }
                 }
 
-                if (spType != null && node.NodeTypes.ContainsKey(spType))
+                if (spType != null)
                 {
-                    result = node.NodeTypes[spType];
+                    //result = node.NodeTypes[spType];
+                    var childNode = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(spType.FullName);
+                    if (childNode != null)
+                        result = childNode;
                 }
             }
 

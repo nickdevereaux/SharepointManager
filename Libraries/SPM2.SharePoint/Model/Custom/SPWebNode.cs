@@ -23,8 +23,11 @@ namespace SPM2.SharePoint.Model
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
-            this.Text = this.Web.Title;
-            this.Url = this.Web.Url;
+            if (this.SPObject != null)
+            {
+                this.Text = this.Web.Title;
+                this.Url = this.Web.Url;
+            }
         }
 
         public override bool IsDefaultSelected()

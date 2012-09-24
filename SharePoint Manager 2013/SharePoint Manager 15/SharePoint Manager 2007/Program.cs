@@ -70,7 +70,11 @@ namespace Keutmann.SharePointManager
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             Cursor.Current = Cursors.Default;
+#if DEBUG
+            MessageBox.Show(e.Exception.Message+ " : " +e.Exception.StackTrace, SPMLocalization.GetString("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+#else
             MessageBox.Show(e.Exception.Message, SPMLocalization.GetString("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
         }
 
     }

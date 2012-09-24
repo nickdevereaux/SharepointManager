@@ -180,23 +180,23 @@ namespace SPM2.Framework
         }
 
 
-        private Type _adapterItemType = null;
-        public Type AdapterItemType
-        {
-            get
-            {
-                if (_adapterItemType == null)
-                {
-                    AdapterItemTypeAttribute attrib = this.ClassType.GetAttribute<AdapterItemTypeAttribute>(true);
-                    if (attrib != null)
-                    {
-                        _adapterItemType = Type.GetType(attrib.Name, false, false);
-                    }
-                }
-                return _adapterItemType; 
-            }
-            set { _adapterItemType = value; }
-        }
+        //private Type _adapterItemType = null;
+        //public Type AdapterItemType
+        //{
+        //    get
+        //    {
+        //        if (_adapterItemType == null)
+        //        {
+        //            AdapterItemTypeAttribute attrib = this.ClassType.GetAttribute<AdapterItemTypeAttribute>(true);
+        //            if (attrib != null)
+        //            {
+        //                _adapterItemType = Type.GetType(attrib.Name, false, false);
+        //            }
+        //        }
+        //        return _adapterItemType; 
+        //    }
+        //    set { _adapterItemType = value; }
+        //}
 
 
         public ClassDescriptor(Type type)

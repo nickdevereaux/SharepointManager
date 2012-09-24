@@ -24,6 +24,8 @@ namespace SPM2.SharePoint.Model
         {
             base.Setup(parent);
 
+            if (this.SPObject == null) return;
+
             string title = (String.IsNullOrEmpty(this.DocumentLibrary.Title)) ? this.DocumentLibrary.ID.ToString() : this.DocumentLibrary.Title;
             this.Text = String.Format("{0} ({1})", title, this.DocumentLibrary.ItemCount);
 

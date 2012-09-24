@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="ISPNodeProvider.cs" />
     <Compile Include="Kernel\Owssvr.cs" />
+    <Compile Include="Model\AdapterItemTypeAttribute.cs" />
     <Compile Include="Model\Custom\SPIisSettingsCollectionNode.cs" />
     <Compile Include="Model\Custom\SPViewFieldNode.cs" />
     <Compile Include="Model\Custom\SPPropertyBagNode.cs" />
@@ -108,6 +109,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rules\RecursiveRuleAttribute.cs" />
+    <Compile Include="Rules\RecursiveRule.cs" />
     <Compile Include="Rules\INodeIncludeRule.cs" />
     <Compile Include="Rules\StandardIncludeRule.cs" />
     <Compile Include="SharePointContext.cs" />

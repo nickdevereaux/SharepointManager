@@ -47,5 +47,9 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
 	public partial class SPPersistedObjectNode
 	{
+        public override bool Accept()
+        {
+            return false;
+        }
 	}
 }

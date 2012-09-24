@@ -25,5 +25,11 @@ namespace SPM2.Framework
             }
             return "";
         }
+
+        public static bool EqualsIgnorecase(this string text, object obj)
+        {
+            if (text == null) throw new ArgumentNullException("text");
+            return text.Equals(obj as string, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

@@ -21,22 +21,17 @@ namespace SPM2.SharePoint.Model
 	public partial class SPListItemCollectionNode
 	{
 
-        //public override object GetSPObject()
-        //{
-        //    if (Parent.SPObject is SPList)
-        //    {
-        //        var list = (SPList)Parent.SPObject;
-        //        if (list.ItemCount > 5000)
-        //        {
-        //            //var query = new SPQuery(list.DefaultView);
+        public override object GetSPObject()
+        {
+            if (Parent.SPObject is SPList)
+            {
+                var list = (SPList)Parent.SPObject;
+                var model = new SPListItemCollectionModel(list);
+                return model;
+            }
 
-
-        //            return list.GetItems(list.DefaultView); 
-        //        }
-        //    }
-
-        //    return base.GetSPObject();
-        //}
+            return base.GetSPObject();
+        }
 
         public override void LoadChildren()
         {

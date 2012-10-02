@@ -14,17 +14,6 @@ namespace SPM2.SharePoint.Model
 	[AdapterItemType("Microsoft.SharePoint.SPListItemCollection, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c")]
 	public partial class SPListItemCollectionNode : SPNodeCollection
 	{
-        [XmlIgnore]
-		public SPListItemCollection ListItemCollection
-        {
-            get
-            {
-                return (SPListItemCollection)this.SPObject;
-            }
-            set
-            {
-                this.SPObject = value;
-            }
-        }
+
 	}
 }

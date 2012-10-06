@@ -68,7 +68,6 @@ namespace SPM2.SharePoint
             {
                 var current = parentNode.Pointer.Current;
                 Type instanceType = current.GetType();
-                //ISPNode node = null;
 
                 ISPNode node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(instanceType.FullName);
                 if (node == null)
@@ -78,18 +77,6 @@ namespace SPM2.SharePoint
                         node = parentNode.DefaultNode;
                     }
                 }
-
-                //if (parentNode.NodeTypes.ContainsKey(instanceType))
-                //{
-                //    node = parentNode.NodeTypes[instanceType];
-                //}
-                //else
-                //{
-                //    if (parentNode.DefaultNode != null)
-                //    {
-                //        node = parentNode.DefaultNode;
-                //    }
-                //}
 
                 if (node != null)
                 {
@@ -114,14 +101,6 @@ namespace SPM2.SharePoint
                 parentNode.TotalCount++;
             }
             
-            // If there is more nodes in the collection, add a "More" item.
-            //if (count >= batchCount && parentNode.LoadingChildren)
-            //{
-            //    var node = new MoreNode(parentNode);
-            //    node.Setup(parentNode);
-            //    list.Add(node);
-            //}
-
             if (parentNode.TotalCount <= batchCount)
             {
                 // There are a low number of nodes, therefore sort nodes by Text.
@@ -293,5 +272,8 @@ namespace SPM2.SharePoint
             if (String.IsNullOrEmpty(xml)) return null;
             return Serializer.XmlToObject<SPFarmNode>(xml);
         }
+
+        private Dictionary<string, bool> childrenExistsCache = new Dictionary<string, bool>();
+
     }
 }

@@ -39,11 +39,10 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             }
         }
 
-
         public SPTreeNode(ISPNode modelNode)
         {
             Model = modelNode;
-            this.Tag = Model.SPObject;
+            this._spObject = () => Model.SPObject;
             this.DefaultExpand = false;
 
             int index = Program.Window.Explorer.AddImage(Model.IconUri);
@@ -55,7 +54,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             this.DataBindings.Add("BrowserUrl", Model, "Url");
             this.Name = Model.SPObjectType.FullName;
 
-            //if (Model.NodeTypes.Count > 0)
+            //if (Model.NodeProvider.ChildrenExists(Model))
             //{
                 this.Nodes.Add(new ExplorerNodeBase("Dummy"));
             //}

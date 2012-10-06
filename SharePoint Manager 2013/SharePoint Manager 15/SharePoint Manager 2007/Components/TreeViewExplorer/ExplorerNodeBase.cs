@@ -64,6 +64,15 @@ namespace Keutmann.SharePointManager.Components
             }
         }
 
+        protected Func<object> _spObject;
+        public object SPObject
+        {
+            get
+            {
+                return _spObject();
+            }
+        }
+
 
         #endregion 
 
@@ -138,7 +147,7 @@ namespace Keutmann.SharePointManager.Components
             ExplorerNodeBase result = null;
             foreach (ExplorerNodeBase node in this.Nodes)
             {
-                if (node.Tag == objTag)
+                if (node.SPObject == objTag)
                 {
                     result = node;
                     break;
@@ -154,7 +163,7 @@ namespace Keutmann.SharePointManager.Components
 
         public virtual void Update()
         {
-            SPMReflection.CallMethod(this.Tag, "Update", new object[] { });
+            SPMReflection.CallMethod(this.SPObject, "Update", new object[] { });
         }
 
         public virtual string ImageUrl()
@@ -181,7 +190,7 @@ namespace Keutmann.SharePointManager.Components
         public virtual void Delete()
         {
             if(!InReadOnlyMode)
-                SPMReflection.CallMethod(this.Tag, "Delete", new object[] { });
+                SPMReflection.CallMethod(this.SPObject, "Delete", new object[] { });
         }
 
         public virtual void Refresh()

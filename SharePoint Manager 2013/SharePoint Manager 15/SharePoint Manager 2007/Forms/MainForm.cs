@@ -349,18 +349,18 @@ namespace Keutmann.SharePointManager.Forms
                 {
                     PropertyDescriptor pd = pvEventArgs.ChangedItem.PropertyDescriptor;
 
-                    Type nodeType = node.Tag.GetType();
+                    Type nodeType = node.SPObject.GetType();
                     FieldInfo myField = nodeType.GetField(pd.Name, BindingFlags.Instance | BindingFlags.Public);
                     if (myField != null)
                     {
-                        myField.SetValue(node.Tag, pvEventArgs.OldValue);
+                        myField.SetValue(node.SPObject, pvEventArgs.OldValue);
                     }
                     else
                     {
                         PropertyInfo myProperty = nodeType.GetProperty(pd.Name, BindingFlags.Instance | BindingFlags.Public);
                         if (myProperty != null)
                         {
-                            myProperty.SetValue(node.Tag, pvEventArgs.OldValue, null);
+                            myProperty.SetValue(node.SPObject, pvEventArgs.OldValue, null);
                         }
                     }
                 }

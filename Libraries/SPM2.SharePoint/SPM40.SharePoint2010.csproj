@@ -111,6 +111,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rules\IRecursiveRule.cs" />
     <Compile Include="Rules\RecursiveRuleAttribute.cs" />
     <Compile Include="Rules\RecursiveRule.cs" />
     <Compile Include="Rules\INodeIncludeRule.cs" />

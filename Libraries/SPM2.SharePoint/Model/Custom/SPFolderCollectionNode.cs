@@ -29,5 +29,10 @@ namespace SPM2.SharePoint.Model
 
             return false;
         }
+
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+        }
 	}
 }

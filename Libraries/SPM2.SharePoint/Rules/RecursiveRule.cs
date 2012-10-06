@@ -45,7 +45,11 @@ namespace SPM2.SharePoint.Rules
 
         public static bool IsRecursiveVisible(ISPNode node)
         {
-            //return node.Descriptor.Attributes.OfType<ExportMetadataAttribute>().Any(p => RecursiveVisibleKey.EqualsIgnorecase(p.Name) && true.Equals(p.Value));
+            if (node is IRecursiveRule)
+            {
+                return ((IRecursiveRule)node).IsRecursiveVisible();
+            }
+
             return node.Descriptor.Attributes.OfType<RecursiveRuleAttribute>().Any(p => p.IsRecursiveVisible);
         }
     }

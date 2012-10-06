@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -24,7 +25,8 @@ namespace SPM2.SharePoint.Model
     [ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
     //[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
-    public partial class SPFolderNode
+    [RecursiveRule(IsRecursiveVisible = true)]
+    public partial class SPFolderNode : IRecursiveRule
 	{
         protected override string GetTitle()
         {
@@ -41,31 +43,41 @@ namespace SPM2.SharePoint.Model
         }
 
 
-        public override void LoadChildren()
+        public bool IsRecursiveVisible()
         {
-            base.LoadChildren();
+            if (this.Parent.SPObjectType.IsOfType(typeof(SPFolderCollection)))
+                return true;
 
-            SPFileCollectionNode files = this.Children.OfType<SPFileCollectionNode>().FirstOrDefault();
-            if (files != null)
-            {
-                this.Children.Remove(files);
-
-                files.LoadChildren();
-
-                this.Children.InsertRange(0, files.Children);
-            }
-
-            SPFolderCollectionNode folderCollection = this.Children.OfType<SPFolderCollectionNode>().FirstOrDefault();
-            if (folderCollection != null)
-            {
-                this.Children.Remove(folderCollection);
-                
-                folderCollection.LoadChildren();
-
-                this.Children.InsertRange(0, folderCollection.Children);
-            }
+            return false;
         }
 
-	}
+        //public override void LoadChildren()
+        //{
+        //    base.LoadChildren();
+
+        //    SPFileCollectionNode files = this.Children.OfType<SPFileCollectionNode>().FirstOrDefault();
+        //    if (files != null)
+        //    {
+        //        this.Children.Remove(files);
+
+        //        files.LoadChildren();
+
+        //        this.Children.InsertRange(0, files.Children);
+        //    }
+
+
+
+        //    SPFolderCollectionNode folderCollection = this.Children.OfType<SPFolderCollectionNode>().FirstOrDefault();
+        //    if (folderCollection != null)
+        //    {
+        //        this.Children.Remove(folderCollection);
+                
+        //        folderCollection.LoadChildren();
+
+        //        this.Children.InsertRange(0, folderCollection.Children);
+        //    }
+        //}
+
+    }
 
 }

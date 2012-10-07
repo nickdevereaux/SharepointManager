@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -17,9 +18,17 @@ namespace SPM2.SharePoint.Model
     [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-	public partial class SPFolderCollectionNode
+	public partial class SPFolderCollectionNode : IViewRule, IRecursiveRule
 	{
-        public override bool Accept()
+        public override void Setup(ISPNode parent)
+        {
+            base.Setup(parent);
+
+            if (SPObject != null)
+                Text += String.Format(" ({0})", FolderCollection.Count);
+        }
+
+        public bool IsVisible()
         {
             if (NodeProvider.ViewLevel >= 100)
                 return true;
@@ -30,9 +39,9 @@ namespace SPM2.SharePoint.Model
             return false;
         }
 
-        public override void LoadChildren()
+        public bool IsRecursiveVisible()
         {
-            base.LoadChildren();
+            return true;
         }
-	}
+    }
 }

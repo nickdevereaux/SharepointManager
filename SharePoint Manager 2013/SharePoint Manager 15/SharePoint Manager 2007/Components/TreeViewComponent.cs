@@ -84,8 +84,8 @@ namespace Keutmann.SharePointManager.Components
             }
         }
 
-        private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode", "SPWebNode" };
-        //private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode" };
+        //private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode", "SPWebNode" };
+        private List<string> DefaultExpandTypes = new List<string> { "SPServiceCollectionNode", "SPWebServiceNode", "SPWebApplicationCollectionNode", "SPWebApplicationNode", "SPSiteCollectionNode", "SPSiteNode" };
 
         public void Build()
         {

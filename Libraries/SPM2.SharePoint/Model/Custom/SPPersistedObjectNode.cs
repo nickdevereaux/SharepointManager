@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -45,11 +46,11 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPSolutionLanguagePackNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSolutionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPDiagnosticsProviderNode")]
-	public partial class SPPersistedObjectNode
+	public partial class SPPersistedObjectNode : IViewRule
 	{
-        public override bool Accept()
+        public bool IsVisible()
         {
             return false;
         }
-	}
+    }
 }

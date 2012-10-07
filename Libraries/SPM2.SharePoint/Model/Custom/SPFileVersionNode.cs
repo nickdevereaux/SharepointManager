@@ -17,5 +17,9 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPFileVersionCollectionNode")]
 	public partial class SPFileVersionNode
 	{
+        public override void LoadChildren()
+        {
+            base.LoadChildren();
+        }
 	}
 }

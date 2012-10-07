@@ -54,10 +54,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             this.DataBindings.Add("BrowserUrl", Model, "Url");
             this.Name = Model.SPObjectType.FullName;
 
-            //if (Model.NodeProvider.ChildrenExists(Model))
-            //{
-                this.Nodes.Add(new ExplorerNodeBase("Dummy"));
-            //}
+            this.Nodes.Add(new ExplorerNodeBase("Dummy"));
         }
 
 
@@ -184,6 +181,13 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
                 {
                     alPages.Add(TabPages.GetXmlPage("Schema Xml", propInfo.GetValue(Model.SPObject, null) as string));
                 }
+            }
+
+            if (Model.SPObject is SPList)
+            {
+                var list = Model.SPObject as SPList;
+
+                alPages.Add(TabPages.GetDataGridViewPage("GridView", list.Items.GetDataTable()));
             }
 
             return (TabPage[])alPages.ToArray(typeof(TabPage));

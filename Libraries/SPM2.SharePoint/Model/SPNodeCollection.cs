@@ -12,23 +12,23 @@ namespace SPM2.SharePoint.Model
 
     public class SPNodeCollection : SPNode, ISPNodeCollection
     {
-        private ISPNode _defaultNode;
-        /// <summary>
-        /// The default node used if the node type is unknown.
-        /// </summary>
-        [XmlIgnore]
-        public ISPNode DefaultNode
-        {
-            get
-            {
-                if (_defaultNode == null)
-                {
-                    _defaultNode = NodeProvider.FindDefaultNode(this);
-                }
-                return _defaultNode;
-            }
-            set { _defaultNode = value; }
-        }
+        //private ISPNode _defaultNode;
+        ///// <summary>
+        ///// The default node used if the node type is unknown.
+        ///// </summary>
+        //[XmlIgnore]
+        //public ISPNode DefaultNode
+        //{
+        //    get
+        //    {
+        //        if (_defaultNode == null)
+        //        {
+        //            _defaultNode = NodeProvider.FindDefaultNode(this);
+        //        }
+        //        return _defaultNode;
+        //    }
+        //    set { _defaultNode = value; }
+        //}
 
         [XmlIgnore]
         public IEnumerator Pointer { get; set; }

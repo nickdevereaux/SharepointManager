@@ -109,6 +109,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Menu\GenericDelete.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Menu\SPFileRecycle.cs">
       <SubType>Component</SubType>
     </Compile>

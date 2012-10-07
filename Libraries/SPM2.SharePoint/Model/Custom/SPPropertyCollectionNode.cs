@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -28,24 +29,12 @@ namespace SPM2.SharePoint.Model
     [ExportToNode(typeof (SPWebServiceNode))]
     [ExportToNode(typeof (SPSolutionNode))]
     [AdapterItemType("System.Collections.Hashtable")]
-    public class SPPropertyCollectionNode : SPNodeCollection
+    public class SPPropertyCollectionNode : SPNodeCollection, IViewRule
     {
         [XmlIgnore]
         public Hashtable AllProperties
         {
             get { return (Hashtable) SPObject; }
-        }
-
-
-        public override bool Accept()
-        {
-            if (NodeProvider.ViewLevel >= 100)
-                return true;
-
-            if (ParentPropertyDescriptor != null && ParentPropertyDescriptor.Name == "UpgradedPersistedProperties")
-                return false;
-            
-            return base.Accept();
         }
 
         public override void LoadChildren()
@@ -61,6 +50,17 @@ namespace SPM2.SharePoint.Model
             }
 
             Children.AddRange(list.OrderBy(p => p.Text));
+        }
+
+        public bool IsVisible()
+        {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            if (ParentPropertyDescriptor != null && ParentPropertyDescriptor.Name == "UpgradedPersistedProperties")
+                return false;
+
+            return true;
         }
     }
 }

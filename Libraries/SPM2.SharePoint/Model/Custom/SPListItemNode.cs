@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -20,8 +21,11 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.BaseFieldControlNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPMobileBaseFieldControlNode")]
     [ExportToNode(typeof(SPFileNode))]
-	public partial class SPListItemNode
+	public partial class SPListItemNode : IRecursiveRule
 	{
-
+        public bool IsRecursiveVisible()
+        {
+            return (Parent is SPFileVersionNode);
+        }
 	}
 }

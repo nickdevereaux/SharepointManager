@@ -10,14 +10,14 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using Microsoft.SharePoint.Utilities;
+using SPM2.SharePoint.Rules;
+using System.Diagnostics;
 
 namespace SPM2.SharePoint.Model
 {
 	[Title(PropertyName="Title")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPListCollectionNode")]
-	public partial class SPDocumentLibraryNode
+    public partial class SPDocumentLibraryNode : IViewRule
 	{
 
         public override void Setup(ISPNode parent)
@@ -40,5 +40,16 @@ namespace SPM2.SharePoint.Model
             filename = filename.Substring(filename.LastIndexOf("/") + 1);
             this.IconUri = SharePointContext.GetImagePath(filename);
         }
-	}
+
+        public bool IsVisible()
+        {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            var result = Parent is SPListCollectionNode;
+
+            return result;
+        }
+
+    }
 }

@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -18,9 +19,9 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
-	public partial class SPFieldCollectionNode
+    public partial class SPFieldCollectionNode : IViewRule
 	{
-        public override bool Accept()
+        public bool IsVisible()
         {
             if (NodeProvider.ViewLevel >= 100)
                 return true;
@@ -36,5 +37,5 @@ namespace SPM2.SharePoint.Model
             }
             return true;
         }
-	}
+    }
 }

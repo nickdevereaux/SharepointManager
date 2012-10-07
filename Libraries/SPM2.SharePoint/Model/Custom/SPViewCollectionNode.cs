@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -18,7 +19,13 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
-	public partial class SPViewCollectionNode
+	public partial class SPViewCollectionNode : IViewRule
 	{
-	}
+        public bool IsVisible()
+        {
+            var result = Parent is SPViewNode;
+
+            return !result;
+        }
+    }
 }

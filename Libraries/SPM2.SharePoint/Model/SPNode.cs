@@ -19,7 +19,7 @@ using SPM2.Framework.Xml;
 namespace SPM2.SharePoint.Model
 {
     [Serializable]
-    public class SPNode : NotifyPropertyChanged, ISPNode, IDisposable
+    public abstract class  SPNode : NotifyPropertyChanged, ISPNode, IDisposable
     {
 
         private ClassDescriptor _descriptor;
@@ -207,8 +207,15 @@ namespace SPM2.SharePoint.Model
         public virtual void Setup(ISPNode parent)
         {
             if (parent == null) return;
+
             Parent = parent;
             NodeProvider = parent.NodeProvider;
+
+            if(ParentPropertyDescriptor == null)
+                ParentPropertyDescriptor = new NullPropertyDescriptor(parent);
+
+            if(String.IsNullOrEmpty(ID))
+                ID = (SPObject != null) ? GetCollectionItemID(SPObject, Index) : ParentPropertyDescriptor.GetHashCode().ToString();
 
             Text = GetTitle();
 
@@ -223,18 +230,22 @@ namespace SPM2.SharePoint.Model
             }
         }
 
-        public virtual bool Accept()
-        {
-            return true;
-        }
-
         protected virtual string GetTitle()
         {
             if (this.Parent is ISPNodeCollection)
             {
-                return Descriptor.GetTitle(SPObject, this.Text);
+                if (String.IsNullOrEmpty(Text))
+                {
+                    Text = SPObjectType.Name;
+                }
+
+                return Descriptor.GetTitle(SPObject, Text);
             }
-            return this.Text;
+
+            if (String.IsNullOrEmpty(Text))
+                return this.ParentPropertyDescriptor.DisplayName;
+
+            return Text;
         }
 
         public virtual object GetSPObject()
@@ -245,7 +256,14 @@ namespace SPM2.SharePoint.Model
             if (Parent.SPObject == null) return result;
             if (ParentPropertyDescriptor == null) return result;
 
-            result = ParentPropertyDescriptor.GetValue(Parent.SPObject);
+            try
+            {
+                result = ParentPropertyDescriptor.GetValue(Parent.SPObject);
+            }
+            catch 
+            {
+                // Sometimes its not possible to get the object at this point.
+            }
          
             return result;
         }
@@ -371,6 +389,27 @@ namespace SPM2.SharePoint.Model
                 }
             }
 
+        }
+
+        private string GetCollectionItemID(object spObject, int index)
+        {
+            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
+            if (spObject.PropertyExist("id", flags))
+            {
+                return spObject.GetPropertyValue<object>("id", flags)+string.Empty;
+            }
+
+            if (spObject.PropertyExist("uniqueid", BindingFlags.IgnoreCase))
+            {
+                return spObject.GetPropertyValue<object>("uniqueid", flags) + string.Empty;
+            }
+
+            if (spObject.PropertyExist("name", BindingFlags.IgnoreCase))
+            {
+                return spObject.GetPropertyValue<object>("name", flags) + string.Empty;
+            }
+
+            return spObject.GetType().FullName + index;
         }
     }
 }

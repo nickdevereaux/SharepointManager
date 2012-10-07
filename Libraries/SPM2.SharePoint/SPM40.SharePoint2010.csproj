@@ -112,10 +112,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Rules\IRecursiveRule.cs" />
+    <Compile Include="Rules\IViewRule.cs" />
     <Compile Include="Rules\RecursiveRuleAttribute.cs" />
     <Compile Include="Rules\RecursiveRule.cs" />
     <Compile Include="Rules\INodeIncludeRule.cs" />
-    <Compile Include="Rules\StandardIncludeRule.cs" />
+    <Compile Include="Rules\ViewRule.cs" />
     <Compile Include="SharePointContext.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceInstanceNode.cs" />
     <Compile Include="Model\Custom\AccessServerWebServiceNode.cs" />
@@ -951,6 +952,9 @@
       <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
       <Name>SPM40.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

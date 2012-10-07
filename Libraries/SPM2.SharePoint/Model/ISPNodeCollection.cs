@@ -8,7 +8,7 @@ namespace SPM2.SharePoint.Model
 {
     public interface ISPNodeCollection : ISPNode
     {
-        ISPNode DefaultNode { get; set; }
+        //ISPNode DefaultNode { get; set; }
         IEnumerator Pointer { get; set; }
         bool LoadingChildren { get; set; }
         int TotalCount { get; set; }

@@ -25,8 +25,12 @@ namespace Keutmann.SharePointManager.Components.Menu
         {
             get
             {
-                Enabled = ((SPFeatureNode)TreeNode.Model).Activated;
-                return Enabled;
+                if (TreeNode.Model is SPFeatureNode)
+                {
+                    Enabled = ((SPFeatureNode)TreeNode.Model).Activated;
+                    return Enabled;
+                }
+                return false;
             }
         }
 

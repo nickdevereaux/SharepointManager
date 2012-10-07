@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -18,7 +19,7 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPListNode", AutoBind=true)]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
-	public partial class SPListItemCollectionNode
+	public partial class SPListItemCollectionNode : IViewRule
 	{
 
         public override object GetSPObject()
@@ -38,13 +39,12 @@ namespace SPM2.SharePoint.Model
             Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
         }
 
-        public override bool Accept()
+        public bool IsVisible()
         {
             if (ParentPropertyDescriptor.Name == "Folders")
                 return false;
 
             return true;
         }
-
-	}
+    }
 }

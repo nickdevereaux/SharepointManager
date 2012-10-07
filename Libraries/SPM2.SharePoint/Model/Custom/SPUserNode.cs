@@ -18,6 +18,7 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPUserCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
+    [View(100)]
 	public partial class SPUserNode
 	{
 	}

@@ -15,6 +15,7 @@ namespace SPM2.SharePoint.Model
 	[Title("SPGroup")]
     [Icon(Small="MARR.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPGroupCollectionNode")]
+    [View(100)]
 	public partial class SPGroupNode
 	{
 	}

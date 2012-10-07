@@ -17,6 +17,93 @@ using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint
 {
+    public class NullPropertyDescriptor : PropertyDescriptor
+    {
+        private ISPNode parent = null;
+
+        public NullPropertyDescriptor(string name) : base(name, new Attribute[] {})
+        {
+        }
+
+        public NullPropertyDescriptor(ISPNode parent) : this(parent.Text)
+        {
+            parent = parent;
+        }
+
+        public override bool CanResetValue(object component)
+        {
+            return false;
+        }
+
+        public override Type ComponentType
+        {
+            get { return typeof(string); }
+        }
+
+        public override object GetValue(object component)
+        {
+            return null;
+        }
+
+        public override bool IsReadOnly
+        {
+            get { return true; }
+        }
+
+        public override Type PropertyType
+        {
+            get { return typeof(string); }
+        }
+
+        public override void ResetValue(object component)
+        {
+        }
+
+        public override void SetValue(object component, object value)
+        {
+        }
+
+        public override bool ShouldSerializeValue(object component)
+        {
+            return false;
+        }
+    }
+
+    public class NullSPNode : SPNode
+    {
+        public NullSPNode()
+        {
+
+        }
+
+        public NullSPNode(ISPNodeProvider provider)
+        {
+            this.NodeProvider = provider;
+        }
+    }
+
+    public static class ISPNodeExtensions
+    {
+        public static void Initialize(this ISPNode node, PropertyDescriptor descriptor, ISPNode parent, object spObject, int index)
+        {
+            if (descriptor == null)
+                throw new ArgumentNullException("descriptor");
+
+            node.Parent = parent;
+            node.NodeProvider = parent.NodeProvider;
+            //node.ID = (spObject != null) ? GetCollectionItemID(spObject, index) : descriptor.GetHashCode().ToString();
+
+            node.ParentPropertyDescriptor = descriptor;
+            node.Index = index;
+            node.SPObject = spObject;
+            
+            //node.Setup(parent);
+        }
+
+
+    }
+    
+
     [Export()]
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class SPNodeProvider : ISPNodeProvider
@@ -34,14 +121,13 @@ namespace SPM2.SharePoint
             ViewLevel = 100;
             Farm = farm;
 
-          
             _ruleEngine = new FirstAcceptRuleEngine<ISPNode>(rules);
         }
 
         public ISPNode LoadFarmNode()
         {
-            var node = Create(null, "Farm", typeof(SPFarm), typeof(SPFarmNode), null, 0);
-            node.SPObject = Farm;
+            var node = new SPFarmNode();
+            node.Initialize(new NullPropertyDescriptor("Farm"), new NullSPNode(this), Farm, 0);
 
             return node;
         }
@@ -67,31 +153,15 @@ namespace SPM2.SharePoint
             while (count < batchCount && parentNode.LoadingChildren)
             {
                 var current = parentNode.Pointer.Current;
-                Type instanceType = current.GetType();
 
-                ISPNode node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(instanceType.FullName);
-                if (node == null)
-                {
-                    if (parentNode.DefaultNode != null)
-                    {
-                        node = parentNode.DefaultNode;
-                    }
-                }
-
+                var node = CreateCollectionNode(parentNode, current.GetType());
                 if (node != null)
                 {
-                    // Always create a new node, because the object has to be unique for each item in the treeview.
-                    var instanceNode = (ISPNode) Activator.CreateInstance(node.GetType());
-                    instanceNode.SPObject = parentNode.Pointer.Current;
-                    instanceNode.ID = GetCollectionItemID(instanceNode.SPObject, parentNode.TotalCount);
-
-                    // Save the index for finding the node again with having to get the SPObject
-                    instanceNode.Index = parentNode.TotalCount;
-
-                    instanceNode.Setup(parentNode);
-                    if (RunIncludeRules(instanceNode))
+                    node.Initialize(new NullPropertyDescriptor(parentNode.Text), parentNode, parentNode.Pointer.Current, parentNode.TotalCount);
+                    if (RunIncludeRules(node))
                     {
-                        list.Add(instanceNode);
+                        node.Setup(parentNode);
+                        list.Add(node);
                     }
                 }
                 
@@ -110,34 +180,12 @@ namespace SPM2.SharePoint
             return list;
         }
 
-        private string GetCollectionItemID(object spObject, int index)
-        {
-            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
-            if (spObject.PropertyExist("id", flags))
-            {
-                return spObject.GetPropertyValue<object>("id", flags).ToString();
-            }
-
-            if (spObject.PropertyExist("uniqueid", BindingFlags.IgnoreCase))
-            {
-                return spObject.GetPropertyValue<object>("uniqueid", flags).ToString();
-            }
-
-            if (spObject.PropertyExist("name", BindingFlags.IgnoreCase))
-            {
-                return spObject.GetPropertyValue<object>("name", flags).ToString();
-            }
-
-            return spObject.GetType().FullName + index;
-        }
-
-
-        public  IEnumerable<ISPNode> LoadChildren(ISPNode node)
+        public IEnumerable<ISPNode> LoadChildren(ISPNode node)
         {
             return LoadUnorderedChildren(node).OrderBy(p => p.Text);
         }
 
-        public  IEnumerable<ISPNode> LoadUnorderedChildren(ISPNode sourceNode)
+        public IEnumerable<ISPNode> LoadUnorderedChildren(ISPNode sourceNode)
         {
             var list = new List<ISPNode>();
 
@@ -148,37 +196,79 @@ namespace SPM2.SharePoint
             var propertyDescriptors = TypeDescriptor.GetProperties(sourceNode.SPObjectType);
             try
             {
-                // ReSharper disable LoopCanBeConvertedToQuery
                 foreach (PropertyDescriptor descriptor in propertyDescriptors)
                 {
-                    // Ensure that the property are supported by a Node
-                    //if (!sourceNode.NodeTypes.ContainsKey(descriptor.PropertyType))
-                    //    continue;
+                    node = CreateNodeOrDefault(descriptor.PropertyType.FullName);
+                    if (node == null) 
+                        continue;
 
-                    node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(descriptor.PropertyType.FullName);
-                    if (node == null) continue;
+                    node.Initialize(descriptor, sourceNode, null, list.Count);
 
+                    if (node.SPObject == null)
+                        continue;
 
-                    //Ensure that the child node instance is unique in the TreeView
-                    node = Create(descriptor, descriptor.DisplayName, descriptor.PropertyType, node.GetType(), sourceNode, list.Count);
+                    node.Setup(sourceNode);
 
                     // Exclude the node if it do not match the correct view
                     if (!RunIncludeRules(node)) continue;
 
-                    // If the node do not accept the situation, then continue.
-                    if (!node.Accept()) continue;
-                    
                     list.Add(node);
-                    
+
                 }
-                // ReSharper restore LoopCanBeConvertedToQuery
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message+ " : "+node.GetType().FullName+ " : "+ex.StackTrace);
+                MessageBox.Show(ex.Message + " : " + node.GetType().FullName + " : " + ex.StackTrace);
             }
             return list;
+        }
+
+
+        private ISPNode CreateCollectionNode(ISPNodeCollection parentNode, Type spObejctType)
+        {
+            ISPNode node = CreateNodeOrDefault(spObejctType.FullName);
+            if (node == null)
+            {
+                node = FindDefaultNode(parentNode, spObejctType);
+            }
+            return node;
+        }
+
+        private ISPNode FindDefaultNode(ISPNodeCollection parentNode, Type spObejctType)
+        {
+            ISPNode result = null;
+
+            Type spType = null;
+
+            var attr = spObejctType.GetAttribute<ClientCallableTypeAttribute>(true);
+            if (attr != null)
+            {
+                spType = attr.CollectionChildItemType;
+            }
+
+            if (spType == null)
+            {
+                Type[] argTypes = spObejctType.GetBaseGenericArguments();
+                if (argTypes != null && argTypes.Length == 1)
+                {
+                    spType = argTypes[0];
+                }
+            }
+
+            if (spType != null)
+            {
+                result = CreateNodeOrDefault(spType.FullName);
+            }
+
+            if(result == null && spObejctType != typeof(object))
+            {
+                result = CreateCollectionNode(parentNode, spObejctType.BaseType);
+            }
+
+
+
+            return result;
         }
 
         private bool RunIncludeRules(ISPNode node)
@@ -197,68 +287,8 @@ namespace SPM2.SharePoint
             {
                 SPNode node = lazyItem.Value;
                 node.NodeProvider = parentNode.NodeProvider;
-
-                //if (node.Descriptor.AdapterItemType != null)
-                //{
-                //    types.AddOrReplace(node.Descriptor.AdapterItemType, node);
-                //}
             }
             return types;
-        }
-
-
-        public ISPNode FindDefaultNode(ISPNode node)
-        {
-            ISPNode result = null;
-            if (node.SPObjectType != null)
-            {
-                Type spType = null;
-
-                var attr = node.SPObjectType.GetAttribute<ClientCallableTypeAttribute>(true);
-                if (attr != null)
-                {
-                    spType = attr.CollectionChildItemType;
-                }
-
-                if (spType == null)
-                {
-                    Type[] argTypes = node.SPObjectType.GetBaseGenericArguments();
-                    if (argTypes != null && argTypes.Length == 1)
-                    {
-                        spType = argTypes[0];
-                    }
-                }
-
-                if (spType != null)
-                {
-                    //result = node.NodeTypes[spType];
-                    var childNode = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(spType.FullName);
-                    if (childNode != null)
-                        result = childNode;
-                }
-            }
-
-            return result;
-        }
-
-        private ISPNode Create(PropertyDescriptor descriptor, string text, Type spObjectType, Type nodeType, ISPNode parent, int index)
-        {
-            var node = (ISPNode) Activator.CreateInstance(nodeType);
-            node.ParentPropertyDescriptor = descriptor;
-            node.NodeProvider = this;
-            node.Text = text;
-            node.SPObjectType = spObjectType;
-            if (descriptor != null)
-            {
-                node.ID = descriptor.GetHashCode().ToString();
-            }
-            else
-            {
-                node.ID = index.ToString();
-            }
-            node.Index = index;
-            node.Setup(parent);
-            return node;
         }
 
         public string Serialize(ISPNode node)
@@ -273,7 +303,13 @@ namespace SPM2.SharePoint
             return Serializer.XmlToObject<SPFarmNode>(xml);
         }
 
-        private Dictionary<string, bool> childrenExistsCache = new Dictionary<string, bool>();
+        private ISPNode CreateNodeOrDefault(string spObjectTypeFullname)
+        {
+            ISPNode node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(spObjectTypeFullname);
+            if (node == null) return null;
+            return (ISPNode)Activator.CreateInstance(node.GetType());
+        }
+
 
     }
 }

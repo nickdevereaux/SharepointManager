@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -17,9 +18,9 @@ namespace SPM2.SharePoint.Model
     [View(50)]
 	[ExportToNode("SPM2.SharePoint.Model.SPGroupNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-	public partial class SPUserCollectionNode
+	public partial class SPUserCollectionNode : IViewRule
 	{
-        public override bool Accept()
+        public bool IsVisible()
         {
             if (NodeProvider.ViewLevel >= 100)
                 return true;
@@ -29,5 +30,5 @@ namespace SPM2.SharePoint.Model
 
             return false;
         }
-	}
+    }
 }

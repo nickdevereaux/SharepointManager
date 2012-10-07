@@ -10,11 +10,12 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using Microsoft.SharePoint.Utilities;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
 	[ExportToNode("SPM2.SharePoint.Model.SPListCollectionNode")]
-	public partial class SPListNode
+	public partial class SPListNode : IViewRule
 	{
 
         public override void Setup(ISPNode parent)
@@ -36,9 +37,15 @@ namespace SPM2.SharePoint.Model
             this.IconUri = SharePointContext.GetImagePath(filename);
         }
 
-        public override void LoadChildren()
+
+        public bool IsVisible()
         {
-            base.LoadChildren();
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            var result = Parent is SPListCollectionNode;
+
+            return result;
         }
 
 

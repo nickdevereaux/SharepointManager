@@ -11,6 +11,7 @@ using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebPartPages;
+using SPM2.SharePoint.Rules;
 
 
 namespace SPM2.SharePoint.Model
@@ -19,8 +20,8 @@ namespace SPM2.SharePoint.Model
 	[Icon(Small="BULLET.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFileCollectionNode")]
-	//[ExportToNode("SPM2.SharePoint.Model.SPContextNode")]
-	public partial class SPFileNode
+	[View(50)]
+	public partial class SPFileNode : IRecursiveRule
 	{
 
         public override void Setup(ISPNode parent)
@@ -60,5 +61,10 @@ namespace SPM2.SharePoint.Model
                 }
             }
         }
-	}
+
+        public bool IsRecursiveVisible()
+        {
+            return (Parent is SPFileVersionNode);
+        }
+    }
 }

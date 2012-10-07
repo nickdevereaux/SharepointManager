@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Xml.Serialization;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
@@ -30,7 +31,6 @@ namespace SPM2.SharePoint.Model
         Type SPObjectType { get; set; }
 
         void Setup(ISPNode parent);
-        bool Accept();
 
         object GetSPObject();
         Type GetSPObjectType();

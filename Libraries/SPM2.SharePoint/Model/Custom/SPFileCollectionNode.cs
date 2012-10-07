@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -16,11 +17,30 @@ namespace SPM2.SharePoint.Model
     [Icon(Small = "ITS16.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPFolderNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebNode")]
-	public partial class SPFileCollectionNode
+    [View(50)]
+	public partial class SPFileCollectionNode : IViewRule
 	{
+
+
+        public override void Setup(ISPNode parent)
+        {
+            base.Setup(parent);
+
+            if(SPObject != null)
+                Text += String.Format(" ({0})", FileCollection.Count);
+        }
+
         public override void LoadChildren()
         {
             Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
         }
-	}
+
+        public bool IsVisible()
+        {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            return !(Parent.SPObject is SPWeb);
+        }
+    }
 }

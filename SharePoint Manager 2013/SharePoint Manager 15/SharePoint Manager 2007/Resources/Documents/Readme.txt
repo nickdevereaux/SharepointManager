@@ -1,4 +1,4 @@
-SharePoint Manager 2007
+SharePoint Manager 2013
 
 Created by
 Carsten Keutmann
@@ -29,9 +29,13 @@ License:
 ------------------
 Please read the License.txt file.
 
+Ver: Ver: 1.0.12.1007
+------------------
+- Beta 2 release.
+
 Ver: Ver: 0.9.12.0301
 ------------------
-- Releast for SharePoint 15
+- Releast for SharePoint 15 (Beta 1)
 
 Ver: 0.9.9.0405
 ------------------

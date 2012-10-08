@@ -33,15 +33,12 @@ namespace SPM2.SharePoint.Model
             base.Setup(parent);
 
             this.Text = this.Entry.Key.ToString();
-
-            // Remove the "Expand" icon from the Property, because the will never be children to this object.
-            //this.IsExpanded = true;
         }
 
-        public override void LoadChildren()
+
+        public override bool HasChildren()
         {
-            // Do nothing!
+            return false;
         }
-
 	}
 }

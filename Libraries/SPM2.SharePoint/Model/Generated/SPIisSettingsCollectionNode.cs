@@ -28,17 +28,5 @@ namespace SPM2.SharePoint.Model
                 this.SPObject = value;
             }
         }
-
-        public override Dictionary<Type, ISPNode> NodeTypes
-        {
-            get
-            {
-                return base.NodeTypes;
-            }
-            set
-            {
-                base.NodeTypes = value;
-            }
-        }
 	}
 }

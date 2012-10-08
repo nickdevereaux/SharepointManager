@@ -103,8 +103,11 @@
     <Compile Include="Model\Generated\SPContentTypeUsageNode.cs" />
     <Compile Include="Model\IActionItem.cs" />
     <Compile Include="Model\ISPNodeCollection.cs" />
+    <Compile Include="Model\ISPNodeExtensions.cs" />
     <Compile Include="Model\MoreNode.cs" />
     <Compile Include="Model\NotifyPropertyChanged.cs" />
+    <Compile Include="Model\NullPropertyDescriptor.cs" />
+    <Compile Include="Model\NullSPNode.cs" />
     <Compile Include="Model\SPExplorerSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

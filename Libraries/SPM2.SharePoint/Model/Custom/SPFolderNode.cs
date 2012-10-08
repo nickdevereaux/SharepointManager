@@ -5,6 +5,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
@@ -23,11 +24,29 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthRulesListNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPHealthReportsListNode")]
     [ExportToNode("SPM2.SharePoint.Model.SPContentTypeNode")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPFileNode")]
-    //[ExportToNode("SPM2.SharePoint.Model.SPListItemNode")]
     [RecursiveRule(IsRecursiveVisible = true)]
     public partial class SPFolderNode : IRecursiveRule, IViewRule
 	{
+        public override void LoadChildren()
+        {
+            var nodes = new List<ISPNode>(NodeProvider.LoadChildren(this));
+            var folders = nodes.OfType<SPFolderCollectionNode>().FirstOrDefault();
+            if (folders != null)
+            {
+                Children.AddRange(NodeProvider.LoadCollectionChildren(folders, int.MaxValue));
+                nodes.Remove(folders);
+            }
+
+            var files = nodes.OfType<SPFileCollectionNode>().FirstOrDefault();
+            if (files != null)
+            {
+                Children.AddRange(NodeProvider.LoadCollectionChildren(files, int.MaxValue));
+                nodes.Remove(files);
+            }
+
+            Children.AddRange(nodes);
+        }
+
         public bool IsRecursiveVisible()
         {
             if (this.Parent.SPObjectType.IsOfType(typeof(SPFolderCollection)))

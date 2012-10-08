@@ -7,6 +7,7 @@ Architect & Design
 Carsten Keutmann (@Keutmann)
 
 Re-release for SharePoint 2010 and SharePoint 15
+Carsten Keutmann (@Keutmann)
 Anders Dissing (@andersdissing)
 
 Localization

@@ -483,6 +483,8 @@ namespace Keutmann.SharePointManager.Forms
             SPMLocalization.SelectedLanguage = localization;
             UpdateLanguageButtons();
             InitializeInterfaceStrings();
+            var node = (SPTreeNode)Explorer.FarmNode;
+            node.Setup();
         }
 
         private void UpdateLanguageButtons()

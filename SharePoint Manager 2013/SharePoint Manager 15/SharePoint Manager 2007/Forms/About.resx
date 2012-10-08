@@ -138,8 +138,8 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>SharePoint Manager 2013 Copyright (c) 2012 All rights reserved. 
-Ver: 1.0.12.0917
+    <value>SharePoint Manager 2013 Copyright (c) 2012 All rights reserved.
+Ver: 1.0.12.1008
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the author be held liable for any damages arising from the use of this software.
 Please email to the author if you are unclear about where to get a copy of GPL.
@@ -148,6 +148,7 @@ Architect &amp; Design
 Carsten Keutmann (@keutmann)
 
 Re-release for SharePoint 2010 and SharePoint 2013
+Carsten Keutmann (@keutmann)
 Anders Dissing (@andersdissing)
 
 Localization

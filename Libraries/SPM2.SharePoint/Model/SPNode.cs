@@ -39,13 +39,42 @@ namespace SPM2.SharePoint.Model
             }
             set 
             {
-                if (_text != value)
+                var localText = NodeProvider.GetLocalizedText(value+"_Text");
+                if (localText == null)
+                    localText = value;
+
+                if (_text != localText)
                 {
-                    _text = value;
+                    _text = localText;
                     OnPropertyChanged("Text");
                 }
             }
         }
+
+        [XmlIgnore]
+        public virtual string ToolTipText
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_toolTipText))
+                {
+                    _toolTipText = SPTypeName;
+                }
+                return _toolTipText;
+            }
+            set {
+                var localText = NodeProvider.GetLocalizedText(value + "_ToolTip");
+                if (localText == null)
+                    localText = value;
+
+                if (_toolTipText != localText)
+                {
+                    _toolTipText = localText;
+                    OnPropertyChanged("ToolTip");
+                }                
+            }
+        }
+
 
         private string _spTypeName = null;
         public virtual string SPTypeName
@@ -64,25 +93,7 @@ namespace SPM2.SharePoint.Model
         public virtual string ID { get; set; }
         public virtual int Index { get; set; }
 
-        private Dictionary<Type, ISPNode> _nodeTypes = null;
-
-        [XmlIgnore]
-        public virtual Dictionary<Type, ISPNode> NodeTypes 
-        {
-            get
-            {
-                if (_nodeTypes == null)
-                {
-                    _nodeTypes = NodeProvider.GetChildrenTypes(this);
-                }
-                return _nodeTypes;
-            }
-            set
-            {
-                _nodeTypes = value;
-            }
-        }
-
+ 
         [XmlIgnore]
         public virtual ISPNodeProvider NodeProvider { get; set; }
 
@@ -92,19 +103,6 @@ namespace SPM2.SharePoint.Model
         [XmlIgnore]
         public virtual ISPNode Parent { get; set; }
 
-        [XmlIgnore]
-        public virtual string ToolTipText
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(_toolTipText))
-                {
-                    _toolTipText = SPTypeName;
-                }
-                return _toolTipText;
-            }
-            set { _toolTipText = value; }
-        }
 
         [XmlIgnore]
         public virtual string IconUri
@@ -217,7 +215,9 @@ namespace SPM2.SharePoint.Model
             if(String.IsNullOrEmpty(ID))
                 ID = (SPObject != null) ? GetCollectionItemID(SPObject, Index) : ParentPropertyDescriptor.GetHashCode().ToString();
 
-            Text = GetTitle();
+            var tempText = GetTitle();
+            Text = tempText;
+            ToolTipText = tempText;
 
             // Make sure to update all children if exist!
             foreach (var item in Children)
@@ -232,20 +232,24 @@ namespace SPM2.SharePoint.Model
 
         protected virtual string GetTitle()
         {
+            string rawText = null;
+
             if (this.Parent is ISPNodeCollection)
             {
                 if (String.IsNullOrEmpty(Text))
                 {
-                    Text = SPObjectType.Name;
+                    rawText = SPObjectType.Name;
                 }
 
-                return Descriptor.GetTitle(SPObject, Text);
+                rawText = Descriptor.GetTitle(SPObject, rawText);
             }
 
-            if (String.IsNullOrEmpty(Text))
-                return this.ParentPropertyDescriptor.DisplayName;
+            if (String.IsNullOrEmpty(rawText))
+                rawText = this.ParentPropertyDescriptor.DisplayName;
 
-            return Text;
+            //SPMLocalization.GetString("SiteFeatures_Text");
+
+            return rawText;
         }
 
         public virtual object GetSPObject()
@@ -350,6 +354,21 @@ namespace SPM2.SharePoint.Model
         {
             Children.Clear();
         }
+
+        public virtual bool HasChildren()
+        {
+
+            //var propertyDescriptors = TypeDescriptor.GetProperties(node.SPObjectType);
+            //foreach (PropertyDescriptor descriptor in propertyDescriptors)
+            //{
+            //    var export = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(descriptor.PropertyType.FullName);
+            //    if (export != null)
+            //        return true;
+            //}
+
+            return true;
+        }
+
 
         public virtual bool IsDefaultSelected()
         {

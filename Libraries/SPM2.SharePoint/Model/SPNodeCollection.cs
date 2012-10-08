@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Serialization;
+using Microsoft.SharePoint;
 using Microsoft.SharePoint.Client;
 using SPM2.Framework;
 
@@ -12,24 +13,6 @@ namespace SPM2.SharePoint.Model
 
     public class SPNodeCollection : SPNode, ISPNodeCollection
     {
-        //private ISPNode _defaultNode;
-        ///// <summary>
-        ///// The default node used if the node type is unknown.
-        ///// </summary>
-        //[XmlIgnore]
-        //public ISPNode DefaultNode
-        //{
-        //    get
-        //    {
-        //        if (_defaultNode == null)
-        //        {
-        //            _defaultNode = NodeProvider.FindDefaultNode(this);
-        //        }
-        //        return _defaultNode;
-        //    }
-        //    set { _defaultNode = value; }
-        //}
-
         [XmlIgnore]
         public IEnumerator Pointer { get; set; }
 
@@ -56,6 +39,18 @@ namespace SPM2.SharePoint.Model
             TotalCount = 0;
             LoadingChildren = false;
             Children.Clear();
+        }
+
+        public override bool HasChildren()
+        {
+            if (SPObject == null) return true;
+
+            var collection = SPObject as SPBaseCollection;
+            if (collection != null)
+            {
+                return collection.Count > 0;
+            }
+            return true;
         }
     }
 }

@@ -9,14 +9,21 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
 	[Title("SPGroup")]
     [Icon(Small="MARR.GIF")]
 	[ExportToNode("SPM2.SharePoint.Model.SPGroupCollectionNode")]
-    [View(100)]
-	public partial class SPGroupNode
+	public partial class SPGroupNode : IViewRule
 	{
-	}
+        public bool IsVisible()
+        {
+            if (NodeProvider.ViewLevel >= 100)
+                return true;
+
+            return Parent is SPGroupCollectionNode;
+        }
+    }
 }

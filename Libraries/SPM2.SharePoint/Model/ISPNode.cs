@@ -21,7 +21,7 @@ namespace SPM2.SharePoint.Model
         ClassDescriptor Descriptor { get; set; }
         PropertyDescriptor ParentPropertyDescriptor { get; set; }
         SerializableList<ISPNode> Children { get; set; }
-        Dictionary<Type, ISPNode> NodeTypes { get; set; }
+        //Dictionary<Type, ISPNode> NodeTypes { get; set; }
         ISPNodeProvider NodeProvider { get; set; }
         
         ISPNode Parent { get; set; }
@@ -37,6 +37,7 @@ namespace SPM2.SharePoint.Model
 
         void LoadChildren();
         void ClearChildren();
+        bool HasChildren();
 
 
     }

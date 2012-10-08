@@ -20,6 +20,8 @@ namespace SPM2.SharePoint.Model
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
+
+            Text = "IisSettings";
         }
 
         public override void LoadChildren()

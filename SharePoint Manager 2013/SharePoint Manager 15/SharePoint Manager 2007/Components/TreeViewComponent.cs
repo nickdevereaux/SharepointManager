@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Resources;
 using System.Text;
 using System.Windows.Forms;
+using Keutmann.SharePointManager.Library;
 using Keutmann.SharePointManager.ViewModel.TreeView;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
@@ -106,6 +107,7 @@ namespace Keutmann.SharePointManager.Components
 
             SPProvider = new SPNodeProvider(SPFarm.Local, rules.Values);
             SPProvider.ViewLevel = ViewLevel;
+            SPProvider.GetLocalizedTextFunction = p => SPMLocalization.GetString(p);
             Trace.WriteLine("ViewLevel: " + SPProvider.ViewLevel);
             var treeViewProvider = new TreeViewNodeProvider(SPProvider);
             FarmNode = treeViewProvider.LoadFarmNode();

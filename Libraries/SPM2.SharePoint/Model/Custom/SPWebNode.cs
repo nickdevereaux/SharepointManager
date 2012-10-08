@@ -9,6 +9,7 @@ using System;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
+using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint.Model
 {
@@ -17,7 +18,7 @@ namespace SPM2.SharePoint.Model
     [View(1)]
 	[ExportToNode("SPM2.SharePoint.Model.SPWebCollectionNode")]
 	[ExportToNode("SPM2.SharePoint.Model.SPSiteNode")]
-	public partial class SPWebNode
+	public partial class SPWebNode : IRecursiveRule, IViewRule
 	{
 
         public override void Setup(ISPNode parent)
@@ -34,5 +35,16 @@ namespace SPM2.SharePoint.Model
         {
             return true;
         }
-	}
+
+        public bool IsRecursiveVisible()
+        {
+            return true;
+        }
+
+        public bool IsVisible()
+        {
+            var result = Parent is SPWebCollectionNode || Parent is SPSiteNode;
+            return result;
+        }
+    }
 }

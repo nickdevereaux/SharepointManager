@@ -17,102 +17,16 @@ using SPM2.SharePoint.Rules;
 
 namespace SPM2.SharePoint
 {
-    public class NullPropertyDescriptor : PropertyDescriptor
-    {
-        private ISPNode parent = null;
-
-        public NullPropertyDescriptor(string name) : base(name, new Attribute[] {})
-        {
-        }
-
-        public NullPropertyDescriptor(ISPNode parent) : this(parent.Text)
-        {
-            parent = parent;
-        }
-
-        public override bool CanResetValue(object component)
-        {
-            return false;
-        }
-
-        public override Type ComponentType
-        {
-            get { return typeof(string); }
-        }
-
-        public override object GetValue(object component)
-        {
-            return null;
-        }
-
-        public override bool IsReadOnly
-        {
-            get { return true; }
-        }
-
-        public override Type PropertyType
-        {
-            get { return typeof(string); }
-        }
-
-        public override void ResetValue(object component)
-        {
-        }
-
-        public override void SetValue(object component, object value)
-        {
-        }
-
-        public override bool ShouldSerializeValue(object component)
-        {
-            return false;
-        }
-    }
-
-    public class NullSPNode : SPNode
-    {
-        public NullSPNode()
-        {
-
-        }
-
-        public NullSPNode(ISPNodeProvider provider)
-        {
-            this.NodeProvider = provider;
-        }
-    }
-
-    public static class ISPNodeExtensions
-    {
-        public static void Initialize(this ISPNode node, PropertyDescriptor descriptor, ISPNode parent, object spObject, int index)
-        {
-            if (descriptor == null)
-                throw new ArgumentNullException("descriptor");
-
-            node.Parent = parent;
-            node.NodeProvider = parent.NodeProvider;
-            //node.ID = (spObject != null) ? GetCollectionItemID(spObject, index) : descriptor.GetHashCode().ToString();
-
-            node.ParentPropertyDescriptor = descriptor;
-            node.Index = index;
-            node.SPObject = spObject;
-            
-            //node.Setup(parent);
-        }
-
-
-    }
-    
-
     [Export()]
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class SPNodeProvider : ISPNodeProvider
     {
         public const string AddInId = "SPM2.SharePoint.SPNodeProvider";
-
         public int ViewLevel { get; set; }
-
         public SPFarm Farm { get; set; }
+
+        public Func<string, string> GetLocalizedTextFunction { get; set; }
+
 
         private FirstAcceptRuleEngine<ISPNode> _ruleEngine;
 
@@ -124,12 +38,25 @@ namespace SPM2.SharePoint
             _ruleEngine = new FirstAcceptRuleEngine<ISPNode>(rules);
         }
 
+
+
+
         public ISPNode LoadFarmNode()
         {
             var node = new SPFarmNode();
             node.Initialize(new NullPropertyDescriptor("Farm"), new NullSPNode(this), Farm, 0);
 
             return node;
+        }
+
+
+        public string GetLocalizedText(string text)
+        {
+            if (GetLocalizedTextFunction != null)
+            {
+                return GetLocalizedTextFunction(text);
+            }
+            return text;
         }
 
         public IEnumerable<ISPNode> LoadCollectionChildren(ISPNodeCollection parentNode, int batchCount)
@@ -279,17 +206,17 @@ namespace SPM2.SharePoint
 
 
 
-        public Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)
-        {
-            IEnumerable<Lazy<SPNode>> importedNodes = CompositionProvider.GetExports<SPNode>(parentNode.Descriptor.ClassType);
-            var types = new Dictionary<Type, ISPNode>();
-            foreach (var lazyItem in importedNodes)
-            {
-                SPNode node = lazyItem.Value;
-                node.NodeProvider = parentNode.NodeProvider;
-            }
-            return types;
-        }
+        //public Dictionary<Type, ISPNode> GetChildrenTypes(ISPNode parentNode)
+        //{
+        //    IEnumerable<Lazy<SPNode>> importedNodes = CompositionProvider.GetExports<SPNode>(parentNode.Descriptor.ClassType);
+        //    var types = new Dictionary<Type, ISPNode>();
+        //    foreach (var lazyItem in importedNodes)
+        //    {
+        //        SPNode node = lazyItem.Value;
+        //        node.NodeProvider = parentNode.NodeProvider;
+        //    }
+        //    return types;
+        //}
 
         public string Serialize(ISPNode node)
         {
@@ -309,6 +236,7 @@ namespace SPM2.SharePoint
             if (node == null) return null;
             return (ISPNode)Activator.CreateInstance(node.GetType());
         }
+
 
 
     }

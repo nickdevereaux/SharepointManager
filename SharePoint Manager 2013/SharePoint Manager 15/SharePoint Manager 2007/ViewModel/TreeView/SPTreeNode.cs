@@ -54,7 +54,10 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             this.DataBindings.Add("BrowserUrl", Model, "Url");
             this.Name = Model.SPObjectType.FullName;
 
-            this.Nodes.Add(new ExplorerNodeBase("Dummy"));
+            if (Model.HasChildren())
+            {
+                this.Nodes.Add(new ExplorerNodeBase("Dummy"));
+            }
         }
 
 

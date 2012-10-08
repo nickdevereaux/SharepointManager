@@ -69,7 +69,7 @@ namespace Keutmann.SharePointManager.Library
             {
                 if (_selectedLanguage == null)
                 {
-                    _selectedLanguage = SPMRegistry.GetValue(C_REGKEY_CULTURE, C_REGKEY_CULTUREID) as string;
+                    //_selectedLanguage = SPMRegistry.GetValue(C_REGKEY_CULTURE, C_REGKEY_CULTUREID) as string;
                     if (_selectedLanguage == null)
                     {
                         _selectedLanguage = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
@@ -82,7 +82,7 @@ namespace Keutmann.SharePointManager.Library
             {
                 _selectedLanguage = value;
                 _selectedCulture = CultureInfo.CreateSpecificCulture(_selectedLanguage);
-                SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, _selectedLanguage);
+                //SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, _selectedLanguage);
             }
         }
 
@@ -103,7 +103,10 @@ namespace Keutmann.SharePointManager.Library
 
         public static string GetString(string word)
         {
-            return FormResources.GetString(word, SelectedCulture);
+            var result = FormResources.GetString(word, SelectedCulture);
+            //if(result != null)
+                return result;
+            //return word;
         }
 
 

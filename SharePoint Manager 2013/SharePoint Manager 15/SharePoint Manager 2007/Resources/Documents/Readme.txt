@@ -4,12 +4,12 @@ Created by
 Carsten Keutmann
 Copyright 2012
 
-The SharePoint Manager 2007 (SPM2007)  
+The SharePoint Manager 2013 (SPM2013)  
 This version enables you to explorer and edit the data in the object model.
 The application is not meant to be a windows form application version of the SharePoint 3.0 Central Administration, but to provide extra functionality that if only found in stsadm.exe or nowhere else. 
 
 Note:
-The SPM15 application only uses the SharePoint Foundation 5.0 object model. 
+The SPM2013 application only uses the SharePoint Foundation 5.0 object model. 
 The application do not access the Sql Server directly or using other kind of hacks.
 
 Warning!
@@ -17,10 +17,10 @@ This program enables you to update the data in SharePoint object model directly.
 Therefore be very careful when changing the data.
 
 How to install:
-1.	Download the ZIP file and unpack on a SharePoint 15 Server.*
-2.	Run the SharePoint Manager 15.exe program.
+1.	Download the ZIP file and unpack on a SharePoint 2013 Server.*
+2.	Run the SharePoint Manager 2013.exe program.
 
-(*) This program has to run on a server where SharePoint Foundation 5.0 or Microsoft SharePoint Server 15 is installed.
+(*) This program has to run on a server where SharePoint Foundation 5.0 or Microsoft SharePoint Server 2013 is installed.
 
 NB! Be sure that you are the server and SharePoint administrator.
 
@@ -29,9 +29,11 @@ License:
 ------------------
 Please read the License.txt file.
 
-Ver: Ver: 1.0.12.1007
+Ver: Ver: 1.0.12.1013
 ------------------
 - Beta 2 release.
+- SharePoint Node model totally rewritten.
+- View mode set to default Medium.
 
 Ver: Ver: 0.9.12.0301
 ------------------

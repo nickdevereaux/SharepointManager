@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Keutmann.SharePointManager</RootNamespace>
-    <AssemblyName>SharePoint Manager 15</AssemblyName>
+    <AssemblyName>SharePoint Manager 2013</AssemblyName>
     <StartupObject>Keutmann.SharePointManager.Program</StartupObject>
     <ApplicationIcon>CENADMIN.ICO</ApplicationIcon>
     <SignAssembly>false</SignAssembly>

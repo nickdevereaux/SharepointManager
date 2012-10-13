@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint Manager 15", "SharePoint Manager 2007\SharePoint Manager 15.csproj", "{414997CA-AC7E-4D66-9939-25FD990DA4F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint Manager", "SharePoint Manager 2007\SharePoint Manager.csproj", "{414997CA-AC7E-4D66-9939-25FD990DA4F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2010", "..\..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj", "{CE144460-64CE-4FB5-A25E-25B7BB028D16}"
 EndProject
@@ -13,19 +13,19 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccLocalPath0 = .
-		SccLocalPath1 = SharePoint\u0020Manager\u00202007
-		SccLocalPath2 = ..\\..\\Libraries\\SPM2.SharePoint
-		SccLocalPath3 = ..\\..\\Libraries\\SPM2.Framework
-		SccLocalPath4 = ..\\..\\Libraries\\SPM2.SharePoint2013
+		SccLocalPath1 = ..\\..\\Libraries\\SPM2.SharePoint
+		SccLocalPath2 = ..\\..\\Libraries\\SPM2.Framework
+		SccLocalPath3 = ..\\..\\Libraries\\SPM2.SharePoint2013
+		SccLocalPath4 = SharePoint\u0020Manager\u00202007
 		SccNumberOfProjects = 5
-		SccProjectName1 = SharePoint\u0020Manager\u00202007
-		SccProjectName2 = ../../Libraries/SPM2.SharePoint
-		SccProjectName3 = ../../Libraries/SPM2.Framework
-		SccProjectName4 = ../../Libraries/SPM2.SharePoint2013
-		SccProjectUniqueName1 = SharePoint\u0020Manager\u00202007\\SharePoint\u0020Manager\u002015.csproj
-		SccProjectUniqueName2 = ..\\..\\Libraries\\SPM2.SharePoint\\SPM40.SharePoint2010.csproj
-		SccProjectUniqueName3 = ..\\..\\Libraries\\SPM2.Framework\\SPM40.Framework.csproj
-		SccProjectUniqueName4 = ..\\..\\Libraries\\SPM2.SharePoint2013\\SPM40.SharePoint2013.csproj
+		SccProjectName1 = ../../Libraries/SPM2.SharePoint
+		SccProjectName2 = ../../Libraries/SPM2.Framework
+		SccProjectName3 = ../../Libraries/SPM2.SharePoint2013
+		SccProjectName4 = SharePoint\u0020Manager\u00202007
+		SccProjectUniqueName1 = ..\\..\\Libraries\\SPM2.SharePoint\\SPM40.SharePoint2010.csproj
+		SccProjectUniqueName2 = ..\\..\\Libraries\\SPM2.Framework\\SPM40.Framework.csproj
+		SccProjectUniqueName3 = ..\\..\\Libraries\\SPM2.SharePoint2013\\SPM40.SharePoint2013.csproj
+		SccProjectUniqueName4 = SharePoint\u0020Manager\u00202007\\SharePoint\u0020Manager.csproj
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

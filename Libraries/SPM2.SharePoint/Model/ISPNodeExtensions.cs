@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using SPM2.Framework;
+
 
 namespace SPM2.SharePoint.Model
 {
@@ -23,5 +26,7 @@ namespace SPM2.SharePoint.Model
 
             //node.Setup(parent);
         }
+
+
     }
 }

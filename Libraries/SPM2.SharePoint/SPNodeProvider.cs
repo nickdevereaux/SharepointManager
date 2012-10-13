@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -77,18 +78,48 @@ namespace SPM2.SharePoint
                 parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
             }
 
+            Stopwatch watch = new Stopwatch();
+            Stopwatch longwatch = new Stopwatch();
+            long createspend = 0;
+            long initspend = 0;
+            long setupspend = 0;
+            string featureName = "";
+            longwatch.Start();
             while (count < batchCount && parentNode.LoadingChildren)
             {
+
                 var current = parentNode.Pointer.Current;
 
+                watch.Restart();
                 var node = CreateCollectionNode(parentNode, current.GetType());
+
+                watch.Stop();
+                if (watch.ElapsedMilliseconds > createspend)
+                {
+                    createspend = watch.ElapsedMilliseconds;
+                }
+
                 if (node != null)
                 {
+                    watch.Restart();
+
                     node.Initialize(new NullPropertyDescriptor(parentNode.Text), parentNode, parentNode.Pointer.Current, parentNode.TotalCount);
+                    watch.Stop();
+                    if (watch.ElapsedMilliseconds > initspend)
+                    {
+                        initspend = watch.ElapsedMilliseconds;
+                    }
+
                     if (RunIncludeRules(node))
                     {
+                        watch.Restart();
                         node.Setup(parentNode);
                         list.Add(node);
+                        watch.Stop();
+                        if (watch.ElapsedMilliseconds > setupspend)
+                        {
+                            setupspend = watch.ElapsedMilliseconds;
+                        }
                     }
                 }
                 
@@ -96,8 +127,15 @@ namespace SPM2.SharePoint
                 
                 count++;
                 parentNode.TotalCount++;
+
             }
-            
+            //longwatch.Stop();
+            Trace.WriteLine("Createspend : "+createspend + " Milliseconds");
+            Trace.WriteLine("Initspend : " + initspend + " Milliseconds");
+            Trace.WriteLine("Setupspend : " + setupspend + " Milliseconds");
+            //Trace.WriteLine("Node Collection creation time : " + longwatch.ElapsedMilliseconds + " Milliseconds");
+
+
             if (parentNode.TotalCount <= batchCount)
             {
                 // There are a low number of nodes, therefore sort nodes by Text.
@@ -237,7 +275,7 @@ namespace SPM2.SharePoint
             return (ISPNode)Activator.CreateInstance(node.GetType());
         }
 
-
+ 
 
     }
 }

@@ -44,7 +44,7 @@ namespace SPM2.SharePoint.Model
             foreach (DictionaryEntry entry in AllProperties)
             {
                 var node = new SPPropertyNode();
-                node.SPObject = entry;
+                node.Initialize(new NullPropertyDescriptor(Text), this, entry, list.Count);
                 node.Setup(this);
                 list.Add(node);
             }

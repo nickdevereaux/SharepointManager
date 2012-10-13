@@ -30,11 +30,10 @@ namespace SPM2.SharePoint.Model
         public override void LoadChildren()
         {
             var list = new List<ISPNode>();
-
             foreach (DictionaryEntry entry in PropertyBag)
             {
                 var node = new SPPropertyNode();
-                node.SPObject = entry;
+                node.Initialize(new NullPropertyDescriptor(Text), this, entry, list.Count);
                 node.Setup(this);
                 list.Add(node);
             }

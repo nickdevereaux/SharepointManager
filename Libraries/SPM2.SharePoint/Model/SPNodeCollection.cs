@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Serialization;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Client;
@@ -26,6 +27,11 @@ namespace SPM2.SharePoint.Model
         {
         }
 
+
+        public override void Setup(ISPNode parent)
+        {
+            base.Setup(parent);
+        }
 
         public override void LoadChildren()
         {
@@ -52,5 +58,7 @@ namespace SPM2.SharePoint.Model
             }
             return true;
         }
+
+
     }
 }

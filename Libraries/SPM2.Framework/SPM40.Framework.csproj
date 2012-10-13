@@ -89,6 +89,7 @@
     <Compile Include="Configuration\SettingsProvider.cs" />
     <Compile Include="ComponentModel\TypeNames.cs" />
     <Compile Include="Configuration\SettingsRoot.cs" />
+    <Compile Include="Diagnostics\TimeLog.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />

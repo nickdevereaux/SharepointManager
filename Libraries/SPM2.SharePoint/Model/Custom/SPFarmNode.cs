@@ -23,10 +23,13 @@ namespace SPM2.SharePoint.Model
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
-            var webapp = SPAdministrationWebApplication.Local;
-            if (webapp.Sites.Count > 0)
+            if (String.IsNullOrEmpty(this.Url))
             {
-                this.Url = webapp.Sites["/"].Url;
+                var webapp = SPAdministrationWebApplication.Local;
+                if (webapp.Sites.Count > 0)
+                {
+                    this.Url = webapp.Sites["/"].Url;
+                }
             }
         }
 	}

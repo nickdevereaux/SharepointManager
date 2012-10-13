@@ -147,16 +147,17 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             var item = list[0];
 
             Trace.WriteLine("Expand node: " + parent.Text);
+            Trace.WriteLine("Find child node: " + item.ID);
 
             parent.HasChildrenLoaded = false;
             Program.Window.Explorer.ExpandNode(parent);
 
             foreach (SPTreeNode node in parent.Nodes)
             {
-                var nodeID = (String.IsNullOrEmpty(node.Model.ID)) ? node.Index.ToString() : node.Model.ID;
-                if (nodeID == item.ID)
+                //var nodeID = (String.IsNullOrEmpty(node.Model.ID)) ? node.Index.ToString() : node.Model.ID;
+                if (node.Model.ID == item.ID)
                 {
-                    Trace.WriteLine("Reload of node: " + item.ID);
+                    Trace.WriteLine("Child node found: " + item.ID);
 
                     Reload(node, list);
                     break;

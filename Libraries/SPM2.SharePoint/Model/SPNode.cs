@@ -14,6 +14,7 @@ using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Collections;
 using SPM2.Framework.ComponentModel;
+using SPM2.Framework.Diagnostics;
 using SPM2.Framework.Xml;
 
 namespace SPM2.SharePoint.Model
@@ -60,7 +61,13 @@ namespace SPM2.SharePoint.Model
                 {
                     _toolTipText = SPTypeName;
                 }
+#if DEBUG
+                return _toolTipText + " (ID:" + this.ID + ")";
+
+#else
                 return _toolTipText;
+#endif
+
             }
             set {
                 var localText = NodeProvider.GetLocalizedText(value + "_ToolTip");
@@ -172,7 +179,7 @@ namespace SPM2.SharePoint.Model
                 {
                     if (_spObject != null)
                     {
-                        _spObjectType = _spObject.GetType();
+                         _spObjectType = _spObject.GetType();
                     }
 
                     if (_spObjectType == null)
@@ -182,11 +189,6 @@ namespace SPM2.SharePoint.Model
                         {
                             _spObjectType = Type.GetType(attrib.Name, true, false);
                         }
-                    }
-
-                    if (_spObjectType != null)
-                    {
-                        PropertyGridTypeConverter.AddTo(_spObjectType);
                     }
                 }
                 return _spObjectType;
@@ -212,8 +214,18 @@ namespace SPM2.SharePoint.Model
             if(ParentPropertyDescriptor == null)
                 ParentPropertyDescriptor = new NullPropertyDescriptor(parent);
 
-            if(String.IsNullOrEmpty(ID))
-                ID = (SPObject != null) ? GetCollectionItemID(SPObject, Index) : ParentPropertyDescriptor.GetHashCode().ToString();
+            if (String.IsNullOrEmpty(ID))
+            {
+                if (parent is ISPNodeCollection && SPObject != null)
+                {
+                    ID = GetCollectionItemID(SPObject, Index);
+                }
+                else
+                {
+                    ID = ParentPropertyDescriptor.GetHashCode().ToString();
+                }
+
+            }
 
             var tempText = GetTitle();
             Text = tempText;
@@ -230,6 +242,43 @@ namespace SPM2.SharePoint.Model
             }
         }
 
+        private string GetCollectionItemID(object spObject, int index)
+        {
+            string result = null;
+            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
+            if (String.IsNullOrEmpty(result))
+            {
+                if (spObject.PropertyExist("id", flags))
+                {
+                    result = spObject.GetPropertyValue<object>("id", flags) + string.Empty;
+                }
+            }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                if (spObject.PropertyExist("uniqueid", BindingFlags.IgnoreCase))
+                {
+                    result = spObject.GetPropertyValue<object>("uniqueid", flags) + string.Empty;
+                }
+            }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                if (spObject.PropertyExist("name", BindingFlags.IgnoreCase))
+                {
+                    result = spObject.GetPropertyValue<object>("name", flags) + string.Empty;
+                }
+            }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                result = index.ToString();
+            }
+
+            return result;
+        }
+
+
         protected virtual string GetTitle()
         {
             string rawText = null;
@@ -241,11 +290,14 @@ namespace SPM2.SharePoint.Model
                     rawText = SPObjectType.Name;
                 }
 
+
                 rawText = Descriptor.GetTitle(SPObject, rawText);
             }
 
             if (String.IsNullOrEmpty(rawText))
+            {
                 rawText = this.ParentPropertyDescriptor.DisplayName;
+            }
 
             //SPMLocalization.GetString("SiteFeatures_Text");
 
@@ -410,25 +462,5 @@ namespace SPM2.SharePoint.Model
 
         }
 
-        private string GetCollectionItemID(object spObject, int index)
-        {
-            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
-            if (spObject.PropertyExist("id", flags))
-            {
-                return spObject.GetPropertyValue<object>("id", flags)+string.Empty;
-            }
-
-            if (spObject.PropertyExist("uniqueid", BindingFlags.IgnoreCase))
-            {
-                return spObject.GetPropertyValue<object>("uniqueid", flags) + string.Empty;
-            }
-
-            if (spObject.PropertyExist("name", BindingFlags.IgnoreCase))
-            {
-                return spObject.GetPropertyValue<object>("name", flags) + string.Empty;
-            }
-
-            return spObject.GetType().FullName + index;
-        }
     }
 }

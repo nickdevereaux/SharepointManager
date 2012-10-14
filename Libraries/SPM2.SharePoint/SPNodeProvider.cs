@@ -31,7 +31,7 @@ namespace SPM2.SharePoint
 
         private FirstAcceptRuleEngine<ISPNode> _ruleEngine;
 
-        public SPNodeProvider(SPFarm farm, IEnumerable<INodeIncludeRule> rules)
+        public SPNodeProvider(SPFarm farm, IEnumerable<IRule<ISPNode>> rules)
         {
             ViewLevel = 100;
             Farm = farm;
@@ -78,48 +78,20 @@ namespace SPM2.SharePoint
                 parentNode.LoadingChildren = parentNode.Pointer.MoveNext();
             }
 
-            Stopwatch watch = new Stopwatch();
-            Stopwatch longwatch = new Stopwatch();
-            long createspend = 0;
-            long initspend = 0;
-            long setupspend = 0;
-            string featureName = "";
-            longwatch.Start();
             while (count < batchCount && parentNode.LoadingChildren)
             {
 
                 var current = parentNode.Pointer.Current;
 
-                watch.Restart();
                 var node = CreateCollectionNode(parentNode, current.GetType());
-
-                watch.Stop();
-                if (watch.ElapsedMilliseconds > createspend)
-                {
-                    createspend = watch.ElapsedMilliseconds;
-                }
 
                 if (node != null)
                 {
-                    watch.Restart();
-
                     node.Initialize(new NullPropertyDescriptor(parentNode.Text), parentNode, parentNode.Pointer.Current, parentNode.TotalCount);
-                    watch.Stop();
-                    if (watch.ElapsedMilliseconds > initspend)
-                    {
-                        initspend = watch.ElapsedMilliseconds;
-                    }
-
                     if (RunIncludeRules(node))
                     {
-                        watch.Restart();
                         node.Setup(parentNode);
                         list.Add(node);
-                        watch.Stop();
-                        if (watch.ElapsedMilliseconds > setupspend)
-                        {
-                            setupspend = watch.ElapsedMilliseconds;
-                        }
                     }
                 }
                 
@@ -129,12 +101,6 @@ namespace SPM2.SharePoint
                 parentNode.TotalCount++;
 
             }
-            //longwatch.Stop();
-            Trace.WriteLine("Createspend : "+createspend + " Milliseconds");
-            Trace.WriteLine("Initspend : " + initspend + " Milliseconds");
-            Trace.WriteLine("Setupspend : " + setupspend + " Milliseconds");
-            //Trace.WriteLine("Node Collection creation time : " + longwatch.ElapsedMilliseconds + " Milliseconds");
-
 
             if (parentNode.TotalCount <= batchCount)
             {

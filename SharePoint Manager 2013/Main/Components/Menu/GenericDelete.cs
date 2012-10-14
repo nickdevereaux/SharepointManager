@@ -28,7 +28,8 @@ namespace Keutmann.SharePointManager.Components.Menu
         {
             get
             {
-                var type = TreeNode.SPObject.GetType();
+                
+                var type = TreeNode.Model.SPObjectType;
                 var method = type.GetMethod("Delete", new Type[] { });
                 Enabled = (method != null);
 

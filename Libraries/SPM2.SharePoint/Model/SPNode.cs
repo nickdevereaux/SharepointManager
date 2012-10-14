@@ -299,6 +299,10 @@ namespace SPM2.SharePoint.Model
                 rawText = this.ParentPropertyDescriptor.DisplayName;
             }
 
+            if (String.IsNullOrEmpty(rawText))
+            {
+                rawText = this.ParentPropertyDescriptor.Name;
+            }
             //SPMLocalization.GetString("SiteFeatures_Text");
 
             return rawText;

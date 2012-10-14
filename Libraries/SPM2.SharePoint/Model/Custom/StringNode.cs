@@ -22,11 +22,11 @@ namespace SPM2.SharePoint.Model
         public override void Setup(ISPNode parent)
         {
             base.Setup(parent);
-
-            Text = this.SPObject as string;
-            if (String.IsNullOrEmpty(Text))
+            
+            var val = this.SPObject as string;
+            if (!String.IsNullOrEmpty(val))
             {
-                Text = "(Empty)";
+                Text += " ("+val+")";
             }
         }
 	}

@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using SPM2.Framework;
 using SPM2.SharePoint.Model;
+using SPM2.Framework.Components;
 
 namespace SPM2.SharePoint.Rules
 {
-    [Export(typeof(INodeIncludeRule))]
+    [Export(typeof(IRule<ISPNode>))]
     [PartCreationPolicy(CreationPolicy.Shared)]
     [ExportMetadata("Order", int.MaxValue)]
-    public class ViewRule : INodeIncludeRule
+    public class ViewRule : IRule<ISPNode>
     {
         // Always accept this rule as it should be the laset one.
         public bool Accept(ISPNode node)

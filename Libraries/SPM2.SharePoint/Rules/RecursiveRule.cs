@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using SPM2.Framework;
 using SPM2.SharePoint.Model;
+using SPM2.Framework.Components;
 
 
 namespace SPM2.SharePoint.Rules
 {
-    [Export(typeof(INodeIncludeRule))]
+    [Export(typeof(IRule<ISPNode>))]
     [PartCreationPolicy(CreationPolicy.Shared)]
     [ExportMetadata("Order", int.MaxValue-1)]
-    public class RecursiveRule : INodeIncludeRule
+    public class RecursiveRule : IRule<ISPNode>
     {
 
         public bool Accept(ISPNode node)

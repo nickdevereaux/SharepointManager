@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Keutmann.SharePointManager.Library;
+using System.IO;
 
 namespace Keutmann.SharePointManager.Forms
 {
@@ -30,6 +31,12 @@ namespace Keutmann.SharePointManager.Forms
         private void InitializeInterfaceStrings()
         {
             btnOK.Text          = SPMLocalization.GetString("Interface_Ok");
+            
+            var path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources\Documents\License.txt");
+            if(File.Exists(path))
+            {
+                textBox1.Text = File.ReadAllText(path);
+            }
             //richTextBox1.Text   = SPMLocalization.GetString("Intervace_About_Text");
             this.Text           = SPMLocalization.GetString("Interface_About");
         }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
             this.ProgressLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ProgressLabel
@@ -41,10 +42,22 @@
             this.ProgressLabel.Size = new System.Drawing.Size(0, 13);
             this.ProgressLabel.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(328, 31);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "SharePoint Manager 2010";
+            // 
             // SplashScreen
             // 
             this.BackgroundImage = global::Keutmann.SharePointManager.Properties.Resources.loading;
             this.ClientSize = new System.Drawing.Size(350, 90);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ProgressLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -57,6 +70,7 @@
         #endregion
 
         private System.Windows.Forms.Label ProgressLabel;
+        private System.Windows.Forms.Label label1;
 
     }
 }

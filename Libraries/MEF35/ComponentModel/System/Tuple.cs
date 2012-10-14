@@ -8,11 +8,11 @@ namespace System
 {
     // This is a very minimalistic implementation of Tuple'2 that allows us
     // to compile and work on versions of .Net eariler then 4.0.
-    public struct Tuple<TItem1, TItem2>
+    public class Tuple<TItem1, TItem2>
     {
         public Tuple(TItem1 item1, TItem2 item2)
         {
-            this = new Tuple<TItem1, TItem2>();
+            //this = new Tuple<TItem1, TItem2>();
             this.Item1 = item1;
             this.Item2 = item2;
         }

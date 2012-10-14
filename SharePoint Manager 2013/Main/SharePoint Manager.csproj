@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Keutmann.SharePointManager</RootNamespace>
-    <AssemblyName>SharePoint Manager 2013</AssemblyName>
+    <AssemblyName>SharePoint Manager 2010</AssemblyName>
     <StartupObject>Keutmann.SharePointManager.Program</StartupObject>
     <ApplicationIcon>CENADMIN.ICO</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
@@ -26,7 +26,7 @@
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -90,7 +90,10 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SQL Server\90\SDK\Assemblies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
@@ -100,13 +103,13 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SQL Server\90\SDK\Assemblies\Microsoft.SqlServer.Smo.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Menu\GenericDelete.cs">
@@ -189,7 +192,6 @@
     </Compile>
     <Compile Include="Library\SPMFarmHelper.cs" />
     <Compile Include="Library\SPMLocalization.cs" />
-    <Compile Include="Library\SPMObjectType.cs" />
     <Compile Include="Library\SPMReflection.cs" />
     <Compile Include="Library\SPMRegistry.cs" />
     <Compile Include="Library\SPMSecurity.cs" />
@@ -352,6 +354,10 @@
     <Folder Include="Functions\EventHandler\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\MEF35\ComponentModel\MEF35.csproj">
+      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
+      <Name>MEF35</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\SPM2.Framework\SPM40.Framework.csproj">
       <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
       <Name>SPM40.Framework</Name>

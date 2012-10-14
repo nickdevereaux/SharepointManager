@@ -11,7 +11,8 @@ namespace SPM2.Framework.Diagnostics
         public static void Messure(string name, Action action)
         {
             Stopwatch watch = new Stopwatch();
-            watch.Restart();
+            watch.Reset();
+            watch.Start();
             action.Invoke();
             watch.Stop();
             Trace.WriteLine(name + " used " + watch.ElapsedMilliseconds + " Milliseconds");

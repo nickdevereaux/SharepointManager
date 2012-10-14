@@ -11,7 +11,7 @@ namespace SPM2.SharePoint.Validation
     [Export(typeof(BaseValidator))]
     public class SPFInstalledValidator : BaseValidator, IValidator
     {
-        public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions\15.0";
+        public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions";
 
         public SPFInstalledValidator()
             : base()
@@ -32,10 +32,17 @@ namespace SPM2.SharePoint.Validation
                 var key = Registry.LocalMachine.OpenSubKey(SpfPath);
                 if (key != null)
                 {
-                    var value = key.GetValue("SharePoint");
-                    if (value != null && value.Equals("Installed"))
+                    var subkey = key.OpenSubKey("14.0");
+                    if (subkey == null)
+                        subkey = key.OpenSubKey("15.0");
+
+                    if (subkey != null)
                     {
-                        return ValidationResult.Success;
+                        var value = subkey.GetValue("SharePoint");
+                        if (value != null && value.Equals("Installed"))
+                        {
+                            return ValidationResult.Success;
+                        }
                     }
                 }
             }

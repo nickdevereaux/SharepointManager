@@ -15,6 +15,8 @@ using SPM2.Framework;
 using SPM2.Framework.Forms;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Rules;
+using SPM2.Framework.Components;
+using SPM2.SharePoint.Model;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -104,7 +106,7 @@ namespace Keutmann.SharePointManager.Components
             // Dispose all objects
             ClearNodes(this.Nodes);
 
-            var rules = CompositionProvider.GetOrderedExports<INodeIncludeRule>();
+            var rules = CompositionProvider.GetOrderedExports<IRule<ISPNode>>();
 
             SPProvider = new SPNodeProvider(SPFarm.Local, rules.Values);
             SPProvider.ViewLevel = ViewLevel;
@@ -200,7 +202,7 @@ namespace Keutmann.SharePointManager.Components
 
         private Image GetImageFromResource(string path)
         {
-            if (String.IsNullOrWhiteSpace(path)) return null;
+            if (String.IsNullOrEmpty(path)) return null;
 
             string[] parts = path.Split(';');
             if (parts.Length != 3) return null;

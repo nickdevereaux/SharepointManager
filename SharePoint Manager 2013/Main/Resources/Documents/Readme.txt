@@ -1,15 +1,15 @@
-SharePoint Manager 2013
+SharePoint Manager
 
 Created by
 Carsten Keutmann
 Copyright 2012
 
-The SharePoint Manager 2013 (SPM2013)  
+The SharePoint Manager
 This version enables you to explorer and edit the data in the object model.
-The application is not meant to be a windows form application version of the SharePoint 3.0 Central Administration, but to provide extra functionality that if only found in stsadm.exe or nowhere else. 
+The application is not meant to be a windows form application version of the SharePoint Central Administration, but to provide extra functionality that if only found in stsadm.exe or nowhere else. 
 
 Note:
-The SPM2013 application only uses the SharePoint Foundation 5.0 object model. 
+The SPM application only uses the SharePoint Foundation object model. 
 The application do not access the Sql Server directly or using other kind of hacks.
 
 Warning!
@@ -17,10 +17,10 @@ This program enables you to update the data in SharePoint object model directly.
 Therefore be very careful when changing the data.
 
 How to install:
-1.	Download the ZIP file and unpack on a SharePoint 2013 Server.*
+1.	Download the ZIP file and unpack on a SharePoint front-end Server.*
 2.	Run the SharePoint Manager 2013.exe program.
 
-(*) This program has to run on a server where SharePoint Foundation 5.0 or Microsoft SharePoint Server 2013 is installed.
+(*) This program has to run on a server where SharePoint Foundation 2010 or 2013 is installed.
 
 NB! Be sure that you are the server and SharePoint administrator.
 
@@ -28,6 +28,11 @@ NB! Be sure that you are the server and SharePoint administrator.
 License:
 ------------------
 Please read the License.txt file.
+
+Ver: Ver: 1.0.12.1015
+------------------
+- Beta 2 release of the 2010 version.
+
 
 Ver: Ver: 1.0.12.1013
 ------------------

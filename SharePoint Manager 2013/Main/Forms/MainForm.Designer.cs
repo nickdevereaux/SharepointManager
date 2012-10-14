@@ -80,7 +80,6 @@ namespace Keutmann.SharePointManager.Forms
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripToolBarStandard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
@@ -500,7 +499,7 @@ namespace Keutmann.SharePointManager.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainWindow";
-            this.Text = "SharePoint Manager 2013 (Beta 2)";
+            this.Text = "SharePoint Manager 2010 (Beta 2)";
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);
@@ -508,7 +507,6 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripToolBarStandard.ResumeLayout(false);
             this.toolStripToolBarStandard.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

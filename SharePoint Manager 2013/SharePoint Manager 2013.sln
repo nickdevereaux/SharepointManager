@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint Manager 2013", "Main\SharePoint Manager 2013.csproj", "{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.Framework", "..\Libraries\SPM2.Framework\SPM40.Framework.csproj", "{5DE0D29F-DE15-4E15-9E89-3A873D849C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2010", "..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj", "{CE144460-64CE-4FB5-A25E-25B7BB028D16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.SharePoint2013", "..\Libraries\SPM2.SharePoint2013\SPM40.SharePoint2013.csproj", "{48E7192B-2165-4561-B9B0-9A1BDB492893}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccLocalPath0 = .
+		SccLocalPath1 = Main
+		SccLocalPath2 = ..\\Libraries\\SPM2.Framework
+		SccLocalPath3 = ..\\Libraries\\SPM2.SharePoint
+		SccLocalPath4 = ..\\Libraries\\SPM2.SharePoint2013
+		SccNumberOfProjects = 5
+		SccProjectName1 = Main
+		SccProjectName2 = ../Libraries/SPM2.Framework
+		SccProjectName3 = ../Libraries/SPM2.SharePoint
+		SccProjectName4 = ../Libraries/SPM2.SharePoint2013
+		SccProjectUniqueName1 = Main\\SharePoint\u0020Manager\u00202013.csproj
+		SccProjectUniqueName2 = ..\\Libraries\\SPM2.Framework\\SPM40.Framework.csproj
+		SccProjectUniqueName3 = ..\\Libraries\\SPM2.SharePoint\\SPM40.SharePoint2010.csproj
+		SccProjectUniqueName4 = ..\\Libraries\\SPM2.SharePoint2013\\SPM40.SharePoint2013.csproj
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs05
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Generate (Debug)|Any CPU = Generate (Debug)|Any CPU
+		Generate (Debug)|x64 = Generate (Debug)|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Generate (Debug)|x64.ActiveCfg = Debug|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48E7192B-2165-4561-B9B0-9A1BDB492893}.Release|x64.ActiveCfg = Release|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|Any CPU.ActiveCfg = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|Any CPU.Build.0 = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Generate (Debug)|x64.ActiveCfg = Generate (Debug)|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE0D29F-DE15-4E15-9E89-3A873D849C40}.Release|x64.ActiveCfg = Release|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Debug|x64.ActiveCfg = Debug|x64
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Debug|x64.Build.0 = Debug|x64
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Generate (Debug)|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Generate (Debug)|Any CPU.Build.0 = Debug|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Generate (Debug)|x64.ActiveCfg = Debug|x64
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Generate (Debug)|x64.Build.0 = Debug|x64
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Release|x64.ActiveCfg = Release|x64
+		{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}.Release|x64.Build.0 = Release|x64
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|Any CPU.ActiveCfg = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|Any CPU.Build.0 = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Generate (Debug)|x64.ActiveCfg = Generate (Debug)|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE144460-64CE-4FB5-A25E-25B7BB028D16}.Release|x64.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

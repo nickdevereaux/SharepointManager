@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SharePoint Manager 15")]
-[assembly: AssemblyDescription("A management application for Microsoft SharePoint Foundation 5.0 and Microsoft SharePoint Server 15.")]
+[assembly: AssemblyTitle("SharePoint Manager")]
+[assembly: AssemblyDescription("A management application for Microsoft SharePoint Foundation and Microsoft SharePoint Server")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SharePoint Manager")]
-[assembly: AssemblyProduct("SharePoint Manager 15")]
+[assembly: AssemblyProduct("SharePoint Manager")]
 [assembly: AssemblyCopyright("Copyright © / 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("c090e867-715f-455c-9406-0ca222eebb7b")]

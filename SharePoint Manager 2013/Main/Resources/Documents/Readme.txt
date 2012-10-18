@@ -29,18 +29,23 @@ License:
 ------------------
 Please read the License.txt file.
 
-Ver: Ver: 1.0.12.1015
+Ver: 1.0.12.1019
+------------------
+- Beta 2 bugfix of SPContentTypeNode. 
+
+
+Ver: 1.0.12.1015
 ------------------
 - Beta 2 release of the 2010 version.
 
 
-Ver: Ver: 1.0.12.1013
+Ver: 1.0.12.1013
 ------------------
 - Beta 2 release.
 - SharePoint Node model totally rewritten.
 - View mode set to default Medium.
 
-Ver: Ver: 0.9.12.0301
+Ver: 0.9.12.0301
 ------------------
 - Releast for SharePoint 15 (Beta 1)
 

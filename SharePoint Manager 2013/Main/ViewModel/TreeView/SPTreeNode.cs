@@ -52,7 +52,7 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             this.DataBindings.Add("Text", Model, "Text");
             this.DataBindings.Add("ToolTipText", Model, "ToolTipText");
             this.DataBindings.Add("BrowserUrl", Model, "Url");
-            this.Name = Model.SPObjectType.FullName;
+            this.Name = (Model.SPObjectType != null) ? Model.SPObjectType.FullName : Model.GetType().FullName;
 
             if (Model.HasChildren())
             {

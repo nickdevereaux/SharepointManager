@@ -38,6 +38,7 @@ namespace SPM2.SharePoint.Model
 
             string filename = this.DocumentLibrary.ImageUrl;
             filename = filename.Substring(filename.LastIndexOf("/") + 1);
+            filename = filename.Substring(0, filename.LastIndexOf("?"));
             this.IconUri = SharePointContext.GetImagePath(filename);
         }
 

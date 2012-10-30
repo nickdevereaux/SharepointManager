@@ -5,13 +5,14 @@ using System.ComponentModel.Composition;
 using System.Security;
 using Microsoft.Win32;
 using SPM2.Framework.Validation;
+using System.Reflection;
 
 namespace SPM2.SharePoint.Validation
 {
     [Export(typeof(BaseValidator))]
     public class SPFInstalledValidator : BaseValidator, IValidator
     {
-        public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions";
+        //public const String SpfPath = @"SOFTWARE\Microsoft\Shared Tools\Web Server Extensions";
 
         public SPFInstalledValidator()
             : base()
@@ -29,26 +30,30 @@ namespace SPM2.SharePoint.Validation
         {        
             try
             {
-                var key = Registry.LocalMachine.OpenSubKey(SpfPath);
-                if (key != null)
-                {
-                    var subkey = key.OpenSubKey("14.0");
-                    if (subkey == null)
-                        subkey = key.OpenSubKey("15.0");
+                var assembly = Assembly.LoadWithPartialName("Microsoft.SharePoint.dll");
 
-                    if (subkey != null)
-                    {
-                        var value = subkey.GetValue("SharePoint");
-                        if (value != null && value.Equals("Installed"))
-                        {
-                            return ValidationResult.Success;
-                        }
-                    }
-                }
+                return ValidationResult.Success;
+
+                //var key = Registry.LocalMachine.OpenSubKey(SpfPath);
+                //if (key != null)
+                //{
+                //    var subkey = key.OpenSubKey("14.0");
+                //    if (subkey == null)
+                //        subkey = key.OpenSubKey("15.0");
+
+                //    if (subkey != null)
+                //    {
+                //        var value = subkey.GetValue("SharePoint");
+                //        if (value != null && value.Equals("Installed"))
+                //        {
+                //            return ValidationResult.Success;
+                //        }
+                //    }
+                //}
             }
             catch (SecurityException ex)
             {
-                throw new ValidatorExcpetion(String.Format("Registry access denied: {0}", SpfPath), ex);
+                //throw new ValidatorExcpetion(String.Format("Registry access denied: {0}", SpfPath), ex);
             }
             return ValidationResult.Error;
         }

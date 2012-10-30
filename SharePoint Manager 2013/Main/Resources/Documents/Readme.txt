@@ -29,6 +29,12 @@ License:
 ------------------
 Please read the License.txt file.
 
+Ver: 1.0.12.1030
+------------------
+- bugfix of SPContentTypeNode on 2013 version. 
+- Image fix on Lists
+
+
 Ver: 1.0.12.1019
 ------------------
 - Beta 2 bugfix of SPContentTypeNode. 

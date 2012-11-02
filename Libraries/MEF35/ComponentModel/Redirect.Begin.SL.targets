@@ -1,6 +1,6 @@
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <OutputPath>..\..\bin\SL3</OutputPath>
+    <!--<OutputPath>..\..\bin\SL3</OutputPath>-->
 
     <IsSilverlight>true</IsSilverlight>
     <DefineConstants>$(DefineConstants);SILVERLIGHT</DefineConstants>

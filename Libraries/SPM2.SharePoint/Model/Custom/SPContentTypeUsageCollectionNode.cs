@@ -23,7 +23,7 @@ namespace SPM2.SharePoint.Model
             base.Setup(parent);
 
             this.Text = "ContentTypeUsages";
-            
+            ToolTipText = this.GetType().Name;
         }
 
         public override object GetSPObject()

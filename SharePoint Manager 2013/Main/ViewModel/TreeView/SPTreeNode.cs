@@ -80,8 +80,6 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
         public override void LoadNodes()
         {
             base.LoadNodes();
-            
-            this.TreeView.BeginUpdate();
 
             if (NodeProvider != null)
             {
@@ -92,22 +90,36 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
                 //    Nodes.Add(childnode);
                 //}
             }
-
-            this.TreeView.EndUpdate();
-
         }
 
         public override void Refresh()
         {
             Trace.WriteLine("Refresh() called on node: " + this.Text);
 
+            var treeView = (TreeViewComponent)this.TreeView;
+            var selectedNode = (SPTreeNode)treeView.SelectedNode;
+            var id = selectedNode.Model.ID;
+
             // Save the structure of open nodes.
             var list = SaveStucture();
             if (list.Count == 0) return;
 
-            var treeView = (TreeViewComponent)this.TreeView;
             
-            treeView.Build(list);
+            treeView.Worker(() => treeView.Build(list));
+
+
+            //selectedNode = (SPTreeNode)treeView.SelectedNode;
+            //if (selectedNode == null)
+            //{
+            //    Trace.WriteLine("No node is selected!");
+            //    return;
+            //}
+            //var newid = selectedNode.Model.ID;
+
+            //if (id != newid)
+            //{
+            //    Trace.WriteLine("Not the same id (old: " + id + " , New: " + newid + ")");
+            //}
         }
 
 
@@ -135,10 +147,14 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
 
         public void Reload(SPTreeNode parent, StuctureItemCollection list)
         {
+            var parentTreeview = TreeView as TreeViewComponent;
+            if (parentTreeview == null)
+                return;
+
             if (list == null || list.Count <= 1)
             {
                 // End of the line, set the selectedNode and return
-                Program.Window.Explorer.SelectedNode = parent;
+                parentTreeview.SelectedNode = parent;
                 return;
             }
 
@@ -150,18 +166,23 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             Trace.WriteLine("Find child node: " + item.ID);
 
             parent.HasChildrenLoaded = false;
-            Program.Window.Explorer.ExpandNode(parent);
+            parentTreeview.ExpandNode(parent);
 
+            var found = false;
             foreach (SPTreeNode node in parent.Nodes)
             {
                 //var nodeID = (String.IsNullOrEmpty(node.Model.ID)) ? node.Index.ToString() : node.Model.ID;
                 if (node.Model.ID == item.ID)
                 {
                     Trace.WriteLine("Child node found: " + item.ID);
-
+                    found = true;
                     Reload(node, list);
                     break;
                 }
+            }
+            if (!found)
+            {
+                parentTreeview.SelectedNode = parent;
             }
         }
 

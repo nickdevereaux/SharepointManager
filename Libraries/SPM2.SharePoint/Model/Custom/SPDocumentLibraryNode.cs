@@ -36,10 +36,7 @@ namespace SPM2.SharePoint.Model
 
             this.Url = SPUtility.GetFullUrl(this.DocumentLibrary.ParentWeb.Site, this.DocumentLibrary.DefaultViewUrl);
 
-            string filename = this.DocumentLibrary.ImageUrl;
-            filename = filename.Substring(filename.LastIndexOf("/") + 1);
-            filename = filename.Substring(0, filename.LastIndexOf("?"));
-            this.IconUri = SharePointContext.GetImagePath(filename);
+            this.IconUri = SPListNode.GetIconUri(this.DocumentLibrary.ImageUrl);
         }
 
         public bool IsVisible()

@@ -99,9 +99,6 @@ namespace Keutmann.SharePointManager.Components
 
         public void Build(StuctureItemCollection list)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            //BeginUpdate();
-
             this.ImageList = Program.Window.SPMimageList;
             // Dispose all objects
             ClearNodes(this.Nodes);
@@ -115,7 +112,6 @@ namespace Keutmann.SharePointManager.Components
             var treeViewProvider = new TreeViewNodeProvider(SPProvider);
             FarmNode = treeViewProvider.LoadFarmNode();
 
-            
             this.Nodes.Add(FarmNode);
 
             if (list != null)
@@ -126,9 +122,6 @@ namespace Keutmann.SharePointManager.Components
             {
                 ExpandToDefault(FarmNode, DefaultExpandTypes);
             }
-            
-            //EndUpdate();
-            Cursor.Current = Cursors.Default;
         }
 
         private void ExpandToDefault(SPTreeNode parent, List<string> types)
@@ -167,24 +160,38 @@ namespace Keutmann.SharePointManager.Components
         {
             if (!node.HasChildrenLoaded)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
                 node.HasChildrenLoaded = true;
                 node.LoadNodes();
 
-                Cursor.Current = Cursors.Default;
             }
         }
 
         protected override void OnBeforeExpand(TreeViewCancelEventArgs e)
         {
             ExplorerNodeBase node = e.Node as ExplorerNodeBase;
+            if (node == null)
+                return;
 
-            ExpandNode(node);
-
+            Worker(() => ExpandNode(node));
+            
             base.OnBeforeExpand(e);
         }
 
+        public void Worker(Action worker)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                BeginUpdate();
+
+                worker.Invoke();
+            }
+            finally
+            {
+                EndUpdate();
+                Cursor.Current = Cursors.Default;
+            }
+        }
 
 
         protected override void Dispose(bool disposing)

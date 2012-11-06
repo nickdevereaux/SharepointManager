@@ -76,7 +76,7 @@ namespace Keutmann.SharePointManager.Forms
 
             splitContainer.Panel1.Controls.Add(Explorer);
 
-            Explorer.Build();
+            Explorer.Worker(() => Explorer.Build());
             //((SPTreeNode)Explorer.SelectedNode).Refresh();
             // Call default expand after Explorer.Build();
 
@@ -129,17 +129,14 @@ namespace Keutmann.SharePointManager.Forms
 
             if (treeNode.Model is MoreNode)
             {
-                e.Cancel = true;
                 var parent = ((SPTreeNode)treeNode.Parent);
+                if (parent == null)
+                    return;
+
+                e.Cancel = true;
 
                 parent.Nodes.Remove(e.Node);
-
                 parent.LoadNodes();
-
-
-                //parent.IsSelected = true;
-                //Explorer.SelectedNode = parent.Nodes[parent.Nodes.Count - 1];
-                //Explorer.SelectedNode = parent;
             }
         }
 
@@ -204,37 +201,40 @@ namespace Keutmann.SharePointManager.Forms
         private void ExplorerClick(SPTreeNode treeNode)
         {
             Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                this.toolStripStatusLabel.Text = treeNode.ToolTipText;
+                UpdateMenu(treeNode);
 
-            this.toolStripStatusLabel.Text = treeNode.ToolTipText;
-            UpdateMenu(treeNode);
-
-            ArrayList nodeColl = new ArrayList(treeNode.GetTabPages());
-            //ArrayList nodeColl = new ArrayList();
+                ArrayList nodeColl = new ArrayList(treeNode.GetTabPages());
            
-            int i = 0;
-            while (i < tabControl.TabPages.Count)
-            {
-                TabPage page = tabControl.TabPages[i];
-                if (nodeColl.Contains(page))
+                int i = 0;
+                while (i < tabControl.TabPages.Count)
                 {
-                    i++;
+                    TabPage page = tabControl.TabPages[i];
+                    if (nodeColl.Contains(page))
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        tabControl.TabPages.Remove(page);
+                    }
                 }
-                else
-                {
-                    tabControl.TabPages.Remove(page);
-                }
-            }
 
-            foreach (TabPage page in nodeColl)
-            {
-                if (!tabControl.Contains(page))
+                foreach (TabPage page in nodeColl)
                 {
-                    tabControl.TabPages.Add(page);
+                    if (!tabControl.Contains(page))
+                    {
+                        tabControl.TabPages.Add(page);
+                    }
                 }
-            }
 
-           //tabControl.Update();
-            Cursor.Current = Cursors.Default;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -271,7 +271,9 @@ namespace Keutmann.SharePointManager.Forms
             if (!CancelActive)
             {
                 ExplorerNodeBase node = (ExplorerNodeBase)Explorer.SelectedNode;
-                
+                if (node == null)
+                    return;
+
                 Hashtable propertyItems = null;
                 if (!ChangedPropertyItems.ContainsKey(node))
                 {
@@ -295,19 +297,28 @@ namespace Keutmann.SharePointManager.Forms
         {
             if (!Properties.Settings.Default.ReadOnly)
             {
-                Cursor.Current = Cursors.WaitCursor;
-                ExplorerNodeBase node = Explorer.SelectedNode as ExplorerNodeBase;
-                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_Changes");
-
-                if (ChangedNodes.ContainsKey(node))
+                try
                 {
-                    node.Update();
-                    node.Setup();
-                    ChangedNodes.Remove(node);
+                    Cursor.Current = Cursors.WaitCursor;
+                    ExplorerNodeBase node = Explorer.SelectedNode as ExplorerNodeBase;
+                    if (node == null)
+                        return;
+
+                    this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_Changes");
+
+                    if (ChangedNodes.ContainsKey(node))
+                    {
+                        node.Update();
+                        node.Setup();
+                        ChangedNodes.Remove(node);
+                    }
+                    UpdateMenu(node);
+                    this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
                 }
-                UpdateMenu(node);
-                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
-                Cursor.Current = Cursors.Default;
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
             }
         }
 
@@ -315,75 +326,94 @@ namespace Keutmann.SharePointManager.Forms
         {
             if (!Properties.Settings.Default.ReadOnly)
             {
-                Cursor.Current = Cursors.WaitCursor;
-                ExplorerNodeBase selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
-
-                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_All_Changes");
-                foreach (ExplorerNodeBase node in ChangedNodes.Keys)
+                try
                 {
-                    node.Update();
-                    node.Setup();
+
+                    Cursor.Current = Cursors.WaitCursor;
+                    ExplorerNodeBase selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
+                    if (selectedNode == null)
+                        return;
+
+                    this.toolStripStatusLabel.Text = SPMLocalization.GetString("Saving_All_Changes");
+                    foreach (ExplorerNodeBase node in ChangedNodes.Keys)
+                    {
+                        node.Update();
+                        node.Setup();
+                    }
+                    ChangedNodes.Clear();
+
+                    UpdateMenu(selectedNode);
+
+                    this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
                 }
-                ChangedNodes.Clear();
-
-                UpdateMenu(selectedNode);
-
-                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Changes_Saved");
-                Cursor.Current = Cursors.Default;
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
             }
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            CancelActive = true;
-            ExplorerNodeBase selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
-
-            this.toolStripStatusLabel.Text = SPMLocalization.GetString("Cancel_All_Modifications");
-
-            foreach (ExplorerNodeBase node in ChangedNodes.Keys)
+            try
             {
-                Hashtable propertyItem = ChangedPropertyItems[node];
+                Cursor.Current = Cursors.WaitCursor;
+                var selectedNode = Explorer.SelectedNode as ExplorerNodeBase;
+                if (selectedNode == null)
+                    return;
 
-                foreach (PropertyValueChangedEventArgs pvEventArgs in propertyItem.Values)
+                CancelActive = true;
+
+                this.toolStripStatusLabel.Text = SPMLocalization.GetString("Cancel_All_Modifications");
+
+                foreach (ExplorerNodeBase node in ChangedNodes.Keys)
                 {
-                    PropertyDescriptor pd = pvEventArgs.ChangedItem.PropertyDescriptor;
+                    Hashtable propertyItem = ChangedPropertyItems[node];
 
-                    Type nodeType = node.SPObject.GetType();
-                    FieldInfo myField = nodeType.GetField(pd.Name, BindingFlags.Instance | BindingFlags.Public);
-                    if (myField != null)
+                    foreach (PropertyValueChangedEventArgs pvEventArgs in propertyItem.Values)
                     {
-                        myField.SetValue(node.SPObject, pvEventArgs.OldValue);
-                    }
-                    else
-                    {
-                        PropertyInfo myProperty = nodeType.GetProperty(pd.Name, BindingFlags.Instance | BindingFlags.Public);
-                        if (myProperty != null)
+                        PropertyDescriptor pd = pvEventArgs.ChangedItem.PropertyDescriptor;
+
+                        Type nodeType = node.SPObject.GetType();
+                        FieldInfo myField = nodeType.GetField(pd.Name, BindingFlags.Instance | BindingFlags.Public);
+                        if (myField != null)
                         {
-                            myProperty.SetValue(node.SPObject, pvEventArgs.OldValue, null);
+                            myField.SetValue(node.SPObject, pvEventArgs.OldValue);
+                        }
+                        else
+                        {
+                            PropertyInfo myProperty = nodeType.GetProperty(pd.Name, BindingFlags.Instance | BindingFlags.Public);
+                            if (myProperty != null)
+                            {
+                                myProperty.SetValue(node.SPObject, pvEventArgs.OldValue, null);
+                            }
                         }
                     }
-                }
 
-                ChangedPropertyItems.Remove(node);
-            }
+                    ChangedPropertyItems.Remove(node);
+                }
 
             
-            foreach (TabPage page in tabControl.TabPages)
-            {
-                if (page is TabPropertyPage)
+                foreach (TabPage page in tabControl.TabPages)
                 {
-                    ((TabPropertyPage)page).Grid.Refresh();
+                    if (page is TabPropertyPage)
+                    {
+                        ((TabPropertyPage)page).Grid.Refresh();
+                    }
                 }
+
+                ChangedNodes.Clear();
+
+                UpdateMenu(selectedNode);
+
+                //this.toolStripStatusLabel.Text = "All modifications has been canceled";
+            }
+            finally
+            {
+                CancelActive = false;
+                Cursor.Current = Cursors.Default;
             }
 
-            ChangedNodes.Clear();
-
-            UpdateMenu(selectedNode);
-
-            //this.toolStripStatusLabel.Text = "All modifications has been canceled";
-            CancelActive = false;
-            Cursor.Current = Cursors.Default;
         }
 
         private void shallowmodeToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -417,7 +447,7 @@ namespace Keutmann.SharePointManager.Forms
 
                 Explorer.Dispose();
                 Explorer.CurrentFarm = newFarm;
-                Explorer.Build();
+                Explorer.Worker(() => Explorer.Build());
             }
 
         }
@@ -584,8 +614,6 @@ namespace Keutmann.SharePointManager.Forms
                 Cursor.Current = Cursors.WaitCursor;
                 var xml = Explorer.SPProvider.Serialize(node.Model);
                 File.WriteAllText(saveFileDialog1.FileName, xml);
-
-                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -607,12 +635,14 @@ namespace Keutmann.SharePointManager.Forms
 
                     var xml = File.ReadAllText(openFileDialog1.FileName);
                     var node = Explorer.SPProvider.Deserialize(xml);
-
-                    Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
                 }
             }
 

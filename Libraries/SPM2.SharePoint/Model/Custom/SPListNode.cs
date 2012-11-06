@@ -32,10 +32,7 @@ namespace SPM2.SharePoint.Model
 
             this.Url = SPUtility.GetFullUrl(List.ParentWeb.Site, List.DefaultViewUrl);
 
-            string filename = this.List.ImageUrl;
-            filename = filename.Substring(filename.LastIndexOf("/") + 1);
-            filename = filename.Substring(0, filename.LastIndexOf("?"));
-            this.IconUri = SharePointContext.GetImagePath(filename);
+            this.IconUri = GetIconUri(this.List.ImageUrl);
         }
 
 
@@ -49,6 +46,10 @@ namespace SPM2.SharePoint.Model
             return result;
         }
 
+        public static string GetIconUri(string filename)
+        {
+            return SharePointContext.GetImagePath(filename.TrimLastIndexOf("/").TrimEndLastIndexOf("?"));
+        }
 
 	}
 }

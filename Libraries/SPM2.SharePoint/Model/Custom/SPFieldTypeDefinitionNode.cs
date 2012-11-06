@@ -17,5 +17,15 @@ namespace SPM2.SharePoint.Model
 	[ExportToNode("SPM2.SharePoint.Model.SPFieldNode")]
 	public partial class SPFieldTypeDefinitionNode
 	{
+        public override void Setup(ISPNode parent)
+        {
+            base.Setup(parent);
+
+            if (FieldTypeDefinition != null)
+            {
+                Text = FieldTypeDefinition.TypeDisplayName;
+                ToolTipText = FieldTypeDefinition.TypeShortDescription;
+            }
+        }
 	}
 }

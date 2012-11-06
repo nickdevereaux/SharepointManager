@@ -229,7 +229,7 @@ namespace SPM2.SharePoint.Model
 
             var tempText = GetTitle();
             Text = tempText;
-            ToolTipText = tempText;
+            //ToolTipText = tempText;
 
             // Make sure to update all children if exist!
             foreach (var item in Children)
@@ -303,7 +303,6 @@ namespace SPM2.SharePoint.Model
             {
                 rawText = this.ParentPropertyDescriptor.Name;
             }
-            //SPMLocalization.GetString("SiteFeatures_Text");
 
             return rawText;
         }

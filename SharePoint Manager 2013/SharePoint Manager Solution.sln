@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint Manager", "Main\SharePoint Manager.csproj", "{93C1FBBA-D785-4E4F-93CC-C8CA95BD889A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPM40.Framework", "..\Libraries\SPM2.Framework\SPM40.Framework.csproj", "{5DE0D29F-DE15-4E15-9E89-3A873D849C40}"
@@ -99,7 +99,6 @@ Global
 		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release 2010|Any CPU.Build.0 = Release 2010|Any CPU
 		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release 2010|x64.ActiveCfg = Release 2010|Any CPU
 		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release 2013|Any CPU.ActiveCfg = Release 2013|Any CPU
-		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release 2013|Any CPU.Build.0 = Release 2013|Any CPU
 		{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}.Release 2013|x64.ActiveCfg = Release 2013|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

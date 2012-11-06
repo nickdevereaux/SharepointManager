@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SPM2.Framework.Validation;
+using SPM2.SharePoint;
 
 namespace Keutmann.SharePointManager.Forms
 {
@@ -19,6 +20,8 @@ namespace Keutmann.SharePointManager.Forms
         public SplashScreen(Func<SplashScreen, ValidationResult> setup)
         {
             InitializeComponent();
+            label1.Text = SPMEnvironment.Version.Title; 
+
             Setup = setup;
             Shown += SplashScreen_Shown;
         }
@@ -26,10 +29,18 @@ namespace Keutmann.SharePointManager.Forms
         void SplashScreen_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
-
-            result = Setup.Invoke(this);
-
-            this.Close();
+            try
+            {
+                result = Setup.Invoke(this);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.Close();
+            }
         }
 
         public void UpdateProgress(string message)

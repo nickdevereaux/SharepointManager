@@ -197,12 +197,8 @@
     <Compile Include="Functions\ExportImport\RestoreForm.Designer.cs">
       <DependentUpon>RestoreForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Library\SPMFarmHelper.cs" />
     <Compile Include="Library\SPMLocalization.cs" />
     <Compile Include="Library\SPMReflection.cs" />
-    <Compile Include="Library\SPMRegistry.cs" />
-    <Compile Include="Library\SPMSecurity.cs" />
-    <Compile Include="Library\SPMPaths.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -8,6 +8,8 @@ using Keutmann.SharePointManager.Forms;
 using Keutmann.SharePointManager.Library;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
+using SPM2.SharePoint;
+using SPM2.SharePoint.Validation;
 
 namespace Keutmann.SharePointManager
 {
@@ -52,6 +54,14 @@ namespace Keutmann.SharePointManager
 
         static ValidationResult Setup(SplashScreen splashScreen)
         {
+            var validator = new SPFInstalledValidator();
+
+            if (validator.RunValidator() == ValidationResult.Error)
+            {
+                MessageBox.Show(validator.ErrorString+Environment.NewLine+Environment.NewLine+validator.QuestionString, SPMEnvironment.Version.Title + " Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return ValidationResult.Error;
+            }
+
             CompositionProvider.LoadAssemblies();
 
             var engine = new PreflightController(splashScreen);

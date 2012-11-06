@@ -154,7 +154,7 @@ namespace Keutmann.SharePointManager.Forms
             this.openDatabaseToolStripMenuItem.Text = "Open Database";
             this.openDatabaseToolStripMenuItem.ToolTipText = "Open Databse Connection";
             this.openDatabaseToolStripMenuItem.Visible = false;
-            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.toolStripDBConnection_Click);
+            //this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.toolStripDBConnection_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -418,7 +418,7 @@ namespace Keutmann.SharePointManager.Forms
             this.toolStripDBConnection.Size = new System.Drawing.Size(23, 22);
             this.toolStripDBConnection.Text = "Open Database Connection";
             this.toolStripDBConnection.Visible = false;
-            this.toolStripDBConnection.Click += new System.EventHandler(this.toolStripDBConnection_Click);
+            //this.toolStripDBConnection.Click += new System.EventHandler(this.toolStripDBConnection_Click);
             // 
             // toolStripSave
             // 
@@ -499,7 +499,6 @@ namespace Keutmann.SharePointManager.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainWindow";
-            this.Text = "SharePoint Manager 2010 (Beta 2)";
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);

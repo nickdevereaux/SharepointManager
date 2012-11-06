@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Diagnostics;
 using SPM2.SharePoint.Model;
 using System.Collections.Generic;
+using SPM2.SharePoint;
 
 namespace Keutmann.SharePointManager.Components
 {
@@ -168,7 +169,7 @@ namespace Keutmann.SharePointManager.Components
 
         public virtual string ImageUrl()
         {
-            return SPMPaths.ImageDirectory + "BLANK16.GIF";
+            return SPMEnvironment.Paths.ImageDirectory + "BLANK16.GIF";
         }
 
 

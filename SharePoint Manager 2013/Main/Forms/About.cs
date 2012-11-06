@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using Keutmann.SharePointManager.Library;
 using System.IO;
+using SPM2.SharePoint;
 
 namespace Keutmann.SharePointManager.Forms
 {
@@ -35,10 +36,11 @@ namespace Keutmann.SharePointManager.Forms
             var path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources\Documents\License.txt");
             if(File.Exists(path))
             {
-                textBox1.Text = File.ReadAllText(path);
+                var text = File.ReadAllText(path);
+
+                textBox1.Text = String.Format(text, SPMEnvironment.Version.Year, SPMEnvironment.Version.Number);
             }
-            //richTextBox1.Text   = SPMLocalization.GetString("Intervace_About_Text");
-            this.Text           = SPMLocalization.GetString("Interface_About");
+            this.Text = SPMLocalization.GetString("Interface_About");
         }
     }
 }

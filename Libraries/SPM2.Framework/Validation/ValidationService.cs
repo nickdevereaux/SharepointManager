@@ -78,6 +78,7 @@ namespace SPM2.Framework.Validation
                 else if (result == ValidationResult.Error)
                 {
                     OnValidatorFailed(validator);
+                    break;
                 }
                 else if (result == ValidationResult.Inconclusive)
                 {

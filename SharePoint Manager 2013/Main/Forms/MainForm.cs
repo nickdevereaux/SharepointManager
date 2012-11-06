@@ -23,6 +23,7 @@ using SPM2.Framework;
 using System.Diagnostics;
 using SPM2.SharePoint.Model;
 using Keutmann.SharePointManager.Components.Menu;
+using SPM2.SharePoint;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -38,6 +39,7 @@ namespace Keutmann.SharePointManager.Forms
         
         public MainWindow()
         {
+            Text = SPMEnvironment.Version.Title;
             
             InitializeComponent();
             Shown += MainWindow_Shown;
@@ -433,24 +435,24 @@ namespace Keutmann.SharePointManager.Forms
             }
         }
 
-        private void toolStripDBConnection_Click(object sender, EventArgs e)
-        {
-            OpenDBConnection connectionForm = new OpenDBConnection();
-            SPMFarmHelper farmHelper = new SPMFarmHelper(Explorer.CurrentFarm);
+        //private void toolStripDBConnection_Click(object sender, EventArgs e)
+        //{
+        //    OpenDBConnection connectionForm = new OpenDBConnection();
+        //    SPMFarmHelper farmHelper = new SPMFarmHelper(Explorer.CurrentFarm);
 
-            connectionForm.ConnectionString = "";// farmHelper.GetConnectionString();
-            //contentService.Instances[0]
-            DialogResult result = connectionForm.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                SPFarm newFarm = SPFarm.Open(connectionForm.ConnectionString);
+        //    connectionForm.ConnectionString = "";// farmHelper.GetConnectionString();
+        //    //contentService.Instances[0]
+        //    DialogResult result = connectionForm.ShowDialog();
+        //    if (result == DialogResult.OK)
+        //    {
+        //        SPFarm newFarm = SPFarm.Open(connectionForm.ConnectionString);
 
-                Explorer.Dispose();
-                Explorer.CurrentFarm = newFarm;
-                Explorer.Worker(() => Explorer.Build());
-            }
+        //        Explorer.Dispose();
+        //        Explorer.CurrentFarm = newFarm;
+        //        Explorer.Worker(() => Explorer.Build());
+        //    }
 
-        }
+        //}
 
         private void OMViewSelectToolStripMenuItem_Click(object sender, EventArgs e)
         {

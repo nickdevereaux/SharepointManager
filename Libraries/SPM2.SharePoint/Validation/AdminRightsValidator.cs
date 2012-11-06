@@ -8,6 +8,7 @@ using SPM2.Framework.Validation;
 namespace SPM2.SharePoint.Validation
 {
     [Export(typeof(BaseValidator))]
+    [ExportMetadata("Order", 100)]
     public class AdminRightsValidator : BaseValidator, IValidator
     {
 

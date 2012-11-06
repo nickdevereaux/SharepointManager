@@ -57,7 +57,7 @@ namespace Keutmann.SharePointManager
 
 
 
-            messages.Add("Application terminated!");
+            messages.Add("The application is unable to continue and will now terminated.");
             var message = String.Join("\r\n\r\n", messages.ToArray());
             MessageBox.Show(message, "SharePoint Manager Preflight check Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

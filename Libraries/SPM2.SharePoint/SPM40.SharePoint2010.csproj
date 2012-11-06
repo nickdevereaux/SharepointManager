@@ -104,6 +104,10 @@
   <ItemGroup>
     <Compile Include="ISPNodeProvider.cs" />
     <Compile Include="Kernel\Owssvr.cs" />
+    <Compile Include="Library\SPMEnvironment.cs" />
+    <Compile Include="Library\SPMPaths.cs" />
+    <Compile Include="Library\SPMRegistry.cs" />
+    <Compile Include="Library\SPMVersion.cs" />
     <Compile Include="Model\AdapterItemTypeAttribute.cs" />
     <Compile Include="Model\Custom\SPIisSettingsCollectionNode.cs" />
     <Compile Include="Model\Custom\SPListItemCollectionModel.cs" />

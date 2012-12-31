@@ -1,16 +1,17 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
-using System.ComponentModel.Composition;
 using System.Security;
 using Microsoft.Win32;
 using SPM2.Framework.Validation;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Validation
 {
     // This check should be in a SPS project
     //[Export(typeof(BaseValidator))]
-    public class SPSInstalledValidator : BaseValidator, IValidator
+    [IoCIgnore()]
+    public class SPSInstalledValidator : BaseValidator
     {
         public const String SPSPath = @"SOFTWARE\Microsoft\Office Server\15.0";
 
@@ -19,10 +20,10 @@ namespace SPM2.SharePoint.Validation
         {
         }
 
-        public SPSInstalledValidator(String id)
-            : base(id)
-        {
-        }
+        //public SPSInstalledValidator(String id)
+        //    : base(id)
+        //{
+        //}
 
         protected override ValidationResult Validate()
         {

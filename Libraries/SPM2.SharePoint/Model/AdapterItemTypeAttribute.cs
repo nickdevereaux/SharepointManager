@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Model
 {
-    [AttributeUsage(System.AttributeTargets.Class, AllowMultiple=false)]
-    public class AdapterItemTypeAttribute : ExportAttribute
+    [AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]
+    public class AdapterItemTypeAttribute : IoCNamedAttribute
     {
-        public string Name { get; set; }
-        public string Key { get; set; }
 
-        public AdapterItemTypeAttribute()
-        {
-        }
+        public string Fullname { get; set; }
 
         public AdapterItemTypeAttribute(string name)
-            : base(name.IndexOf(",") > 0 ? name.Substring(0, name.IndexOf(",")) : name, typeof(ISPNode))
+            : base(FormatName(name))
         {
-            Name = name;
+            Fullname = name;
+        }
+
+        private static string FormatName(string name)
+        {
+            return name.IndexOf(",") > 0 ? name.Substring(0, name.IndexOf(",")) : name;
         }
     }
 }

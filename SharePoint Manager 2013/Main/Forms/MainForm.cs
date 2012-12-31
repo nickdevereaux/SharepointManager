@@ -24,6 +24,7 @@ using System.Diagnostics;
 using SPM2.SharePoint.Model;
 using Keutmann.SharePointManager.Components.Menu;
 using SPM2.SharePoint;
+using SPM2.Framework.IoC;
 
 
 namespace Keutmann.SharePointManager.Forms
@@ -35,14 +36,17 @@ namespace Keutmann.SharePointManager.Forms
         public Dictionary<ExplorerNodeBase, bool> ChangedNodes = new Dictionary<ExplorerNodeBase, bool>();
 
         public Dictionary<ExplorerNodeBase, Hashtable> ChangedPropertyItems = new Dictionary<ExplorerNodeBase, Hashtable>();
-    
-        
-        public MainWindow()
+
+        public static IContainerAdapter IoCContainer { get; set; }        
+
+        public MainWindow(IContainerAdapter container)
         {
             Text = SPMEnvironment.Version.Title;
+            IoCContainer = container;
             
             InitializeComponent();
             Shown += MainWindow_Shown;
+            Load +=new EventHandler(MainWindow_Load);
         }
 
 
@@ -59,7 +63,7 @@ namespace Keutmann.SharePointManager.Forms
             
             splashScreen.UpdateProgress("Loading SharePoint Model...");
 
-            Explorer = new TreeViewComponent();
+            Explorer = IoCContainer.Resolve<TreeViewComponent>();
             this.Explorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Explorer.HideSelection = false;
             this.Explorer.Location = new System.Drawing.Point(0, 0);
@@ -167,6 +171,12 @@ namespace Keutmann.SharePointManager.Forms
         public void MainWindow_Load(object sender, EventArgs e) 
         {
             SetLanguage(SPMLocalization.C_CULTURE_EN);
+
+            this.MainMenuStrip = IoCContainer.Resolve<MainMenuStrip>();
+            this.Controls.Add(this.MainMenuStrip);
+
+            var statusStrip = IoCContainer.Resolve<MainWindowStatusStrip>();
+            this.Controls.Add(statusStrip);
 
             //string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
             //if (language == null)
@@ -421,7 +431,7 @@ namespace Keutmann.SharePointManager.Forms
         private void shallowmodeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             
-            Settings set = Properties.Settings.Default;
+            var set = Properties.Settings.Default;
             set["ShallowExpand"] = !set.ShallowExpand;
             set.Save();
         }

@@ -10,6 +10,10 @@ using SPM2.Framework;
 using SPM2.Framework.Validation;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Validation;
+using Autofac;
+using SPM2.Framework.IoC;
+using System.Reflection;
+using SPM2.Framework.Configuration;
 
 namespace Keutmann.SharePointManager
 {
@@ -23,7 +27,9 @@ namespace Keutmann.SharePointManager
             public static extern Boolean FreeConsole();
         }
 
-
+        private static Autofac.IContainer autoFacContainer = null;
+        public static IContainerAdapter IoCContainer { get; set; }
+ 
         public static MainWindow Window = null;
 
         public static Stopwatch Watch = new Stopwatch();
@@ -42,14 +48,25 @@ namespace Keutmann.SharePointManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-
-            Window = new MainWindow();
-            var result = SplashScreen.ShowSplashScreen(Setup);
-            if (result == ValidationResult.Success)
+           
+            try
             {
-                Application.Run(Window);
+                var result = SplashScreen.ShowSplashScreen(Setup);
+                if (result == ValidationResult.Success)
+                {
+                    Application.Run(Window);
+                }
+                Trace.WriteLine("Application ended");
             }
-            Trace.WriteLine("Application ended");
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (autoFacContainer != null)
+                    autoFacContainer.Dispose();
+            }
         }
 
         static ValidationResult Setup(SplashScreen splashScreen)
@@ -62,15 +79,32 @@ namespace Keutmann.SharePointManager
                 return ValidationResult.Error;
             }
 
-            CompositionProvider.LoadAssemblies();
 
-            var engine = new PreflightController(splashScreen);
+            var builder = new ContainerBuilder();
+
+            // Find all the assemblies for this application
+            builder.RegisterModule(new AutoLoadAssemblies());
+
+            // Build the container now!
+            autoFacContainer = builder.Build();
+            //CompositionProvider.LoadAssemblies();
+
+            IoCContainer = autoFacContainer.Resolve<IContainerAdapter>();
+
+
+            var provider = IoCContainer.Resolve<SettingsProvider>();
+            provider.Load();
+
+            var engine = new PreflightController(splashScreen, IoCContainer);
             if (!engine.Validate())
             {
                 return ValidationResult.Error;
             }
-            
+
+            Window = IoCContainer.Resolve<MainWindow>();
             Window.SplashScreenLoad(splashScreen);
+
+
             return ValidationResult.Success;
         }
 

@@ -160,5 +160,12 @@ namespace SPM2.Framework
             return types;
         }
 
+        public static bool IsDelegate(this Type type)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            return type.IsSubclassOf(typeof(Delegate));
+        }
+
     }
+
 }

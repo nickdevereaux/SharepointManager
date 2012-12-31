@@ -30,7 +30,9 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
             {
 
                 if (base.ContextMenuStrip != null) return base.ContextMenuStrip;
-                base.ContextMenuStrip = new SPContextMenu(this);
+                var menu = NodeProvider.IoCContainer.Resolve<SPContextMenu>();
+                menu.Initialize(this);
+                base.ContextMenuStrip = menu;
                 return base.ContextMenuStrip;
             }
             set

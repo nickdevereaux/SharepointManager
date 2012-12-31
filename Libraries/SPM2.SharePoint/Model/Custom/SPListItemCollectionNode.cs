@@ -36,7 +36,8 @@ namespace SPM2.SharePoint.Model
 
         public override void LoadChildren()
         {
-            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
+            var settings = NodeProvider.IoCContainer.Resolve<SPExplorerSettings>();
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, settings.BatchNodeLoad));
         }
 
         public bool IsVisible()

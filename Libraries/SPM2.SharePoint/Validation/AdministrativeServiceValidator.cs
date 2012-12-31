@@ -7,12 +7,13 @@ using System.Diagnostics;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
-using System.ComponentModel.Composition;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Validation
 {
     // Is not necessary for SPM to run
     //[Export(typeof(BaseValidator))]
+    [IoCIgnore()]
     public class AdministrativeServiceValidator : BaseValidator, IValidator
     {
         public AdministrativeServiceValidator()
@@ -23,9 +24,9 @@ namespace SPM2.SharePoint.Validation
             this.ErrorString = "The current user is not administrator";
         }
 
-        public AdministrativeServiceValidator(String id) : base(id)
-        {
-        }
+        //public AdministrativeServiceValidator(String id) : base(id)
+        //{
+        //}
 
         protected override ValidationResult Validate()
         {
@@ -83,7 +84,7 @@ namespace SPM2.SharePoint.Validation
         {
             get
             {
-                return new SPFInstalledValidator(String.Empty).RunValidator() == ValidationResult.Success;
+                return new SPFInstalledValidator().RunValidator() == ValidationResult.Success;
             }
         }
     }

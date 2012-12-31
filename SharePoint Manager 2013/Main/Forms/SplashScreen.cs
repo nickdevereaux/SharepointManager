@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using SPM2.Framework.Validation;
 using SPM2.SharePoint;
+using System.Diagnostics;
 
 namespace Keutmann.SharePointManager.Forms
 {
@@ -35,7 +36,12 @@ namespace Keutmann.SharePointManager.Forms
             }
             catch(Exception ex)
             {
+#if DEBUG
+                Trace.TraceError(ex.Message + " : " + ex.StackTrace);
+                MessageBox.Show(ex.Message+" : "+ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#else
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
             }
             finally
             {

@@ -684,9 +684,18 @@ namespace Keutmann.SharePointManager {
         /// <summary>
         ///   Looks up a localized string similar to Languages.
         /// </summary>
-        internal static string Interface_Languages {
+        internal static string Interface_Languages_Text {
             get {
-                return ResourceManager.GetString("Interface_Languages", resourceCulture);
+                return ResourceManager.GetString("Interface_Languages_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Interface_Languages_ToolTip {
+            get {
+                return ResourceManager.GetString("Interface_Languages_ToolTip", resourceCulture);
             }
         }
         
@@ -894,6 +903,24 @@ namespace Keutmann.SharePointManager {
         internal static string Interface_ServerName {
             get {
                 return ResourceManager.GetString("Interface_ServerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Interface_Settings_Text {
+            get {
+                return ResourceManager.GetString("Interface_Settings_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Interface_Settings_ToolTip {
+            get {
+                return ResourceManager.GetString("Interface_Settings_ToolTip", resourceCulture);
             }
         }
         

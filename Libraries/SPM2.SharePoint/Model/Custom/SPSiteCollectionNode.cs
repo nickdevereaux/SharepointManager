@@ -23,8 +23,8 @@ namespace SPM2.SharePoint.Model
 	{
         public override void LoadChildren()
         {
-            Children.AddRange(NodeProvider.LoadCollectionChildren(this, SPExplorerSettings.Current.BatchNodeLoad));
-            //Children.AddRange(NodeProvider.LoadCollectionChildren(this, 1));
+            var settings = NodeProvider.IoCContainer.Resolve<SPExplorerSettings>();
+            Children.AddRange(NodeProvider.LoadCollectionChildren(this, settings.BatchNodeLoad));
        }
     }
 }

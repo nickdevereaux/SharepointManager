@@ -7,26 +7,31 @@ using System.Diagnostics;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
-using System.ComponentModel.Composition;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Validation
 {
     // Is not necessary for SPM to run
     //[Export(typeof(BaseValidator))]
+    [IoCIgnore()]
     public class TimerServiceValidator : BaseValidator, IValidator
     {
-        public TimerServiceValidator()
+        public IContainerAdapter IoCContainer = null;
+
+        public TimerServiceValidator(IContainerAdapter container)
             : base()
         {
+            IoCContainer = container;
+
             this.QuestionString = "The application needs to run on a frontend server with SharePoint Foundation installed";
             this.SuccessString = "Microsoft SharePoint Timer Service found";
             this.ErrorString = "Microsoft SharePoint Timer Service missing";
 
         }
 
-        public TimerServiceValidator(String id) : base(id)
-        {
-        }
+        //public TimerServiceValidator(String id) : base(id)
+        //{
+        //}
 
         protected override ValidationResult Validate()
         {
@@ -88,7 +93,9 @@ namespace SPM2.SharePoint.Validation
         {
             get
             {
-                return new SPFInstalledValidator(String.Empty).RunValidator() == ValidationResult.Success;
+                var spfinstalledValidator = IoCContainer.Resolve<SPFInstalledValidator>();
+
+                return spfinstalledValidator.RunValidator() == ValidationResult.Success;
             }
         }
     }

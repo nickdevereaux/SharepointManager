@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using SPM2.Framework.Collections;
 using SPM2.SharePoint;
 using SPM2.SharePoint.Model;
+using SPM2.Framework.IoC;
 
 namespace Keutmann.SharePointManager.ViewModel.TreeView
 {
@@ -13,10 +14,13 @@ namespace Keutmann.SharePointManager.ViewModel.TreeView
     //[PartCreationPolicy(CreationPolicy.Shared)]
     public class TreeViewNodeProvider : ITreeViewNodeProvider
     {
+        public IContainerAdapter IoCContainer { get; set; }        
+
         public ISPNodeProvider SPProvider { get; set; }
 
-        public TreeViewNodeProvider(ISPNodeProvider provider)
+        public TreeViewNodeProvider(ISPNodeProvider provider, IContainerAdapter container)
         {
+            IoCContainer = container;
             SPProvider = provider;
         }
 

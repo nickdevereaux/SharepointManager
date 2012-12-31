@@ -90,23 +90,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug 2013|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release 2013|AnyCPU'">
     <AssemblyName>SharePoint Manager 2013</AssemblyName>
   </PropertyGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug 2010|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release 2010|AnyCPU'">
-    <ProjectReference Include="..\..\Libraries\MEF35\ComponentModel\MEF35.csproj">
-      <Project>{1BBA5101-D4F0-48B8-A5D6-7B23A099DCE3}</Project>
-      <Name>MEF35</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\SPM2.Framework\SPM40.Framework.csproj">
+    <ProjectReference Include="..\..\Libraries\SPM2.Framework\SPM2.Framework.csproj">
       <Project>{5de0d29f-de15-4e15-9e89-3a873d849c40}</Project>
-      <Name>SPM40.Framework</Name>
+      <Name>SPM2.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\SPM2.SharePoint\SPM40.SharePoint2010.csproj">
+    <ProjectReference Include="..\..\Libraries\SPM2.SharePoint\SPM2.SharePoint2010.csproj">
       <Project>{ce144460-64ce-4fb5-a25e-25b7bb028d16}</Project>
-      <Name>SPM40.SharePoint2010</Name>
+      <Name>SPM2.SharePoint2010</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Autofac-2.6.3.862-NET35\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -119,32 +117,97 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Menu\GenericDelete.cs">
+    <Compile Include="Collections\ChangedNodes.cs" />
+    <Compile Include="Collections\IChangedNodes.cs" />
+    <Compile Include="Commands\RefreshNodeCommand.cs" />
+    <Compile Include="Commands\SaveAllNodeCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\SaveNodeCommand.cs" />
+    <Compile Include="Components\MainWindowStatusLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Menu\SPFileRecycle.cs">
+    <Compile Include="Components\Menu\Context\GenericDelete.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Menu\SPFileDownload.cs">
+    <Compile Include="Components\Menu\Context\SPFileRecycle.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Menu\GenericRefesh.cs">
+    <Compile Include="Components\Menu\Context\SPFileDownload.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Context\GenericRefesh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Context\SPFeatureDeactivate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Context\SPFeatureActivate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Edit\SettingsMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Edit\RefreshMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Help\AboutMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Help\HelpMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Language\EnglishMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Language\LanguageMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\MenuSeparators.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\File\SaveAllMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\Edit\EditMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\File\ExitMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\File\FileMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Menu\ISPMenuItem.cs" />
-    <Compile Include="Components\Menu\SPFeatureDeactivate.cs">
+    <Compile Include="Components\Menu\MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Menu\SPFeatureActivate.cs">
+    <Compile Include="Components\Menu\File\SaveMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Menu\View\ViewMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SettingsPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SettingsTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\TreeViewExplorer\NodeSorter.cs" />
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneralSettings.cs" />
+    <Compile Include="Library\ISPMLocalization.cs" />
     <Compile Include="PreflightController.cs" />
     <Compile Include="ViewModel\TreeView\SPMoreNode.cs" />
     <Compile Include="ViewModel\TreeView\StuctureItem.cs" />
@@ -181,7 +244,7 @@
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Menu\SPContextMenu.cs">
+    <Compile Include="Components\Menu\Context\SPContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\TreeViewExplorer\ExplorerNodeBase.cs" />
@@ -247,6 +310,9 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>

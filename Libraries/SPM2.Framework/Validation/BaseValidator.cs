@@ -4,7 +4,7 @@ using System;
 
 namespace SPM2.Framework.Validation
 {
-    public abstract class BaseValidator 
+    public abstract class BaseValidator : IValidator
     {
         //private InstallConfiguration configuration;
 
@@ -19,12 +19,6 @@ namespace SPM2.Framework.Validation
         protected BaseValidator()
         {
             Id = this.GetType().Name;
-        }
-
-
-        protected BaseValidator(String id)
-        {
-            Id = id;
         }
 
         public ValidationResult RunValidator()

@@ -2,18 +2,17 @@
 
 using System;
 using System.Windows.Forms;
-using System.ComponentModel.Composition;
 using System.Collections.Generic;
 
 namespace SPM2.Framework.Validation
 {
-    public delegate void ValidateEventHandler(BaseValidator validator);
+    public delegate void ValidateEventHandler(IValidator validator);
 
     public delegate void Operation();
 
     public class ValidationService : IDisposable
     {
-        private readonly ValidatorCollection validators = new ValidatorCollection(String.Empty);
+        private readonly ValidatorCollection validators = new ValidatorCollection();
         
         public event ValidateEventHandler ValidatorSucceed;
         public event ValidateEventHandler ValidatorFailed;
@@ -40,12 +39,12 @@ namespace SPM2.Framework.Validation
             Errors = 0;
         }
 
-        public void Add(BaseValidator validator)
+        public void Add(IValidator validator)
         {
             validators.AddValidator(validator);
         }
 
-        public void AddRange(IEnumerable<BaseValidator> collection)
+        public void AddRange(IEnumerable<IValidator> collection)
         {
             foreach (var item in collection)
             {
@@ -89,7 +88,7 @@ namespace SPM2.Framework.Validation
             OnValidationFinished();
         }
 
-        private void OnValidatorSucceed(BaseValidator validator)
+        private void OnValidatorSucceed(IValidator validator)
         {
             var handler = ValidatorSucceed;
             if(handler != null)
@@ -98,7 +97,7 @@ namespace SPM2.Framework.Validation
             }
         }
 
-        private void OnValidatorFailed(BaseValidator validator)
+        private void OnValidatorFailed(IValidator validator)
         {
             Errors++;
             var handler = ValidatorFailed;
@@ -108,7 +107,7 @@ namespace SPM2.Framework.Validation
             }
         }
 
-        private void OnValidatorSkipped(BaseValidator validator)
+        private void OnValidatorSkipped(IValidator validator)
         {
             var handler = ValidatorSkippped;
             if (handler != null)

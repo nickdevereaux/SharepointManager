@@ -1,17 +1,19 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
-using System.ComponentModel.Composition;
 using System.Security;
 using Microsoft.Win32;
 using SPM2.Framework.Validation;
 using System.Reflection;
 using System.Diagnostics;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Validation
 {
     //[Export(typeof(BaseValidator))]
     //[ExportMetadata("Order", 50)]
+
+    [IoCIgnore()]
     public class SPFInstalledValidator : BaseValidator, IValidator
     {
         public SPFInstalledValidator()
@@ -22,9 +24,9 @@ namespace SPM2.SharePoint.Validation
             this.ErrorString = "Microsoft SharePoint is missing.";
         }
 
-        public SPFInstalledValidator(String id) : base(id)
-        {
-        }
+        //public SPFInstalledValidator(String id) : base(id)
+        //{
+        //}
 
         protected override ValidationResult Validate()
         {        

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -16,6 +15,7 @@ using SPM2.Framework.Collections;
 using SPM2.Framework.ComponentModel;
 using SPM2.Framework.Diagnostics;
 using SPM2.Framework.Xml;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Model
 {
@@ -187,7 +187,7 @@ namespace SPM2.SharePoint.Model
                         var attrib = GetType().GetAttribute<AdapterItemTypeAttribute>(true);
                         if (attrib != null)
                         {
-                            _spObjectType = Type.GetType(attrib.Name, true, false);
+                            _spObjectType = Type.GetType(attrib.Fullname, true, false);
                         }
                     }
                 }
@@ -360,14 +360,14 @@ namespace SPM2.SharePoint.Model
         private IEnumerable<object> LoadContextMenuNodes(Type fromType)
         {
             var result = new List<object>();
-            OrderingCollection<IContextMenuItem> orderedItems =
-                CompositionProvider.GetOrderedExports<IContextMenuItem>(fromType);
-            foreach (var item in orderedItems)
-            {
-                IContextMenuItem menuItem = item.Value;
-                menuItem.SetupItem(this);
-                result.Add(menuItem);
-            }
+            //OrderingCollection<IContextMenuItem> orderedItems =
+            //    CompositionProvider.GetOrderedExports<IContextMenuItem>(fromType);
+            //foreach (var item in orderedItems)
+            //{
+            //    IContextMenuItem menuItem = item.Value;
+            //    menuItem.SetupItem(this);
+            //    result.Add(menuItem);
+            //}
             return result;
         }
 

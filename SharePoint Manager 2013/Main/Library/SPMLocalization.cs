@@ -30,12 +30,15 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using SPM2.Framework.IoC;
 
 //using Keutmann.SharePointManager.Library;
 
 namespace Keutmann.SharePointManager.Library
 {
-    public static class SPMLocalization
+
+    [IoCLifetime(Singleton=true)]
+    public class SPMLocalization : ISPMLocalization
     {
         public const string C_REGKEY_CULTURE = "Culture";
         public const string C_REGKEY_CULTUREID = "CultureID";
@@ -109,6 +112,10 @@ namespace Keutmann.SharePointManager.Library
             //return word;
         }
 
+        public string GetText(string word)
+        {
+            return GetString(word);
+        }
 
         //public static CultureInfo SelectedLanguage()
         //{

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -15,11 +14,11 @@ using SPM2.Framework.Components;
 using SPM2.Framework.Xml;
 using SPM2.SharePoint.Model;
 using SPM2.SharePoint.Rules;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint
 {
-    [Export()]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [IoCLifetime(Singleton = true)]
     public class SPNodeProvider : ISPNodeProvider
     {
         public const string AddInId = "SPM2.SharePoint.SPNodeProvider";
@@ -28,13 +27,16 @@ namespace SPM2.SharePoint
 
         public Func<string, string> GetLocalizedTextFunction { get; set; }
 
+        public IContainerAdapter IoCContainer { get; set; }        
+
 
         private FirstAcceptRuleEngine<ISPNode> _ruleEngine;
 
-        public SPNodeProvider(SPFarm farm, IEnumerable<IRule<ISPNode>> rules)
+        public SPNodeProvider(SPFarm farm, IEnumerable<IRule<ISPNode>> rules, IContainerAdapter container)
         {
             ViewLevel = 100;
             Farm = farm;
+            IoCContainer = container;
 
             _ruleEngine = new FirstAcceptRuleEngine<ISPNode>(rules);
         }
@@ -236,9 +238,10 @@ namespace SPM2.SharePoint
 
         private ISPNode CreateNodeOrDefault(string spObjectTypeFullname)
         {
-            ISPNode node = CompositionProvider.Current.GetExportedValueOrDefault<ISPNode>(spObjectTypeFullname);
-            if (node == null) return null;
-            return (ISPNode)Activator.CreateInstance(node.GetType());
+            var node = IoCContainer.ResolveOrDefault<ISPNode>(spObjectTypeFullname);
+            return node;
+            //if (node == null) return null;
+            //return (ISPNode)Activator.CreateInstance(node.GetType());
         }
 
  

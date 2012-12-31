@@ -1,15 +1,17 @@
 ﻿// From: http://sharepointinstaller.codeplex.com/
 
 using System;
-using System.ComponentModel.Composition;
 using Microsoft.SharePoint.Administration;
 using SPM2.Framework.Validation;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint.Validation
 {
-    [Export(typeof(BaseValidator))]
-    [ExportMetadata("Order", 100)]
-    public class AdminRightsValidator : BaseValidator, IValidator
+    //[Export(typeof(BaseValidator))]
+    //[ExportMetadata("Order", 100)]
+
+    [IoCOrder(100)]
+    public class AdminRightsValidator : BaseValidator
     {
 
         public AdminRightsValidator()
@@ -20,9 +22,9 @@ namespace SPM2.SharePoint.Validation
             this.ErrorString = "The current user is not administrator";
         }
 
-        public AdminRightsValidator(String id) : base(id)
-        {
-        }
+        //public AdminRightsValidator(String id) : base(id)
+        //{
+        //}
 
         protected override ValidationResult Validate()
         {

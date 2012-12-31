@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using Keutmann.SharePointManager.Forms;
 using SPM2.Framework;
 using SPM2.Framework.Validation;
+using Autofac;
+using SPM2.Framework.IoC;
 
 namespace Keutmann.SharePointManager
 {
@@ -16,19 +18,22 @@ namespace Keutmann.SharePointManager
         ValidationService service = new ValidationService();
 
 
-        public SplashScreen SplashForm { get; set; }
+        public SplashScreen SplashForm { get; private set; }
 
+        public IContainerAdapter IoCContainer { get; private set; }
 
-
-        public PreflightController(SplashScreen splashScreen)
+        public PreflightController(SplashScreen splashScreen, IContainerAdapter container)
         {
             SplashForm = splashScreen;
+            IoCContainer = container;
         }
 
         public bool Validate()
         {
             SplashForm.UpdateProgress("Preflight check...");
-            var validators = CompositionProvider.Current.GetExportedValues<BaseValidator>();
+
+            var validators = IoCContainer.Resolve<IEnumerable<IValidator>>();
+            //var validators = CompositionProvider.Current.GetExportedValues<BaseValidator>();
 
             service.AddRange(validators);
 
@@ -51,7 +56,7 @@ namespace Keutmann.SharePointManager
         private void HandleErrors()
         {
 
-            var messages = (from p in service.Validators
+            var messages = (from p in service.Validators.validators
                           where p.Result == ValidationResult.Error
                           select p.ErrorString +".\r\n" + p.QuestionString + ".").ToList();
 
@@ -63,7 +68,7 @@ namespace Keutmann.SharePointManager
         }
 
 
-        void service_UpdateProgress(BaseValidator validator)
+        void service_UpdateProgress(IValidator validator)
         {
             SplashForm.UpdateProgress(validator.SuccessString);
         }

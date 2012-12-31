@@ -17,11 +17,15 @@ using SPM2.SharePoint;
 using SPM2.SharePoint.Rules;
 using SPM2.Framework.Components;
 using SPM2.SharePoint.Model;
+using SPM2.Framework.IoC;
 
 namespace Keutmann.SharePointManager.Components
 {
     public class TreeViewComponent : TreeViewExtended
     {
+        public IContainerAdapter IoCContainer { get; set; }        
+
+
         public int oldNodeIndex = -1;
         public SPFarm CurrentFarm = SPFarm.Local;
 
@@ -30,8 +34,9 @@ namespace Keutmann.SharePointManager.Components
 
         public SPTreeNode FarmNode { get; set; }
 
-        public TreeViewComponent()
+        public TreeViewComponent(IContainerAdapter container)
         {
+            IoCContainer = container;
             this.ShowNodeToolTips = true;
             this.HideSelection = false;
             ViewLevel = 50;
@@ -103,13 +108,14 @@ namespace Keutmann.SharePointManager.Components
             // Dispose all objects
             ClearNodes(this.Nodes);
 
-            var rules = CompositionProvider.GetOrderedExports<IRule<ISPNode>>();
+            //var rules = CompositionProvider.GetOrderedExports<IRule<ISPNode>>();
+            var rules = IoCContainer.Resolve<IEnumerable<IRule<ISPNode>>>().Ordered();
 
-            SPProvider = new SPNodeProvider(SPFarm.Local, rules.Values);
+            SPProvider = new SPNodeProvider(SPFarm.Local, rules, IoCContainer);
             SPProvider.ViewLevel = ViewLevel;
             SPProvider.GetLocalizedTextFunction = p => SPMLocalization.GetString(p);
             Trace.WriteLine("ViewLevel: " + SPProvider.ViewLevel);
-            var treeViewProvider = new TreeViewNodeProvider(SPProvider);
+            var treeViewProvider = new TreeViewNodeProvider(SPProvider, IoCContainer);
             FarmNode = treeViewProvider.LoadFarmNode();
 
             this.Nodes.Add(FarmNode);

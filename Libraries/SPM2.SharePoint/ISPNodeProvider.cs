@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using Microsoft.SharePoint.Administration;
 using SPM2.SharePoint.Model;
+using SPM2.Framework.IoC;
 
 namespace SPM2.SharePoint
 {
     public interface ISPNodeProvider
     {
+        IContainerAdapter IoCContainer { get; set; }
+
         int ViewLevel { get; set; }
         SPFarm Farm { get; set; }
 

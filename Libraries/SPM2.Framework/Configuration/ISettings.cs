@@ -6,6 +6,6 @@ namespace SPM2.Framework.Configuration
 {
     public interface ISettings
     {
-        SerializableList<ISettings> Children { get; set; }
+        //SerializableList<ISettings> Children { get; set; }
     }
 }
